@@ -1,0 +1,260 @@
+{
+    "key": "group_56225ab626883",
+    "title": "Blog Post Fields",
+    "fields": [
+        {
+            "key": "field_56225ab62be12",
+            "label": "Author Name",
+            "name": "author_name",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62cb1f",
+            "label": "Meta Description",
+            "name": "meta_description",
+            "type": "textarea",
+            "instructions": "Each post should have a custom meta description.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62d417",
+            "label": "Title Tag",
+            "name": "title_tag",
+            "type": "text",
+            "instructions": "Each post should have a title tag.  The ideal length of a title tag is less than 60 characters.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": 80,
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e1d2",
+            "label": "Featured Image",
+            "name": "featured_image",
+            "type": "image",
+            "instructions": "When you upload a featured image, the larger image you can upload the better.  Several different image sizes will automatically be created from your original image.  This featured image is used in various places like on the blog feed, as well as on social media when the posts are shared.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "preview_size": "thumbnail",
+            "library": "all",
+            "return_format": "id",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_56225ab62e3e5",
+            "label": "Call to Action Header",
+            "name": "call_to_action_header",
+            "type": "text",
+            "instructions": "This is the header for the call to action in the sidebar.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Code My Views Takes Care Of Your PSD to HTML",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e4c6",
+            "label": "Call to Action Secondary Text",
+            "name": "call_to_action_secondary_text",
+            "type": "text",
+            "instructions": "This is the secondary text that shows below the call to action header.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Get a quote in less than an hour",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e5db",
+            "label": "Call to Action Button Text",
+            "name": "call_to_action_button_text",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "Learn More",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e6c9",
+            "label": "Call to Action Link",
+            "name": "call_to_action_link",
+            "type": "text",
+            "instructions": "Where should the user be taken to when they click the call to action button?",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e7a6",
+            "label": "Canonical Tag",
+            "name": "canonical_tag",
+            "type": "text",
+            "instructions": "If this is a syndicated post, you can place the rel canonical tag in this field",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "formatting": "html",
+            "maxlength": "",
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "key": "field_56225ab62e8be",
+            "label": "Content Group",
+            "name": "content_group",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "designshack_traffic": "Design Shack Content\/Traffic Article",
+                "designshack_syndicated": "Design Shack Syndicated",
+                "original_content": "Original Content",
+                "written_licensed_content": "Written Content"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "disabled": 0,
+            "readonly": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "blog-post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "excerpt",
+        "custom_fields",
+        "discussion",
+        "comments",
+        "author",
+        "format",
+        "featured_image",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": 1,
+    "description": ""
+}

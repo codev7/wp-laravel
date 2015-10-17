@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: CMV
+        psr4_prefix: CMV
+        src_path: app

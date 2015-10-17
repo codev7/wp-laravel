@@ -1,0 +1,22 @@
+@images: '/images/';
+@fonts: '/fonts/';
+@icon-font-path: '/fonts/';
+
+@base-font-family: 'Gotham', sans-serif;
+@base-bold-family: 'Gotham', sans-serif;
+@base-medium-family: 'Gotham', sans-serif;
+
+@archer-semi: 'Archer-Semibold', serif;
+@archer-semi-italic: 'Archer-SemiboldItalic', serif;
+@archer-bold: 'Archer-Bold', serif;
+
+@screen-large-desktop: 1599px;
+
+// 1200..1599
+@desktop: ~"only screen and (min-width: @{screen-lg-min}) and (max-width: @{screen-large-desktop})";
+// 992..1199
+@tablet-large: ~"only screen and (min-width: @{screen-md-min}) and (max-width: @{screen-md-max})";
+// 768..991
+@tablet: ~"only screen and (min-width: @{screen-sm-min}) and (max-width: @{screen-sm-max})";
+// ..767
+@mobile: ~"only screen and (max-width: @{screen-xs-max})";
