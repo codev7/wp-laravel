@@ -14,7 +14,18 @@ use CMV\Lead;
 use CMV\Jobs\SendLeadToSlack;
 
 class LeadsController extends Controller
-{
+{   
+
+    /**
+     * Store a newly created resource in storage.
+     * @Get("home", as="spark", middleware="auth")
+     * @return Response
+     */
+    public function sparkTest()
+    {
+        return view('home');
+    }
+
     /**
      * Store a newly created resource in storage.
      * @Post("concierge/subscribe", as="concierge.subscribe")
