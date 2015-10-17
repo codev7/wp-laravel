@@ -15,5 +15,6 @@ class VerifyCsrfToken extends BaseVerifier
         'stripe/webhook',
         'blog',
         'blog/*',
+        '/'
     ];
 }
