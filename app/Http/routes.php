@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-	return view('spark::welcome');
-});
 
-Route::get('home', ['middleware' => 'auth', function () {
+
+/*Route::get('home', ['middleware' => 'auth', function () {
 	return view('home');
-}]);
+}]);*/
 
 get('admin/logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index', 'as' => 'admin.logs', /*'middleware' => ['auth','admin_auth']*/ ]);
 
