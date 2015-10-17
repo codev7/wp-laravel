@@ -15,7 +15,7 @@ class ClearLaravelCache
      */
     public function handle($request, Closure $next)
     {
-        if (env('APP_ENV') === 'local') {
+        if (env('APP_ENV') === 'local' && env('CLEAR_VIEW_CACHE') === true) {
             $cachedViewsDirectory=app('path.storage').'/framework/views/';
             $files = glob($cachedViewsDirectory.'*');
             foreach($files as $file) {

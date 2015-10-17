@@ -139,6 +139,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
         
 
         /*
@@ -150,6 +151,7 @@ return [
         Laravel\Cashier\CashierServiceProvider::class,
         CMV\Providers\AnnotationsServiceProvider::class,
         CMV\Providers\MacroServiceProvider::class,
+        CMV\Providers\WordPressServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
@@ -157,6 +159,7 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /**
          * Spark Service Providers...
          */

@@ -35,6 +35,7 @@
 		<div class="container">
 			<div class="tab-content">	
 				<?php $count = 0; ?>
+
                 @foreach(get_field('tabs') as $tab)
                     <?php $count++; ?>
                     <div id="tab-{{ $count }}" class="tab-pane <?php echo $count == 1 ? 'active' : null ?>">

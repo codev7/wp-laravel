@@ -18,6 +18,12 @@
  * @package WordPress
  */
 
+if(!class_exists('Dotenv'))
+{
+    include_once '../../vendor/autoload.php';
+}
+
+
 Dotenv::load(dirname(__DIR__));
 
 // ** MySQL settings - You can get this info from your web host ** //
