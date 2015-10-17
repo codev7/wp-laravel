@@ -50,6 +50,7 @@ class ServicesOfferedController extends Controller
 
         if($slug == 'javascript') return redirect()->route('service', ['slug' => 'psd-to-html']);
         if($slug == 'web-application-development')  return redirect()->route('service',['slug' => 'web-mobile-application-development']);
+        if($slug == 'wordpress-plugin-development')  return redirect()->route('service',['slug' => 'wordpress-development']);
         
         global $post;
         global $more;
@@ -62,6 +63,12 @@ class ServicesOfferedController extends Controller
         ];
 
         $posts = get_posts($args);
+
+        if(!$posts)
+        {
+            abort('404');
+        }
+
         $post = $posts[0];
         setup_postdata($post);
         
