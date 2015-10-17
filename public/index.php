@@ -7,17 +7,7 @@
  * @author   Taylor Otwell <taylorotwell@gmail.com>
  */
 
-/*
-|--------------------------------------------------------------------------
-| Wordpress
-|--------------------------------------------------------------------------
-|
-| Integrate Wordpress with Laravel core
-|
-*/
 
-define('WP_USE_THEMES', false);
-require __DIR__.'/../wp/wp-blog-header.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +22,19 @@ require __DIR__.'/../wp/wp-blog-header.php';
 */
 
 require __DIR__.'/../bootstrap/autoload.php';
+
+
+/*
+|--------------------------------------------------------------------------
+| Wordpress
+|--------------------------------------------------------------------------
+|
+| Integrate Wordpress with Laravel core
+|
+*/
+
+define('WP_USE_THEMES', false);
+require __DIR__.'/../wp/wp-blog-header.php';
 
 /*
 |--------------------------------------------------------------------------

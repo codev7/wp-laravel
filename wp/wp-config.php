@@ -18,7 +18,6 @@
  * @package WordPress
  */
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
 Dotenv::load(dirname(__DIR__));
 
 // ** MySQL settings - You can get this info from your web host ** //
