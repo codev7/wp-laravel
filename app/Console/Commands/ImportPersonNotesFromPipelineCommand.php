@@ -5,8 +5,8 @@ namespace CMV\Console\Commands;
 use Illuminate\Console\Command;
 
 use CMV\Misc\PipelineDeals;
-use CMV\Contact;
-use CMV\Company;
+use CMV\Models\Prospector\Contact;
+use CMV\Models\Prospector\Company;
 use CMV\User;
 
 class ImportPersonNotesFromPipelineCommand extends Command
@@ -70,12 +70,14 @@ class ImportPersonNotesFromPipelineCommand extends Command
 
             if(isset($notes['entries']))
             {
-                $contact->activities()->delete();
                 foreach($notes['entries'] as $entry)
                 {
-                    $activity = new \CMV\Activity([
-                        'content' => $entry['content']
+                    $activity =  \CMV\Models\Prospector\Activity::firstOrCreate([
+                        'pipeline_deals_id' => $entry['id']
                     ]);
+
+                    $activity->content = $entry['content'];
+                    $activity->save();
 
                     $contact->activities()->save( $activity );
 
@@ -147,20 +149,19 @@ class ImportPersonNotesFromPipelineCommand extends Command
         foreach($people['entries'] as $person)
         {
 
+
             $contact = Contact::where('email', $person['email'])->first();
 
             if(!$contact)
             {
-                
+                    
                 $contact = $this->createNewContact( $person );
 
             }
 
             if($contact) {
 
-                $contact->company->assignToSalesRepyByPipelineUserId( $person['user']['id'] );
-
-                $contact->pipeline_deals_id = $person['id'];
+                $contact->pipeline_deals_id = $person['user']['id'];
                 $contact->save();   
             }
             
@@ -168,7 +169,7 @@ class ImportPersonNotesFromPipelineCommand extends Command
     }
 
     protected function createNewContact( $person )
-    {      
+    {     
         if(empty($person['company_name']))
         {
             $this->error('Could not add ' . $person['email']. '.  No company name.');

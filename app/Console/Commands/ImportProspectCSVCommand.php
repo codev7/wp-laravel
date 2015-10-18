@@ -5,8 +5,8 @@ namespace CMV\Console\Commands;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
 
-use CMV\Company;
-use CMV\Contact;
+use CMV\Models\Prospector\Company;
+use CMV\Models\Prospector\Contact;
 use CMV\User;
 
 class ImportProspectCSVCommand extends Command
@@ -99,7 +99,7 @@ class ImportProspectCSVCommand extends Command
             foreach($data as $key => $value)
             {
 
-                if($value != '') $meta[] = new \CMV\CompanyMeta(['key' => $key, 'value' => $value]);
+                if($value != '') $meta[] = new \CMV\Models\Prospector\CompanyMeta(['key' => $key, 'value' => $value]);
 
             }
             $company->meta()->saveMany($meta);
@@ -118,7 +118,7 @@ class ImportProspectCSVCommand extends Command
             foreach($data as $key => $value)
             {
 
-                if($value != '') $meta[] = new \CMV\ContactMeta(['key' => $key, 'value' => $value]);
+                if($value != '') $meta[] = new \CMV\Models\Prospector\ContactMeta(['key' => $key, 'value' => $value]);
 
             }
             $contact->meta()->saveMany($meta);

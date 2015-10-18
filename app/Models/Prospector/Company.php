@@ -3,7 +3,7 @@
 namespace CMV\Models\Prospector;
 
 use Illuminate\Database\Eloquent\Model;
-
+use CMV\User;
 
 /**
 * A Company object is a company that we are trying
