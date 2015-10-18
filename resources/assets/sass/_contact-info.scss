@@ -1,0 +1,131 @@
+/* contact-info */
+.contact-info {
+	padding: 64px 0 60px;
+	@media #{$mobile} {
+		padding-top: 35px;
+		padding-bottom: 20px;
+	}
+	h3 {
+		font: 14px/17px $base-medium-family;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin: 0 0 16px;
+	}
+	.contact-list {
+		border-top: 1px solid $grey15;
+		position: relative;
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			@include center-block();
+			width: 1px;
+			background: $grey15;
+			@media #{$tablet} {
+				display: none;
+			}
+			@media #{$mobile} {
+				display: none;
+			}
+		}
+	}
+	.contact-item {
+		padding: 29px 200px 15px 167px;
+		@media #{$tablet-large} {
+			padding-right: 0;
+		}
+		@media #{$mobile} {
+			padding-left: 0;
+			padding-right: 0;
+			text-align: center;
+		}
+		.img-map {
+			float: left;
+			width: 131px;
+			height: auto;
+			margin: 0 26px 0 -157px;
+			@media #{$mobile} {
+				float: none;
+				@include center-block();
+				margin-bottom: 10px;
+			}
+		}
+		.descr {
+			float: left;
+			width: 100%;
+			padding: 8px 20px 0 0;
+			@media #{$mobile} {
+				float: none;
+				padding-right: 0;
+			}
+		}
+		h4 {
+			margin: 0 0 6px;
+			font: 20px/23px $archer-bold;
+		}
+		address {
+			font-size: inherit;
+			line-height: inherit;
+			margin-bottom: 0;
+			@media #{$tablet-large} {
+				margin-bottom: 10px;
+			}
+			@media #{$mobile} {
+				margin-bottom: 10px;
+			}
+		}
+		.str {
+			display: block;
+		}
+		.photos {
+			float: right;
+			width: 188px;
+			list-style: none;
+			padding: 0;
+			margin: 0 -198px 0 10px;
+			font-size: 0;
+			line-height: 0;
+			font-family: 'AdobeBlank';
+			@media #{$tablet-large} {
+				float: none;
+				width: auto;
+				margin-right: 0;
+				margin-left: 0;
+				padding-top: 15px;
+			}
+			@media #{$mobile} {
+				float: none;
+				@include center-block();
+			}
+			> li {
+				display: inline-block;
+				vertical-align: top;
+				width: 50%;
+				padding: 2px 14px 12px 0;
+				@media #{$mobile} {
+					padding-left: 7px;
+					padding-right: 7px;
+				}
+			}
+			span {
+				display: block;
+				height: 0;
+				padding: 0 0 70.89%;
+				@include border-radius(4px);
+				background-position: 50% 50%;
+				background-repeat: no-repeat;
+				background-size: cover;
+				&:hover {
+					text-decoration: none;
+					opacity: 0.9;
+				}
+				img {
+					display: none;
+				}
+			}
+		}
+	}
+}

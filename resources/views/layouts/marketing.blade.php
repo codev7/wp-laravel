@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     
-    @include('partials/head')
+    <head>
+        
+        @include('common/head')
 
+    <head>
     @yield('body','<body class="inner">')
 
     <div id="wrapper">
@@ -106,6 +109,11 @@
         </footer><!-- /footer -->
 </div><!-- /wrapper -->
     
+@if(isProduction())
+    <script src="{{ elixir('js/cmv-marketing.js') }}"></script>
+@else
+    <script src="{{ asset('js/cmv-marketing.js') }}"></script>
+@endif
 @include('common/footer')
 </body>
 </html>

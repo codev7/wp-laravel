@@ -12,17 +12,28 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss')
-       .browserify('codemyviews.js', 'public/js/codemyviews.js');
-
-   
-    mix.less('codemyviews.less');
-
-
-
-    mix.version([
-        'public/css/codemyviews.css',
-        'public/js/codemyviews.js'
-    ]);
+    mix.sass('codemyviews.scss')
+        .browserify('codemyviews.js','public/css/cmv-js.js')
+        .scripts([
+            'plugins/modernizr.js',
+            'plugins/jquery-1.11.1.min.js',
+            'plugins/jquery.ui.core.js',
+            'plugins/vue.js',
+            'plugins/vue-validator.js',
+            'plugins/vue-resource.js',
+            'plugins/moment.js',
+            'plugins/jquery.waypoints.js',
+            'plugins/jquery.validate.js',
+            'plugins',
+            'custom/cmv-helpers.js',
+            'custom/validation.js',
+            'custom',
+            'Vue'
+        ], 'public/js/cmv-marketing.js')
+        .version([
+            'public/css/codemyviews.css',
+            'public/js/cmv-marketing.js',
+            'public/js/cmv-js.js'
+        ]);
 
 });

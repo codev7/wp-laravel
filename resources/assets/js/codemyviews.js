@@ -13,8 +13,7 @@
  | attempt to create this Vue application so we can avoid conflicts.
  |
  */
-var Vue = require('Vue');
-var modernizr = require("modernizr");
+
 require('laravel-spark/core/dependencies');
 
 if ($('#spark-app').length > 0) {
@@ -22,17 +21,3 @@ if ($('#spark-app').length > 0) {
 
 	new Vue(require('laravel-spark'));
 }
-
-)
-        require('./plugins/jquery-1.11.1.min.js'),
-        require('./plugins/jquery.ui.core.js'),
-        require('./plugins/vue-validator.js'),
-        require('./plugins/vue-resource.js'),
-        require('./plugins/moment.js'),
-        require('./plugins/jquery.waypoints.js'),
-        require('./plugins/custom-form.js'),
-        require('./plugins'),
-        require('./custom/cmv-helpers.js'),
-        require('./custom/validation.js'),
-        require('./custom'),
-        'Vue'

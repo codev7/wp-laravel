@@ -25,3 +25,9 @@
         <div class="clearfix"></div>
     </div>
 </footer>
+
+@if(isProduction())
+    <script src="{{ elixir('js/cmv-js.js') }}"></script>
+@else
+    <script src="{{ asset('js/cmv-js.js') }}"></script>
+@endif

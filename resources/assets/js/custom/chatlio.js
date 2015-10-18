@@ -1,5 +1,14 @@
 function toggleChat() {
-    _chatlio.show({expanded: true}); return false;
+
+    if(CObj.prod)
+    {
+        _chatlio.show({expanded: true}); return false;
+
+    }
+    else
+    {
+        alert('this only works in production environment.');
+    }
 }
 
 

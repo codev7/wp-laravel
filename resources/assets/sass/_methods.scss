@@ -1,0 +1,144 @@
+/* page-heading */
+.page-heading {
+	border-bottom: 0;
+	padding-top: 94px;
+	padding-bottom: 53px;
+	margin: 0;
+	line-height: 2em;
+	color: $grey3;
+	@media #{$mobile} {
+		padding-top: 30px;
+		padding-bottom: 20px;
+	}
+	p {
+		margin: 0 0 10px;
+	}
+	.sub-ttl {
+		font-size: 68px;
+		line-height: 71px;
+		margin: 0 0 24px;
+		@media #{$mobile} {
+			font-size: 34px;
+			line-height: 37px;
+			margin-bottom: 12px;
+		}
+	}
+	.ttl {
+		font-size: 69px;
+		line-height: 72px;
+		letter-spacing: 48px;
+		margin: 0 0 15px;
+		@media #{$tablet} {
+			letter-spacing: 28px;
+		}
+		@media #{$mobile} {
+			font-size: 45px;
+			line-height: 48px;
+			letter-spacing: 7px;
+		}
+	}
+}
+/* methods-info */
+.methods-info {
+	position: relative;
+	@include rotate-bg();
+	padding: 112px 0 40px;
+	@media #{$mobile} {
+		padding-top: 40px;
+	}
+	&:before {
+		background: $blue10 url('#{$images}bg-methods-info.jpg');
+	}
+}
+/* method-list */
+.method-list {
+	line-height: 24px;
+	margin-bottom: 36px;
+	@media #{$mobile} {
+		margin-bottom: 20px;
+	}
+	> .media {
+		width: 50%;
+		margin: 0;
+		@media #{$tablet} {
+			width: 75%;
+			@include center-block();
+			text-align: center;
+			.media-left {
+				padding-right: 0;
+				padding-bottom: 21px;
+				@include center-block();
+			}
+			.media-body {
+				display: block;
+			}
+			.media-object {
+				@include center-block();
+			}
+		}
+		@media #{$mobile} {
+			max-width: 100%;
+			width: 400px;
+			@include center-block();
+			text-align: center;
+			.media-left {
+				padding-right: 0;
+				padding-bottom: 21px;
+				@include center-block();
+			}
+			.media-body {
+				display: block;
+			}
+			.media-object {
+				@include center-block();
+			}
+		}
+		& + .media {
+			margin-top: 115px;
+			@media #{$tablet} {
+				margin-top: 50px;
+			}
+			@media #{$mobile} {
+				margin-top: 30px;
+			}
+		}
+		&.item-right {
+			margin-left: auto;
+			@media #{$tablet} {
+				@include center-block();
+			}
+		}
+		&.item-center {
+			@include center-block();
+			text-align: center;
+			.media-left {
+				padding-right: 0;
+				padding-bottom: 21px;
+				@include center-block();
+			}
+			.media-object {
+				@include center-block();
+			}
+			.media-body {
+				display: block;
+			}
+		}
+	}
+	.media-left {
+		width: 131px;
+		padding-top: 12px;
+		padding-right: 5px;
+	}
+	.media-body {
+		width: auto;
+	}
+	.media-object {
+		height: auto;
+		max-width: 100%;
+	}
+	.media-heading {
+		font: 28px/31px $archer-semi-italic;
+		color: $black;
+		margin: 0 0 17px;
+	}
+}

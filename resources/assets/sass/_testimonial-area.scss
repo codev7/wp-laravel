@@ -1,0 +1,98 @@
+/* tesimonial-area */
+.testimonial-area {
+	position: relative;
+	padding: 146px 0 98px;
+	color: $white;
+	@media #{$mobile} {
+		padding-top: 50px;
+		padding-bottom: 30px;
+	}
+	@include rotate-bg();
+	&:before {
+		background: $blue6 url('#{$images}bg-testimonial-area.jpg') no-repeat 50% 50%;
+		background-size: cover;
+	}
+	.sub-ttl {
+		color: inherit;
+		margin-bottom: 20px;
+		letter-spacing: -1px;
+	}
+	.ttl {
+		letter-spacing: 7px;
+		margin-bottom: 17px;
+	}
+	.heading {
+		line-height: 28px;
+		position: relative;
+		padding: 0 0 30px;
+		margin: 0 0 41px;
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 254px;
+			height: 2px;
+			background: $white;
+			@include center-block();
+		}
+	}
+	.get-quote {
+		padding: 0 0 76px;
+		.btn-quote {
+			margin-left: 7px;
+			margin-right: 7px;
+			letter-spacing: 2px;
+			vertical-align: top;
+			@media #{$mobile} {
+				margin-bottom: 10px;
+			}
+		}
+		.quote-str {
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 7px;
+			padding-top: 10px;
+			padding-bottom: 11px;
+			font-family: $base-medium-family;
+			line-height: 23px;
+		}
+	}
+	.testimonial {
+		background: $white;
+		color: $black;
+		text-align: center;
+		@include border-radius(4px);
+		padding: 38px 24px;
+		margin: 0 0 20px;
+		border: 0;
+		img {
+			display: block;
+			width: 45px;
+			height: auto;
+			@include center-block();
+			margin-bottom: 13px;
+		}
+		cite {
+			display: block;
+			font: 12px/20px $base-bold-family;
+			text-transform: uppercase;
+			padding: 0 0 21px;
+		}
+		q {
+			display: block;
+			font: 16px/24px $archer-semi-italic;
+			padding: 0 0 13px;
+			&:before,
+			&:after {display: none;}
+		}
+		.name {
+			display: block;
+		}
+		.company {
+			display: block;
+			color: $blue7;
+		}
+	}
+}

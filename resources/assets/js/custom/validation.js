@@ -1,5 +1,5 @@
-/* jQuery Validation Set Defaults */
-(function () {
+$(document).on('ready', function () {
+
     if (!$.validator) {
         throw new Error('jquery.validate.js required');
     }
@@ -35,10 +35,6 @@
             }
         }
     });
-
-}).call(this);
-
-$(document).on('ready', function () {
 
     /* Default Form Submission Function */
     var defaultFormSubmit = function (form) {
