@@ -239,10 +239,15 @@ if(document.querySelector('#order-concierge'))
 
                     $('#payment-form').append(shareASaleTracker);
 
-                    /* Perfect Audience Tracking */
-                    _pa.revenue = value;
-                    _pa.productId = that.modal.plan_id; 
-                    _pq.push(['track', 'concierge_signup']);
+
+                    if(CObj.prod)
+                    {
+                        /* Perfect Audience Tracking */
+                        _pa.revenue = value;
+                        _pa.productId = that.modal.plan_id; 
+                        _pq.push(['track', 'concierge_signup']);    
+                    }
+                    
 
                     CMV.trackEvent('concierge','Customer Subscribed',value);
 

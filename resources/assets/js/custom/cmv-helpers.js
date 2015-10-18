@@ -15,6 +15,12 @@ var CMV = {
 
             _kmq.push(['record',  action , {'Amount' : valueInDollars, 'Category': category} ]);      
         }
+        else
+        {
+            
+            console.log('Event Tracked: ' + category + ' - ' + action);
+
+        }
         
     }
 };

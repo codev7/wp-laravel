@@ -1,0 +1,21 @@
+// Button Outline
+// --------------------------------------------------
+
+.btn-default-outline {
+  @include button-outline-variant($btn-default-color);
+}
+.btn-primary-outline {
+  @include button-outline-variant($btn-primary-border);
+}
+.btn-success-outline {
+  @include button-outline-variant($btn-success-border);
+}
+.btn-info-outline {
+  @include button-outline-variant($btn-info-border);
+}
+.btn-warning-outline {
+  @include button-outline-variant($btn-warning-border);
+}
+.btn-danger-outline {
+  @include button-outline-variant($btn-danger-border);
+}

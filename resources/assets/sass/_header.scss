@@ -153,6 +153,7 @@
 				}
 			}
 		}
+		
 		.dropdown-menu {
 			float: none;
 			right: 0;
@@ -169,6 +170,7 @@
 			@media #{$mobile} {
 				margin-top: 0;
 			}
+
 			a {
 				color: $white;
 			}

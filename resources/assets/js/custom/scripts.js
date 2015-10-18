@@ -1,4 +1,11 @@
 $(document).ready(function(){
+	
+	customForm.lib.domReady(function(){
+		
+		customForm.customForms.replaceAll();
+	
+	});
+	
 	$('.gallery').each(function() {
 		var $el = $(this).find('.gallery-nav').children(),
 			width = ~~($(this).find('.gallery-nav').outerWidth() / $el.length);

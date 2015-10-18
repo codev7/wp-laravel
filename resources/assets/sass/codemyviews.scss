@@ -1,32 +1,27 @@
 /*
- * Variables...
- */
- /*
-$border-radius-base: 0;
-$brand-primary: #2B5A84;
-$btn-border-radius-base: 4px;
-$btn-font-weight: 300;
-$font-family-sans-serif: "Lato", Helvetica, Arial, sans-serif !default;
-$font-size-base: 14px;
-$navbar-height: 65px;*/
-
-/*
  * Bootstrap CSS...
  */
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "_colors";
+@import "_variables";
+
+@import "bootstrap/bootstrap";
+
+@import "_mixins";
+
+@import "_fonts";
+@import "_buttons";
+
 
 /*
  * Spark Styling...
  */
-//@import "vendor/laravel/spark/resources/assets/sass/spark";
+@import "spark/spark";
 
 @import "plugins/slick";
-@import "_vars";
-@import "_mixins";
-@import "_colors";
-@import "_fonts";
+@import "plugins/forms";
+
 @import "_headings";
-@import "_buttons";
+
 @import "_header";
 @import "_visual";
 @import "_gallery-area";
@@ -143,3 +138,5 @@ h6 {
         padding-top: 58px;
     }
 }
+
+@import 'apptheme/toolkit';

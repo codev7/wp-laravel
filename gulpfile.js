@@ -13,7 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('codemyviews.scss')
-        .browserify('codemyviews.js','public/css/cmv-js.js')
+        .browserify('codemyviews.js','public/js/cmv-js.js')
         .scripts([
             'plugins/modernizr.js',
             'plugins/jquery-1.11.1.min.js',

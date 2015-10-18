@@ -137,9 +137,16 @@ if(document.querySelector('#quote-form'))
                 }
 
                 if(step == 1)
-                {
+                {   
                     CMV.trackEvent('lead','Back Button Clicked',0);
                     this.h3_header = 'Start Here';
+
+                    setTimeout(function()
+                    {
+
+                        customForm.customForms.replaceAll();
+
+                    },10);
                 }
             },
 
