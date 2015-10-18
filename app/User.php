@@ -116,14 +116,6 @@ class User extends Model implements AuthorizableContract,
 
     }
 
-    /* should try to remove this - is not needed. */
-    public function saveNameFromFullName($fullName)
-    {
-
-        $this->name = $fullName;
-        
-        $this->save();
-    }
 
     public function getFullName()
     {
@@ -181,9 +173,14 @@ class User extends Model implements AuthorizableContract,
 
     }
 
+    public function leads()
+    {
+        return $this->hasMany('CMV\Lead');
+    }
+
     public function activities()
     {
-        return $this->hasMany('CMV\Models\Prospector\Activity');
+        return $this->hasMany('CMV\Models\Prospector\Activity','sales_rep_id');
     }
 
     public function projectInvoices()
@@ -258,7 +255,7 @@ class User extends Model implements AuthorizableContract,
             
 
         $output = [];
-        foreach(CMV\Models\Prospector\Company::$statuses as $status => $description)
+        foreach(\CMV\Models\Prospector\Company::$statuses as $status => $description)
         {
 
             $foundValue = false;

@@ -1,55 +1,38 @@
-@extends('spark::layouts.spark')
+@extends('spark::layouts.skeleton')
 
 <!-- Main Content -->
 @section('content')
-<div id="spark-authenticate-screen" class="container spark-screen">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@include('spark::common.errors', ['form' => 'default'])
+<div class="container-fluid container-fill-height">
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-						{!! csrf_field() !!}
+	<div class="container-content-middle container spark-screen" id="spark-authenticate-screen">
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control spark-first-field" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
+		<form role="form" action="{{ url('/login') }}" method="POST" class="m-x-auto text-center app-login-form">
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="remember"> Remember Me
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									<i class="fa fa-btn fa-sign-in"></i>Login
-								</button>
-
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
-							</div>
-						</div>
-					</form>
-				</div>
+			{!! csrf_field() !!}
+			<a href="{{ route('home') }}" class="app-brand m-b-lg">
+				<img src="{{ asset('images/cmv-logo-application.png') }}" alt="brand">
+			</a>
+			@include('spark::common.errors', ['form' => 'default'])
+			<div class="form-group">
+				<input type="email" placeholder="Your Email Address" class="form-control spark-first-field" name="email" value="{{ old('email') }}">
 			</div>
-		</div>
+
+			<div class="form-group m-b-md">
+				<input type="password" placeholder="Password" class="form-control" name="password">
+			</div>
+			<input type="hidden" value="1" name="remember">
+			<div class="m-b-lg">
+				<button type="submit" class="btn btn-primary btn-block">Log In</button>
+
+				<hr />
+
+				<div class="btn-group btn-group-sm">
+					<a href="{{ url('/register') }}" class="btn btn-success btn-sm">Create Account</a>
+					<a href="{{ url('/password/email') }}" class="btn btn-default text-muted btn-sm">Forgot password</a>
+				</div>
+				
+			</div>
+		</form>
 	</div>
 </div>
 @endsection

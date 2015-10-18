@@ -17,11 +17,11 @@ class SparkServiceProvider extends ServiceProvider
      * @var array
      */
     protected $invoiceWith = [
-        'vendor' => 'Your Company',
-        'product' => 'Your Product',
-        'street' => 'PO Box 111',
-        'location' => 'Your Town, 12345',
-        'phone' => '555-555-5555',
+        'vendor' => 'Code My Views Inc.',
+        'product' => 'Development Services',
+        'street' => '2028 E Ben White Blvd Ste 240-9450',
+        'location' => 'Austin, TX 78741',
+        'phone' => '512-831-6717',
     ];
 
     /**
@@ -141,17 +141,26 @@ class SparkServiceProvider extends ServiceProvider
      */
     protected function customizeSubscriptionPlans()
     {
-       Spark::free()->features([
-            'Feature 1',
-            'Feature 2',
-            'Feature 3',
-        ]);
 
-        Spark::plan('Basic', 'WP-CONCIERGE-BASIC')->price(500)
+        Spark::plan('Single', 'WP-CONCIERGE-SINGEL')->price(599)
          ->features([
-             'Feature 1',
-             'Feature 2',
-             'Feature 3',
+             '1 site',
+             '1 request at a time',
+             '2 Business Days to Complete Non Urgent Tasks',
+         ]);
+
+         Spark::plan('Freelancer', 'WP-CONCIERGE-FREELANCER')->price(1599)
+         ->features([
+             '3 sites',
+             '2 request at a time',
+             '2 Business Days to Complete Non Urgent Tasks'
+         ]);
+
+         Spark::plan('Agency', 'WP-CONCIERGE-AGENCY')->price(2400)
+         ->features([
+             '5 sites',
+             '3 request at a time',
+             '1 Business Days to Complete Non Urgent Tasks'
          ]);
     }
 }

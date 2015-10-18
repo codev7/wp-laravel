@@ -1,6 +1,5 @@
 @extends('spark::layouts.spark')
 
-<!-- Main Content -->
 @section('content')
 <div id="spark-terms-screen" class="container-fluid spark-screen">
 	<div class="row">

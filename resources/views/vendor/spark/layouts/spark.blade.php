@@ -3,9 +3,11 @@
 <head>
     @include('spark::layouts.common.head')
 </head>
-<body>
+<body class="with-top-navbar">
     <!-- Vue App For Spark Screens -->
     <div id="spark-app" v-cloak>
+        <div class="growl" id="app-growl"></div>
+
         <!-- Navigation -->
         @if (Auth::check())
             @include('spark::nav.authenticated')
@@ -13,8 +15,9 @@
             @include('spark::nav.guest')
         @endif
 
-        <!-- Main Content -->
-        @yield('content')
+        <div class="container p-t-md">
+            @yield('content')
+        </div><!--container-->
 
         <!-- Footer -->
         @include('spark::common.footer')

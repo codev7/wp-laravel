@@ -32,7 +32,7 @@
         </div>
     </div><!--col-->
 </div><!--row-->
-<a href="#" class="m-a-0 btn btn-primary pull-right"><span class="icon icon-install"></span> {{ $rep->first_name }}'s Prospect CSV</a>
+<a href="#" class="m-a-0 btn btn-primary pull-right"><span class="icon icon-install"></span> {{ $rep->name }}'s Prospect CSV</a>
 
 <h4 class="m-b">Agency &amp; Brand Reachout Stats <a href="#stage-modal" data-toggle="modal"><span class="icon icon-help-with-circle"></span></a></h4>
 <div class="m-b">
@@ -43,7 +43,7 @@
     data-scale-line-color="transparent"
     data-scale-grid-line-color="rgba(255,255,255,.05)"
     data-scale-font-color="#a2a2a2"
-    data-labels='{!! CMV\Company::getJsonStatuses() !!}'
+    data-labels='{!! CMV\Models\Prospector\Company::getJsonStatuses() !!}'
     data-value="[{ fillColor: '#1e6ab4', label: 'Agency Stats', data: {!! $rep->getStatusCountJson('agency') !!} },{fillColor: '#7caa18', label: 'Brand Stats', data: {!! $rep->getStatusCountJson('brand') !!} }]">
   </canvas>
 </div>

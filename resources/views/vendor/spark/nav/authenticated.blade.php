@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-fixed-top app-navbar">
 	<div class="container">
 		<div class="navbar-header">
 
@@ -11,25 +11,35 @@
 			</button>
 
 			<!-- Branding Image -->
-			<a class="navbar-brand" href="/" style="padding-top: 19px;">
-				<i class="fa fa-btn fa-sun-o"></i>Spark
+			<a class="navbar-brand" href="{{ route('home') }}">
+				<img src="{{ asset('images/cmv-logo-application.png') }}" alt="brand">
 			</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- Left Side Of Navbar -->
-			<ul class="nav navbar-nav">
-				<li><a href="/home">Home</a></li>
-
+			<ul class="nav navbar-nav hidden-xs">
+				<li class="{{ set_active('dashboard') }}">
+                    <a href="/prospects/dashboard">Sales Dashboard</a>
+                </li>
+                <li  class="{{ set_active('companies') }}">
+                    <a href="{{ route('companies',['filter' => 'all']) }}">Companies</a>
+                </li>
+                <li  class="{{ set_active('contacts') }}">
+                    <a href="/contacts/">Contacts</a>
+                </li>
 				@if ( ! Spark::isDisplayingSettingsScreen())
+					
+
 					<!-- Additional User Defined Navbar Items -->
 					<!-- Best To Leave Left Side Nav Empty On Settings To Avoid Vue.js Conflicts -->
+
+
 				@endif
 			</ul>
 
 			<!-- Right Side Of Navbar -->
-			<ul class="nav navbar-nav navbar-right">
-
+			<ul class="nav navbar-nav navbar-right m-r-0 hidden-xs">
 				<!-- Settings Dropdown -->
 				@if (Spark::isDisplayingSettingsScreen())
 					{{-- This Dropdown Is For Spark Settings Sreens - Vue Based --}}

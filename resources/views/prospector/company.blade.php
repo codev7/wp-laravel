@@ -1,12 +1,12 @@
-@extends('layouts/dashboard')
+@extends('spark::layouts.spark')
 
 @section('content')
 <div class="hr-divider m-t-md m-b">
     <h3 class="hr-divider-content hr-divider-heading">Company Info</h3>
 </div>
 <ol class="breadcrumb">
-    <li><a href="/dashboard/">Dashboard</a></li>
-    <li><a href="/companies/">Companies</a></li>
+    <li><a href="{{ route('prospects.dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('companies') }}">Companies</a></li>
     <li class="active" style="color: black">{{ $company->name }}</li>
 </ol>
 

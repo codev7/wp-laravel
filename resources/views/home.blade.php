@@ -1,8 +1,8 @@
-@extends('spark::layouts.app')
+@extends('spark::layouts.spark')
 
 @section('content')
 <!-- Main Content -->
-<div class="container spark-screen">
+<div class="spark-screen">
 	@if (Spark::usingTeams() && ! Auth::user()->hasTeams())
 
 		<!-- Teams Are Enabled, But The User Doesn't Have One -->

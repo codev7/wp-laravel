@@ -16,15 +16,6 @@ use CMV\Jobs\SendLeadToSlack;
 class LeadsController extends Controller
 {   
 
-    /**
-     * Store a newly created resource in storage.
-     * @Get("home", as="spark", middleware="auth")
-     * @return Response
-     */
-    public function sparkTest()
-    {
-        return view('home');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -95,9 +86,10 @@ class LeadsController extends Controller
         }
 
 
-        if($request->input('name') && is_null($user->first_name))
+        if($request->input('name') && is_null($user->name))
         {
-            $user->saveNameFromFullName( $request->input('name') );
+            $user->name = $request->input('name');
+            $user->save();
         }
 
 

@@ -1,7 +1,6 @@
-@extends('layouts/dashboard')
+@extends('spark::layouts.spark')
 
 @section('content')
-
 
 
 <div class="hr-divider m-t-md m-b">
@@ -13,15 +12,15 @@
     <div class="col-sm-12">
 
         <ul class="nav nav-tabs">
-        @foreach($reps as $rep)
-        <li @if($reps[0]->id == $rep->id) class="active" @endif><a data-toggle="tab" href="#tab-{{ $rep->first_name }}-{{ $rep->last_name }}">{{ $rep->first_name }} {{ $rep->last_name }}</a></li>
+        @foreach($reps as $count => $rep)
+        <li @if($reps[0]->id == $rep->id) class="active" @endif><a data-toggle="tab" href="#tab-{{ $count }}">{{ $rep->name }}</a></li>
         @endforeach
         </ul>
 
         <div class="tab-content m-t">
 
-            @foreach($reps as $rep)
-                <div class="tab-pane @if($reps[0]->id == $rep->id) active @endif" id="tab-{{ $rep->first_name }}-{{ $rep->last_name }}">
+            @foreach($reps as $count => $rep)
+                <div class="tab-pane @if($reps[0]->id == $rep->id) active @endif" id="tab-{{ $count }}}">
 
                     @include('partials/rep',['rep' => $rep])
 

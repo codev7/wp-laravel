@@ -1,0 +1,133 @@
+/* buttons */
+.btn {
+	
+	border: 4px solid transparent;
+
+	&.btn-project {
+		font: 18px/22px @base-bold-family;
+		text-transform: none;
+		padding: 24px 57px;
+		border-color: @grey4;
+		border-width: 5px;
+		color: @blue2;
+		letter-spacing: 0;
+		.border-radius(42px);
+		.caret {
+			color: @blue;
+			.rotate(-90deg);
+			border-width: 7px 5px 0;
+		}
+		@media @mobile {
+			font-size: 14px;
+			line-height: 17px;
+			padding: 12px 28px;
+			border-width: 3px;
+		}
+	}
+	&.btn-quote {
+		border-color: @green4;
+		background: rgba(116,158,26,0.46);
+		.border-radius(21px);
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+	&.btn-quote2 {
+		border-color: @blue7;
+		background: @blue7;
+		letter-spacing: 2px;
+		.border-radius(21px);
+		&:hover {
+			opacity: 0.9;
+		}
+	}
+	&.btn-chat {
+		background: none;
+		border-color: @blue;
+		&:hover {
+			background-color: @blue2;
+		}
+	}
+}
+.btn-to-next {
+	position: absolute;
+	left: 50%;
+	bottom: -64px;
+	width: 60px;
+	height: 60px;
+	.border-radius(50%);
+	color: @white;
+	font-size: 22px;
+	background: @blue;
+	margin-left: -((@container-large-desktop + @grid-gutter-width)/2);
+	cursor: pointer;
+	@media @tablet-large {
+		margin-left: -((@container-desktop - @grid-gutter-width)/2);
+		bottom: -54px;
+	}
+	@media @tablet {
+		margin-left: -((@container-tablet + @grid-gutter-width)/2);
+		bottom: -50px;
+	}
+	@media @mobile {
+		width: 30px;
+		height: 30px;
+		bottom: -20px;
+		margin-left: 0;
+		left: @grid-gutter-width/2;
+		font-size: 12px;
+	}
+	.glyphicon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -0.5em 0 0 -0.5em;
+	}
+	&:hover,
+	&:focus {
+		color: @white;
+		opacity: 0.9;
+	}
+	&.type2 {
+		background-color: @white;
+		color: @black;
+		.box-shadow(0 1px 0 1px rgba(0,0,0,0.1));
+		&:hover {
+			color: @black;
+		}
+	}
+}
+.btn-load-more {
+	display: block;
+	cursor: pointer;
+	color: @white !important;
+	background: @black3;
+	text-align: center;
+	text-decoration: none !important;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font: 14px/29px @base-bold-family;
+	padding: 33px 70px 33px 3000px;
+	margin: 0 -35px 0 -3000px;
+	@media @tablet-large {
+		margin-right: -@grid-gutter-width/2;
+		padding-right: @grid-gutter-width/2;
+	}
+	@media @tablet {
+		margin-right: -3000px;
+		margin-bottom: 10px;
+		padding-left: 3100px;
+		padding-right: 3000px;
+	}
+	@media @mobile {
+		margin-left: -@grid-gutter-width/2;
+		margin-right: -@grid-gutter-width/2;
+		margin-bottom: 10px;
+		padding: 20px @grid-gutter-width/2;
+	}
+	&:hover {
+		text-decoration: none;
+		color: @white;
+		opacity: 0.95;
+	}
+}

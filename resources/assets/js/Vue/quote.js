@@ -59,7 +59,12 @@ if(document.querySelector('#quote-form'))
 
                     CMV.trackEvent('lead','Lead Submitted',0);
 
-                    _pq.push(['track', 'warm_lead']);
+                    if(CObj.prod)
+                    {
+
+                        _pq.push(['track', 'warm_lead']);
+
+                    }
                     
                 }).error(function(data, status, request){
 

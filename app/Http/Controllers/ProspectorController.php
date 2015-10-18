@@ -5,23 +5,26 @@ namespace CMV\Http\Controllers;
 use Illuminate\Http\Request;
 use CMV\Http\Requests;
 use CMV\Http\Controllers\Controller;
+use CMV\Models\Prospector\Company;
+use CMV\Models\Prospector\Contact;
+use Input;
 
 class ProspectorController extends Controller
 {
 
     /**
-     * @Get("prospects/dashboard", as="prospects.dashboard", middleware="sales_rep")
+     * @Get("prospects/dashboard", as="prospects.dashboard", middleware="auth")
      * @return Response
      */
     public function prospectsDashboard()
     {
-        $unassigned = CMV\Company::unassignedCompanies();
-        return view('prospector/dashboard')->with('unassigned',$unassigned)->with('reps', CMV\User::where('is_sales_rep',true))->with('reps', CMV\User::where('is_sales_rep',true)->with('companies')->get());
+        $unassigned = Company::unassignedCompanies();
+        return view('prospector/dashboard')->with('unassigned',$unassigned)->with('reps', \CMV\User::where('is_sales_rep',true))->with('reps', \CMV\User::where('is_sales_rep',true)->with('companies')->get());
     }
 
 
     /**
-     * @Get("prospects/companies/{filter?}/{rep?}", as="companies", middleware="sales_rep")
+     * @Get("prospects/companies/{filter?}/{rep?}", as="companies", middleware="auth")
      * @return Response
      */
     public function companies($filter = null, $rep = null)
@@ -32,15 +35,15 @@ class ProspectorController extends Controller
         }
 
 
-        $search = Input::get('search');
+        $search = \Input::get('search');
 
         if($search) {
-            $companies = CMV\Company::with('contacts','salesRep')->where('name','LIKE',"%{$search}%");
+            $companies = Company::with('contacts','salesRep')->where('name','LIKE',"%{$search}%");
         } else {
-            $companies = CMV\Company::with('contacts','salesRep');
+            $companies = Company::with('contacts','salesRep');
         }
             
-        $status = Input::get('status');
+        $status = \Input::get('status');
         if($status) {
             
             $companies->where('status',$status);
@@ -74,18 +77,18 @@ class ProspectorController extends Controller
     }
 
     /**
-     * @Get("company/{id}", as="company", middleware="sales_rep")
+     * @Get("company/{id}", as="company", middleware="auth")
      * @return Response
      */
     public function company($id)
     {
-        $company = CMV\Company::findOrFail($id);
+        $company = Company::findOrFail($id);
 
-        return view('company')->with('company', $company);
+        return view('prospector/company')->with('company', $company);
     }
 
     /**
-     * @Get("contacts", as="contacts", middleware="sales_rep")
+     * @Get("contacts", as="contacts", middleware="auth")
      * @return Response
      */
     public function contacts()
@@ -93,27 +96,27 @@ class ProspectorController extends Controller
         $search = Input::get('search');
 
         if($search) {
-            $prospects = CMV\Contact::with('company','activities')
+            $prospects = Contact::with('company','activities')
                 ->where('contacts.email','LIKE',"%{$search}%")
                 ->orWhere('contacts.first_name','LIKE',"%{$search}%")
                 ->orWhere('contacts.last_name','LIKE',"%{$search}%");
         } else {
-            $prospects = CMV\Contact::with('company','activities');
+            $prospects = Contact::with('company','activities');
         }
 
         
 
-        return view('contacts')->with('prospects', $prospects->paginate(50));
+        return view('prospector/contacts')->with('prospects', $prospects->paginate(50));
     }
 
 
     /**
-     * @Post("company/{id}", as="update-company", middleware="sales_rep")
+     * @Post("company/{id}", as="update-company", middleware="auth")
      * @return Response
      */
     public function updateCompany($id)
     {
-        $company = CMV\Company::findOrFail($id);
+        $company = Company::findOrFail($id);
 
         if(Input::get('status'))
         {
@@ -138,14 +141,14 @@ class ProspectorController extends Controller
     }
 
     /**
-     * @Get("company/{id}/person/{person_id}", as="prospect", middleware="sales_rep")
+     * @Get("company/{id}/person/{person_id}", as="prospect", middleware="auth")
      * @return Response
      */
     public function contact($id, $person_id)
     {
-        $contact = CMV\Contact::with('company','activities')->findOrFail($person_id);
+        $contact = Contact::with('company','activities')->findOrFail($person_id);
 
-        return view('contact')->with('contact', $contact)->with('company', $contact->company)->with('activities', $contact->activities()->orderBy('created_at', 'desc')->get());
+        return view('prospector/contact')->with('contact', $contact)->with('company', $contact->company)->with('activities', $contact->activities()->orderBy('created_at', 'desc')->get());
     }
 
 }   

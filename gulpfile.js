@@ -12,7 +12,8 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('codemyviews.scss')
+    mix.less('cmv-app.less','public/css/cmv-app.css');
+    mix.less('cmv-marketing.less','public/css/codemyviews.css')
         .browserify('codemyviews.js','public/js/cmv-js.js')
         .scripts([
             'plugins/modernizr.js',

@@ -23,7 +23,7 @@
                     <hr />
                     <h2 class="text-primary">Company Stages</h2>
 
-                    @foreach(CMV\Company::$statuses as $stage  => $description)
+                    @foreach(CMV\Models\Prospector\Company::$statuses as $stage  => $description)
                             <h3 class="m-a-0">{{ $stage }}</h3>
                             <p class="m-b">{{ $description }}</p>
 
