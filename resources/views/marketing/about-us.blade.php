@@ -1,5 +1,4 @@
-@extends('layouts.master')
-
+@extends('layouts/marketing')
 @section('content')
 	<header class="page-header page-heading">
 		<div class="container">

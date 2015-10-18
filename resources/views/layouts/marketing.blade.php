@@ -5,7 +5,6 @@
 
     @yield('body','<body class="inner">')
 
-
     <div id="wrapper">
         <header id="header">
             <div class="container">
@@ -56,57 +55,57 @@
         @yield('content')
 
         <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="holder clearfix">
-                        <strong class="logo"><a href="/"><span class="sr-only">{{ config('app.company_name') }}</span></a></strong>
-                        <span class="copyright">&copy; <strong>{{ date('Y') }}</strong></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-5">
+                        <div class="holder clearfix">
+                            <strong class="logo"><a href="/"><span class="sr-only">{{ config('app.company_name') }}</span></a></strong>
+                            <span class="copyright">&copy; <strong>{{ date('Y') }}</strong></span>
+                        </div>
+                        <ul class="nav nav-pills add-nav">
+                            <li><a href="{{ route('legal') }}">NDA</a></li>
+                            <li><a href="{{ route('legal') }}">Terms of Service</a></li>
+                            <li><a href="{{ route('legal') }}">Privacy Policy</a></li>
+                        </ul>
                     </div>
-                    <ul class="nav nav-pills add-nav">
-                        <li><a href="{{ route('legal') }}">NDA</a></li>
-                        <li><a href="{{ route('legal') }}">Terms of Service</a></li>
-                        <li><a href="{{ route('legal') }}">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-8 col-md-7">
-                    <div class="row">
-                        <div class="col-lg-5 col-lg-offset-1 col-sm-7">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h4>About Us</h4>
-                                    <ul class="list-unstyled nav-list">
-                                        <li><a href="" class="jobs">Jobs</a></li>
-                                        <li><a href="{{ route('about-us') }}">About Us</a></li>
-                                        <li><a href="{{ route('methods') }}">Methodology</a></li>
-                                        <li><a href="{{ route('our-code') }}">Our Code</a></li>
-                                    </ul>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="row">
+                            <div class="col-lg-5 col-lg-offset-1 col-sm-7">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h4>About Us</h4>
+                                        <ul class="list-unstyled nav-list">
+                                            <li><a href="" class="jobs">Jobs</a></li>
+                                            <li><a href="{{ route('about-us') }}">About Us</a></li>
+                                            <li><a href="{{ route('methods') }}">Methodology</a></li>
+                                            <li><a href="{{ route('our-code') }}">Our Code</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>Developer Daily</h4>
+                                        <ul class="list-unstyled nav-list">
+                                            <li><a href="{{ route('blog') }}">Blog Index</a></li>
+                                            <li><a href="{{ route('blog.category',['category' => 'ui-ux']) }}">UI/UX</a></li>
+                                            <li><a href="{{ route('blog.category', ['category' => 'front-end']) }}">Front End</a></li>
+                                            <li><a href="{{ route('blog.category', ['category' => 'branding']) }}">Branding</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4>Developer Daily</h4>
-                                    <ul class="list-unstyled nav-list">
-                                        <li><a href="{{ route('blog') }}">Blog Index</a></li>
-                                        <li><a href="{{ route('blog.category',['category' => 'ui-ux']) }}">UI/UX</a></li>
-                                        <li><a href="{{ route('blog.category', ['category' => 'front-end']) }}">Front End</a></li>
-                                        <li><a href="{{ route('blog.category', ['category' => 'branding']) }}">Branding</a></li>
-                                    </ul>
+                            </div>
+                            <div class="col-lg-6 col-sm-5">
+                                <h4>Live Chat <span id="chat-status" class="state online"></span></h4>
+                                <div class="chat-block">
+                                    <p>Talk to one of our developer specialists today for any assistance or information.</p>
+                                    <a href="javascript:void(0);" onclick="toggleChat()" class="btn btn-primary btn-chat">START LIVE CHAT</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-5">
-                            <h4>Live Chat <span id="chat-status" class="state online"></span></h4>
-                            <div class="chat-block">
-                                <p>Talk to one of our developer specialists today for any assistance or information.</p>
-                                <a href="javascript:void(0);" onclick="toggleChat()" class="btn btn-primary btn-chat">START LIVE CHAT</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </footer><!-- /footer -->
+            </div><!-- container-->
+        </footer><!-- /footer -->
 </div><!-- /wrapper -->
     
-@include('partials/footer')
+@include('common/footer')
 </body>
 </html>

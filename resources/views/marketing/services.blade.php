@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts/marketing')
 
 @section('body')
 <body class="services-page">

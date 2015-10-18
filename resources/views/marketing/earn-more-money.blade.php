@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts/marketing')
 
 @section('body')
 <body class="blog-detail-page hide-nav">
