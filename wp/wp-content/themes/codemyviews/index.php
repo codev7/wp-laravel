@@ -1,4 +1,4 @@
 <?php
 
 
-wp_redirect( env('WP_SITEURL') );
+wp_redirect( env('APP_URL') );

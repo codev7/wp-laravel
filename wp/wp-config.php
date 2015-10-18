@@ -20,7 +20,7 @@
 
 if(!class_exists('Dotenv'))
 {
-    include_once '../../vendor/autoload.php';
+    include_once dirname(__DIR__) . '/vendor/autoload.php';
 }
 
 
@@ -28,10 +28,10 @@ Dotenv::load(dirname(__DIR__));
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', env('DB_BLOG_DATABASE'));
+define('DB_NAME', env('DB_DATABASE'));
 
 
-define('WP_HOME', env('WP_HOME'));
+define('WP_HOME', env('APP_URL'));
 define('WP_SITEURL', env('WP_SITEURL'));
 
 /** MySQL database username */

@@ -12,13 +12,44 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Laravel\Spark\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatable;
 use Laravel\Spark\Contracts\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatableContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements AuthorizableContract,
                                     BillableContract,
                                     CanResetPasswordContract,
                                     TwoFactorAuthenticatableContract
 {
-    use Authorizable, Billable, CanResetPassword, TwoFactorAuthenticatable, CanJoinTeams;
+    use Authorizable, Billable, CanResetPassword, TwoFactorAuthenticatable, CanJoinTeams,SoftDeletes;
+
+
+    protected $columns = [
+        'id',
+        'name',
+        'email',
+        'password',
+        'phone_country_code',
+        'phone_number',
+        'two_factor_options',
+        'current_team_id',
+        'stripe_active',
+        'stripe_id',
+        'stripe_subscription',
+        'stripe_plan',
+        'last_four',
+        'extra_billing_info',
+        'trial_ends_at',
+        'subscription_ends_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'developer_key', //save the developers public key here  - most will be null
+        'is_mastermind', //this will be a super admin mode
+        'is_admin', //admin mode (for project managers / internal team)
+        'is_developer', // (for developers)
+        'is_sales_rep', // (for sales reps)
+        'pipeline_user_id', //this is where we will store the pipeline API user id - most users will be NULL
+        'bitbucket_username' //where we can store the developers bitbucket username - most will be null
+    ];
 
     /**
      * The database table used by the model.
@@ -67,32 +98,29 @@ class User extends Model implements AuthorizableContract,
     public function isAdministrator()
     {
 
-        return $this->administrator;
+        return $this->is_admin;
 
     }
 
-
-    public function leads()
+    public function isDeveloper()
     {
 
-
-        return $this->hasMany( 'CMV\Lead' );
+        return $this->is_developer; 
 
     }
 
+    public function isMastermind()
+    {
+
+        return $this->is_mastermind; 
+
+    }
+
+    /* should try to remove this - is not needed. */
     public function saveNameFromFullName($fullName)
     {
 
-        $parts = explode(" ", $fullName);
-        
-        $this->first_name = $parts[0];
-
-        if(count($parts) > 1)
-        {
-            $this->last_name = array_pop($parts);
-
-            $this->first_name = implode(" ", $parts);   
-        }
+        $this->name = $fullName;
         
         $this->save();
     }
@@ -101,24 +129,143 @@ class User extends Model implements AuthorizableContract,
     {
 
 
-        if(isset($this->last_name) && isset($this->first_name))
+        if(isset($this->name))
         {
 
-            return $this->first_name . ' ' . $this->last_name;
+            return $this->name;
 
-        }
-
-
-        if(isset($this->first_name))
-        {
-            return $this->first_name;
-        }
-
-        if(isset($this->last_name))
-        {
-            return $this->last_name;
         }
 
         return false;
+    }
+
+    public function teams()
+    {
+
+        return $this->belongsToMany('CMV\Team','user_teams');
+
+    }
+
+    public function developerProjects()
+    {
+
+        return $this->hasMany('CMV\Models\PM\Project','developer_id');
+
+    }
+
+    public function assignedProjects()
+    {
+
+        return $this->hasMany('CMV\Models\PM\Project','project_manager_id');
+
+    }
+
+    public function messages()
+    {
+
+        return $this->hasMany('CMV\Models\PM\Message');
+
+    }
+
+    public function companies()
+    {
+
+        return $this->hasMany('CMV\Models\Prospector\Company','sales_rep_id','id');
+
+    }
+
+    public function contacts()
+    {
+
+        return $this->hasManyThrough('CMV\Models\Prospector\Contact','CMV\Models\Prospector\Company');
+
+    }
+
+    public function activities()
+    {
+        return $this->hasMany('CMV\Models\Prospector\Activity');
+    }
+
+
+
+    public function getTrailing28DayActivities($returnDateArray = null)
+    {
+
+        $fromDate = \Carbon\Carbon::now()->subDay()->subWeeks(4); // or ->format(..)
+        $tillDate = \Carbon\Carbon::now()->subDay();
+
+
+        $currentDate = $fromDate;
+
+        while($currentDate->toDateString() < $tillDate->toDateString())
+        {
+            $dates[] = $currentDate->addDay()->toDateString();
+        }
+
+        if($returnDateArray == true)
+        {   
+            return json_encode($dates);
+        }
+
+        $data = $this->activities()
+                ->selectRaw('date(created_at) as date, COUNT(*) as count')
+                ->whereBetween( \DB::raw('date(created_at)'), [\Carbon\Carbon::now()->subDay()->subWeeks(4)->toDateString(), \Carbon\Carbon::now()->subDay()->toDateString()] )
+                ->groupBy('date')
+                ->orderBy('date', 'DESC')
+                ->lists('count', 'date');
+
+       
+        $output = [];
+        foreach($dates as $date)
+        {
+
+            $foundValue = false;
+            foreach($data as $name => $value)
+            {
+                if($date == $name)
+                {
+                    $output[] = $value;
+                    $foundValue = true;
+                }
+            }
+
+            if($foundValue === false)
+            {
+                $output[] = 0;
+            }
+
+        }       
+        return json_encode($output);
+    }
+
+    public function getStatusCountJson($type)
+    {
+
+        $data = $this->companies()->where('type',$type)->select('status', \DB::raw('count(*) as total'))->groupBy('status')->lists('total','status')->toArray();
+            
+
+        $output = [];
+        foreach(Company::$statuses as $status => $description)
+        {
+
+            $foundValue = false;
+            foreach($data as $name => $value)
+            {
+                if($status == $name)
+                {
+                    $output[] = $value;
+                    $foundValue = true;
+                }
+            }
+
+            if($foundValue === false)
+            {
+                $output[] = 0;
+            }
+
+        }
+
+
+        return json_encode($output);
     }
 }

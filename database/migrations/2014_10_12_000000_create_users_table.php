@@ -38,16 +38,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('subscription_ends_at')->nullable();
 
             $table->timestamps();
-
-            /* First Name Field */
-            $table->string('first_name')->nullable()->default(null);
-
-            /* Last Name Field */
-            $table->string('last_name')->nullable()->default(null);
-
-            /* Name of Company - nullable if not a client */
-            $table->string('company_name')->nullable()->default(null);
-
+            $table->softDeletes();
             /* This is used to store the ssh key of a developer */
             $table->text('developer_key')->nullable()->default(null);
 
@@ -58,7 +49,11 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(false);
 
             /* This is a boolean to control if a user is a contractor or not */
-            $table->boolean('is_contractor')->default(false);
+            $table->boolean('is_developer')->default(false);
+
+            /* This is a boolean to control if a user is a sales rep or not */
+            $table->boolean('is_sales_rep')->default(false);
+            $table->boolean('pipeline_user_id')->unsigned()->nullable()->default(null);
         });
     }
 

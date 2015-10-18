@@ -12,7 +12,7 @@ class MacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //require base_path() . '/resources/macros/form-macros.php';
+        require base_path() . '/resources/macros/form-macros.php';
     }
 
     /**

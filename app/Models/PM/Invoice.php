@@ -1,6 +1,6 @@
 <?php 
 
-namespace CMV;
+namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
@@ -11,19 +11,16 @@ class Invoice extends Model {
     
     protected $columns = [
         'id',
-        'line_items',
-        'invoice_total',
         'discount',
         'status',
         'date_paid',
-        'project_id',
+        'reference_id',
+        'reference_type', //concierge_site || project
+        'customer_id',
+        'stripe_invoice_id',
         'created_at',
         'updated_at',
         'deleted_at'
-    ];
-
-    protected $casts = [
-        'line_items' => 'array',
     ];
 
     protected $fillable = [];
@@ -37,13 +34,27 @@ class Invoice extends Model {
         'deleted_at'
     ];
 
+    public function lineItems()
+    {
+        return $this->hasMany('LineItem');
+    }
 
+    public function customer()
+    {
+        return $this->belongsTo('CMV\User','customer_id');
+    }
 
     public function project()
     {
 
-        return $this->belongsTo( 'CMV\Project' );
+        return $this->belongsTo( 'Project', 'reference_id');
 
+    }
+
+
+    public function conciergeSite()
+    {
+        return $this->belongsTo( 'ConciergeSite', 'reference_id');
     }
 
 }

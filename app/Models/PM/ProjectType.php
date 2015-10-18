@@ -1,6 +1,6 @@
 <?php 
 
-namespace CMV;
+namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,10 +34,10 @@ class ProjectType extends Model {
     ];
 
 
-    public function leads()
+    public function projects()
     {
 
-        return $this->hasMany( 'CMV\Lead' );
+        return $this->hasMany( 'Project' );
 
     }
 

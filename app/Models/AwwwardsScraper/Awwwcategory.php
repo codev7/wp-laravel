@@ -1,6 +1,6 @@
 <?php 
 
-namespace CMV;
+namespace CMV\Models\AwwwardsScraper;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Awwwcategory extends Model {
      */
     public function awwwards()
     {
-        return $this->belongsToMany('CMV\Awwwcategory', 'awwward_category', 'awwwcategory_id', 'awwward_id');
+        return $this->belongsToMany('Awwwcategory', 'awwward_category', 'awwwcategory_id', 'awwward_id');
     }
 
 }
