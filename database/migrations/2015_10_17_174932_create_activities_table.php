@@ -19,10 +19,10 @@ class CreateActivitiesTable extends Migration
 
             $table->integer('contact_id')->unsigned()->nullable();
             $table->integer('sales_rep_id')->unsigned()->nullable();
-
             $table->text('content');
-            
+            $table->integer('pipeline_deals_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

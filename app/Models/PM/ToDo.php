@@ -4,6 +4,12 @@ namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+* Customers can submit to-do items to their projects
+* as well as to any sites they have in Concierge service.
+* Each to-do will be automatically created as a task via
+* the bitbucket API.
+*/
 class ToDo extends Model
 {
     protected $columns = [

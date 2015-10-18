@@ -17,7 +17,6 @@ class CreateContactsTable extends Migration
             $table->string('email')->nullable()->default(null);
             $table->string('first_name')->nullable()->default(null);
             $table->string('last_name')->nullable()->default(null);
-            $table->date('last_contacted')->nullable()->default(null);
             $table->integer('company_id')->unsigned();
             $table->integer('pipeline_deals_id')->unsigned()->nullable();
             $table->timestamps();

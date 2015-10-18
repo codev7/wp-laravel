@@ -4,9 +4,25 @@ namespace CMV\Models\Prospector;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+* The Contact object belongs to a company.
+* This is where we store individual contact information for
+* a potential prospect at a company.
+*/
 class Contact extends Model
-{
-    protected $fillable = ['email'];
+{   
+    protected $columns = [
+        'id',
+        'email',
+        'first_name',
+        'last_name',
+        'company_id',
+        'pipeline_deals_id',
+        'created_at',
+        'updated_at'
+    ];
+
+    protected $fillable = ['email'];    
 
     public function company()
     {

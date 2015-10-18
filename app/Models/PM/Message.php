@@ -5,6 +5,19 @@ namespace CMV\Models\PM;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
+/**
+* This model holds data that pertains to the messages that happen
+* in both Projects and ConciergeSite.  In both of those objects,
+* there are conversations that happen between all of the users that
+* interact with the site/project.
+* 
+* Message's can have replies which are also stored in this
+* table/model via the parent_message_id attribute.
+*
+* A to-do item can also be referenced by a message via the
+* todo_reference_id attribute.
+*/
 class Message extends Model
 {
     use SoftDeletes;

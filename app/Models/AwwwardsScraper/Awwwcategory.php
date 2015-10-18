@@ -4,8 +4,16 @@ namespace CMV\Models\AwwwardsScraper;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The model is used to hold data that we scrape
+ * from the http://www.awwwards.com website.
+ */
 class Awwwcategory extends Model {
 
+    protected $columns = [
+        'id',
+        'name' //name of the category
+    ];
     public $timestamps = false;
 
     protected $fillable = ['name'];

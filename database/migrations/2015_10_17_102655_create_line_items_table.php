@@ -16,7 +16,7 @@ class CreateLineItemsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description',600)->nullable()->default(null);
-            $table->decimal('unit_price')->default(0);
+            $table->decimal('price')->default(0);
             $table->string('category')->nullable()->default(null);
             $table->timestamps();
         });

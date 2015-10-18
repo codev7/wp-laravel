@@ -4,6 +4,11 @@ namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+* This model holds the data that relates to each line item
+* on the invoices in the system.
+* We try to categorize invoices by the categories you see below.
+*/
 class LineItem extends Model {
 
 	protected $columns = [
@@ -12,7 +17,7 @@ class LineItem extends Model {
         'name',
         'description',
         'price',
-        'category',
+        'category', //front_end|back_end|wordpress|javascript|design
         'created_at',
         'updated_at'
     ];

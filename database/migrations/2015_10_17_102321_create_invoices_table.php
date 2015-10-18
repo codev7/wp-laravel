@@ -14,13 +14,15 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->json('line_items')->nullable()->default(null);
-            $table->decimal('invoice_total',10,2)->default(0);
             $table->integer('discount')->nullable()->default(null);
-            $table->string('status');
+            $table->string('status')->nullable()->default(null);
             $table->date('date_paid')->nullable()->default(null);
-            $table->integer('project_id');
-                       
+            $table->integer('reference_id')->unsigned();
+            $table->string('reference_type');
+
+            $table->integer('customer_id')->unsigned();
+                
+            $table->string('stripe_invoice_id')->nullable()->default(null);    
             $table->timestamps();
             $table->softDeletes();
         });

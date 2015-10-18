@@ -4,6 +4,12 @@ namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+* A project type is used to create a "starting point" for
+* each project.  The bitbucket url is the URL to the repo
+* that we will clone for the specific project type that is
+* associated with the project. 
+*/
 class ProjectType extends Model {
 
 	protected $columns = [

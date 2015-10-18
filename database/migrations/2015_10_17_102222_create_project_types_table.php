@@ -19,7 +19,7 @@ class CreateProjectTypesTable extends Migration
             $table->string('name')->unique();
 
             /* The git clone url for the git repo that serves as the base for all of this project type */
-            $table->string('bitbucket_url');
+            $table->string('bitbucket_url')->nullable()->default(null);
             $table->timestamps();
         });
     }

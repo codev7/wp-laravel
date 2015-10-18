@@ -4,6 +4,11 @@ namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+/**
+* This model holds all data that pertains to the projects
+* that are created by teams in the system.
+*/
 class Project extends Model {
 
 	use SoftDeletes;

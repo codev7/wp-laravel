@@ -5,6 +5,12 @@ namespace CMV\Models\PM;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+* The model holds invoices that are in the system.
+* An invoice can be associated with a Project object,
+* or it can be associated with a ConciergeSite object.
+* In most cases, an invoice will have a stripe_invoice_id.
+*/
 class Invoice extends Model {
 
     use SoftDeletes;

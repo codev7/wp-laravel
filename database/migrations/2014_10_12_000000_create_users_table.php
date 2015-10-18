@@ -54,6 +54,8 @@ class CreateUsersTable extends Migration
             /* This is a boolean to control if a user is a sales rep or not */
             $table->boolean('is_sales_rep')->default(false);
             $table->boolean('pipeline_user_id')->unsigned()->nullable()->default(null);
+
+            $table->string('bitbucket_username')->nullable()->default(null);
         });
     }
 

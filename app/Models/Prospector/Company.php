@@ -4,9 +4,31 @@ namespace CMV\Models\Prospector;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+* A Company object is a company that we are trying
+* find contact info for, and then once we have that,
+* we will start reaching out to them (via one of our sales reps).
+* Each company has a specific status which you can see below.
+*
+* Each company is owned by one sales rep.
+*
+* Each company in the system is either a brand or an agency.
+* 
+*/
 class Company extends Model
 {
-    
+        
+    protected $columns = [
+        'id',
+        'name',
+        'type', // agency | brand
+        'status',
+        'sales_rep_id',
+        'created_at',
+        'updated_at'
+    ];
+
     protected $fillable = ['name'];
 
     public static $statuses = [
