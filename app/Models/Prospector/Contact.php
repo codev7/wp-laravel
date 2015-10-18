@@ -27,14 +27,14 @@ class Contact extends Model
     public function company()
     {
 
-        return $this->belongsTo('Company');
+        return $this->belongsTo('CMV\Models\Prospector\Company');
 
     }
 
     public function activities()
     {
 
-        return $this->hasMany('Activity');
+        return $this->hasMany('CMV\Models\Prospector\Activity');
 
     }
 
@@ -48,7 +48,12 @@ class Contact extends Model
     public function meta()
     {
 
-        return $this->hasMany('ContactMeta');
+        return $this->hasMany('CMV\Models\Prospector\ContactMeta');
 
+    }
+
+    public function scopeRandom($query)
+    {
+        return $query->orderBy(\DB::raw('RAND()'));
     }
 }

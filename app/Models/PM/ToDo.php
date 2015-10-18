@@ -26,12 +26,12 @@ class ToDo extends Model
 
     public function conciergeSite()
     {
-        return $this->belongsTo('ConciergeSite','reference_id')
+        return $this->belongsTo('CMV\Models\PM\ConciergeSite','reference_id');
     }
 
     public function project()
     {
-        return $this->belongsTo('Project','reference_id');
+        return $this->belongsTo('CMV\Models\PM\Project','reference_id');
     }
 
     public function createdBy()

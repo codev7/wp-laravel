@@ -14,7 +14,8 @@ class CreateLineItemsTable extends Migration
     {
         Schema::create('line_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->integer('invoice_id')->unsigned();
+            $table->string('name');
             $table->string('description',600)->nullable()->default(null);
             $table->decimal('price')->default(0);
             $table->string('category')->nullable()->default(null);

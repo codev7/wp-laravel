@@ -70,7 +70,7 @@ class Project extends Model {
     public function team()
     {
 
-        return $this->belongsTo( 'CMV\Team', 'customer_id' );
+        return $this->belongsTo( 'CMV\Team', 'team_id' );
 
     }
 
@@ -94,30 +94,30 @@ class Project extends Model {
     public function type()
     {
 
-        return $this->belongsTo( 'ProjectType' );
+        return $this->belongsTo( 'CMV\Models\PM\ProjectType','project_type_id' );
 
     }
 
     public function briefs()
     {
-        return $this->hasMany('ProjectBrief');
+        return $this->hasMany('CMV\Models\PM\ProjectBrief');
     }
 
     public function invoices()
     {
 
-        return $this->hasMany( 'Invoice' );
+        return $this->hasMany( 'CMV\Models\PM\Invoice','reference_id');
 
     }
 
     public function toDos()
     {
-        return $this->hasMnay('ToDo');
+        return $this->hasMany('CMV\Models\PM\ToDo','reference_id');
     }
 
     public function messages()
     {
-        return $this->hasMany('Message');
+        return $this->hasMany('CMV\Models\PM\Message','reference_id');
     }
 
     public function createOrFindProjectTypeId($projectTypeName)

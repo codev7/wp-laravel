@@ -18,6 +18,7 @@ class CreateTeamsTables extends Migration
             $table->integer('owner_id')->index();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         // Create User Teams Intermediate Table...

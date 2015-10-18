@@ -186,7 +186,15 @@ class User extends Model implements AuthorizableContract,
         return $this->hasMany('CMV\Models\Prospector\Activity');
     }
 
+    public function projectInvoices()
+    {
+        return $this->hasMany('CMV\Models\PM\Invoice','customer_id');
+    }
 
+    public function conciergeInvoices()
+    {
+        return $this->hasMany('CMV\Models\PM\Invoice','customer_id');
+    }
 
     public function getTrailing28DayActivities($returnDateArray = null)
     {
@@ -238,6 +246,11 @@ class User extends Model implements AuthorizableContract,
         return json_encode($output);
     }
 
+    public function scopeRandom($query)
+    {
+        return $query->orderBy(\DB::raw('RAND()'));
+    }
+
     public function getStatusCountJson($type)
     {
 
@@ -245,7 +258,7 @@ class User extends Model implements AuthorizableContract,
             
 
         $output = [];
-        foreach(Company::$statuses as $status => $description)
+        foreach(CMV\Models\Prospector\Company::$statuses as $status => $description)
         {
 
             $foundValue = false;

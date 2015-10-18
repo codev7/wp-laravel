@@ -24,7 +24,7 @@ class ContactMeta extends Model
     public function contact()
     {
 
-        return $this->belongsTo('Contact');
+        return $this->belongsTo('CMV\Models\Prospector\Contact');
 
     }
 }

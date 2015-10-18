@@ -44,7 +44,7 @@ class Invoice extends Model {
 
     public function lineItems()
     {
-        return $this->hasMany('LineItem');
+        return $this->hasMany('CMV\Models\PM\LineItem');
     }
 
     public function customer()
@@ -55,14 +55,14 @@ class Invoice extends Model {
     public function project()
     {
 
-        return $this->belongsTo( 'Project', 'reference_id');
+        return $this->belongsTo( 'CMV\Models\PM\Project', 'reference_id');
 
     }
 
 
     public function conciergeSite()
     {
-        return $this->belongsTo( 'ConciergeSite', 'reference_id');
+        return $this->belongsTo( 'CMV\Models\PM\ConciergeSite', 'reference_id');
     }
 
 }

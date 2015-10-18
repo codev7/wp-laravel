@@ -25,7 +25,7 @@ class AwwwCategory extends Model {
      */
     public function awwwards()
     {
-        return $this->belongsToMany('Awwwcategory', 'awwward_category', 'awwwcategory_id', 'awwward_id');
+        return $this->belongsToMany('CMV\Models\AwwwardsScraper\Awwward', 'awwward_category', 'awwwcategory_id', 'awwward_id');
     }
 
 }

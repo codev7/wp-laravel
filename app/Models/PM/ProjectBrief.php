@@ -17,6 +17,7 @@ class ProjectBrief extends Model
     protected $columns = [
         'id',
         'text', //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
+        'project_id',
         'project_type_id',
         'created_by_id',
         'approved_by_customer_id',
@@ -28,7 +29,7 @@ class ProjectBrief extends Model
     
     public function project()
     {
-        return $this->belongsTo('Project');
+        return $this->belongsTo('CMV\Models\PM\Project');
    }
 
    public function createdByUser()

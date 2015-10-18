@@ -45,6 +45,10 @@ class Company extends Model
 
     ];
 
+    public static function statusKeys()
+    {
+        return array_keys( self::$statuses );
+    }
 
     public static function getJsonStatuses()
     {
@@ -75,14 +79,14 @@ class Company extends Model
     public function contacts()
     {
 
-        return $this->hasMany('Contact');
+        return $this->hasMany('CMV\Models\Prospector\Contact');
 
     }
 
     public function meta()
     {
 
-        return $this->hasMany('CompanyMeta');
+        return $this->hasMany('CMV\Models\Prospector\CompanyMeta');
 
     }
 

@@ -4,7 +4,7 @@
 function get_status_options($selected = null)
 {
     $output = '';
-    foreach(CMV\Company::$statuses as $status => $description)
+    foreach(CMV\Models\Prospector\Company::$statuses as $status => $description)
     {   
 
         $output .= '<option ';
@@ -24,7 +24,7 @@ function get_status_options($selected = null)
 function count_for_rep($email, $company_type = null)
 {
 
-    $rep = CMV\SalesRep::with('companies')->whereEmail($email)->first();
+    $rep = CMV\User::where('is_sales_rep',true)->with('companies')->whereEmail($email)->first();
 
     if(!$rep) return 0;
 

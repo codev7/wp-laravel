@@ -1,15 +1,13 @@
 <?php
 
 namespace CMV;
-use Laravel\Cashier\Billable;
-use Laravel\Cashier\Contracts\Billable as BillableContract;
 
 use Laravel\Spark\Teams\Team as SparkTeam;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Team extends SparkTeam implements BillableContract
+class Team extends SparkTeam
 {
-    use Billable, SoftDeletes;
+    use SoftDeletes;
 
     protected $columns = [
         'id',
@@ -26,7 +24,7 @@ class Team extends SparkTeam implements BillableContract
     }
     
     
-    public function invoices()
+    public function invoice()
     {
         return $this->hasManyThrough('CMV\Models\PM\Invoice','CMV\Models\PM\Project');
     }
@@ -35,4 +33,10 @@ class Team extends SparkTeam implements BillableContract
     {
         return $this->hasMany('CMV\Models\PM\ConciergeSite');
     }
+
+    public function scopeRandom($query)
+    {
+        return $query->orderBy(\DB::raw('RAND()'));
+    }
+
 }

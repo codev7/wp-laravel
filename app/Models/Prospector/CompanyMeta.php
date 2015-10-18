@@ -24,7 +24,7 @@ class CompanyMeta extends Model
     public function company()
     {
 
-        return $this->belongsTo('Company');
+        return $this->belongsTo('CMV\Models\Prospector\Company');
 
     }
 }

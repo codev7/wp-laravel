@@ -43,8 +43,12 @@ class ProjectType extends Model {
     public function projects()
     {
 
-        return $this->hasMany( 'Project' );
+        return $this->hasMany( 'CMV\Models\PM\Project' );
 
     }
 
+    public function scopeRandom($query)
+    {
+        return $query->orderBy(\DB::raw('RAND()'));
+    }
 }

@@ -29,10 +29,18 @@ class LineItem extends Model {
         'category'
     ]; 
 
+    public static $categories = [
+        'front_end',
+        'back_end',
+        'wordpress',
+        'javascript',
+        'design'
+    ];
+
 
     public function invoice()
     {
-        return $this->belongsTo('Invoice');
+        return $this->belongsTo('CMV\Models\PM\Invoice');
     }
 
 }

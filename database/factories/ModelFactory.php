@@ -10,14 +10,6 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-//ToDo
-//- not needed
-
-/* other tables with no factory defined here. */
-//awward_category
-//company_metas
-//contact_metas
-//user_teams
 
 //Awwward
 $factory->define(CMV\Models\AwwwardsScraper\Awwward::class, function (Faker\Generator $faker) {
@@ -54,6 +46,12 @@ $factory->define(CMV\Models\PM\ConciergeSite::class, function (Faker\Generator $
     ];
 });
 
+//ToDo
+$factory->define(CMV\Models\PM\ToDo::class, function (Faker\Generator $faker) {
+    return [
+        'reference_type' => 'project'
+    ];
+});
 
 //Invoice
 $factory->define(CMV\Models\PM\Invoice::class, function (Faker\Generator $faker) {
@@ -64,10 +62,20 @@ $factory->define(CMV\Models\PM\Invoice::class, function (Faker\Generator $faker)
     ];
 });
 
+//Line Item
+$factory->define(CMV\Models\PM\LineItem::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->text(10),
+        'description' => $faker->sentence(8),
+        'price' => $faker->numberBetween(500,7500),
+        'category' => $faker->randomElement(CMV\Models\PM\LineItem::$categories)
+    ];
+});
+
 //Message
 $factory->define(CMV\Models\PM\Message::class, function (Faker\Generator $faker) {
     return [
-        'comment' => $faker->realText( $faker->randomLetter(200,500) )
+        'comment' => $faker->realText( $faker->numberBetween(200,500) )
     ];
 });
 
@@ -89,11 +97,12 @@ $factory->define(CMV\Models\PM\Project::class, function (Faker\Generator $faker)
 //ProjectBrief
 $factory->define(CMV\Models\PM\ProjectBrief::class, function (Faker\Generator $faker) {
     return [
-        'text' => $faker->realText( $faker->randomLetter(200,800) ), //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
+        'text' => $faker->realText( $faker->numberBetween(200,800) ), //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
         'approved_at' => $faker->randomElement(null, $faker->dateTimeThisMonth())
     ];
 });
 
+//ProjectType
 $factory->define(CMV\Models\PM\ProjectType::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->randomElement(CMV\Models\PM\ProjectType::$defaults)
@@ -105,7 +114,8 @@ $factory->define(CMV\Models\PM\ProjectType::class, function (Faker\Generator $fa
 //Activity
 $factory->define(CMV\Models\Prospector\Activity::class, function (Faker\Generator $faker) {
     return [
-        'content' => $faker->realText( $faker->randomLetter(200,800) ),
+        'content' => $faker->realText( $faker->numberBetween(200,800) ),
+        'created_at' => $faker->dateTimeThisYear()
     ];
 });
 
@@ -114,14 +124,14 @@ $factory->define(CMV\Models\Prospector\Company::class, function (Faker\Generator
     return [
         'name' => implode(' ', $faker->words(4)),
         'type' => $faker->randomElement(CMV\Models\Prospector\Company::$types),
-        'status' => $faker->randomElement(CMV\Models\Prospector\Company::array_keys($statuses))
+        'status' => $faker->randomElement(CMV\Models\Prospector\Company::statusKeys())
     ];
 });
 
 //CompanyMeta
 $factory->define(CMV\Models\Prospector\CompanyMeta::class, function (Faker\Generator $faker) {
     return [
-        'value' => $faker->realText( $faker->randomLetter(5,15) )
+        'value' => $faker->realText( $faker->numberBetween(10,20) )
     ];
 });
 
@@ -130,14 +140,14 @@ $factory->define(CMV\Models\Prospector\Contact::class, function (Faker\Generator
     return [
         'first_name' => $faker->firstName(null),
         'last_name' => $faker->lastName,
-        'email' => $faker->email
+        'email' => $faker->unique()->email
     ];
 });
 
 //ContactMeta
 $factory->define(CMV\Models\Prospector\ContactMeta::class, function (Faker\Generator $faker) {
     return [
-        'value' => $faker->realText( $faker->randomLetter(5,15) )
+        'value' => $faker->realText( $faker->numberBetween(10,20) )
     ];
 });
 

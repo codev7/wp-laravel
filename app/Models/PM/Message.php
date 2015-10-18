@@ -38,12 +38,12 @@ class Message extends Model
 
     public function project()
     {
-        return $this->belongsTo('Project','reference_id');
+        return $this->belongsTo('CMV\Models\PM\Project','reference_id');
     }
 
     public function conciergeSite()
     {
-        return $this->belongsTo('ConciergeSite','reference_id');
+        return $this->belongsTo('CMV\Models\PM\ConciergeSite','reference_id');
     }
 
     public function user()
@@ -51,13 +51,18 @@ class Message extends Model
         return $this->belongsTo('CMV\User');
     }
 
-    public function parent()
+    public function children()
     {
-        return $this->belongsTo('Message','parent_message_id');
+        return $this->hasMany('CMV\Models\PM\Message','parent_message_id');
     }
 
     public function toDo()
     {
-        return $this->belongsTo('ToDo','todo_reference_id');
+        return $this->belongsTo('CMV\Models\PM\ToDo','todo_reference_id');
+    }
+
+    public function scopeRandom($query)
+    {
+        return $query->orderBy(\DB::raw('RAND()'));
     }
 }

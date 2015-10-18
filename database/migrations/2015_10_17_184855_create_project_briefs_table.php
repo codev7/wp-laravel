@@ -20,6 +20,7 @@ class CreateProjectBriefsTable extends Migration
             $table->integer('project_type_id')->unsigned()->nullable()->default(null);
 
             $table->integer('created_by_id')->unsigned();
+            $table->integer('project_id')->unsigned();
 
             $table->integer('approved_by_customer_id')->unsigned()->nullable()->default(null);
 

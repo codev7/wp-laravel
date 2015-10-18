@@ -58,12 +58,12 @@ class ConciergeSite extends Model
 
     public function toDos()
     {
-        return $this->hasMany('ToDo');
+        return $this->hasMany('CMV\Models\PM\ToDo','reference_id');
     }
 
     public function messages()
     {
-        return $this->hasMany('Message');
+        return $this->hasMany('CMV\Models\PM\Message','reference_id');
     }
 
 

@@ -36,7 +36,7 @@ class Activity extends Model
     public function company()
     {
 
-        return $this->belongsTo('Company');
+        return $this->belongsTo('CMV\Models\Prospector\Company');
 
     }
 
@@ -44,7 +44,7 @@ class Activity extends Model
     public function contact()
     {
 
-        return $this->belongsTo('Contact');
+        return $this->belongsTo('CMV\Models\Prospector\Contact');
 
     }
 
