@@ -18,7 +18,6 @@ class ProjectBrief extends Model
         'id',
         'text', //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
         'project_id',
-        'project_type_id',
         'created_by_id',
         'approved_by_customer_id',
         'approved_at',

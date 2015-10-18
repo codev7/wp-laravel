@@ -25,6 +25,19 @@ class ProjectSeeder extends Seeder
 
             $project->save();
 
+            /* Create project briefs */
+            $project->briefs()->saveMany( factory( CMV\Models\PM\ProjectBrief::class, 2)->make()->each(function($brief) use($project){
+
+                if($brief->approved_at)
+                {
+                    $brief->approvedByUser()->associate( $project->team->users()->random()->take(1)->first() );   
+                }
+
+                $brief->createdByUser()->associate( $project->projectManager );
+                $brief->save();
+            
+            }));
+
             $project->toDos()->saveMany( factory( CMV\Models\PM\ToDo::class, rand(2,10))->make(['reference_type' => 'project'])->each(function($toDo) use($project){
 
                 $toDo->createdBy()->associate( $project->team->users()->random()->take(1)->first() );
@@ -39,7 +52,7 @@ class ProjectSeeder extends Seeder
             
 
 
-            $invoice = $project->invoices()->save( factory( CMV\Models\PM\Invoice::class)->make() );
+            $invoice = $project->invoices()->save( factory( CMV\Models\PM\Invoice::class)->make(['reference_type' => 'project']) );
             
             $invoice->lineItems()->saveMany( factory( CMV\Models\PM\LineItem::class, rand(4,8))->make() );
 

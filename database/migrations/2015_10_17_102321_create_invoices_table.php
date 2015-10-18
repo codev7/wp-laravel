@@ -18,10 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->string('status')->nullable()->default(null);
             $table->date('date_paid')->nullable()->default(null);
             $table->integer('reference_id')->unsigned();
-            $table->string('reference_type');
-
-            $table->integer('customer_id')->unsigned();
-                
+            $table->string('reference_type');                
             $table->string('stripe_invoice_id')->nullable()->default(null);    
             $table->timestamps();
             $table->softDeletes();

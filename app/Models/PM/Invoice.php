@@ -22,7 +22,6 @@ class Invoice extends Model {
         'date_paid',
         'reference_id',
         'reference_type', //concierge_site || project
-        'customer_id',
         'stripe_invoice_id',
         'created_at',
         'updated_at',

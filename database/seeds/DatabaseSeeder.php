@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
                 
         $this->call(ProjectManagementSeeder::class);
         $this->call(ProjectTypeSeeder::class);
-        $this->call(ConciergeSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(ConciergeSeeder::class);
         $this->call(ProspectorSeeder::class);
         $this->call(AwwwardSeeder::class);
 

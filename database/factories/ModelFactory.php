@@ -38,10 +38,15 @@ $factory->define(CMV\Models\PM\ConciergeSite::class, function (Faker\Generator $
     return [
         //'files' => [],
         'type' => $faker->randomElement(CMV\Models\PM\ConciergeSite::$types),
-        'bitbucket_id' => $faker->randomNumber(7), //id of the site in bitbucket for api sync purposes
+        'bitbucket_id' => $faker->randomNumber(7),
         'name' => implode(' ', $faker->words(4)),
         'slug' => implode('-', $faker->words(4)),
         'url' => $faker->url,
+        'saved_credentials' => Crypt::encrypt(json_encode([
+            implode(' ',$faker->words(2)) => implode(' ',$faker->words(5)),
+            implode(' ',$faker->words(3)) => implode(' ',$faker->words(8)),
+            implode(' ',$faker->words(1)) => implode(' ',$faker->words(10))
+        ])),
         'subdomain' => implode('-', $faker->words(4))//subdomain for the staging site {subdomain}.concierge.approvemyviews.com
     ];
 });
@@ -98,7 +103,7 @@ $factory->define(CMV\Models\PM\Project::class, function (Faker\Generator $faker)
 $factory->define(CMV\Models\PM\ProjectBrief::class, function (Faker\Generator $faker) {
     return [
         'text' => $faker->realText( $faker->numberBetween(200,800) ), //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
-        'approved_at' => $faker->randomElement(null, $faker->dateTimeThisMonth())
+        'approved_at' => $faker->randomElement([null, $faker->dateTimeThisMonth()])
     ];
 });
 
