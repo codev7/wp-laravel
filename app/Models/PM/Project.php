@@ -50,6 +50,23 @@ class Project extends Model {
         'deleted_at'
     ];
 
+    public static $statuses = [
+        'quote',
+        'brief',
+        'approval',
+        'development',
+        'qa',
+        'complete'
+    ];
+
+    public static $requestedDeadlineOptions = [
+        'asap',
+        'this_week',
+        'next_week',
+        'next_month',
+        'not_sure'
+    ];
+
     public function team()
     {
 

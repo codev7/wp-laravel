@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
  * The model is used to hold data that we scrape
  * from the http://www.awwwards.com website.
  */
-class Awwwcategory extends Model {
+class AwwwCategory extends Model {
+
+    protected $table = 'awwwcategories';
 
     protected $columns = [
         'id',

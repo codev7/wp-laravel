@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 * as well as to any sites they have in Concierge service.
 * Each to-do will be automatically created as a task via
 * the bitbucket API.
+*
+* Should have some caching mechanism for data pulled in from Bitbucket.
 */
 class ToDo extends Model
 {

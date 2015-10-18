@@ -24,7 +24,8 @@ class Team extends SparkTeam implements BillableContract
     {
         return $this->hasMany('CMV\Models\PM\Project');
     }
-
+    
+    
     public function invoices()
     {
         return $this->hasManyThrough('CMV\Models\PM\Invoice','CMV\Models\PM\Project');

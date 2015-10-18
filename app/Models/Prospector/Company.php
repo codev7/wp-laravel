@@ -29,6 +29,8 @@ class Company extends Model
         'updated_at'
     ];
 
+    public static $types = ['agency', 'brand'];
+
     protected $fillable = ['name'];
 
     public static $statuses = [

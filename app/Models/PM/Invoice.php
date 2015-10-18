@@ -40,6 +40,8 @@ class Invoice extends Model {
         'deleted_at'
     ];
 
+    public static $statuses = ['draft','sent','unpaid','paid'];
+
     public function lineItems()
     {
         return $this->hasMany('LineItem');

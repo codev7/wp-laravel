@@ -36,7 +36,7 @@ class ConciergeSite extends Model
         'deleted_at'
     ];
 
-
+    public static $types = ['wordpress','laravel'];
 
     public function team()
     {

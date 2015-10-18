@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Awwward extends Model {
 
+    protected $table = 'awwwards';
+
     protected $columns = [
         'id',
         'username',
@@ -35,7 +37,7 @@ class Awwward extends Model {
      */
     public function categories()
     {
-        return $this->belongsToMany('Awwwcategory', 'awwward_category', 'awwward_id', 'awwwcategory_id');
+        return $this->belongsToMany('CMV\Models\AwwwardsScraper\AwwwCategory', 'awwward_category', 'awwward_id', 'awwwcategory_id');
     }
 
 }

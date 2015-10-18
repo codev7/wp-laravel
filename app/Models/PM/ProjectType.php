@@ -25,7 +25,7 @@ class ProjectType extends Model {
         'bitbucket_url',
     ];
 
-    protected $defaults = [
+    public static $defaults = [
         'psd_to_html_to_wordpress',
         'design_html_wordpress',
         'wordpress_theme',
