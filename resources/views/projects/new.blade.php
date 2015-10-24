@@ -11,10 +11,19 @@
     <div class="container" id="quote-form">
         <div class="row">
             <div class="col-md-6">
+
+                @if(Auth::check())
+                <header class="head-block">
+                    <h1 class="sub-ttl">Hey there, {{ Auth::user()->getFirstName() }}.</h1>
+                    <h2 class="ttl text-primary">Create a Project <i class="fa fa-long-arrow-right"></i></h2>
+                </header>
+                @else
                 <header class="head-block">
                     <h1 class="sub-ttl">Get a Guaranteed Price Quote</h1>
                     <h2 class="ttl text-primary">for Your Project</h2>
                 </header>
+                @endif
+
                 <div class="how-work clearfix">
                     <img src="{{ asset('images/img-46.svg') }}" alt="image description" class="pull-left how-img" >
                     <h3 class="text-primary">HOW we WORK</h3>
@@ -28,19 +37,32 @@
             </div>
             <div class="col-md-6">
                 <div class="quote-form clearfix">
-                    <form method="post"
-                    v-on="submit: onSubmitForm"
-                    id="form-quote">
 
+                    
+                    <form method="post" action="{{ route('project.create') }}" class="tab-content">
+                        {!! Form::token() !!}
+                        <div class="tab-pane active" id="step-1">
 
-                        <div v-if="step == 1">
-                            <label for="project_type">What type of project do you have?</label>
+                            @if(Auth::guest())
+                            <div class="hr-divider">
+                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav">
+                                <li class="active" >
+                                  <a href="#" style="background-color: #ccc">Step 1: Project Details</a>
+                                </li>
+                                <li class='disabled'>
+                                  <a href="#">Step 2: Contact Info</a>
+                                </li>
+                              </ul>
+                            </div>
+                            @endif
+
+                            <label for="project_type" class=" m-t-lg">What type of project do you have?</label>
                             <div class="sel-hold">
                                 <select
                                 name="project_type"
                                 id="project_type"
                                 class="form-control input-lg"
-                                v-model="newQuote.project_type">
+                                >
                                 <option value="">Select a Project Type</option>
                                 @foreach(quoteFieldsProjectFields() as $option)
                                     
@@ -56,7 +78,7 @@
                                 name="lead_deadline"
                                 id="lead_deadline"
                                 class="form-control input-lg"
-                                v-model="newQuote.lead_deadline">
+                                >
                                 <option value="">Select a Deadline</option>
                                 @foreach(leadDeadlineOptions() as $option)
                                     <option value="{{ $option }}">{{ $option }}</option>
@@ -67,37 +89,39 @@
                             <textarea type="text"
                                 name="project_brief"
                                 id="project_brief"
-                                class="form-control input-lg"
-                                v-model="newQuote.project_brief"
+                                class="form-control input-lg m-b-0"
                                 cols="30"
                                 rows="10"
                                 placeholder="Enter your project info here..."></textarea>
-                            <div class="upload-box" id="file-upload"
-                                    class="btn btn-primary"
-                                    v-on="click: launchFilePicker">
-                                <div class="upload-hold">
-                                    <input type="file">
-                                </div>
-                                <h4>Do you have any files to upload?</h4>
-                                <p>Upload as many files as you want by clicking the upload icon to the left.  You can add more files later.</p>
-                                <br />
-                                <h4 class="text-success" v-if="fileCount > 0">You uploaded @{{ fileCount }} file<span v-if="fileCount > 1">s</span>.</h4>
-                            </div>
-                            <button v-on="click: gotoStep(2, $event)" class="btn btn-success btn-submit pull-right" type="submit">NEXT STEP</button>
+                            <p class="text-muted m-t-0 m-b-lg">You will be able to upload files to your project later.</p>
+
+                            @if(Auth::guest())
+                            <a data-toggle="tab" class="btn btn-success btn-submit pull-right" href="#step-2">NEXT STEP</a>
+                            @else
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Create Project</button>
+                            @endif
                         </div>
 
-                        <div v-if="step == 2">
+                        <div class="tab-pane" id="step-2">
 
-                            <p><a href="" v-on="click: gotoStep(1, $event)" class="btn btn-sm"><small><i class="fa fa-arrow-left"></i> back to step 1</small></a></p>
+                            @if(Auth::guest())
+                            <div class="hr-divider">
+                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav">
+                                <li>
+                                  <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
+                                </li>
+                                <li class="active">
+                                  <a href="#" style="background-color: #ccc">Step 2: Contact Info</a>
+                                </li>
+                              </ul>
+                            </div>
+                            @endif
 
-                            <div
-                            v-class="
-                                form-group : true,
-                                has-error : hasError('name')
-                            ">
+
+                            <div class="form-group">
                                 <label
                                     for="name"
-                                    class="control-label">
+                                    class="control-label m-t-lg">
                                    5) What is your name?
                                 </label>
                                 <input
@@ -105,58 +129,46 @@
                                     name="name"
                                     id="name"
                                     class="form-control required input-lg"
-                                    v-model="newQuote.name">
+                                    >
                             </div>
 
-                            <div 
-                            v-class="
-                                form-group : true,
-                                has-error : hasError('email')
-                            ">
+                            <div class="form-group">
+                                <label
+                                    for="company_name"
+                                    class="control-label m-t-lg">
+                                   5) What is your company name (or team name)?
+                                </label>
+                                <input
+                                    type="text"
+                                    name="company_name"
+                                    id="company_nams"
+                                    class="form-control required input-lg"
+                                    >
+                            </div>
+
+                            <div class="form-group">
+           
                                 <label
                                     for="email"
                                     class="control-label">
                                     6) What is your email?
                                 </label>
-                                <input type="text" name="email" id="email" class="form-control input-lg form-control required" v-model="newQuote.email">
+                                <input type="text" name="email" id="email" class="form-control input-lg form-control required">
                             </div>
                             
-                            <div 
-                            v-class="
-                                form-group : true
-                            ">
+                            <div class="form-group">
                                 <label
-                                    for="phone"
+                                    for="password"
                                     class="control-label">
-                                    Optional: What is your phone number?
+                                    Optional: Set Account Password
                                 </label>
-                                <input type="text" name="phone" id="phone" class="form-control input-lg form-control" v-model="newQuote.phone">
+                                <input type="password" name="password" id="password" class="form-control input-lg form-control">
                             </div>
 
-                            <button 
-                            v-on="click: onSubmitForm"
-                            v-if="!submitted"
-                            class="btn btn-lg btn-success btn-block">Get Free Quote</button>
+                            <button type="submit" class="btn btn-lg btn-success btn-block">Get Free Quote</button>
 
-                            <button 
-                            v-if="submitted"
-                            disabled="!disabled"
-                            class="btn btn-lg btn-success btn-disabled btn-block"><i class="fa fa-spin fa-spinner"></i> Sending...</button>
-
+                          
                         </div><!--step-->
-
-
-                        <div
-                        v-if="step == 3" class="success-message">
-                            <p>We have received your information and one of our expert developers or designers will be in touch within a hour.</p>
-
-                            <p>If we received this after hours, we will respond first thing in the morning.</p>
-
-                            <p>We are excited about the opportunity we have to work with you.  If you have any other questions in the meantime, you can find all of our contact information in the footer of the website.</p>
-
-                            <p>Talk to you soon, <br />
-                            The Code My Views Inc. Team</p>
-                        </div>  
                     </form>
                 </div>
             </div>

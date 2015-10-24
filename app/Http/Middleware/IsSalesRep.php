@@ -19,14 +19,14 @@ class IsSalesRep
 
         if(!Auth::check())
         {
-            Flash::error('You need to login first.');
+            \Flash::error('You need to login first.');
             return redirect()->guest('/login');
         }
 
 
         if(!hasRole('sales-rep'))
         {
-            Flash::error('You need to be a sales rep to view that page.');
+            \Flash::error('You need to be a sales rep to view that page.');
 
             return redirect()->to('/home');
         }

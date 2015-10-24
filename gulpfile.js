@@ -17,10 +17,13 @@ elixir(function(mix) {
         .browserify('codemyviews.js','public/js/cmv-js.js')
         .scripts([
             'plugins/modernizr.js',
+            'plugins/jquery.js',
             'plugins/jquery.ui.core.js',
             'plugins/moment.js',
             'plugins/jquery.waypoints.js',
             'plugins/jquery.validate.js',
+            'plugins/vue.js',
+            'plugins/vue-resource.js',
             'plugins',
             'custom/cmv-helpers.js',
             'custom/validation.js',

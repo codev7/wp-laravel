@@ -20,19 +20,42 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav hidden-xs">
 
-				@if(isRouteNameSpace('home'))
-					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Home</a></li>
+				@if(isRouteNameSpace('home') || isRouteNameSpace('settings'))
+					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Dashboard</a></li>
 				@endif
 
-				@if(hasRole('sales-rep') && isRouteNameSpace('home'))
+				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')))
 					<li><a href="{{ route('prospector.dashboard') }}">Prospector Dashboard</a></li>
 				@endif
 
+				@if(isRouteNameSpace('project') && isset($project))
+				<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
+				<li class="disabled">
+                    <a href="#"><strong>{{ $project->name }}</strong></a>
+                </li>
+
+                <li class="{{ set_active_from_route_name('project.single') }}">
+                    <a href="{{ route('project.single', ['slug' => $project->slug]) }}">Project Dashboard</a>
+                </li>
+
+                <li class="{{ set_active_from_route_name('prospector.companies') }}">
+                    <a href="#">Files</a>
+                </li>
+
+                <li class="{{ set_active_from_route_name('prospector.contacts') }}">
+                    <a href="#">Invoices</a>
+                </li>
+
+                <li class="{{ set_active_from_route_name('prospector.contacts') }}">
+                    <a href="#">To Do's <span class="badge">15</span></a>
+                </li>
+				@endif
+
 				@if(isRouteNameSpace('prospector'))
-					<li><a href="{{ route('home') }}"><small><i class="fa fa-arrow-left"></i> back to home</small></a></li>
+					<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 
 					<li class="disabled">
-	                    <a href="#"><strong>Prospector:</strong></a>
+	                    <a href="#"><strong>Prospector</strong></a>
 	                </li>
 
 	                <li class="{{ set_active_from_route_name('prospector.dashboard') }}">

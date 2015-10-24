@@ -116,6 +116,15 @@ class User extends Model implements AuthorizableContract,
 
     }
 
+    public function getFirstName()
+    {
+
+        $name = $this->name;
+
+        return $name[0];
+
+    }
+
     public function isMastermind()
     {
 

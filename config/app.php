@@ -212,7 +212,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Flash'     => CMV\Services\Flash::class,
+        'Flash'     => CMV\Misc\Flash::class,
         'AWS'       => Aws\Laravel\AwsFacade::class,
         'Bugsnag'   => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
         'Carbon'    => Carbon\Carbon::class,

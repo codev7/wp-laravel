@@ -38,9 +38,8 @@ class Project extends Model {
         'project_type_id',
         'git_url',
         'name',
-        'deadline',
-        'status',
-        'subdomain'
+        'requested_deadline',
+        'status'
     ];
 
     protected $dates = [

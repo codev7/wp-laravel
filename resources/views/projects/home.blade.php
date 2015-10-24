@@ -35,9 +35,9 @@
 
                 @if(Auth::user()->currentTeam()->projects()->count() > 0)
                 <div class="pull-right">
-                    <button class="btn btn-primary-outline" ng-click="showAddProjectModal()" ng-if="user.subscribed">
-                        <i class="fa fa-btn fa-plus with-text"></i> Add Project
-                    </button>
+                    <a class="btn btn-primary-outline" href="{{ route('project.new') }}">
+                        <i class="fa fa-btn fa-plus with-text"></i> Create Project
+                    </a>
                 </div>
                 <div class="panel panel-flush">
                     <div class="panel-body">
@@ -58,17 +58,20 @@
 
 
                             <tbody>
+
+                                @foreach(Auth::user()->currentTeam()->projects as $project)
                                 <tr>
 
-                                    <td>Project Name</td>
-                                    <td>PSD to WordPress</td>
-                                    <td>5 minutes ago</td>
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->type->name }}</td>
+                                    <td>{{ $project->updated_at->diffForHumans() }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-default-outline" data-toggle="tooltip" title="View Project">
+                                        <a href="{{ route('project.single', ['slug' => $project->slug]) }}" class="btn btn-default-outline" data-toggle="tooltip" title="View Project">
                                             <i class="fa fa-arrow-right"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     

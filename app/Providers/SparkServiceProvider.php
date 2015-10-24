@@ -142,6 +142,11 @@ class SparkServiceProvider extends ServiceProvider
     protected function customizeSubscriptionPlans()
     {
 
+        Spark::free()
+         ->features([
+             'Unlimited Projects',
+             'No Concierge Sites',
+         ]);
         Spark::plan('Single', 'WP-CONCIERGE-SINGLE')->price(599)
          ->features([
              '1 site',
