@@ -17,11 +17,7 @@ elixir(function(mix) {
         .browserify('codemyviews.js','public/js/cmv-js.js')
         .scripts([
             'plugins/modernizr.js',
-            'plugins/jquery-1.11.1.min.js',
             'plugins/jquery.ui.core.js',
-            'plugins/vue.js',
-            'plugins/vue-validator.js',
-            'plugins/vue-resource.js',
             'plugins/moment.js',
             'plugins/jquery.waypoints.js',
             'plugins/jquery.validate.js',

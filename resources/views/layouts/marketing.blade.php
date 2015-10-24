@@ -57,9 +57,12 @@
                             @endforeach
                         </ul>
 
-
-
-                        @yield('header_cta', ' <a href="'. route('quote'). '" class="btn btn-success">Get A Free Quote</a>')
+                        @if(Auth::check())
+                        <a href="{{ route('app.home') }}" class="btn btn-success">My Account</a>
+                        @else
+                        <a href="{{ route('quote') }}" class="btn btn-success">Get A Free Quote</a>
+                        @endif
+                        
                    
                     </div>
                 </nav>
@@ -121,8 +124,10 @@
 </div><!-- /wrapper -->
     
 @if(isProduction())
+    <script src="{{ elixir('js/cmv-js.js') }}"></script>
     <script src="{{ elixir('js/cmv-marketing.js') }}"></script>
 @else
+    <script src="{{ asset('js/cmv-js.js') }}"></script>
     <script src="{{ asset('js/cmv-marketing.js') }}"></script>
 @endif
 @include('common/footer')

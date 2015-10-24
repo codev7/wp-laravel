@@ -19,15 +19,35 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav hidden-xs">
-				<li class="{{ set_active('dashboard') }}">
-                    <a href="/prospects/dashboard">Sales Dashboard</a>
-                </li>
-                <li  class="{{ set_active('companies') }}">
-                    <a href="{{ route('companies',['filter' => 'all']) }}">Companies</a>
-                </li>
-                <li  class="{{ set_active('contacts') }}">
-                    <a href="/contacts/">Contacts</a>
-                </li>
+
+				@if(isRouteNameSpace('home'))
+					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Home</a></li>
+				@endif
+
+				@if(hasRole('sales-rep') && isRouteNameSpace('home'))
+					<li><a href="{{ route('prospector.dashboard') }}">Prospector Dashboard</a></li>
+				@endif
+
+				@if(isRouteNameSpace('prospector'))
+					<li><a href="{{ route('home') }}"><small><i class="fa fa-arrow-left"></i> back to home</small></a></li>
+
+					<li class="disabled">
+	                    <a href="#"><strong>Prospector:</strong></a>
+	                </li>
+
+	                <li class="{{ set_active_from_route_name('prospector.dashboard') }}">
+	                    <a href="{{ route('prospector.dashboard') }}">Dashboard</a>
+	                </li>
+
+	                <li class="{{ set_active_from_route_name('prospector.companies') }}">
+	                    <a href="{{ route('prospector.companies') }}">All Companies</a>
+	                </li>
+
+	                <li class="{{ set_active_from_route_name('prospector.contacts') }}">
+	                    <a href="{{ route('prospector.contacts') }}">All Contacts</a>
+	                </li>
+                @endif
+
 				@if ( ! Spark::isDisplayingSettingsScreen())
 					
 

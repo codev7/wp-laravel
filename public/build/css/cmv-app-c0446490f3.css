@@ -3796,8 +3796,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #f3f3f3;
-  border-color: #e5e5e5;
+  background-color: #fff;
+  border-color: #1e6ab4;
 }
 .navbar-inverse .navbar-brand {
   color: #333;
@@ -3835,14 +3835,14 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
-  background-color: #eeeeee;
+  background-color: #fafafa;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
   background-color: #fff;
 }
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {
-  border-color: #e1e1e1;
+  border-color: #ededed;
 }
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
@@ -3852,10 +3852,10 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 @media (max-width: 991px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-    border-color: #e5e5e5;
+    border-color: #1e6ab4;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
-    background-color: #e5e5e5;
+    background-color: #1e6ab4;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color: #333;
@@ -11697,7 +11697,7 @@ body {
 .navbar-inverse .navbar-brand-emphasized:hover,
 .navbar-inverse .navbar-brand-emphasized:focus {
   color: #fff;
-  background-color: #e5e5e5;
+  background-color: #1e6ab4;
 }
 .navbar-padded .navbar-header {
   padding-left: 5px;
@@ -11717,7 +11717,7 @@ body {
   background-color: #ffffff;
 }
 .navbar-inverse .navbar-form-control:focus {
-  color: #f3f3f3;
+  color: #fff;
   background-color: #fff;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
 }
@@ -17983,7 +17983,7 @@ fieldset[disabled] .btn-danger-outline.active {
 .navbar-inverse .navbar-brand-emphasized:hover,
 .navbar-inverse .navbar-brand-emphasized:focus {
   color: #fff;
-  background-color: #e5e5e5;
+  background-color: #1e6ab4;
 }
 .navbar-padded .navbar-header {
   padding-left: 5px;
@@ -18003,7 +18003,7 @@ fieldset[disabled] .btn-danger-outline.active {
   background-color: #ffffff;
 }
 .navbar-inverse .navbar-form-control:focus {
-  color: #f3f3f3;
+  color: #fff;
   background-color: #fff;
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
 }
@@ -18263,30 +18263,34 @@ img.zoom-img {
 }
 .profile-header-bio {
   font-size: 16px;
-  color: #fff;
+  color: #333;
 }
 .profile-header-user {
   margin-top: 20px;
-  color: #fff;
+  color: #333;
 }
 @media (min-width: 480px) {
   .profile-header {
-    height: 400px;
+    height: 300px;
   }
 }
 @media (min-width: 768px) {
   .profile-header {
-    height: 500px;
+    height: 350px;
   }
   .profile-header .media-object {
     width: 110px;
   }
+}
+.home-background-tiled {
+  background: #f7f9fb url('/images/bg-methods-info.jpg');
 }
 .profile-header-nav {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
+  border-bottom: 1px solid #fff;
   line-height: 0;
 }
 .profile-header-nav .nav {
@@ -18296,7 +18300,7 @@ img.zoom-img {
 .profile-header-nav .nav > li > a {
   padding: 0 10px 18px;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #333;
 }
 .profile-header-nav .nav-tabs > li > a {
   transition: color 0.2s ease-in-out;
@@ -18304,7 +18308,8 @@ img.zoom-img {
 .profile-header-nav .nav-tabs > li > a:focus,
 .profile-header-nav .nav-tabs > li > a:hover,
 .profile-header-nav .nav > li.active > a {
-  color: #fff;
+  color: #1e6ab4;
+  font-weight: bold;
   background: transparent;
   border-color: transparent;
 }

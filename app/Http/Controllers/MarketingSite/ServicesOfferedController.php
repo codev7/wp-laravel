@@ -29,11 +29,11 @@ class ServicesOfferedController extends Controller
      * @Get("wordpress-concierge", as="wp-concierge")
      * @return Services Offered
      */
-    public function wordPressMaintenancePackage()
+    public function concierge()
     {
 
 
-        return $this->minifyHTML(view('marketing/wp-maintenance'));
+        return $this->minifyHTML(view('marketing/concierge'));
 
 
     }

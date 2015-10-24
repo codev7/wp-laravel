@@ -45,13 +45,13 @@ class SparkServiceProvider extends ServiceProvider
     {
         Spark::configure([
             'models' => [
-                'teams' => Team::class,
+                'teams' => CMV\Team::class,
             ]
         ]);
 
-        Spark::validateNewTeamsWith(function() {
-            // Validate here...
-        });
+
+        /*Spark::validateNewTeamsWith(function() {
+        });*/
     }
 
     /**
@@ -142,7 +142,7 @@ class SparkServiceProvider extends ServiceProvider
     protected function customizeSubscriptionPlans()
     {
 
-        Spark::plan('Single', 'WP-CONCIERGE-SINGEL')->price(599)
+        Spark::plan('Single', 'WP-CONCIERGE-SINGLE')->price(599)
          ->features([
              '1 site',
              '1 request at a time',

@@ -20,10 +20,6 @@
 
 @stop
 
-@section('header_cta')
-	<a href="#order-concierge" class="btn btn-success">I want Concierge</a>
-@endsection
-
 @section('content')
 	<section class="visual3 repeatable">
 		<div class="container">

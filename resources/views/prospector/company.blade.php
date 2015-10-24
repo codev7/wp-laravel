@@ -5,8 +5,8 @@
     <h3 class="hr-divider-content hr-divider-heading">Company Info</h3>
 </div>
 <ol class="breadcrumb">
-    <li><a href="{{ route('prospects.dashboard') }}">Dashboard</a></li>
-    <li><a href="{{ route('companies') }}">Companies</a></li>
+    <li><a href="{{ route('prospector.dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('prospector.companies') }}">Companies</a></li>
     <li class="active" style="color: black">{{ $company->name }}</li>
 </ol>
 
@@ -48,10 +48,10 @@
 
                                         @foreach($company->contacts as $prospect)
                                         <tr>
-                                            <td><a href="{{ route('prospect', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}">{{ $prospect->first_name. ' '.$prospect->last_name }}</a></td>
+                                            <td><a href="{{ route('prospector.contact', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}">{{ $prospect->first_name. ' '.$prospect->last_name }}</a></td>
                                             <td>{{ $prospect->email }}</td>
                                             <td>{!! $prospect->getTimeOfLastActivity() !!}</td>
-                                            <td><a href="{{ route('prospect', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}" class="btn btn-warning"><i class="icon icon-edit"></i></a></td>
+                                            <td><a href="{{ route('prospector.contact', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}" class="btn btn-warning"><i class="icon icon-edit"></i></a></td>
                                         </tr>
                                         @endforeach
 

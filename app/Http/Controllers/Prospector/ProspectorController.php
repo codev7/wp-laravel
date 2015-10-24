@@ -1,6 +1,6 @@
 <?php
 
-namespace CMV\Http\Controllers;
+namespace CMV\Http\Controllers\Prospector;
 
 use Illuminate\Http\Request;
 use CMV\Http\Requests;
@@ -9,11 +9,15 @@ use CMV\Models\Prospector\Company;
 use CMV\Models\Prospector\Contact;
 use Input;
 
+/**
+ * @Controller(prefix="prospector")
+ * @Middleware("sales-rep")
+ */
 class ProspectorController extends Controller
 {
 
     /**
-     * @Get("prospects/dashboard", as="prospects.dashboard", middleware="auth")
+     * @Get("dashboard", as="prospector.dashboard")
      * @return Response
      */
     public function prospectsDashboard()
@@ -24,14 +28,14 @@ class ProspectorController extends Controller
 
 
     /**
-     * @Get("prospects/companies/{filter?}/{rep?}", as="companies", middleware="auth")
+     * @Get("companies/{filter?}/{rep?}", as="prospector.companies")
      * @return Response
      */
     public function companies($filter = null, $rep = null)
     {
         if(!$filter)
         {
-            return redirect()->route('companies', ['filter' => 'all', 'rep' => $rep]);
+            return redirect()->route('prospector.companies', ['filter' => 'all', 'rep' => $rep]);
         }
 
 
@@ -77,7 +81,7 @@ class ProspectorController extends Controller
     }
 
     /**
-     * @Get("company/{id}", as="company", middleware="auth")
+     * @Get("company/{id}", as="prospector.company")
      * @return Response
      */
     public function company($id)
@@ -88,7 +92,7 @@ class ProspectorController extends Controller
     }
 
     /**
-     * @Get("contacts", as="contacts", middleware="auth")
+     * @Get("contacts", as="prospector.contacts")
      * @return Response
      */
     public function contacts()
@@ -111,7 +115,7 @@ class ProspectorController extends Controller
 
 
     /**
-     * @Post("company/{id}", as="update-company", middleware="auth")
+     * @Post("company/{id}", as="prospector.update-company")
      * @return Response
      */
     public function updateCompany($id)
@@ -141,7 +145,7 @@ class ProspectorController extends Controller
     }
 
     /**
-     * @Get("company/{id}/person/{person_id}", as="prospect", middleware="auth")
+     * @Get("company/{id}/person/{person_id}", as="prospector.contact")
      * @return Response
      */
     public function contact($id, $person_id)

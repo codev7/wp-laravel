@@ -22,9 +22,3 @@ if ($('#spark-app').length > 0) {
 	new Vue(require('laravel-spark'));
 }
 
-
-
-
-require('./plugins/tablesorter');
-require('./custom/chartjs-data-api');
-require('./plugins/datepicker');

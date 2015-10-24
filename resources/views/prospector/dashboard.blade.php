@@ -8,9 +8,7 @@
 </div>
 
 <div class="row">
-
     <div class="col-sm-12">
-
         <ul class="nav nav-tabs">
         @foreach($reps as $count => $rep)
         <li @if($reps[0]->id == $rep->id) class="active" @endif><a data-toggle="tab" href="#tab-{{ $count }}">{{ $rep->name }}</a></li>
@@ -28,8 +26,6 @@
             @endforeach
         </div><!--tab-content-->
     </div>
-
-
 </div>
 
 <hr class="m-t">
@@ -48,10 +44,10 @@
 
                         @foreach($unassigned as $company)
                         <tr>
-                            <td style="vertical-align: middle"><a href="{{ route('company', ['id' => $company->id]) }}">{{ $company->name }}</a><br /><small class="text-muted">{{ $company->contacts->count() }} contacts</small></td>
+                            <td style="vertical-align: middle"><a href="{{ route('prospector.company', ['id' => $company->id]) }}">{{ $company->name }}</a><br /><small class="text-muted">{{ $company->contacts->count() }} contacts</small></td>
                             <td style="width: 50%">
                                 Assign to: 
-                                <form action="{{ route('update-company', ['id' => $company->id]) }}" method="post">
+                                <form action="{{ route('prospector.update-company', ['id' => $company->id]) }}" method="post">
                                     <div class="flextable">
                                         <div class="flextable-item flextable-primary">
                                             <select name="sales_rep_id" class="custom-select custom-select-sm form-control">@foreach($reps as $rep)<option value="{{ $rep->id }}">{{ $rep->email }}</option>@endforeach</select>
@@ -65,7 +61,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </td>
+                           t </td>
                         </tr>
                         @endforeach
 
@@ -79,16 +75,9 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
         </div>
     </div>
-
 </div>
-
 
 @include('modals/explainers')
 

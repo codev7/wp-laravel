@@ -4,7 +4,7 @@
 
     <hr class="m-t m-b p-a-0" />
 
-    <form action="{{ route('update-company', ['id' => $company->id]) }}" method="post">
+    <form action="{{ route('prospector.update-company', ['id' => $company->id]) }}" method="post">
         <div class="form-group">
             <label>Status</label>
             <select name="status" class="custom-select custom-select-sm form-control">{!! get_status_options($company->status) !!}</select>
@@ -15,7 +15,7 @@
     </form>
     
 
-    <form action="{{ route('update-company', ['id' => $company->id]) }}" method="post">
+    <form action="{{ route('prospector.update-company', ['id' => $company->id]) }}" method="post">
     <div class="form-group m-t">
         <label>Company Type</label>
         <select name="type" class="custom-select custom-select-sm form-control">

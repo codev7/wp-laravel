@@ -31,6 +31,50 @@ function count_for_rep($email, $company_type = null)
     return $rep->companies()->where('type', $company_type)->count();
 }
 
+function isRouteNameSpace($pathToCheck)
+{      
+    return str_contains(Request::url(), $pathToCheck);
+
+}
+
+
+function hasRole($role)
+{
+
+    if(Auth::guest()) return false;
+
+    switch($role) {
+
+        case 'sales-rep':
+
+
+            return Auth::user()->is_sales_rep;
+
+        break;
+
+
+        case 'developer':
+
+            return Auth::user()->is_developer;
+
+        break;
+
+        case 'admin':
+
+            return Auth::user()->is_admin;
+
+        break;
+
+
+        case 'mastermind':
+
+            return Auth::user()->is_mastermind;
+
+        break;
+    }
+
+}
+
 /*
 Usage:
 fireJSEvent('Viewed Admin Dashboard','pageview','Viewed Dashboard',['date' => date('Y-m-d')]);

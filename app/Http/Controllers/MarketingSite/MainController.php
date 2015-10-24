@@ -105,14 +105,14 @@ class MainController extends Controller
                 [
                     'text' => 'View Front-page.php',
                     'icon' => 'wordpress',
-                    'content' => view('portfolio/detaildelivery-frontpage')->render(),
+                    'content' => view('marketing/portfolio/detaildelivery-frontpage')->render(),
                     'id' => 'tab-2',
                     'code_type' => 'html'
                 ],
                 [
                     'text' => 'View CSS/LESS',
                     'icon' => 'css3',
-                    'content' => htmlentities( view('portfolio/detaildelivery-css')->render() ),
+                    'content' => htmlentities( view('marketing/portfolio/detaildelivery-css')->render() ),
                     'id' => 'tab-1',
                     'code_type' => 'css'
                 ],
@@ -130,14 +130,14 @@ class MainController extends Controller
                 [
                     'text' => 'View HTML',
                     'icon' => 'plus',
-                    'content' => view('portfolio/micpics-html')->render(),
+                    'content' => view('marketing/portfolio/micpics-html')->render(),
                     'id' => 'tab-1',
                     'code_type' => 'html'
                 ],
                 [
                     'text' => 'View CSS',
                     'icon' => 'plus',
-                    'content' => view('portfolio/micpics-css')->render(),
+                    'content' => view('marketing/portfolio/micpics-css')->render(),
                     'id' => 'tab-2',
                     'code_type' => 'css'
                 ]
@@ -154,14 +154,14 @@ class MainController extends Controller
                 [
                     'text' => 'View HTML',
                     'icon' => 'plus',
-                    'content' =>  view('portfolio/lotplans-html')->render(),
+                    'content' =>  view('marketing/portfolio/lotplans-html')->render(),
                     'id' => 'tab-1',
                     'code_type' => 'html'
                 ],
                 [
                     'text' => 'View CSS',
                     'icon' => 'plus',
-                    'content' => view('portfolio/lotplans-css')->render(),
+                    'content' => view('marketing/portfolio/lotplans-css')->render(),
                     'id' => 'tab-2',
                     'code_type' => 'css'
                 ]
@@ -179,7 +179,7 @@ class MainController extends Controller
                 [
                     'text' => 'View PHP',
                     'icon' => 'plus',
-                    'content' => view('portfolio/slack-command')->render(),
+                    'content' => view('marketing/portfolio/slack-command')->render(),
                     'id' => 'tab-1',
                     'code_type' => 'html'
                 ]
@@ -197,7 +197,7 @@ class MainController extends Controller
                 [
                     'text' => 'View HTML',
                     'icon' => 'plus',
-                    'content' => htmlentities(view('portfolio/wahooly')->render()),
+                    'content' => htmlentities(view('marketing/portfolio/wahooly')->render()),
                     'id' => 'tab-1',
                     'code_type' => 'html'
                 ]
@@ -214,7 +214,7 @@ class MainController extends Controller
                 [
                     'text' => 'View JavaScript',
                     'icon' => 'plus',
-                    'content' => view('portfolio/react-js')->render(),
+                    'content' => view('marketing/portfolio/react-js')->render(),
                     'id' => 'tab-1',
                     'code_type' => 'javascript'
                 ]
@@ -233,14 +233,14 @@ class MainController extends Controller
                 [
                     'text' => 'View JavaScript',
                     'icon' => 'plus',
-                    'content' => view('portfolio/vue-js')->render(),
+                    'content' => view('marketing/portfolio/vue-js')->render(),
                     'id' => 'tab-1',
                     'code_type' => 'javascript'
                 ],
                 [
                     'text' => 'View HTML',
                     'icon' => 'html5',
-                    'content' => view('portfolio/vue-html')->render(),
+                    'content' => view('marketing/portfolio/vue-html')->render(),
                     'id' => 'tab-2',
                     'code_type' => 'html'
                 ]
@@ -284,6 +284,6 @@ class MainController extends Controller
     public function freeQuote()
     {   
         
-        return $this->minifyHTML(view('marketing/quote'));
+        return redirect()->route('project.new');
     }
 }

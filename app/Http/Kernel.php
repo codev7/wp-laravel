@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \CMV\Http\Middleware\RedirectIfAuthenticated::class,
         'admin_auth' => \CMV\Http\Middleware\IsAdministrator::class,
+        'sales-rep' => \CMV\Http\Middleware\IsSalesRep::class,
         'ajax' => \CMV\Http\Middleware\AjaxOnly::class,
     ];
 }
