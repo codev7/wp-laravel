@@ -60,6 +60,8 @@ class ProjectsController extends Controller
     public function create(Request $request)
     {
         
+        $projectName = $request->input('project_name');
+
         if(\Auth::guest())
         {
 
@@ -81,9 +83,6 @@ class ProjectsController extends Controller
 
             $team->save();
 
-
-            $projectName = 'A Project Created at '.time().'.';
-
             $projectData = [
                 'name' => $projectName,
                 'requested_deadline' => $request->input('lead_deadline'),
@@ -91,8 +90,7 @@ class ProjectsController extends Controller
 
             $project = Project::create($projectData);
 
-            $project->slug = str_replace(' ','-',$projectName);
-            $project->subdomain = str_replace(' ','-',$projectName);
+            $project->slug = str_replace(' ','-',strtolower($projectName));
             $project->team()->associate($team);
 
             $project->save();
@@ -104,9 +102,28 @@ class ProjectsController extends Controller
             $user->switchToTeam($team);
 
             $user->save();
-            return redirect()->route('app.home');
 
         }
+        else
+        {
+            //user already logged in
+            
+            $projectData = [
+                'name' => $projectName,
+                'requested_deadline' => $request->input('lead_deadline'),
+            ];
 
+            $project = Project::create($projectData);
+
+            $project->slug = str_replace(' ','-',strtolower($projectName));
+            $project->team()->associate(Auth::user()->currentTeam());
+
+            $project->save();
+            
+            $project->createOrFindProjectTypeId($request->input('project_type'));
+        }
+
+
+        return redirect()->route('project.single', ['slug' => $project->slug]);
     }
 }

@@ -14,10 +14,17 @@ class CreateTeamsTables extends Migration
     {
         // Create Teams Table...
         Schema::create('teams', function (Blueprint $table) {
+            
             $table->increments('id');
+            
             $table->integer('owner_id')->index();
+            
             $table->string('name');
+            
+            $table->timestamp('nda_agreed_at')->nullable()->default(null);
+
             $table->timestamps();
+            
             $table->softDeletes();
         });
 

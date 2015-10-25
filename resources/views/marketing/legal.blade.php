@@ -29,7 +29,7 @@
 
                             <h5>Never under any circumstances are the details of your projects shared with anyone outside the bounds of our company.</h5>
 
-                            <p>Our guarantee to you is that any project you engage with Code My Views Inc. is confidential.  All of our serivces are 100% white-labeled, so even if you are sub-contracting out a project to us, your customer will not have any insight into this.  We want you to feel comfortable working with us on all of your projects, anything you submit through our site (all projects and quotes) is bound by the non-disclosure agreement that you see below.</p>
+                            <p>Our guarantee to you is that any project you engage with Code My Views Inc. is confidential.  All of our services are 100% white-labeled, so even if you are sub-contracting out a project to us, your customer will not have any insight into this.  We want you to feel comfortable working with us on all of your projects, anything you submit through our site (all projects and quotes) is bound by the non-disclosure agreement that you see below.</p>
 
                             @include('partials/nda')
 

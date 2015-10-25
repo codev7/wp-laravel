@@ -45,7 +45,7 @@
 
                             @if(Auth::guest())
                             <div class="hr-divider">
-                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav">
+                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b">
                                 <li class="active" >
                                   <a href="#" style="background-color: #ccc">Step 1: Project Details</a>
                                 </li>
@@ -56,8 +56,22 @@
                             </div>
                             @endif
 
-                            <label for="project_type" class=" m-t-lg">What type of project do you have?</label>
-                            <div class="sel-hold">
+                            <div class="form-group">
+                                <label
+                                    for="project_name"
+                                    class="control-label">
+                                   What is the name of your project?
+                                </label>
+                                <input
+                                    type="text"
+                                    name="project_name"
+                                    id="project_name"
+                                    class="form-control required input-lg"
+                                    >
+                            </div>
+
+                            <label for="project_type" class="">What type of project do you have?</label>
+                            <div class="sel-hold m-b-0">
                                 <select
                                 name="project_type"
                                 id="project_type"
@@ -73,7 +87,7 @@
                             </select>
                             </div>
                             <label for="lead_deadline">When is your deadline?</label>
-                            <div class="sel-hold">
+                            <div class="sel-hold m-b-0">
                                 <select
                                 name="lead_deadline"
                                 id="lead_deadline"
@@ -175,5 +189,7 @@
         </div>
     </div>
 </section><!-- / quote-area -->
+
+@include('modals/nda')
 
 @endsection

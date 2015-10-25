@@ -26,7 +26,7 @@ class CreateProjectsTable extends Migration
             $table->string('requested_deadline')->nullable()->default(null);
             $table->date('guaranteed_deadline')->nullable()->default(null);
             $table->string('status');
-            $table->string('subdomain')->unique();
+            $table->string('subdomain')->nullable()->default(null);
             $table->json('contractor_payout')->nullable()->default(null);
             
             $table->timestamps();

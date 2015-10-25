@@ -13,9 +13,10 @@ class Team extends SparkTeam
         'id',
         'owner_id',
         'name',
+        'nda_agreed_at',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     public function projects()

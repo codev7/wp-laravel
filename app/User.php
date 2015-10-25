@@ -119,7 +119,7 @@ class User extends Model implements AuthorizableContract,
     public function getFirstName()
     {
 
-        $name = $this->name;
+        $name = explode(' ',$this->name);
 
         return $name[0];
 

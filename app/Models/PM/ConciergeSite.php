@@ -45,7 +45,6 @@ class ConciergeSite extends Model
 
     }
 
-
     public function developer()
     {
         return $this->belongsTo('CMV\User','developer_id');

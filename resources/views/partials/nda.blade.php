@@ -1,7 +1,5 @@
-<h4>Non-Disclosure Agreement</h4>
-<p class=" text-muted"><small>{{ date('F j, Y') }}</small></p>
-<br />
-<br />
+<h4 class="text-center">Non-Disclosure Agreement</h4>
+<p class=" text-muted text-center"><small>{{ date('F j, Y') }}</small></p>
 <p>This Nondisclosure Agreement (the "Agreement") is entered into by and between Code My Views Inc. with its principal offices at 600 Congress Ave. 14th Floor, Austin, TX 78701 ("Disclosing Party") and all of its customers and future customers, ("Receiving Party") for the purpose of preventing the unauthorized disclosure of Confidential Information as defined below. The parties agree to enter into a confidential relationship with respect to the disclosure of certain proprietary and confidential information ("Confidential Information").</p>
 
 <ol>
