@@ -37,8 +37,8 @@ return [
 
     'stripe' => [
         'model'  => CMV\User::class,
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'key'    => env('STRIPE_KEY','pk_test_H4Yz9y4R0Ij6HvDdpe7cs79e'),
+        'secret' => env('STRIPE_SECRET','sk_test_hx5fBx0gDeRnu4JcVvh3j6df'),
     ],
 
 ];
