@@ -19,31 +19,19 @@
 		<div class="collapse navbar-collapse" id="navbar-collapse-main">
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav hidden-xs">
-                <li><a href="{{ route('quote') }}">Get a Project Quote</a></li>
-				<li><a href="/register">WordPress Concierge</a></li>
+                <li class="{{ set_active_from_route_name('project.new') }}"><a href="{{ route('project.new') }}">Get a Project Quote</a></li>
+				<li><a href="{{ route('wp-concierge') }}">WordPress Concierge</a></li>
 			</ul>
 
 			<!-- Right Side Of Navbar -->
-			<ul class="nav navbar-nav navbar-right m-r-0 hidden-xs">
+			<ul class="nav navbar-nav navbar-right m-r-0">
 				<!-- Login / Registration Links -->
 				<li><a href="/login">Login</a></li>
 				<li><a href="/register">Register</a></li>
 			</ul>
 
-			<ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="profile/index.html">Profile</a></li>
-          <li><a href="notifications/index.html">Notifications</a></li>
-          <li><a data-toggle="modal" href="#msgModal">Messages</a></li>
-          <li><a href="docs/index.html">Docs</a></li>
-          <li><a href="#" data-action="growl">Growl</a></li>
-          <li><a href="login/index.html">Logout</a></li>
-        </ul>
 
-        <ul class="nav navbar-nav hidden">
-          <li><a href="#" data-action="growl">Growl</a></li>
-          <li><a href="login/index.html">Logout</a></li>
-        </ul>
+
 		</div>
 	</div>
 </nav>

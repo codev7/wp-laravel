@@ -3,7 +3,7 @@
 		<div class="navbar-header">
 
 			<!-- Collapsed Hamburger -->
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-main">
 				<span class="sr-only">Toggle Navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -16,9 +16,9 @@
 			</a>
 		</div>
 
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<div class="collapse navbar-collapse" id="navbar-collapse-main">
 			<!-- Left Side Of Navbar -->
-			<ul class="nav navbar-nav hidden-xs">
+			<ul class="nav navbar-nav">
 
 				@if(isRouteNameSpace('home') || isRouteNameSpace('settings'))
 					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Dashboard</a></li>
@@ -127,7 +127,7 @@
 			</ul>
 
 			<!-- Right Side Of Navbar -->
-			<ul class="nav navbar-nav navbar-right m-r-0 hidden-xs">
+			<ul class="nav navbar-nav navbar-right m-r-0">
 				<!-- Settings Dropdown -->
 				@if (Spark::isDisplayingSettingsScreen())
 					{{-- This Dropdown Is For Spark Settings Sreens - Vue Based --}}
