@@ -8,10 +8,6 @@
 <title>WordPress VIP Concierge - 24/7 Service - Unlimited Fixes for your WordPress Site</title>
 @stop
 
-@section('additional_js')
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-@endsection
-
 @section('meta')
 
 <meta name="description" content="The World&#039;s best WordPress developer's providing you unlimited support for your WordPress site. - Trusted by Fortune 500 companies." />
@@ -276,13 +272,16 @@
 		    <div class="container" >
 
 		    	<div class="text-center">
-			        <h3 class="sub-ttl" v-if="payment_successful == false">WordPress Concierge Pricing</h3>
-			        <h2 class="ttl text-primary" v-if="payment_successful == false">Easy Pricing Plans</h2>
-			        <h4 v-if="payment_successful == false">An expert WordPress developer will be assigned immediately to your site</h4>
+			        <h3 class="sub-ttl">WordPress Concierge Pricing</h3>
+			        <h2 class="ttl text-primary">Easy Pricing Plans</h2>
+			        <h4>An expert WordPress developer will be assigned immediately to your site</h4>
 		        </div>
 		        <br />
 
-		        <div class="row flat" v-if="payment_successful == false">
+		        @if(Spark::plans())
+		        <div class="row flat">
+
+
 
 		        	<div class="col-md-3 col-xs-12">
 
@@ -310,113 +309,43 @@
 		      
 		                </ul>
 		            </div>
-
+		            @foreach(Spark::plans() as $count => $plan)
 		            <div class="col-md-3 col-xs-12">
-		                <ul class="plan plan1">
+
+		           
+		                <ul class="plan plan{{ $count + 1 }}  {{ $count == 1 ? 'featured' : null }}">
 		                    <li class="plan-name">
-		                        Basic
+		                        {{ $plan->name }}
 		                    </li>
 		                    <li class="plan-price">
-		                        <strong>$500</strong> / month
+		                        <strong>{{ $plan->currencySymbol }}{{ $plan->price }}</strong> / month
 		                    </li>
+
+		                    @foreach($plan->features as $feature)
 		                    <li>
-		                        <strong>1 request at a time</strong>
+		                        <strong>{{ $feature }}</strong>
 		                    </li>
-		                    <li>
-		                        <strong>2 Business Days to Complete Non Urgent Tasks</strong>
-		                    </li>
-		                    <li>
-		                        <strong>30 minute Downtime Response</strong>
-		                    </li>
+		                    @endforeach
+		                  
 		                    <li>&nbsp;</li>	
 		                    <li class="plan-action">
 		                        <a 
-		                        	href="#modal-concierge-subscribe"
-		                        	v-on="click: launchStripeModal($event, 'Basic Concierge Plan', '$500 / month', 'Subscribe to Basic', 'WP-CONCIERGE-BASIC' )"
-		                        	class="btn btn-default btn-lg btn-subscribe">
+		                        	href="{{ Auth::guest() ? '/register' : '/settings?tab=subscription' }}"
+		                        	class="btn {{ $count == 1 ? 'btn-success' : 'btn-default' }}  btn-lg">
 		                        	Choose Plan
 		                        </a>
 		                    </li>
 		                </ul>
 		            </div>
+		            @endforeach
 
-		            <div class="col-md-3 col-xs-12">
-		                <ul class="plan plan2 featured">
-		                    <li class="plan-name">
-		                        Premium
-		                    </li>
-		                    <li class="plan-price">
-		                        <strong>$750</strong> / month
-		                    </li>
-		                    <li>
-		                        <strong>2 requests at a time</strong>
-		                    </li>
-		                    <li>
-		                        <strong>24 hours to Complete Non Urgent Tasks</strong>
-		                    </li>
-		                    <li>
-		                        <strong>15 minute Downtime Response</strong>
-		                    </li>
-							<li>&nbsp;</li>		  
-		                    <li class="plan-action">
-		                    	<a 
-		                        	href="#modal-concierge-subscribe"
-		                        	v-on="click: launchStripeModal($event, 'Premium Concierge Plan', '$750 / month', 'Subscribe to Premium', 'WP-CONCIERGE-PREMIUM' )"
-		                        	class="btn  btn-success btn-lg btn-subscribe">
-		                        	Choose Plan
-		                        </a>
-			                 </li>
-			             </ul>
-			         </div>
 
-			        <div class="col-md-3 col-xs-12">
-			            <ul class="plan plan3">
-		                    <li class="plan-name">
-		                        High Traffic
-		                    </li>
-		                    <li class="plan-price">
-		                        <strong>$1,500</strong> / month
-		                    </li>
-		                    <li>
-		                        <strong>unlimited requests at a time</strong>
-		                    </li>
-		                    <li>
-		                        <strong>15 hours to Complete Non Urgent Tasks</strong>
-		                    </li>
-		                    <li>
-		                        <strong>&lt; 5 minute Downtime Response</strong>
-		                    </li>
-		                    <li>
-		                        <strong>Phone support</strong>
-		                    </li>
-		                    <li class="plan-action">
-			                     <a 
-		                        	href="#modal-concierge-subscribe"
-		                        	v-on="click: launchStripeModal($event, 'High Traffic Concierge Plan', '$1,500 / month', 'Subscribe to High Traffic', 'WP-CONCIERGE-TRAFFIC')"
-		                        	class="btn btn-default btn-lg btn-subscribe">
-		                        	Choose Plan
-		                        </a>
-			                 </li>
-			            </ul>
-			        </div>
+		           
 		    	</div>
-
-
-		    	<div v-if="payment_successful == true" class="text-center">
-
-		    		<h4><strong>Thank you for joining the Code My Views WordPress concierge!</strong></h4>
-
-		    		<p>Someone from my team will be in touch within one hour.</p>
-
-		    		<p>Thanks,<br /><strong>- Connor Hood</strong><br />CEO - Code My Views<br />512-831-6717</p>
-		    	</div>
+		    	@endif
 		    	<br />
 		    	<br />
-		    	@include('modals/concierge')
-		    	<br />
-		    	<br />
-
-		        <div class="holder text-center" v-if="payment_successful == false">
+		        <div class="holder text-center">
 		        	<h4>Not quite ready or have some questions?  Just get in touch.</h4>
 		            <strong class="phone"><i class="fa fa-envelope"></i> <a href="mailto:team@codemyviews.com">team@codemyviews.com</a></strong>
 		            <br />

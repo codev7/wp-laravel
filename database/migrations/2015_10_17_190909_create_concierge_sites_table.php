@@ -32,7 +32,7 @@ class CreateConciergeSitesTable extends Migration
             
             $table->text('saved_credentials')->nullable()->default(null);
             $table->string('status')->nullable()->default(null);
-            $table->string('subdomain')->unique();
+            $table->string('subdomain')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });

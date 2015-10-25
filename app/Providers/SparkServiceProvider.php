@@ -142,26 +142,21 @@ class SparkServiceProvider extends ServiceProvider
     protected function customizeSubscriptionPlans()
     {
 
-        Spark::free()
-         ->features([
-             'Unlimited Projects',
-             'No Concierge Sites',
-         ]);
-        Spark::plan('Single', 'WP-CONCIERGE-SINGLE')->price(599)
+        Spark::plan('Freelancer', 'WP-CONCIERGE-SINGLE')->price(599)
          ->features([
              '1 site',
              '1 request at a time',
              '2 Business Days to Complete Non Urgent Tasks',
          ]);
 
-         Spark::plan('Freelancer', 'WP-CONCIERGE-FREELANCER')->price(1599)
+         Spark::plan('Agency', 'WP-CONCIERGE-FREELANCER')->price(1599)
          ->features([
              '3 sites',
              '2 request at a time',
              '2 Business Days to Complete Non Urgent Tasks'
          ]);
 
-         Spark::plan('Agency', 'WP-CONCIERGE-AGENCY')->price(2400)
+         Spark::plan('Agency XL', 'WP-CONCIERGE-AGENCY')->price(2400)
          ->features([
              '5 sites',
              '3 request at a time',
