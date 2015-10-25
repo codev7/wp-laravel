@@ -38,7 +38,7 @@ class ProjectsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @Get("project/{slug}", as="project.single")
+     * @Get("project/{slug}", as="project.single", middleware="auth")
      * @return Response
      */
     public function single($slug)
@@ -50,6 +50,58 @@ class ProjectsController extends Controller
 
         return view('projects/single')->with('project', $project);
 
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @Get("project/{slug}/briefs", as="project.briefs", middleware="auth")
+     * @return Response
+     */
+    public function briefs($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/briefs')->with('project', $project);   
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @Get("project/{slug}/files", as="project.files", middleware="auth")
+     * @return Response
+     */
+    public function files($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/files')->with('project', $project);   
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @Get("project/{slug}/invoices", as="project.invoices", middleware="auth")
+     * @return Response
+     */
+    public function invoices($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/invoices')->with('project', $project);   
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @Get("project/{slug}/to-dos", as="project.todos", middleware="auth")
+     * @return Response
+     */
+    public function toDos($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/to-dos')->with('project', $project);   
     }
 
     /**
