@@ -13,11 +13,11 @@
           </a>
 
           <h5 class="panel-title">
-            <small>Project Engineer</small><br />
+            <small>Lead Concierge</small><br />
             Dave Gamache
           </h5>
 
-          <p class="m-b-0">Hey, I'm Dave.  I am your project engineer.</p>
+          <p class="m-b-0">Hey, I'm Dave.  I am your concierge engineer.</p>
 
         </div>
       </div>
@@ -209,19 +209,8 @@
       </ul>
     </div>
     <div class="col-md-3">
-      <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        Hang tight! We are preparing a project estimate for you.
-      </div>
-
-      <div class="panel panel-default m-b-md hidden-xs">
-        <div class="panel-body">
-          <h5 class="m-t-0">Concierge Service</h5>
-            <img class="img-thumbnail" data-width="640" data-height="640" data-action="zoom" src="{{ asset('images/img-10.png') }}">
-          <p class="m-t"><strong>Looking for ongoing support?</strong> Check out our VIP Concierge service.</p>
-          <a href="{{ route('wp-concierge') }}" class="btn btn-primary-outline btn-sm">Learn More</a>
-        </div>
-      </div>
+      
+      <a href="#" class="btn btn-lg btn-primary-outline btn-block m-b"><i class="fa fa-plus"></i> Submit a Task</a>
 
       <div class="panel panel-default m-b-md hidden-xs">
         <div class="panel-body">

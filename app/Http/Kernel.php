@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
         'guest' => \CMV\Http\Middleware\RedirectIfAuthenticated::class,
         'admin_auth' => \CMV\Http\Middleware\IsAdministrator::class,
         'sales-rep' => \CMV\Http\Middleware\IsSalesRep::class,
+        'mastermind' => \CMV\Http\Middleware\IsMastermind::class,
         'ajax' => \CMV\Http\Middleware\AjaxOnly::class,
     ];
 }
