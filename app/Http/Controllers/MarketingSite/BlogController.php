@@ -7,6 +7,9 @@ use CMV\Http\Requests;
 use CMV\Http\Controllers\Controller;
 use Cache;
 
+/**
+ * @Middleware("require-wordpress")
+ */
 class BlogController extends Controller
 {
     /**
@@ -16,6 +19,7 @@ class BlogController extends Controller
      */
     public function blog($paged = null, $page_number = null)
     {       
+
 
         global $paged;
 

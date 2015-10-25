@@ -87,6 +87,9 @@
 	                    <a href="{{ route('mastermind.dashboard') }}">Dashboard</a>
 	                </li>
 	                
+                    <li>
+                        <a href="{{ route('mastermind.logs') }}">Error Logs</a>
+                    </li>
                 @endif
 
 				@if(isRouteNameSpace('prospector'))

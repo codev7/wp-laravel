@@ -41,7 +41,7 @@ class ServicesOfferedController extends Controller
 
     /**
      * Display the specified resource.
-     *  @Get("services/{slug}", as="service")
+     *  @Get("services/{slug}", as="service", middleware="require-wordpress")
      * @param  int  
      * @return Response
      */

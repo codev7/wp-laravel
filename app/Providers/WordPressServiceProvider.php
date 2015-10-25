@@ -26,7 +26,7 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function register()
     {   
-        if(\File::exists($this->bootstrapFilePath))
+        if(\File::exists($this->bootstrapFilePath) && env('ENABLE_WP') === true)
         {
             
             require_once $this->bootstrapFilePath;

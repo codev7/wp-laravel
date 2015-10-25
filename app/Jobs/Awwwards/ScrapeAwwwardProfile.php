@@ -8,13 +8,13 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use CMV\Awwwcategory;
+use CMV\Models\AwwwardsScraper\Awwwcategory;
 use Guzzle\Plugin\Cookie\CookieJar\CookieJarInterface;
 use GuzzleHttp\Client,
     Guzzle\Plugin\Cookie\Cookie,
     Guzzle\Plugin\Cookie\CookieJar\ArrayCookieJar;
 
-use CMV\Awwward;
+use CMV\Models\AwwwardsScraper\Awwward;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ScrapeAwwwardProfile extends Job implements SelfHandling, ShouldQueue

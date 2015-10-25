@@ -11,12 +11,8 @@
 |
 */
 
-
-
-
-get('admin/logs', ['uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index', 'as' => 'admin.logs', /*'middleware' => ['auth','admin_auth']*/ ]);
-
-/*Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);*/
+get('mastermind/logs', [
+    'uses' => '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index',
+    'as' => 'mastermind.logs',
+    'middleware' => 'mastermind'
+]);

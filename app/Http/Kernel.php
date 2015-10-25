@@ -34,5 +34,6 @@ class Kernel extends HttpKernel
         'sales-rep' => \CMV\Http\Middleware\IsSalesRep::class,
         'mastermind' => \CMV\Http\Middleware\IsMastermind::class,
         'ajax' => \CMV\Http\Middleware\AjaxOnly::class,
+        'require-wordpress' => \CMV\Http\Middleware\WordPressRequired::class,
     ];
 }
