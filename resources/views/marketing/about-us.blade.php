@@ -19,7 +19,7 @@
 					</div>
 					<div class="media-body">
 						<h3 class="media-heading">Always Available</h3>
-						<p>Our support staff is available 8-6PM (Austin, TX time), and with project managers also available in San Francisco, CA, you can know we will be avaiable whenever you are working. </p>
+						<p>Our support staff is available 8-6PM (Austin, TX time), and with project managers also available in San Francisco, CA, you can know we will be available whenever you are working. </p>
 
 						<p>Read about the methodology we use on all of our projects that allows us to deliver every project on time, pixel perfect, and bug free.</p>
 
