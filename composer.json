@@ -25,7 +25,8 @@
         "symfony/dom-crawler": "~2.0,>=2.0.5",
         "ext-curl": "*",
         "shuber/curl": "dev-master",
-        "league/csv": "~6.0"
+        "league/csv": "~6.0",
+        "gentle/bitbucket-api": "^0.7.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
