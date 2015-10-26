@@ -41,6 +41,22 @@ $app->singleton(
     CMV\Exceptions\Handler::class
 );
 
+$app->bind('Bitbucket', function() {
+    // @example http://gentlero.bitbucket.org/bitbucket-api/examples/
+    // @see: https://bitbucket.org/account/user/<username or team>/api
+    $oauth_params = [
+        'oauth_consumer_key'         => $_ENV['BITBUCKET_KEY'],
+        'oauth_consumer_secret'     => $_ENV['BITBUCKET_SECRET'],
+    ];
+
+    $bitbucket = new \Bitbucket\API\Api();
+    $bitbucket->getClient()->addListener(
+        new \Bitbucket\API\Http\Listener\OAuthListener($oauth_params)
+    );
+
+    return $bitbucket;
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
