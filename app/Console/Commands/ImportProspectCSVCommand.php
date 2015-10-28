@@ -2,12 +2,10 @@
 
 namespace CMV\Console\Commands;
 
-use Illuminate\Console\Command;
-use League\Csv\Reader;
-
 use CMV\Models\Prospector\Company;
 use CMV\Models\Prospector\Contact;
-use CMV\User;
+use Illuminate\Console\Command;
+use League\Csv\Reader;
 
 class ImportProspectCSVCommand extends Command
 {
@@ -28,31 +26,41 @@ class ImportProspectCSVCommand extends Command
     /**
      * The required column names in each of the CSVs.
      *
+     * @see $this->headersAreValid
      * @var array
      */
-    protected $requiredColumns;
+    protected $requiredColumns = ['company_name','email','first_name','last_name'];
 
-    protected $contactMetaFields;
-
-    protected $companyMetaFields;
-
-    protected $globalDataArray;
     /**
-     * Create a new command instance.
+     * Column names which contains important meta for contacts
      *
-     * @return void
+     * @see $this->fetchContactMeta
+     * @var array
      */
-    public function __construct()
-    {
-        parent::__construct();
+    protected $contactMetaFields = ['website','company_formatted_address','company_address','company_city','company_state','company_postal_code','company_country','size','linkedin_company_url','locality','locality_city','locality_state','locality_state_code','locality_country','industry','leadsource','linkedin_company_industry','address','city','state','country','industry','twitter','facebook','google+','comments/extra'];
 
-        $this->requiredColumns = ['company_name','email','first_name','last_name'];
+    /**
+     * Column names which contains important meta for companies
+     *
+     * @see $this->fetchCompanyMeta
+     * @var array
+     */
+    protected $companyMetaFields = ['phone','email_status','linkedin_public_profile_url','email_type','linkedin_url','title','linkedin'];
+
+    /**
+     * Aggregated meta for companies
+     *
+     * @var array
+     */
+    protected $companies = [];
+
+    /**
+     * Aggregated meta for contacts
+     *
+     * @var array
+     */
+    protected $contacts = [];
     
-        $this->companyMetaFields = ['website','company_formatted_address','company_address','company_city','company_state','company_postal_code','company_country','size','linkedin_company_url','locality','locality_city','locality_state','locality_state_code','locality_country','industry','leadsource','linkedin_company_industry','address','city','state','country','industry','twitter','facebook','google+','comments/extra'];
-        $this->contactMetaFields = ['phone','email_status','linkedin_public_profile_url','email_type','linkedin_url','title','linkedin'];
-        
-        $this->globalDataArray = [];
-    }
 
     /**
      * Execute the console command.
@@ -60,225 +68,211 @@ class ImportProspectCSVCommand extends Command
      * @return mixed
      */
     public function handle()
-    {   
-
-
-        if( $this->argument('path_to_file') ) {   
-            
-            $this->processCsv( Reader::createFromPath( $this->argument('path_to_file') )  );
-             
-        } else {
-
-            foreach (\File::allFiles(storage_path() . '/csvs') as $partial) {
-
-                $this->info($partial->getPathName());
-
-                $this->processCsv( Reader::createFromPath($partial->getPathName()) );
-                
-
-            }  
-
+    {
+        if($this->argument('path_to_file'))
+        {
+            $files = [$this->argument('path_to_file')];
+        } else
+        {
+            $files = array_map(function(\Symfony\Component\Finder\SplFileInfo $file) {
+                return $file->getPathName();
+            }, \File::allFiles(storage_path() . '/csvs'));
         }
 
+        foreach ($files as $file) 
+        {
+            $this->info($file);
+            $this->processCsv(Reader::createFromPath($file));
+        }
 
-        $this->processGlobalMetaData();
-        
+        $this->createCompaniesMeta($this->companies);
+        $this->createContactsMeta($this->contacts);
     }
 
-    protected function processGlobalMetaData()
+    /**
+     * Process csv contents.
+     * Create Company and Contact entities from file contents
+     * Load $this->companies and $this->contacts with meta information
+     *
+     * @param Reader $csv
+     * @return bool
+     */
+    protected function processCsv(Reader $csv)
+    {
+        $headers = array_map(function($header) {
+            return str_replace(' ','_',strtolower($header));
+        }, $csv->fetchOne());
+
+        $this->info('Verifying required columns exist...');
+        if(!$this->headersAreValid($headers)) 
+        {
+            $this->error('This CSV does not have all of the required columns.');
+            return false;
+        }
+        $this->info('All required fields are present.  Importing prospects...');
+
+        foreach($csv->setOffset(1)->fetchAll() as $row) 
+        {
+            $line = array_combine($headers, $row);
+
+            $imported = $this->importProspect($line);
+            if($imported) {
+                $this->fetchCompanyMeta($line);
+                $this->fetchContactMeta($line);
+            }
+        }
+    }
+
+    /**
+     * Extract Company and Contact data from csv row and save them to DB
+     *
+     * @param array $line array with file column names as keys and cell values as values
+     * @return bool import results
+     */
+    protected function importProspect(array $line)
+    {
+        if($line['company_name'] == '')
+        {
+            $this->error('We do not have a company name. Skipping...');
+            return false;
+        }
+
+        if($line['email'] == '')
+        {
+            $this->error('We do not have an email.  Skipping...');
+            return false;
+        }
+
+        $company = Company::firstOrCreate(['name' => $line['company_name']]);
+        if(isset($line['type']))
+        {
+            $company->type = $line['type'];
+        }
+
+        $contact = $company->contacts()->firstOrCreate(['email' => $line['email']]);
+        if(isset($line['first_name']))
+        {
+            $contact->first_name = $line['first_name'];
+        }
+        if(isset($line['last_name']))
+        {
+            $contact->last_name = $line['last_name'];
+        }
+        
+        $company->save();
+        $contact->save();
+        return true;
+    }
+
+    /**
+     * Fetch contact meta from file line
+     *
+     * @param array $line array with file column names as keys and cell values as values
+     * @return bool parsing results
+     */
+    protected function fetchContactMeta($line)
+    {
+        if($line['email'] == '')
+        {
+            return false;
+        }
+
+        foreach($this->contactMetaFields as $field)
+        {
+            if(isset($line[$field]))
+            {
+                $this->contacts[$line['email']][$field] = $line[$field];
+            }
+        }
+    }
+
+    /**
+     * Fetch company meta from file line
+     *
+     * @param array $line array with file column names as keys and cell values as values
+     * @return bool parsing results
+     */
+    protected function fetchCompanyMeta($line)
+    {
+        if($line['company_name'] == '')
+        {
+            return false;
+        }
+
+        foreach($this->companyMetaFields as $field)
+        {
+            if(isset($line[$field]))
+            {
+                $this->companies[$line['company_name']][$field] = $line[$field];
+            }
+        }
+    }
+
+    /**
+     * Save companies metadata provided by argument array $companies
+     *
+     * @param array $companies companies
+     */
+    protected function createCompaniesMeta(array $companies)
     {
         $this->info('Processing company meta data...');
-        foreach($this->globalDataArray['companies'] as $company_name => $data)
+        foreach($companies as $name => $data)
         {
-
-            $company = Company::where('name', $company_name)->first();
-
+            $company = Company::where('name', $name)->first();
             \DB::table('company_metas')->where('company_id', $company->id)->delete();
-
             $meta = [];
             foreach($data as $key => $value)
             {
-
-                if($value != '') $meta[] = new \CMV\Models\Prospector\CompanyMeta(['key' => $key, 'value' => $value]);
-
+                if($value != '')
+                {
+                    $meta[] = new \CMV\Models\Prospector\CompanyMeta(['key' => $key, 'value' => $value]);
+                }
             }
             $company->meta()->saveMany($meta);
-            
 
         }
-        
-        $this->info('Processing contact meta data...');
-        foreach($this->globalDataArray['contacts'] as $email => $data)
-        {
+    }
 
+    /**
+     * Save contacts metadata provided by argument array $contacts
+     *
+     * @param array $contacts companies
+     */
+    protected function createContactsMeta(array $contacts)
+    {
+        $this->info('Processing contact meta data...');
+        foreach($contacts as $email => $data)
+        {
             $contact = Contact::where('email', $email)->first();
             \DB::table('contact_metas')->where('contact_id', $contact->id)->delete();
 
             $meta = [];
             foreach($data as $key => $value)
             {
-
-                if($value != '') $meta[] = new \CMV\Models\Prospector\ContactMeta(['key' => $key, 'value' => $value]);
-
+                if($value != '')
+                {
+                    $meta[] = new \CMV\Models\Prospector\ContactMeta(['key' => $key, 'value' => $value]);
+                }
             }
             $contact->meta()->saveMany($meta);
-            
-
         }
     }
 
-    protected function processCsv( $csv )
+    /**
+     * Check if all required headers exists in headers array
+     *
+     * @param array $headers array of headers needed to be validated
+     * @return bool validation result
+     */
+    protected function headersAreValid(array $headers)
     {
-        $this->info('Verifying required columns exist...');
-
-
-        $headers = $this->formatHeaderNames( $csv->fetchOne() );
-
-
-        $fileValidated = true;
-
-        foreach($this->requiredColumns as $required)
-        {
-
-            if(!in_array($required, $headers))
-            {
-                $fileValidated = false;
+        foreach($this->requiredColumns as $required) {
+            if(!in_array($required, $headers)) {
+                return false;
             }
-
         }
-
-
-        if($fileValidated === false)
-        {
-
-            $this->error('This CSV does not have all of the required columns.');
-            return false;
-        }
-
-        $this->info('All required fields are present.  Importing prospects...');
-
-        foreach($csv->setOffset(1)->fetchAll() as $row) {
-            
-            $this->addDataToGlobal( $row,  $headers);
-            $this->importProspect( $row,  $headers);
-
-
-        }
-    }
-
-    protected function importProspect($data, $headers)
-    {
-
-        $values = [];
-        
-        foreach($data as $count => $value)
-        {
-
-            $values[ $headers[$count] ] = $value;
-
-        }
-
-        if($values['company_name'] == '')
-        {   
-            $this->error('We do not have a company name. Skipping...');
-            return false;
-        }
-        $company = Company::firstOrCreate(['name' => $values['company_name']]);
-
-        if($values['email'] == '')
-        {
-            $this->error('We do not have an email.  Skipping...');
-            return false;
-        }
-        $contact = $company->contacts()->firstOrCreate(['email' => $values['email']]);
-
-        if(isset($values['type']))
-        {
-            $company->type = $values['type'];
-        }
-
-        if(isset($values['first_name']))
-        {
-
-            $contact->first_name = $values['first_name'];
-
-        }
-
-        if(isset($values['last_name']))
-        {
-
-            $contact->last_name = $values['last_name'];
-
-        }
-
-        $contact->save();
-        $company->save();
-    }
-
-    protected function addDataToGlobal($row, $headers)
-    {
-
-        $values = [];
-        foreach($row as $count => $value)
-        {
-
-            $values[ $headers[$count] ] = $value;
-
-        }
-
-        if($values['company_name'] == '')
-        {   
-            return false;
-        }
-
-        /* Save Company Meta Data */
-        foreach($this->companyMetaFields as $metaField)
-        {
-
-            if(isset( $values[ $metaField ] ))
-            {
-
-                $this->globalDataArray['companies'][ $values['company_name'] ][ $metaField ] = $values[ $metaField ];
-
-            }
-
-        }
-
-        if($values['email'] == '')
-        {   
-            return false;
-        }
-
-        /* Save Company Meta Data */
-        foreach($this->contactMetaFields as $metaField)
-        {
-
-            if(isset( $values[ $metaField ] ))
-            {
-
-                $this->globalDataArray['contacts'][ $values['email'] ][ $metaField ] = $values[ $metaField ];
-
-            }
-
-        }
-      
-        
-
-
+        return true;
     }
 
 
-    protected function formatHeaderNames($headers)
-    {
-
-        $output = [];
-
-
-        foreach($headers as $header)
-        {
-            $output[] = str_replace(' ','_',strtolower($header));
-        }
-
-        return $output;
-    }
 }
