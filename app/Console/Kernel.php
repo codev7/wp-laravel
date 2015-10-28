@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \CMV\Console\Commands\Inspire::class,
         \CMV\Console\Commands\ScrapeAwwwards::class,
-        \CMV\Console\Commands\ImportProspectCSVCommand::class,
+        \CMV\Console\Commands\Prospector\ImportCompaniesAndContactsFromCSV::class,
         \CMV\Console\Commands\ImportPersonNotesFromPipelineCommand::class,
     ];
 

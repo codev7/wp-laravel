@@ -1,13 +1,13 @@
 <?php
 
-namespace CMV\Console\Commands;
+namespace CMV\Console\Commands\Prospector;
 
 use CMV\Models\Prospector\Company;
 use CMV\Models\Prospector\Contact;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
 
-class ImportProspectCSVCommand extends Command
+class ImportCompaniesAndContactsFromCSV extends Command
 {
     /**
      * The name and signature of the console command.
