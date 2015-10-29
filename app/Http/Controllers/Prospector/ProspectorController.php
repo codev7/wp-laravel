@@ -137,7 +137,7 @@ class ProspectorController extends Controller
             $company->sales_rep_id = Input::get('sales_rep_id');
         }
 
-        Flash::success('<a href="'. route('company', ['id' => $company->id]) .'">'.$company->name .'</a> has been updated.');
+        \Flash::success('<a href="'. route('prospector.company', ['id' => $company->id]) .'">'.$company->name .'</a> has been updated.');
 
         $company->save();
 

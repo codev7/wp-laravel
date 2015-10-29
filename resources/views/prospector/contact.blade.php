@@ -5,9 +5,9 @@
     <h3 class="hr-divider-content hr-divider-heading">Contact Info</h3>
 </div>
 <ol class="breadcrumb">
-    <li><a href="{{ route('prospects.dashboard') }}">Dashboard</a></li>
-    <li><a href="{{ route('companies') }}">Companies</a></li>
-    <li ><a href="{{ route('company', ['id' => $contact->company_id]) }}">{{ $company->name }}</a></li>
+    <li><a href="{{ route('prospector.dashboard') }}">Dashboard</a></li>
+    <li><a href="{{ route('prospector.companies') }}">Companies</a></li>
+    <li ><a href="{{ route('prospector.company', ['id' => $contact->company_id]) }}">{{ $company->name }}</a></li>
     <li class="active" style="color: black">{{ $contact->email }}</li>
 </ol>
 
