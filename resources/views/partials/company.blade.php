@@ -5,6 +5,7 @@
     <hr class="m-t m-b p-a-0" />
 
     <form action="{{ route('prospector.update-company', ['id' => $company->id]) }}" method="post">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="form-group">
             <label>Status</label>
             <select name="status" class="custom-select custom-select-sm form-control">{!! get_status_options($company->status) !!}</select>
@@ -19,6 +20,7 @@
     <div class="form-group m-t">
         <label>Company Type</label>
         <select name="type" class="custom-select custom-select-sm form-control">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
 
             @if($company->type == null)
             <option value="">Not selected</option>
