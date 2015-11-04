@@ -9,7 +9,7 @@ use CMV\Models\Prospector\Contact;
 use CMV\Models\Prospector\Company;
 use CMV\User;
 
-class ImportPersonNotesFromPipelineCommand extends Command
+class ImportDataFromPipelineDeals extends Command
 {
     /**
      * The name and signature of the console command.
