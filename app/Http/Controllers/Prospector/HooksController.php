@@ -6,12 +6,12 @@ use CMV\Http\Requests;
 use CMV\Http\Controllers\Controller;
 
 /**
- * @Controller(prefix="prospector")
+ * @Controller(prefix="prospector/webhook")
  */
 class HooksController extends Controller
 {
     /**
-     * @Post("hook/bcc")
+     * @Post("bcc")
      * @return Response
      */
     public function contextIoBccWebHook()
