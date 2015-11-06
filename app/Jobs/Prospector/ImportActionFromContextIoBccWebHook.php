@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use CMV\Models\Prospector\Activity;
 use CMV\Models\Prospector\Contact;
 use CMV\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, ShouldQueue
@@ -54,22 +55,22 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
         $rep = User::where(['email' => $from['email']])->first();
 
         if(!$rep) {
-            $this->error("Sales rep with email {$from['email']} not found.");
+            Log::error("Sales rep with email {$from['email']} not found.");
             return;
         }
 
-        $this->info("got email from {$rep->email}");
+        Log::info("got email from {$rep->email}");
         foreach($email['addresses']['to'] as $to) {
             $contact = Contact::where(['email' => $to['email']])->first();
             if(!$contact) {
-                $this->error("Contact with email {$to['email']} not found");
+                Log::error("Contact with email {$to['email']} not found");
                 Mail::send('emails.contact-not-found', ['email' => $to['email']], function($message) use ($rep)
                 {
                     $message->to($rep->email, $rep->name)->subject("Contact not found");
                 });
                 continue;
             } else {
-                $this->info("Log activity for Contact {$contact->email}");
+                Log::info("Log activity for Contact {$contact->email}");
                 $emailBody = current($email['bodies']);
 
                 $activity = new Activity();
