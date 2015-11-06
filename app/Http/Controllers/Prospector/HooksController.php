@@ -3,7 +3,7 @@
 namespace CMV\Http\Controllers\Prospector;
 
 use CMV\Http\Requests;
-use CMV\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 /**
  * @Controller(prefix="prospector/webhook")
