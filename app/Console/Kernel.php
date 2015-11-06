@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
         \CMV\Console\Commands\Inspire::class,
         \CMV\Console\Commands\ScrapeAwwwards::class,
         \CMV\Console\Commands\Prospector\ImportCompaniesAndContactsFromCSV::class,
-        \CMV\Console\Commands\ImportPersonNotesFromPipelineCommand::class,
+        \CMV\Console\Commands\Prospector\ImportDataFromPipelineDeals::class
     ];
 
     /**
