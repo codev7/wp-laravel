@@ -42,7 +42,8 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
         $contextIO = new \ContextIO(env('CONTEXT_IO_API_KEY'), env('CONTEXT_IO_API_SECRET'));
         $accountId = $this->message['account_id'];
         $messageId = $this->message['message_data']['message_id'];
-
+        Log::info("working with message #{$messageId}");
+        
         $params = [
             'label' => 0,
             'folder' => 'Inbox',
