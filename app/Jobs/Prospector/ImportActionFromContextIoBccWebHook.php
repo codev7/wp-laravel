@@ -42,12 +42,13 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
         $contextIO = new \ContextIO(env('CONTEXT_IO_API_KEY'), env('CONTEXT_IO_API_SECRET'));
         $accountId = $this->message['account_id'];
         $messageId = $this->message['message_data']['message_id'];
-        Log::info("working with message #{$messageId}");
-        
+        Log::info("Working with message {$messageId}");
+
         $params = [
             'label' => 0,
             'folder' => 'Inbox',
-            'message_id' => $messageId
+            'message_id' => $messageId,
+            'include_body' => 1
         ];
 
         $email = $contextIO->getMessage($accountId, $params)->getData();
@@ -60,7 +61,7 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
             return;
         }
 
-        Log::info("got email from {$rep->email}");
+        Log::info("Got email from {$rep->email}");
         foreach($email['addresses']['to'] as $to) {
             $contact = Contact::where(['email' => $to['email']])->first();
             if(!$contact) {
