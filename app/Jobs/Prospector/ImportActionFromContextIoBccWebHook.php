@@ -1,8 +1,8 @@
 <?php
 
-namespace CMV\Console\Commands\Prospector;
+namespace CMV\Jobs\Prospector;
 
-use Illuminate\Console\Command;
+use CMV\Jobs\Job;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -12,23 +12,9 @@ use CMV\Models\Prospector\Contact;
 use CMV\User;
 use Illuminate\Support\Facades\Mail;
 
-class ImportActionFromContextIoBccWebHook extends Command implements SelfHandling, ShouldQueue
+class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'context-io:webhook';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Import data from context-io webhook message.';
 
     /**
      * @var message from web hook

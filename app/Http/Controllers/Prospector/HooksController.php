@@ -2,16 +2,18 @@
 
 namespace CMV\Http\Controllers\Prospector;
 
-use CMV\Console\Commands\Prospector\ImportActionFromContextIoBccWebHook;
+use CMV\Jobs\Prospector\ImportActionFromContextIoBccWebHook;
 use CMV\Http\Requests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Queue;
 
 /**
  * @Controller(prefix="prospector/webhook")
  */
 class HooksController extends Controller
 {
+    use DispatchesJobs;
+
     /**
      * @Post("bcc")
      * @return Response
@@ -20,7 +22,7 @@ class HooksController extends Controller
     {
         $request = request()->all();
         if ($request['signature'] == hash_hmac('sha256', $request['timestamp'].$request['token'], env('CONTEXT_IO_API_SECRET'))) {
-            Queue::push(new ImportActionFromContextIoBccWebHook($request));
+            $this->dispatch(new ImportActionFromContextIoBccWebHook($request));
         } else {
             return response('Unauthorized.', 401);
         }
