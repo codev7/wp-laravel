@@ -7,6 +7,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use CMV\Models\Prospector\Activity;
+use CMV\Models\Prospector\Contact;
+use CMV\User;
+use Illuminate\Support\Facades\Mail;
 
 class ImportActionFromContextIoBccWebHook extends Command implements SelfHandling, ShouldQueue
 {
