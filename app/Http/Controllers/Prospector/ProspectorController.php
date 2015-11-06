@@ -154,5 +154,4 @@ class ProspectorController extends Controller
 
         return view('prospector/contact')->with('contact', $contact)->with('company', $contact->company)->with('activities', $contact->activities()->orderBy('created_at', 'desc')->get());
     }
-
 }   

@@ -26,7 +26,8 @@
         "ext-curl": "*",
         "shuber/curl": "dev-master",
         "league/csv": "~6.0",
-        "gentle/bitbucket-api": "^0.7.0"
+        "gentle/bitbucket-api": "^0.7.0",
+        "contextio/php-contextio-lite": "1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
