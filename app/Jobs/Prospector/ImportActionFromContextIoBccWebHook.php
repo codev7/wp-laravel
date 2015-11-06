@@ -23,7 +23,7 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
     protected $message;
 
     /**
-     * Create a new command instance.
+     * Create a new job instance.
      *
      * @param array $message
      */
@@ -33,25 +33,24 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
     }
 
     /**
-     * Execute the command.
+     * Execute the job.
      *
      * @return void
      */
     public function handle()
     {
         $contextIO = new \ContextIO(env('CONTEXT_IO_API_KEY'), env('CONTEXT_IO_API_SECRET'));
-        $accountId = $this->message['account_id'];
         $messageId = $this->message['message_data']['message_id'];
         Log::info("Working with message {$messageId}");
 
         $params = [
-            'label' => 0,
+            'label' => 0, //which means ANY label
             'folder' => 'Inbox',
             'message_id' => $messageId,
             'include_body' => 1
         ];
 
-        $email = $contextIO->getMessage($accountId, $params)->getData();
+        $email = $contextIO->getMessage($this->message['account_id'], $params)->getData();
 
         $from = current($email['addresses']['from']);
         $rep = User::where(['email' => $from['email']])->first();
@@ -73,6 +72,10 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
                 continue;
             } else {
                 Log::info("Log activity for Contact {$contact->email}");
+
+                // context.io returns two elements in 'bodies' array
+                // first element (which we use) is a text\plain version of the message
+                // second element is a text\html version, which would look weird as an Activity content
                 $emailBody = current($email['bodies']);
 
                 $activity = new Activity();
