@@ -13,6 +13,20 @@ class ImportActionFromContextIoBccWebHook extends Command implements SelfHandlin
     use InteractsWithQueue, SerializesModels;
 
     /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'context-io:webhook';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Import data from context-io webhook message.';
+
+    /**
      * @var message from web hook
      */
     protected $message;
