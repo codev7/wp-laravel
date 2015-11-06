@@ -155,4 +155,15 @@ class ProspectorController extends Controller
         return view('prospector/contact')->with('contact', $contact)->with('company', $contact->company)->with('activities', $contact->activities()->orderBy('created_at', 'desc')->get());
     }
 
+    /**
+     * @Post("hook/bcc")
+     * @return Response
+     */
+    public function contextIoBccWebHook()
+    {
+        $request = request()->all();
+        \Log::info(json_encode($request));
+        return 'ok';
+    }
+
 }   
