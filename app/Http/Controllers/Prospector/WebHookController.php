@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 /**
  * @Controller(prefix="prospector/webhook")
  */
-class HooksController extends Controller
+class WebHookController extends Controller
 {
     use DispatchesJobs;
 
