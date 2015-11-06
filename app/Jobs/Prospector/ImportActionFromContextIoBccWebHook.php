@@ -28,7 +28,6 @@ class ImportActionFromContextIoBccWebHook extends Job implements SelfHandling, S
      */
     public function __construct(array $message)
     {
-        parent::__construct();
         $this->message = $message;
     }
 
