@@ -4,7 +4,17 @@
     "gulp": "^3.8.8"
   },
   "dependencies": {
+    "bugsnag": "^1.6.6",
+    "jquery": "^2.1.4",
+    "jquery-match-height": "^0.6.0",
+    "jquery-ui": "^1.10.5",
     "laravel-elixir": "^3.0.0",
-    "laravel-spark": "^1.0.0"
+    "laravel-spark": "^1.0.0",
+    "modernizr": "^3.2.0",
+    "moment": "^2.10.6",
+    "placeholder": "^1.0.2",
+    "slick-carousel": "^1.5.8",
+    "underscore": "^1.8.3",
+    "vue": "^1.0.7"
   }
 }
