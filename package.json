@@ -9,6 +9,9 @@
     "duplexer2": "^0.1.4",
     "findup-sync": "^0.3.0",
     "is-relative": "^0.2.1",
-    "laravel-elixir": "^3.0.0"
+    "laravel-elixir": "^3.0.0",
+    "moment": "^2.10.6",
+    "placeholder": "^1.0.2",
+    "bugsnag": "^1.6.6"
   }
 }

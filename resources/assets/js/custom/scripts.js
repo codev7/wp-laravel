@@ -1,17 +1,12 @@
 $(document).ready(function(){
 	
-	customForm.lib.domReady(function(){
-		
-		customForm.customForms.replaceAll();
-	
-	});
-	
 	$('.gallery').each(function() {
 		var $el = $(this).find('.gallery-nav').children(),
 			width = ~~($(this).find('.gallery-nav').outerWidth() / $el.length);
 
 		$el.css('width', width);
 	});
+
 	$('.gallery').slick({
 		arrows: false,
 		dots: true,
@@ -63,94 +58,6 @@ $(document).ready(function(){
 			$(this).css('background-image', 'url(' + $el.attr('src') + ')');
 		}
 	});
-	
-	(function() {
-		var $parent = $('.visual').find('.yt-block'),
-			$logo = $parent.find('.logo'),
-			$corner = $parent.find('.corner'),
-			$point1 = $parent.find('.point-01'),
-			$point2 = $parent.find('.point-02'),
-			$glass = $parent.find('.glass'),
-			$light = $parent.find('.light'),
-			$devices = $parent.find('.devices'),
-			$state = $parent.find('.state'),
-			$btn = $parent.find('.btn-restart'),
-			activeClass = 'animated',
-			arr = ['ind-white', 'ind-blue', 'ind-green'],
-			arr2 = ['ind-red', 'ind-yellow', 'ind-black'],
-			arr3 = ['time1', 'time2', 'time3'];
-		
-		$devices.each(function() {
-			var $el = $(this).find('img');
-			if ($el.length > 0) {
-				$(this).find('.device').find('.img').append($el.clone());
-			}
-		});
-		$light.find('.ind').each(function() {
-			$(this).addClass(arr[getRandomInt(0,2)]);
-			$(this).addClass(arr2[getRandomInt(0,2)]);
-			$(this).addClass(arr3[getRandomInt(0,2)]);
-		});
-		function getRandomInt(min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
-		function startMove() {
-			setTimeout(function() {
-				$logo.addClass(activeClass);
-			}, 2000);
-			setTimeout(function() {
-				$logo.fadeOut();
-				$corner.addClass(activeClass);
-			}, 3000);
-			setTimeout(function() {
-				$corner.removeClass(activeClass);
-			}, 3500);
-			setTimeout(function() {
-				$point1.addClass(activeClass);
-			}, 4500);
-			setTimeout(function() {
-				$point1.removeClass(activeClass);
-			}, 5000);
-			setTimeout(function() {
-				$glass.addClass(activeClass);
-			}, 6000);
-			setTimeout(function() {
-				$glass.removeClass(activeClass);
-			}, 6500);
-			setTimeout(function() {
-				$light.addClass(activeClass);
-			}, 7500);
-			setTimeout(function() {
-				$light.removeClass(activeClass);
-			}, 10000);
-			setTimeout(function() {
-				$point2.addClass(activeClass);
-			}, 11000);
-			setTimeout(function() {
-				$point2.removeClass(activeClass);
-			}, 11500);
-			setTimeout(function() {
-				$devices.addClass(activeClass);
-			}, 12500);
-			setTimeout(function() {
-				$devices.removeClass(activeClass);
-			}, 15500);
-			setTimeout(function() {
-				$state.addClass(activeClass);
-			}, 16500);
-		}
-		//startMove();
-		/*$btn.on('click', function() {
-			if ($(this).next().hasClass(activeClass)) {
-				$parent.find('.' + activeClass).removeClass(activeClass);
-				setTimeout(function() {
-					$logo.fadeIn(300);
-					startMove();
-				}, 1000);
-			}
-			return false;
-		});*/
-	})();
 
 	$('.btn-to-next').click(function(){
 		$('html,body').animate({

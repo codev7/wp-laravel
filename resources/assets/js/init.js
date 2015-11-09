@@ -1,13 +1,14 @@
 var controllers = {
-    'quote/form': require('./Vue/quote'),
-    'portfolio/items': require('./Vue/portfolio'),
-    'order/concierge': require('./Vue/concierge')
+    'job-application': require('./controllers/job-application'),
+    'portfolio': require('./controllers/portfolio')
 };
+console.log(controllers);
+var Bugsnag = require('bugsnag');
 
 export default {
     controllers() {
-        $('[data-controller]').each((el) => {
-            let controller = controllers[$(el).attr('data-controller')];
+        $('[data-controller]').each((i, el) => {
+            var controller = controllers[$(el).attr('data-controller')];
             controller.$mount(el);
         });
     },

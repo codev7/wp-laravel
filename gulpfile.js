@@ -17,25 +17,14 @@ elixir(function(mix) {
     mix.less('cmv-marketing.less','public/css/codemyviews.css');
 
     mix.scripts([
-        //'plugins/modernizr.js',
+        'plugins/modernizr.js',
         'plugins/jquery.js',
         'plugins/jquery.pjax.js',
-        'plugins/bugsnag.js',
         'plugins/vue.js',
-        'plugins/custom-form.js',
-        'plugins/jquery.waypoints.js',
         'plugins/*.js',
         'custom/cmv-helpers.js',
-        'custom/validation.js',
         'custom/*.js'
     ], 'public/js/vendor.js');
-
-    //mix.scripts([
-    //    'custom/cmv-helpers.js',
-    //    'custom/validation.js',
-    //    'custom',
-    //    'Vue'
-    //], 'public/js/cmv-marketing.js');
 
     mix.browserify('codemyviews.js','public/js/cmv-js.js');
 
