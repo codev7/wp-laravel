@@ -8,7 +8,7 @@
 @section('content')
 
 <section class="quote-area">
-    <div class="container" id="quote-form">
+    <div class="container" id="quote-form" controller="quote/form">
         <div class="row">
             <div class="col-md-6">
 

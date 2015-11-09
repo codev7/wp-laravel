@@ -124,9 +124,11 @@
 </div><!-- /wrapper -->
     
 @if(isProduction())
-    <script src="{{ elixir('js/cmv-marketing.js') }}"></script>
+    <script src="{{ elixir('js/vendor.js') }}"></script>
+    <script src="{{ elixir('js/cmv-js.js') }}"></script>
 @else
-    <script src="{{ asset('js/cmv-marketing.js') }}"></script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/cmv-js.js') }}"></script>
 @endif
 @include('common/footer')
 </body>

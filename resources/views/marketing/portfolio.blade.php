@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div id="portfolio-items">
+                        <div id="portfolio-items" data-controller="portfolio/items">
                             <div id="single-portfolio-item">
 
                                 <div

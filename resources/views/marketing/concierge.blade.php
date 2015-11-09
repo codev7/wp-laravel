@@ -267,7 +267,7 @@
 		</div><!-- container-->
 	</section><!-- /service-overview -->
 
-	<div id="order-concierge">
+	<div id="order-concierge" controller="order/concierge">
 		<section class="call-area">
 		    <div class="container" >
 

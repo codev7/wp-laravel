@@ -18,7 +18,7 @@
 
 @section('content')
 	<section class="quote-area">
-		<div class="container" id="quote-form">
+		<div class="container" id="quote-form" controller="quote/form">
 			<div class="row">
 				<div class="col-md-6">
 					<header class="head-block">
@@ -39,8 +39,7 @@
 				<div class="col-md-6">
 					<div class="quote-form clearfix">
 						<form method="post"
-                        v-on="submit: onSubmitForm"
-                        id="form-quote">
+                        v-on="submit: onSubmitForm" id="form-quote">
 
 
 	                        <div v-if="step == 1">
@@ -53,10 +52,7 @@
                                     v-model="newQuote.project_type">
                                     <option value="">Select a Project Type</option>
                                     @foreach(quoteFieldsProjectFields() as $option)
-                                        
-
                                         <option value="{{ $option }}">{{ $option }}</option>
-
                                     @endforeach
                                 </select>
 								</div>

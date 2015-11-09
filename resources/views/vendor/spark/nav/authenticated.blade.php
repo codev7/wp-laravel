@@ -39,23 +39,23 @@
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.single') }}">
-                    <a href="{{ route('project.single', ['slug' => $project->slug]) }}">Project Dashboard</a>
+                    <a data-pjax href="{{ route('project.single', ['slug' => $project->slug]) }}">Project Dashboard</a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.briefs') }}">
-                    <a href="{{ route('project.briefs', ['slug' => $project->slug]) }}">Briefs</a>
+                    <a data-pjax href="{{ route('project.briefs', ['slug' => $project->slug]) }}">Briefs</a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.files') }}">
-                    <a href="{{ route('project.files', ['slug' => $project->slug]) }}">Files</a>
+                    <a data-pjax href="{{ route('project.files', ['slug' => $project->slug]) }}">Files</a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.invoices') }}">
-                    <a href="{{ route('project.invoices', ['slug' => $project->slug]) }}">Invoices</a>
+                    <a data-pjax href="{{ route('project.invoices', ['slug' => $project->slug]) }}">Invoices</a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.todos') }}">
-                    <a href="{{ route('project.todos', ['slug' => $project->slug]) }}">To Do's <span class="badge">15</span></a>
+                    <a data-pjax href="{{ route('project.todos', ['slug' => $project->slug]) }}">To Do's <span class="badge">15</span></a>
                 </li>
 				@endif
 
