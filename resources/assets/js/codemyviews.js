@@ -1,11 +1,11 @@
 var init = require('./init');
 
-require('laravel-spark/core/dependencies');
+require('./npm/laravel-spark/core/dependencies');
 
 if ($('#spark-app').length > 0) {
-	require('./spark/components')
+	require('./npm/laravel-spark/core/components')
 
-	new Vue(require('laravel-spark'));
+	new Vue(require('./npm/laravel-spark/spark.js'));
 }
 
 init.bugsnag();

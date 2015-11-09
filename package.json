@@ -9,7 +9,6 @@
     "duplexer2": "^0.1.4",
     "findup-sync": "^0.3.0",
     "is-relative": "^0.2.1",
-    "laravel-elixir": "^3.0.0",
-    "laravel-spark": "^1.0.12"
+    "laravel-elixir": "^3.0.0"
   }
 }
