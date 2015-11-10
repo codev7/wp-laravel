@@ -24,43 +24,28 @@ class Message extends Model
 
     protected $columns = [
         'id',
-        'reference_id',
-        'reference_type', //concierge_site || project
+        'thread_id',
         'user_id',
-        'parent_message_id', //null if not a child message
-        'comment', //text field w/ markdown allowed
-        'todo_reference_id', //null if no bug is referenced
+        'content', //text field w/ markdown allowed
+//        'todo_reference_id', //null if no bug is referenced
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
 
-    public function project()
-    {
-        return $this->belongsTo('CMV\Models\PM\Project','reference_id');
-    }
-
-    public function conciergeSite()
-    {
-        return $this->belongsTo('CMV\Models\PM\ConciergeSite','reference_id');
-    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('CMV\User');
     }
 
-    public function children()
-    {
-        return $this->hasMany('CMV\Models\PM\Message','parent_message_id');
-    }
-
-    public function toDo()
-    {
-        return $this->belongsTo('CMV\Models\PM\ToDo','todo_reference_id');
-    }
-
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeRandom($query)
     {
         return $query->orderBy(\DB::raw('RAND()'));

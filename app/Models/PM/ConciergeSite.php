@@ -65,9 +65,10 @@ class ConciergeSite extends Model
         return $this->hasMany('CMV\Models\PM\ToDo','reference_id');
     }
 
-    public function messages()
+    public function threads()
     {
-        return $this->hasMany('CMV\Models\PM\Message','reference_id');
+        return $this->hasMany('CMV\Models\PM\Thread','reference_id')
+            ->where('reference_type', Thread::REF_CONCIERGE);
     }
 
 

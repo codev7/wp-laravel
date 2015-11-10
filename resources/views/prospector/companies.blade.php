@@ -70,7 +70,7 @@
 
                         @else
                         <tr>
-                            <td colspan"5">No companies.</td>
+                            <td colspan="5">No companies.</td>
                         </tr>
                         @endif
                     </tbody>
