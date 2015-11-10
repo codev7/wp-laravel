@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9">
+    <div class="col-md-9" data-controller="project/briefs">
     
         
 

@@ -1,4 +1,4 @@
-var controller = new Vue({
+export default Vue.extend({
 
     /*
      * Bootstrap the component. Load the initial data.
@@ -63,5 +63,3 @@ var controller = new Vue({
         }
     }
 });
-
-export default controller;

@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-6">
+    <div class="col-md-6" data-controller="project/dashboard">
         <ul class="list-group media-list media-list-stream">
 
             <li class="media list-group-item p-a">
