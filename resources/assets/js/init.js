@@ -29,7 +29,6 @@ var Bugsnag = require('bugsnag');
 
 export default {
     controllers() {
-        console.log('3');
         mountControllers("[data-controller]");
     },
     bugsnag() {
