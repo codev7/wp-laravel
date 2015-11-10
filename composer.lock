@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8fdee778ee01c6b6be0db3b2f0012450",
-    "content-hash": "2b0f9abcdcde1c5dbe8dd3fb4c108f57",
+    "hash": "31cb8c16623bb051127c4c64c2e25e3f",
+    "content-hash": "5bf797c75a1b1177d674ecfe5c4da42c",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -522,16 +522,16 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "v1.0.1",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604"
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/0bcb2e79d8571787f18b7eb036ed3d004908e604",
-                "reference": "0bcb2e79d8571787f18b7eb036ed3d004908e604",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/90b2128806bfde671b6952ab8bea493942c1fdae",
+                "reference": "90b2128806bfde671b6952ab8bea493942c1fdae",
                 "shasum": ""
             },
             "require": {
@@ -543,7 +543,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -585,7 +585,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2014-12-20 21:24:13"
+            "time": "2015-11-06 14:35:42"
         },
         {
             "name": "doctrine/lexer",
@@ -734,16 +734,16 @@
         },
         {
             "name": "gentle/bitbucket-api",
-            "version": "0.7.0",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gentlero/bitbucket-api.git",
-                "reference": "93b554f942c5bf38b54024be80f917e921f548a3"
+                "reference": "c3de78a5a5939d494cda4293ffae9db47b8d5de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gentlero/bitbucket-api/zipball/93b554f942c5bf38b54024be80f917e921f548a3",
-                "reference": "93b554f942c5bf38b54024be80f917e921f548a3",
+                "url": "https://api.github.com/repos/gentlero/bitbucket-api/zipball/c3de78a5a5939d494cda4293ffae9db47b8d5de9",
+                "reference": "c3de78a5a5939d494cda4293ffae9db47b8d5de9",
                 "shasum": ""
             },
             "require": {
@@ -784,7 +784,7 @@
                 "api",
                 "bitbucket"
             ],
-            "time": "2015-09-08 05:28:45"
+            "time": "2015-11-07 13:31:32"
         },
         {
             "name": "graham-campbell/htmlmin",
@@ -1611,16 +1611,16 @@
         },
         {
             "name": "laravel/spark",
-            "version": "v0.1.2",
+            "version": "dev-vue",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/spark.git",
-                "reference": "26eca8d0774c35f68bdf64f792e3fbc59193c5de"
+                "reference": "0fac003f0836a31d9bfd2c4203ab38380d3c6c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/spark/zipball/26eca8d0774c35f68bdf64f792e3fbc59193c5de",
-                "reference": "26eca8d0774c35f68bdf64f792e3fbc59193c5de",
+                "url": "https://api.github.com/repos/laravel/spark/zipball/0fac003f0836a31d9bfd2c4203ab38380d3c6c76",
+                "reference": "0fac003f0836a31d9bfd2c4203ab38380d3c6c76",
                 "shasum": ""
             },
             "require": {
@@ -1657,7 +1657,7 @@
                 "scaffolding",
                 "stripe"
             ],
-            "time": "2015-10-23 02:58:32"
+            "time": "2015-11-09 23:10:33"
         },
         {
             "name": "laravelcollective/annotations",
@@ -1717,16 +1717,16 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.1.6",
+            "version": "v5.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "8b7c357e78b8fb6a2e48377cf2441441aac6dd1e"
+                "reference": "5ad8377968ba3b4da91fc60ca98b2eef4df380fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/8b7c357e78b8fb6a2e48377cf2441441aac6dd1e",
-                "reference": "8b7c357e78b8fb6a2e48377cf2441441aac6dd1e",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/5ad8377968ba3b4da91fc60ca98b2eef4df380fc",
+                "reference": "5ad8377968ba3b4da91fc60ca98b2eef4df380fc",
                 "shasum": ""
             },
             "require": {
@@ -1763,7 +1763,7 @@
                     "email": "adam@laravelcollective.com"
                 }
             ],
-            "time": "2015-09-03 17:16:48"
+            "time": "2015-11-06 18:14:38"
         },
         {
             "name": "league/csv",
@@ -2316,20 +2316,23 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.0.10",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "2fa50aa2f17066fa74ba00d943e8cee1a98284af"
+                "reference": "19f765b66c6fbb56ee3b11bc16d52e38eebdc295"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/2fa50aa2f17066fa74ba00d943e8cee1a98284af",
-                "reference": "2fa50aa2f17066fa74ba00d943e8cee1a98284af",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/19f765b66c6fbb56ee3b11bc16d52e38eebdc295",
+                "reference": "19f765b66c6fbb56ee3b11bc16d52e38eebdc295",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
             },
             "suggest": {
                 "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
@@ -2357,7 +2360,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-10-23 13:21:37"
+            "time": "2015-11-10 00:45:41"
         },
         {
             "name": "pda/pheanstalk",
@@ -2697,16 +2700,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "2.8.0",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "27120b98f84f6d0b9f04b9e1dc206b275815ffb3"
+                "reference": "03dd0eeab50c3a1da43baaae14df34ef703c8ce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/27120b98f84f6d0b9f04b9e1dc206b275815ffb3",
-                "reference": "27120b98f84f6d0b9f04b9e1dc206b275815ffb3",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/03dd0eeab50c3a1da43baaae14df34ef703c8ce6",
+                "reference": "03dd0eeab50c3a1da43baaae14df34ef703c8ce6",
                 "shasum": ""
             },
             "require": {
@@ -2750,7 +2753,7 @@
                 "mysql",
                 "spatie"
             ],
-            "time": "2015-10-29 19:47:01"
+            "time": "2015-11-05 19:12:56"
         },
         {
             "name": "stripe/stripe-php",
@@ -4850,6 +4853,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel/spark": 20,
         "aws/aws-sdk-php-laravel": 10,
         "shuber/curl": 20
     },

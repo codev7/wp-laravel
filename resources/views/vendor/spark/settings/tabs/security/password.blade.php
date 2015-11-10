@@ -3,42 +3,39 @@
 		<div class="panel-heading">Update Password</div>
 
 		<div class="panel-body">
-			<spark-errors form="@{{ updatePasswordForm }}"></spark-errors>
+            <spark-error-alert :form="updatePasswordForm"></spark-error-alert>
 
-			<div class="alert alert-success" v-if="updatePasswordForm.updated">
+			<div class="alert alert-success" v-if="updatePasswordForm.successful">
 				<strong>Great!</strong> Your password was successfully updated.
 			</div>
 
 			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label class="col-md-3 control-label">Current Password</label>
-					<div class="col-md-6">
-						<input type="password" class="form-control" name="old_password" v-model="updatePasswordForm.old_password">
-					</div>
-				</div>
+                <spark-password :display="'Current Password'"
+                                :form="updatePasswordForm"
+                                :name="'current_password'"
+                                :input.sync="updatePasswordForm.current_password">
+                </spark-password>
 
-				<div class="form-group">
-					<label class="col-md-3 control-label">New Password</label>
-					<div class="col-md-6">
-						<input type="password" class="form-control" name="password" v-model="updatePasswordForm.password">
-					</div>
-				</div>
+                <spark-password :display="'New Password'"
+                                :form="updatePasswordForm"
+                                :name="'password'"
+                                :input.sync="updatePasswordForm.password">
+                </spark-password>
 
-				<div class="form-group">
-					<label class="col-md-3 control-label">Confirm Password</label>
-					<div class="col-md-6">
-						<input type="password" class="form-control" name="password_confirmation" v-model="updatePasswordForm.password_confirmation">
-					</div>
-				</div>
+                <spark-password :display="'Confirm Password'"
+                                :form="updatePasswordForm"
+                                :name="'password_confirmation'"
+                                :input.sync="updatePasswordForm.password_confirmation">
+                </spark-password>
 
 				<div class="form-group">
 					<div class="col-md-6 col-md-offset-3">
-						<button type="submit" class="btn btn-primary" v-on="click: updatePassword">
-							<span v-if="updatePasswordForm.updating">
+						<button type="submit" class="btn btn-primary" @click.prevent="updatePassword" :disabled="updatePasswordForm.busy">
+							<span v-if="updatePasswordForm.busy">
 								<i class="fa fa-btn fa-spinner fa-spin"></i> Updating
 							</span>
 
-							<span v-if=" ! updatePasswordForm.updating">
+							<span v-else>
 								<i class="fa fa-btn fa-save"></i> Update
 							</span>
 						</button>

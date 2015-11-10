@@ -1,9 +1,9 @@
 <!-- Registration -> Individual Plan Display Block -->
-<div class="panel panel-default spark-plan">
+<div class="panel panel-default spark-plan spark-plan-@{{ plan.id }}">
 	<div class="panel-heading text-center">@{{ plan.name }}</div>
 	<div class="panel-body">
 		<ul>
-			<li v-repeat="feature : plan.features">@{{ feature }}</li>
+			<li v-for="feature in plan.features">@{{ feature }}</li>
 		</ul>
 
 		<hr>
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 
-			<div v-if=" ! currentCoupon">
+			<div v-else>
 				@{{ plan.currencySymbol }}@{{ plan.price }}
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 		<hr>
 
 		<div class="spark-plan-subscribe-button-container">
-			<button class="btn btn-primary spark-plan-subscribe-button"  v-on="click: selectPlan(plan)">
+			<button class="btn btn-primary spark-plan-subscribe-button"  @click.prevent="selectPlan(plan)">
 				<span v-if=" ! plan.trialDays && plan.price == 0">
 					Register
 				</span>

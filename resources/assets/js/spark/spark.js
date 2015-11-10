@@ -4,6 +4,12 @@
 require('./core/components');
 
 /**
+ * Load the Spark form utilities.
+ */
+require('./core/form-utils');
+require('./core/form-fields');
+
+/**
  * Export the Spark application.
  */
 module.exports = {
@@ -36,6 +42,8 @@ module.exports = {
          */
         updateUser: function () {
             this.getUser();
+
+            return true;
         },
 
 
@@ -44,14 +52,18 @@ module.exports = {
          */
         updateTeams: function () {
             this.getTeams();
+
+            return true;
         },
 
 
         /**
          * Receive an updated team list from a child component.
          */
-        teamsUpdated: function (teams) {
-            this.$broadcast('teamsRetrieved', teams);
+        updateTeams: function () {
+            this.getTeams();
+
+            return true;
         }
     },
 

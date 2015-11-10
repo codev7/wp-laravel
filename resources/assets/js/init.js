@@ -2,7 +2,6 @@ var controllers = {
     'job-application': require('./controllers/job-application'),
     'portfolio': require('./controllers/portfolio')
 };
-console.log(controllers);
 var Bugsnag = require('bugsnag');
 
 export default {

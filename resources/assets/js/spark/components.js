@@ -13,9 +13,9 @@
  | require your own custom-built components to manage these screens.
  */
 
-require('laravel-spark/settings/dashboard/profile')
-require('laravel-spark/settings/dashboard/security/password')
-require('laravel-spark/settings/dashboard/security/two-factor')
+require('./settings/dashboard/profile')
+require('./settings/dashboard/security/password')
+require('./settings/dashboard/security/two-factor')
 
-require('laravel-spark/settings/team/owner')
-require('laravel-spark/settings/team/membership/edit-team-member')
+require('./settings/team/owner')
+require('./settings/team/membership/edit-team-member')

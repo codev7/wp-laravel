@@ -1,6 +1,6 @@
 @extends('spark::layouts.spark')
 
-
+<!-- Scripts -->
 @section('scripts')
 	<script src="https://js.stripe.com/v2/"></script>
 
@@ -9,7 +9,7 @@
 	</script>
 @append
 
-
+<!-- Main Content -->
 @section('content')
 <!-- Your Settings Dashboard -->
 <spark-settings-screen inline-template>
@@ -28,7 +28,7 @@
 								@foreach (Spark::settingsTabs()->displayable() as $tab)
 									<li role="presentation"{!! $tab->key === $activeTab ? ' class="active"' : '' !!}>
 										<a href="#{{ $tab->key }}" aria-controls="{{ $tab->key }}" role="tab" data-toggle="tab">
-											<i class="fa fa-btn fa-fw {{ $tab->icon }}"></i>&nbsp;{{ $tab->name }}</span>
+											<i class="fa fa-btn fa-fw {{ $tab->icon }}"></i>&nbsp;{{ $tab->name }}
 										</a>
 									</li>
 								@endforeach

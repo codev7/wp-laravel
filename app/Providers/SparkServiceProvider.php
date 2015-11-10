@@ -45,7 +45,7 @@ class SparkServiceProvider extends ServiceProvider
     {
         Spark::configure([
             'models' => [
-                'teams' => CMV\Team::class,
+                'teams' => \CMV\Team::class,
             ]
         ]);
 

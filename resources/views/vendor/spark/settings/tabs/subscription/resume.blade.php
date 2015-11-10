@@ -8,14 +8,14 @@
 			extra cost until the end of the billing period.
 		</div>
 
-		<spark-errors form="@{{ resumeSubscriptionForm }}"></spark-errors>
+		<spark-errors :form="resumeSubscriptionForm"></spark-errors>
 
-		<button class="btn btn-primary" v-on="click: resumeSubscription" v-attr="disabled: resumeSubscriptionForm.resuming">
-			<span v-if="resumeSubscriptionForm.resuming">
+		<button class="btn btn-primary" @click.prevent="resumeSubscription" :disabled="resumeSubscriptionForm.busy">
+			<span v-if="resumeSubscriptionForm.busy">
 				<i class="fa fa-btn fa-spinner fa-spin"></i>Resuming
 			</span>
 
-			<span v-if=" ! resumeSubscriptionForm.resuming">
+			<span v-else>
 				<i class="fa fa-btn fa-clock-o"></i>Resume Subscription
 			</span>
 		</button>

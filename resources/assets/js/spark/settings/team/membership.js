@@ -17,12 +17,11 @@ Vue.component('spark-team-settings-membership-screen', {
             roles: [],
             leavingTeam: false,
 
-            sendInviteForm: {
-                email: '',
-                errors: [],
-                sending: false,
-                sent: false
-            }
+            editingTeamMember: null,
+
+            sendInviteForm: new SparkForm({
+                email: ''
+            })
         };
     },
 
@@ -32,7 +31,7 @@ Vue.component('spark-team-settings-membership-screen', {
          * Determine if all necessary data has been loaded.
          */
         everythingIsLoaded: function () {
-            return this.user && this.team;
+            return this.user && this.team && this.roles.length > 0;
         },
 
 
@@ -55,6 +54,8 @@ Vue.component('spark-team-settings-membership-screen', {
          */
         userRetrieved: function (user) {
             this.user = user;
+
+            return true;
         },
 
 
@@ -63,6 +64,8 @@ Vue.component('spark-team-settings-membership-screen', {
          */
         teamRetrieved: function (team) {
             this.team = team;
+
+            return true;
         },
 
 
@@ -71,6 +74,8 @@ Vue.component('spark-team-settings-membership-screen', {
          */
         rolesRetrieved: function (roles) {
             this.roles = roles;
+
+            return true;
         }
     },
 
@@ -79,24 +84,14 @@ Vue.component('spark-team-settings-membership-screen', {
         /*
          * Send an invitation to a new user.
          */
-        sendInvite: function (e) {
-            e.preventDefault();
+        sendInvite: function () {
+            var self = this;
 
-            this.sendInviteForm.errors = [];
-            this.sendInviteForm.sent = false;
-            this.sendInviteForm.sending = true;
+            Spark.post('/settings/teams/' + this.team.id + '/invitations', this.sendInviteForm)
+                .then(function () {
+                    self.$dispatch('updateTeam');
 
-            this.$http.post('/settings/teams/' + TEAM_ID + '/invitations', this.sendInviteForm)
-                .success(function (team) {
-                    this.$dispatch('teamUpdated', team);
-
-                    this.sendInviteForm.email = '';
-                    this.sendInviteForm.sent = true;
-                    this.sendInviteForm.sending = false;
-                })
-                .error(function (errors) {
-                    this.sendInviteForm.sending = false;
-                    Spark.setErrorsOnForm(this.sendInviteForm, errors);
+                    self.sendInviteForm.email = '';
                 });
         },
 
@@ -109,9 +104,9 @@ Vue.component('spark-team-settings-membership-screen', {
                 return i.id === invite.id;
             });
 
-            this.$http.delete('/settings/teams/' + TEAM_ID + '/invitations/' + invite.id)
-                .success(function (team) {
-                    this.$dispatch('teamUpdated', team);
+            this.$http.delete('/settings/teams/' + this.team.id + '/invitations/' + invite.id)
+                .success(function () {
+                    this.$dispatch('updateTeam');
                 });
         },
 
@@ -120,7 +115,9 @@ Vue.component('spark-team-settings-membership-screen', {
          * Edit an existing team member.
          */
         editTeamMember: function (member) {
-            this.$broadcast('teamMemberEditRequested', member);
+            this.editingTeamMember = member;
+
+            $('#modal-edit-team-member').modal('show');
         },
 
 
@@ -132,9 +129,9 @@ Vue.component('spark-team-settings-membership-screen', {
                 return u.id == teamMember.id;
             });
 
-            this.$http.delete('/settings/teams/' + TEAM_ID + '/members/' + teamMember.id)
-                .success(function (team) {
-                    this.$dispatch('teamUpdated', team);
+            this.$http.delete('/settings/teams/' + this.team.id + '/members/' + teamMember.id)
+                .success(function () {
+                    this.$dispatch('updateTeam');
                 });
         },
 
@@ -145,7 +142,7 @@ Vue.component('spark-team-settings-membership-screen', {
         leaveTeam: function () {
             this.leavingTeam = true;
 
-            this.$http.delete('/settings/teams/' + TEAM_ID + '/membership')
+            this.$http.delete('/settings/teams/' + this.team.id + '/membership')
                 .success(function () {
                     window.location = '/settings?tab=teams';
                 });

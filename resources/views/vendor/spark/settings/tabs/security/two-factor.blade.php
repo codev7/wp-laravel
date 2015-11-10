@@ -11,31 +11,29 @@
 						<a href="https://authy.com" target="_blank">Authy</a> application on your phone.
 					</div>
 
-					<spark-errors form="@{{ twoFactorForm }}"></spark-errors>
+            		<spark-error-alert :form="twoFactorForm"></spark-error-alert>
 
 					<form class="form-horizontal" role="form">
-						<div class="form-group">
-							<label class="col-md-3 control-label">Country Code</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="country_code" v-model="twoFactorForm.country_code" placeholder="1">
-							</div>
-						</div>
+		                <spark-text :display="'Country Code'"
+		                            :form="twoFactorForm"
+		                            :name="'country_code'"
+		                            :input.sync="twoFactorForm.country_code">
+		                </spark-text>
 
-						<div class="form-group">
-							<label class="col-md-3 control-label">Phone Number</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="phone_number" v-model="twoFactorForm.phone_number" placeholder="555-555-5555">
-							</div>
-						</div>
+		                <spark-text :display="'Phone Number'"
+		                            :form="twoFactorForm"
+		                            :name="'phone_number'"
+		                            :input.sync="twoFactorForm.phone_number">
+		                </spark-text>
 
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-3">
-								<button type="submit" class="btn btn-primary" v-on="click: enableTwoFactorAuth" v-attr="disabled: twoFactorForm.updating">
-									<span v-if="twoFactorForm.enabling">
+								<button type="submit" class="btn btn-primary" @click.prevent="enableTwoFactorAuth" :disabled="twoFactorForm.busy">
+									<span v-if="twoFactorForm.busy">
 										<i class="fa fa-btn fa-spinner fa-spin"></i> Enabling
 									</span>
 
-									<span v-if=" ! twoFactorForm.enabling">
+									<span v-else>
 										<i class="fa fa-btn fa-phone"></i> Enable
 									</span>
 								</button>
@@ -60,12 +58,12 @@
 					</div>
 
 					<form role="form">
-						<button type="submit" class="btn btn-danger" v-on="click: disableTwoFactorAuth" v-attr="disabled: disableTwoFactorForm.disabling">
-							<span v-if="disableTwoFactorForm.disabling">
+						<button type="submit" class="btn btn-danger" @click.prevent="disableTwoFactorAuth" :disabled="disableTwoFactorForm.busy">
+							<span v-if="disableTwoFactorForm.busy">
 								<i class="fa fa-btn fa-spinner fa-spin"></i> Disabling
 							</span>
 
-							<span v-if=" ! disableTwoFactorForm.disabling">
+							<span v-else>
 								<i class="fa fa-btn fa-times"></i> Disable
 							</span>
 						</button>

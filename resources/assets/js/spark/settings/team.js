@@ -18,12 +18,12 @@ Vue.component('spark-team-settings-screen', {
 
 	events: {
 	    /*
-	     * Handle the "teamUpdated" event. Broadcast back to all tabs.
+	     * Handle the "updateTeam" event. Re-retrieve the team.
 	     */
-		teamUpdated: function (team) {
-			this.team = team;
+		updateTeam: function () {
+			this.getTeam();
 
-			this.$broadcast('teamRetrieved', team);
+			return true;
 		}
 	},
 

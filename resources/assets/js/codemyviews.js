@@ -1,11 +1,10 @@
 var init = require('./init');
 
-require('./npm/laravel-spark/core/dependencies');
+//require('./npm/laravel-spark/core/dependencies');
 
 if ($('#spark-app').length > 0) {
-	require('./npm/laravel-spark/core/components')
-
-	new Vue(require('./npm/laravel-spark/spark.js'));
+	require('./spark/components')
+	new Vue(require('./spark/spark.js'));
 }
 
 init.bugsnag();
@@ -24,4 +23,3 @@ if($('#modal-nda').length > 0) {
         $('#nda-cliff-notes').toggle();
     });
 }
-

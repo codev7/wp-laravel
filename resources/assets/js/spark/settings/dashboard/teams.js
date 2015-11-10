@@ -17,14 +17,12 @@ Vue.component('spark-settings-teams-screen', {
             invitations: [],
 
             teamToDelete: null,
-            deletingTeam: false,
 
-            createTeamForm: {
-                name: '',
-                errors: [],
-                creating: false,
-                created: false
-            }
+            createTeamForm: new SparkForm({
+                name: ''
+            }),
+
+            deleteTeamForm: new SparkForm({})
         };
     },
 
@@ -35,6 +33,8 @@ Vue.component('spark-settings-teams-screen', {
          */
         userRetrieved: function (user) {
             this.user = user;
+
+            return true;
         },
 
 
@@ -43,6 +43,8 @@ Vue.component('spark-settings-teams-screen', {
          */
         teamsRetrieved: function (teams) {
             this.teams = teams;
+
+            return true;
         }
     },
 
@@ -59,23 +61,18 @@ Vue.component('spark-settings-teams-screen', {
         },
 
 
-        createTeam: function (e) {
-            e.preventDefault();
+        /**
+         * Create a new team.
+         */
+        createTeam: function () {
+            var self = this;
 
-            this.createTeamForm.errors = [];
-            this.createTeamForm.creating = true;
+            Spark.post('/settings/teams', this.createTeamForm)
+                .then(function () {
+                    self.createTeamForm.name = '';
 
-            this.$http.post('/settings/teams', this.createTeamForm)
-                .success(function (teams) {
-                    this.$dispatch('updateUser');
-                    this.$dispatch('teamsUpdated', teams);
-
-                    this.createTeamForm.name = '';
-                    this.createTeamForm.creating = false;
-                })
-                .error(function (errors) {
-                    Spark.setErrorsOnForm(this.createTeamForm, errors);
-                    this.createTeamForm.creating = false;
+                    self.$dispatch('updateUser');
+                    self.$dispatch('updateTeams');
                 });
         },
 
@@ -89,9 +86,9 @@ Vue.component('spark-settings-teams-screen', {
             });
 
             this.$http.delete('/settings/teams/' + team.id + '/membership')
-                .success(function (teams) {
+                .success(function () {
                     this.$dispatch('updateUser');
-                    this.$dispatch('teamsUpdated', teams);
+                    this.$dispatch('updateTeams');
                 });
         },
 
@@ -110,15 +107,14 @@ Vue.component('spark-settings-teams-screen', {
          * Delete the given team.
          */
         deleteTeam: function () {
-            this.deletingTeam = true;
+            var self = this;
 
-            this.$http.delete('/settings/teams/' + this.teamToDelete.id)
-                .success(function (teams) {
-                    this.deletingTeam = false;
+            Spark.delete('/settings/teams/' + this.teamToDelete.id, this.deleteTeamForm)
+                .then(function () {
                     $('#modal-delete-team').modal('hide');
 
-                    this.$dispatch('updateUser');
-                    this.$dispatch('teamsUpdated', teams);
+                    self.$dispatch('updateUser');
+                    self.$dispatch('updateTeams');
                 });
         },
 
@@ -132,9 +128,9 @@ Vue.component('spark-settings-teams-screen', {
             });
 
             this.$http.post('/settings/teams/invitations/' + invite.id + '/accept')
-                .success(function (teams) {
+                .success(function () {
                     this.$dispatch('updateUser');
-                    this.$dispatch('teamsUpdated', teams);
+                    this.$dispatch('updateTeams');
                 });
         },
 
@@ -160,6 +156,24 @@ Vue.component('spark-settings-teams-screen', {
             }
 
             return this.user.id === team.owner_id;
+        },
+
+        /**
+         * Experimental Error Stuff! Also fullErrors on form...
+         */
+        hasError: function (form, field) {
+            var keys = _.keys(form.fullErrors);
+            console.log(keys);
+            if (_.indexOf(keys, field) > -1) {
+                return true;
+            }
+            return false;
+        },
+
+        getError: function (form, field) {
+            if (this.hasError(form, field)) {
+                return form.fullErrors[field][0];
+            }
         }
     }
 });
