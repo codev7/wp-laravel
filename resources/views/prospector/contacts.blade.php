@@ -43,10 +43,10 @@
                 @foreach($prospects as $prospect)
 
                 <tr>
-                  <td><a style="text-decoration: none !important" href="{{ route('prospect', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}">{{ $prospect->first_name. ' '.$prospect->last_name }}<br /><small class="text-muted">{{ $prospect->email }}</small></a></td>
+                  <td><a style="text-decoration: none !important" href="{{ route('prospector.contact', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}">{{ $prospect->first_name. ' '.$prospect->last_name }}<br /><small class="text-muted">{{ $prospect->email }}</small></a></td>
                   <td>{{ $prospect->company->name }}</td>
                   <td>{!! $prospect->getTimeOfLastActivity() !!}</td>
-                  <td><a href="{{ route('prospect', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}" class="btn btn-warning"><i class="icon icon-edit"></i></a></td>
+                  <td><a href="{{ route('prospector.contact', ['id' => $prospect->company_id, 'person_id' => $prospect->id]) }}" class="btn btn-warning"><i class="icon icon-edit"></i></a></td>
                 </tr>
                 @endforeach
 
