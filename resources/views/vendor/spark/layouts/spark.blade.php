@@ -17,6 +17,8 @@
             <div class="container p-t-md" id="pjax-container">
                 @yield('content')
             </div><!--container-->
+
+            </div><!--markup is broken somewhere-->
         <!-- Footer -->
         @include('spark::common.footer')
 
