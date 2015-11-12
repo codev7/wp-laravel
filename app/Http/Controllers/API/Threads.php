@@ -2,6 +2,7 @@
 namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\Thread;
+use CMV\Services\MessagesService;
 use Input, Validator, Auth;
 
 class Threads extends Controller {
@@ -33,6 +34,18 @@ class Threads extends Controller {
     }
 
     /**
+     * @Post("api/threads/{threads}")
+     */
+    public function show($id)
+    {
+        /** @var Thread $thread */
+        $thread = Thread::find($id);
+        $thread->load('messages');
+
+        return $this->respondWithData($thread->toArray());
+    }
+
+    /**
      * @Post("api/threads")
      * @return \Illuminate\Http\JsonResponse
      */
@@ -53,12 +66,12 @@ class Threads extends Controller {
 
         $data = Input::all();
 
-        $thread = new Thread();
-        $thread->reference_type = $data['reference_type'];
-        $thread->referenct_id = $data['reference_id'];
-        $thread->save();
+        $service = new MessagesService(Auth::user());
+        $reference = $service->getReference($data['reference_type'], $data['reference_id']);
 
-        $thread->addMessage(Auth::user(), $data['content']);
+        $message = $service->postInNewThread($reference, $data['content']);
+
+        return $this->show($message->thread->id);
     }
 
 }

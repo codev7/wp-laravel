@@ -2,12 +2,12 @@
 namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\ToDo;
-use Input, Validator, Auth;
+use Input, Validator, Auth, App;
 
 class Todos extends Controller {
 
     /**
-     * @Get("api/threads")
+     * @Get("api/todos")
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
@@ -33,7 +33,7 @@ class Todos extends Controller {
     }
 
     /**
-     * @Post("api/threads")
+     * @Post("api/todos")
      * @return \Illuminate\Http\JsonResponse
      */
     public function create()
@@ -59,6 +59,18 @@ class Todos extends Controller {
         $thread->save();
 
         $thread->addMessage(Auth::user(), $data['content']);
+    }
+
+    /**
+     * @Get("api/todos/{todos}/comments")
+     * @param $id
+     */
+    public function comments($id)
+    {
+        $todo = ToDo::find($id);
+        $comments = $todo->comments();
+
+        return $this->respondWithData($comments);
     }
 
 }

@@ -3,8 +3,14 @@ namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\Message;
 use CMV\Models\PM\Thread;
+use CMV\Services\MessagesService;
 use Input, Validator, Auth;
 
+/**
+ * @todo If it's todo related create Bitbucket issue
+ * Class Messages
+ * @package CMV\Http\Controllers\API
+ */
 class Messages extends Controller {
 
     /**
@@ -28,7 +34,8 @@ class Messages extends Controller {
         $data = Input::all();
         $thread = Thread::find($data['thread_id']);
 
-        $message = $thread->addMessage(Auth::user(), $data['content']);
+        $service = new MessagesService(Auth::user());
+        $message = $service->postInThread($thread, Auth::user(), $data['content']);
 
         return $this->show($message->id);
     }

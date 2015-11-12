@@ -3,7 +3,8 @@
 namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
-use App;
+use App, Config, Bugsnag, Exception;
+use Carbon\Carbon;
 
 /**
 * Customers can submit to-do items to their projects
@@ -35,34 +36,52 @@ class ToDo extends Model
         static::created(function($todo) {
             if (!$todo->bitbucket_issue_id && $todo->project->hasRepo()) {
                 $bb = App::make('Bitbucket');
-                $issues = $bb->api('Repositories\Issues');
+                $resource = $bb->api('Repositories\Issues');
                 try {
-                    $response = $issues->create(\Config::get('services.bitbucket.accname'), $todo->project->bitbucket_slug, [
-                        'title' => $todo->title,
-                        'content' => $todo->content,
-                        'kind' => 'task',
-                        'priority' => 'major'
-                    ]);
+                    $response = $resource->create(
+                        Config::get('services.bitbucket.accname'),
+                        $todo->project->bitbucket_slug, [
+                            'title' => $todo->title,
+                            'content' => $todo->content,
+                            'kind' => 'task',
+                            'priority' => 'major'
+                        ]
+                    );
                     $content = json_decode($response->getContent());
                     $todo->bitbucket_issue_id = $content->local_id;
                     $todo->save();
-                } catch (\Exception $e) {
-                    \Bugsnag::notifyException($e);
+                } catch (Exception $e) {
+                    Bugsnag::notifyException($e);
                 }
             }
         });
     }
 
-    public function conciergeSite()
+    /**
+     * @return mixed
+     */
+    public function comments()
     {
-        return $this->belongsTo('CMV\Models\PM\ConciergeSite','reference_id');
+        return $this->hasOne('CMV\Models\PM\Thread')
+            ->where('reference_type', Thread::REF_TODO);
     }
 
-    public function project()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function reference()
     {
-        return $this->belongsTo('CMV\Models\PM\Project','reference_id');
+        switch ($this->reference_type) {
+            case static::REF_PROJECT:
+                return $this->belongsTo('\CMV\Models\PM\Project', 'reference_id');
+            case static::REF_CONCIERGE:
+                return $this->belongsTo('\CMV\Models\PM\ConciergeSite', 'reference_id');
+        }
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function createdBy()
     {
         return $this->belongsTo('CMV\User','created_by_id');
