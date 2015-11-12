@@ -111,7 +111,8 @@ class Project extends Model {
 
     public function toDos()
     {
-        return $this->hasMany('CMV\Models\PM\ToDo','reference_id');
+        return $this->hasMany('CMV\Models\PM\ToDo','reference_id')
+            ->where('reference_type', ToDo::REF_PROJECT);
     }
 
     public function threads()
@@ -127,6 +128,14 @@ class Project extends Model {
 
         $this->project_type_id = $projectType->id;
         $this->save();
-        
+    }
+
+    /**
+     * Checks whether the projects has associated bitbucket repository
+     * @return boolean
+     */
+    public function hasRepo()
+    {
+        return $this->bitbucket_slug && $this->bitbucket_slug != "0";
     }
 }

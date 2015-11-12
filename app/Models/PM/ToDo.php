@@ -3,6 +3,7 @@
 namespace CMV\Models\PM;
 
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 /**
 * Customers can submit to-do items to their projects
@@ -14,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 */
 class ToDo extends Model
 {
+    const REF_PROJECT = 'project';
+    const REF_CONCIERGE = 'concierge_site';
+
     protected $columns = [
         'id',
         'reference_id', //concierge_site_id || project_id
@@ -23,6 +27,31 @@ class ToDo extends Model
         'created_at',
         'updated_at'
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function($todo) {
+            if (!$todo->bitbucket_issue_id && $todo->project->hasRepo()) {
+                $bb = App::make('Bitbucket');
+                $issues = $bb->api('Repositories\Issues');
+                try {
+                    $response = $issues->create(\Config::get('services.bitbucket.accname'), $todo->project->bitbucket_slug, [
+                        'title' => $todo->title,
+                        'content' => $todo->content,
+                        'kind' => 'task',
+                        'priority' => 'major'
+                    ]);
+                    $content = json_decode($response->getContent());
+                    $todo->bitbucket_issue_id = $content->local_id;
+                    $todo->save();
+                } catch (\Exception $e) {
+                    \Bugsnag::notifyException($e);
+                }
+            }
+        });
+    }
 
     public function conciergeSite()
     {

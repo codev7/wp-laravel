@@ -41,4 +41,9 @@ return [
         'secret' => env('STRIPE_SECRET','sk_test_hx5fBx0gDeRnu4JcVvh3j6df'),
     ],
 
+    'bitbucket' => [
+        'key' => env('BITBUCKET_KEY'),
+        'secret' => env('BITBUCKET_SECRET'),
+        'accname' => env('BITBUCKET_ACCNAME')
+    ]
 ];

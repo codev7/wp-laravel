@@ -45,8 +45,8 @@ $app->bind('Bitbucket', function() {
     // @example http://gentlero.bitbucket.org/bitbucket-api/examples/
     // @see: https://bitbucket.org/account/user/<username or team>/api
     $oauth_params = [
-        'oauth_consumer_key'         => $_ENV['BITBUCKET_KEY'],
-        'oauth_consumer_secret'     => $_ENV['BITBUCKET_SECRET'],
+        'oauth_consumer_key'         => Config::get('services.bitbucket.key'),
+        'oauth_consumer_secret'     => Config::get('services.bitbucket.secret'),
     ];
 
     $bitbucket = new \Bitbucket\API\Api();
