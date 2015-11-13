@@ -22,7 +22,7 @@ class Threads extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $threads = Thread::with('messages', 'messages.user')
@@ -61,7 +61,7 @@ class Threads extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $data = Input::all();

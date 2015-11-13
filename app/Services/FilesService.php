@@ -8,19 +8,19 @@ use Illuminate\Support\Collection;
 /**
  * Handles creating threads and messages
  * @todo add permission checks
- * Class MessagesService
+ * Class FilesService
  * @package CMV\Services
  */
 class FilesService {
 
-    protected $owner;
+    protected $user;
 
     /**
-     * @param User $owner
+     * @param User $user
      */
-    public function __construct(User $owner)
+    public function __construct(User $user)
     {
-        $this->owner = $owner;
+        $this->user = $user;
     }
 
     /**
@@ -29,9 +29,7 @@ class FilesService {
      */
     public function all($reference)
     {
-        // check permissions
-
-        return $reference->files()->all();
+        return $reference->files();
     }
 
     /**
@@ -41,14 +39,12 @@ class FilesService {
      */
     public function create($reference, array $data)
     {
-        // check permissions
-
         $data = array_only($data, ['path', 'name', 'mime', 'size']);
 
         $file = new File();
         $file->reference_type = $this->getReftype($reference);
         $file->reference_id = $reference->id;
-        $file->user_id = $this->owner->id;
+        $file->user_id = $this->user->id;
         foreach ($data as $column => $value) {
             $file->column = $value;
         }
@@ -63,7 +59,6 @@ class FilesService {
      */
     public function find($id)
     {
-        // check permissions
         return File::find($id);
     }
 

@@ -30,7 +30,7 @@ class Files extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $reference = FilesService::getReference($data['reference_type'], $data['reference_id']);
@@ -67,7 +67,7 @@ class Files extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $reference = FilesService::getReference($data['reference_type'], $data['reference_id']);

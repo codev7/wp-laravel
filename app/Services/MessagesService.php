@@ -16,14 +16,19 @@ use CMV\User;
  */
 class MessagesService {
 
-    protected $author;
+    protected $user;
 
     /**
-     * @param User $author
+     * @param User $user
      */
-    public function __construct(User $author)
+    public function __construct(User $user)
     {
-        $this->author = $author;
+        $this->user = $user;
+    }
+
+    public function getThreads($reference)
+    {
+        return $reference->threads();
     }
 
     /**
@@ -34,7 +39,7 @@ class MessagesService {
     public function postInFirstOrNewThread($reference, $content)
     {
         $thread = $this->firstOrCreateThread($reference);
-        return $thread->addMessage($this->author, $content);
+        return $thread->addMessage($this->user, $content);
     }
 
     /**
@@ -45,7 +50,7 @@ class MessagesService {
     public function postInNewThread($reference, $content)
     {
         $thread = $this->createThread($reference);
-        return $thread->addMessage($this->author, $content);
+        return $thread->addMessage($this->user, $content);
     }
 
     /**
@@ -55,7 +60,7 @@ class MessagesService {
      */
     public function postInThread(Thread $thread, $content)
     {
-        return $thread->addMessage($this->author, $content);
+        return $thread->addMessage($this->user, $content);
     }
 
     /**

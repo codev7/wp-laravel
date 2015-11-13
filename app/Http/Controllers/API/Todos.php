@@ -21,7 +21,7 @@ class Todos extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $items = ToDo::with('messages', 'messages.user')
@@ -48,7 +48,7 @@ class Todos extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return $this->respondWithFaildValidator($validator);
+            return $this->respondWithFailedValidator($validator);
         }
 
         $data = Input::all();
