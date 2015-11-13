@@ -92,7 +92,7 @@
                                     <div class="col-sm-6">
                                         <h4>About Us</h4>
                                         <ul class="list-unstyled nav-list">
-                                            <li><a href="" class="jobs">Jobs</a></li>
+                                            <li data-controller="cmv-jobs"><a href="#" class="jobs" v-on:click="step1($event)">Jobs</a></li>
                                             <li><a href="{{ route('about-us') }}">About Us</a></li>
                                             <li><a href="{{ route('methods') }}">Methodology</a></li>
                                             <li><a href="{{ route('our-code') }}">Our Code</a></li>
