@@ -67,7 +67,7 @@ class Threads extends Controller {
         $data = Input::all();
 
         $service = new MessagesService(Auth::user());
-        $reference = $service->getReference($data['reference_type'], $data['reference_id']);
+        $reference = $service::getReference($data['reference_type'], $data['reference_id']);
 
         $message = $service->postInNewThread($reference, $data['content']);
 

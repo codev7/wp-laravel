@@ -10,7 +10,7 @@ use CMV\User;
 
 /**
  * Handles creating threads and messages
- * @todo throw permission exceptions
+ * @todo add permission checks
  * Class MessagesService
  * @package CMV\Services
  */

@@ -20,7 +20,7 @@ class Project extends Model {
         'developer_id',
         'project_manager_id',
         'git_url', //the ssh url for the git repo on bitbucket
-        'bitbucket_id', //bitbucket ID of the project for API purposes
+        'bitbucket_slug', //bitbucket SLUG of the project for API purposes
         'team_id',
         'name', //unique name of project
         'slug', //unique
@@ -66,6 +66,9 @@ class Project extends Model {
         'not_sure'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function team()
     {
 
@@ -73,54 +76,84 @@ class Project extends Model {
 
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function members()
     {
         return $this->hasManyThrough('CMV\User','CMV\Team');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function developer()
     {
-
         return $this->belongsTo( 'CMV\User', 'developer_id' );
-
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function projectManager()
     {
         return $this->belongsTo('CMV\User', 'project_manager_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function type()
     {
-
         return $this->belongsTo( 'CMV\Models\PM\ProjectType','project_type_id' );
-
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function briefs()
     {
         return $this->hasMany('CMV\Models\PM\ProjectBrief');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function invoices()
     {
-
         return $this->hasMany( 'CMV\Models\PM\Invoice','reference_id');
-
     }
 
+    /**
+     * @return mixed
+     */
     public function toDos()
     {
         return $this->hasMany('CMV\Models\PM\ToDo','reference_id')
             ->where('reference_type', ToDo::REF_PROJECT);
     }
 
+    /**
+     * @return mixed
+     */
     public function threads()
     {
         return $this->hasMany('CMV\Models\PM\Thread','reference_id')
             ->where('reference_type', Thread::REF_PROJECT);
     }
 
+    /**
+     * @return mixed
+     */
+    public function files()
+    {
+        return $this->hasMany('CMV\Models\PM\Thread','reference_id')
+            ->where('reference_type', File::REF_PROJECT);
+    }
+
+    /**
+     * @param $projectTypeName
+     */
     public function createOrFindProjectTypeId($projectTypeName)
     {
 
@@ -131,7 +164,7 @@ class Project extends Model {
     }
 
     /**
-     * Checks whether the projects has associated bitbucket repository
+     * Checks whether the project has associated bitbucket repository
      * @return boolean
      */
     public function hasRepo()
