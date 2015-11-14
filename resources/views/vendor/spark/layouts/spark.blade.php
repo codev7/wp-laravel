@@ -5,7 +5,7 @@
 </head>
 <body class="with-top-navbar">
     <!-- Vue App For Spark Screens -->
-    <div id="spark-app" v-cloak>
+    <div>
         <div class="growl" id="app-growl"></div>
             <!-- Navigation -->
             @if (Auth::check())

@@ -8,6 +8,8 @@ if ($('#spark-app').length > 0) {
 }
 
 init.bugsnag();
+init.extensions();
+init.directives();
 init.controllers();
 init.pjax();
 

@@ -13,7 +13,7 @@ var mountControllers = (selector) => {
     $(selector).each((i, el) => {
         var cName = $(el).attr('data-controller');
         if (controllers[cName] === undefined) console.warn(`Controller ${cName} is not found`);
-        inittedControllers[cName] = new controllers[cName]().$mount(el);
+        inittedControllers[cName] = (new controllers[cName]()).$mount(el);
     });
 };
 var unmountControllers = (selector) => {
@@ -46,5 +46,11 @@ export default {
         $(document).on('pjax:beforeReplace'), () => {
             unmountControllers("#pjax-container [data-controller]");
         }
+    },
+    directives() {
+        require('./directives/trix');
+    },
+    extensions() {
+        require('./extensions/lodash');
     }
 }

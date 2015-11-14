@@ -1,8 +1,11 @@
 export default Vue.extend({
 
-    /*
-     * Bootstrap the component. Load the initial data.
-     */
+    data() {
+        return {
+            message: ''
+        }
+    },
+
     ready() {
         console.log('project-dashboard c-r initialized')
     }

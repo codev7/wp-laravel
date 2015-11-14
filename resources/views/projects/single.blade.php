@@ -13,7 +13,10 @@
 
             <li class="media list-group-item p-a">
                 <div class="form-group">
-                    <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+                    <textarea class="form-control hidden" rows="4" placeholder="Message"
+                              v-model="message"
+                              v-trix
+                    ></textarea>
                 </div>
 
                 <a href="#" class="btn btn-block btn-default-outline">Submit Message</a>
