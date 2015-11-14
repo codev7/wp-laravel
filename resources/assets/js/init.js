@@ -12,8 +12,9 @@ var inittedControllers = {};
 var mountControllers = (selector) => {
     $(selector).each((i, el) => {
         var cName = $(el).attr('data-controller');
+        el.id = _.randomStr();
         if (controllers[cName] === undefined) console.warn(`Controller ${cName} is not found`);
-        inittedControllers[cName] = (new controllers[cName]()).$mount(el);
+        inittedControllers[cName] = new controllers[cName]({el: `#${el.id}`});
     });
 };
 var unmountControllers = (selector) => {

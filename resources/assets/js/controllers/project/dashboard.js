@@ -1,7 +1,7 @@
 export default Vue.extend({
 
     props: {
-        props: {
+        state: {
             type: String,
             required: true
         }
@@ -9,16 +9,32 @@ export default Vue.extend({
 
     data() {
         return {
+            loaded: false,
+            data: [],
             message: ''
         }
     },
 
-    computed() {
-        console.log(this.props);
+    attached() {
+        this.state = JSON.parse(this.state);
     },
 
     ready() {
-        console.log('project-dashboard c-r initialized')
+        this.getThreads();
+    },
+
+    methods: {
+        getThreads() {
+            this.$http.get(`/api/threads`, this.state, (data) => {
+                this.data = data.data;
+                this.loaded = true;
+            });
+        },
+        postMessage(e) {
+            this.$http.post(`/api/threads`, _.extend(this.state, {content: this.message}), (data) => {
+                this.message = '';
+            });
+        }
     }
 
 });

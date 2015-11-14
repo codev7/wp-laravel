@@ -40,7 +40,7 @@ class Threads extends Controller {
     {
         /** @var Thread $thread */
         $thread = Thread::find($id);
-        $thread->load('messages');
+        $thread->load('messages', 'messages.user');
 
         return $this->respondWithData($thread->toArray());
     }
@@ -55,9 +55,9 @@ class Threads extends Controller {
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
-            'reference_type' => 'required_unless:thread_id|in:project,concierge_site',
-            'reference_id' => 'required_unless:thread_id',
-            'content' => 'required',
+            'reference_type' => 'required|in:project,concierge_site',
+            'reference_id' => 'required|numeric',
+            'content' => 'required|string',
         ]);
 
         if ($validator->fails()) {

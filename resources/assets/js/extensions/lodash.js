@@ -20,10 +20,10 @@ _.mixin({
      * @returns {string}
      */
     randomStr(length = 6) {
-        var text = "";
+        var text = "e";
         var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-        for( var i=0; i < length; i++ )
+        for( var i=0; i < length-1; i++ )
             text += possible.charAt(Math.floor(Math.random() * possible.length));
 
         return text;

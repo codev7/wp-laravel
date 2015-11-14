@@ -43,6 +43,14 @@ class Message extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function thread()
+    {
+        return $this->belongsTo('CMV\Models\PM\Thread');
+    }
+
+    /**
      * @param $query
      * @return mixed
      */

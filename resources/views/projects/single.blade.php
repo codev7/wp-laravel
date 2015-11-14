@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-6" data-controller="project/dashboard">
+    <div class="col-md-6" data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
         <ul class="list-group media-list media-list-stream">
 
             <li class="media list-group-item p-a">
@@ -19,126 +19,66 @@
                     ></textarea>
                 </div>
 
-                <a href="#" class="btn btn-block btn-default-outline">Submit Message</a>
+                <button class="btn btn-block btn-default-outline"
+                        v-on:click="postMessage($event)">Submit Message</button>
             </li>
 
-            <li class="media list-group-item p-a">
-                <a class="media-left" href="#">
-                    <img
-                    class="media-object img-circle"
-                    src="{{ asset('images/avatar-dhg.png') }}">
-                </a>
-                <div class="media-body">
-                    <div class="media-heading">
-                        <small class="pull-right text-muted">4 min</small>
-                        <h5>Dave Gamache</h5>
-                    </div>
+            <div v-if="data.length">
+                <li class="media list-group-item p-a" v-for="thread in data" v-show="thread.messages.length">
 
-                    <p>
-                        Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                    </p>
+                    <a class="media-left" href="#">
+                        <img class="media-object img-circle" v-bind:src="thread.messages[0].user.gravatar">
+                    </a>
 
-                    <div class="media-body-inline-grid" data-grid="images">
-                        <div style="display: none">
-                            <img data-action="zoom" data-width="1050" data-height="700" src="{{ asset('images/unsplash_1.jpg') }}">
-                        </div>
-
-                        <div style="display: none">
-                            <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_1.jpg') }}">
-                        </div>
-
-                        <div style="display: none">
-                            <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_13.jpg') }}">
-                        </div>
-
-                        <div style="display: none">
-                            <img data-action="zoom" data-width="1048" data-height="700" src="{{ asset('images/unsplash_2.jpg') }}">
-                        </div>
-                    </div>
-
-                    <ul class="media-list m-b">
-                        <li class="media">
-                            <a class="media-left" href="#">
-                                <img
-                                class="media-object img-circle"
-                                src="{{ asset('images/avatar-fat.jpg') }}">
-                            </a>
-                            <div class="media-body">
-                                <strong>Jacon Thornton: </strong>
-                                Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
-                            </div>
-                        </li>
-                        <li class="media">
-                            <a class="media-left" href="#">
-                                <img
-                                class="media-object img-circle"
-                                src="{{ asset('images/avatar-mdo.png') }}">
-                            </a>
-                            <div class="media-body">
-                                <strong>Mark Otto: </strong>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="media list-group-item p-a">
-                <a class="media-left" href="#">
-                    <img
-                    class="media-object img-circle"
-                    src="{{ asset('images/avatar-fat.jpg') }}">
-                </a>
-                <div class="media-body">
-                    <div class="media-body-text">
+                    <div class="media-body">
                         <div class="media-heading">
-                            <small class="pull-right text-muted">12 min</small>
-                            <h5>Jacob Thornton</h5>
+                            <small class="pull-right text-muted">4 min</small>
+                            <h5>@{{thread.messages[0].user.name}}</h5>
                         </div>
+
                         <p>
-                            Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            @{{{thread.messages[0].content}}}
                         </p>
-                    </div>
-                </div>
-            </li>
 
-            <li class="media list-group-item p-a">
-                <a class="media-left" href="#">
-                    <img
-                    class="media-object img-circle"
-                    src="{{ asset('images/avatar-mdo.png') }}">
-                </a>
-                <div class="media-body">
-                    <div class="media-heading">
-                        <small class="pull-right text-muted">34 min</small>
-                        <h5>Mark Otto</h5>
-                    </div>
-
-                    <p>
-                        Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                    </p>
-
-                    <div class="media-body-inline-grid" data-grid="images">
-                        <img style="display: none" data-width="640" data-height="640" data-action="zoom" src="{{ asset('images/instagram_3.jpg') }}">
-                    </div>
-
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="media-left" href="#">
-                                <img
-                                class="media-object img-circle"
-                                src="{{ asset('images/avatar-dhg.png') }}">
-                            </a>
-                            <div class="media-body">
-                                <strong>Dave Gamache: </strong>
-                                Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
+                        {{--
+                        <div class="media-body-inline-grid" data-grid="images">
+                            <div style="display: none">
+                                <img data-action="zoom" data-width="1050" data-height="700" src="{{ asset('images/unsplash_1.jpg') }}">
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+
+                            <div style="display: none">
+                                <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_1.jpg') }}">
+                            </div>
+
+                            <div style="display: none">
+                                <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_13.jpg') }}">
+                            </div>
+
+                            <div style="display: none">
+                                <img data-action="zoom" data-width="1048" data-height="700" src="{{ asset('images/unsplash_2.jpg') }}">
+                            </div>
+                        </div>
+                        --}}
+
+                        <ul class="media-list m-b">
+                            <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
+                                <a class="media-left" href="#">
+                                    <img
+                                    class="media-object img-circle"
+                                    v-bind:src="message.user.gravatar">
+                                </a>
+                                <div class="media-body">
+                                    <strong>@{{ message.user.name }}: </strong>
+                                    @{{{ message.content }}}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </div>
         </ul>
     </div>
+
     <div class="col-md-3">
         <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -27,7 +27,7 @@ class Controller extends BaseController {
      */
     protected function respondWithData(array $data)
     {
-        return Response::json($data);
+        return Response::json(['data' => $data]);
     }
 
     /**

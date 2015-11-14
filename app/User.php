@@ -73,7 +73,8 @@ class User extends Model implements AuthorizableContract,
      * @var array
      */
     protected $appends = [
-        'using_two_factor_auth'
+        'using_two_factor_auth',
+        'gravatar'
     ];
 
     /**
@@ -104,9 +105,12 @@ class User extends Model implements AuthorizableContract,
 
     public function getGravatarImage($size = 256)
     {
-        
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "&s=" . $size;
-        
+    }
+
+    public function getGravatarAttribute()
+    {
+        return $this->getGravatarImage();
     }
 
     public function isDeveloper()
