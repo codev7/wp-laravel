@@ -2,6 +2,7 @@
 
 namespace CMV\Models\PM;
 
+use CMV\Models\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 */
 class Project extends Model {
 
-	use SoftDeletes;
+	use SoftDeletes, HasSlug;
     
     protected $columns = [
         'id',
@@ -156,7 +157,6 @@ class Project extends Model {
      */
     public function createOrFindProjectTypeId($projectTypeName)
     {
-
         $projectType = ProjectType::firstOrCreate(['name' => $projectTypeName]);
 
         $this->project_type_id = $projectType->id;

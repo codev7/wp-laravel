@@ -37,6 +37,9 @@ class Thread extends Model {
         return $this->belongsTo('CMV\Models\PM\\'.$ref, 'reference_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function messages()
     {
         return $this->hasMany('CMV\Models\PM\Message');

@@ -8,7 +8,7 @@
 @section('content')
 
 <section class="quote-area">
-    <div class="container" id="quote-form" controller="quote/form">
+    <div class="container" id="quote-form" data-controller="project/new" v-cloak>
         <div class="row">
             <div class="col-md-6">
 
@@ -39,20 +39,19 @@
                 <div class="quote-form clearfix">
 
                     
-                    <form method="post" action="{{ route('project.create') }}" class="tab-content">
-                        {!! Form::token() !!}
+                    <form method="post" class="tab-content" v-on:submit="createProject($event)">
                         <div class="tab-pane active" id="step-1">
 
                             @if(Auth::guest())
                             <div class="hr-divider">
-                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b">
-                                <li class="active" >
-                                  <a href="#" style="background-color: #ccc">Step 1: Project Details</a>
-                                </li>
-                                <li class='disabled'>
-                                  <a href="#">Step 2: Contact Info</a>
-                                </li>
-                              </ul>
+                                <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b">
+                                    <li class="active" >
+                                        <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
+                                    </li>
+                                    <li class='nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b'>
+                                        <a href="#step-2" data-toggle="tab">Step 2: Contact Info</a>
+                                    </li>
+                                </ul>
                             </div>
                             @endif
 
@@ -62,57 +61,44 @@
                                     class="control-label">
                                    What is the name of your project?
                                 </label>
-                                <input
-                                    type="text"
-                                    name="project_name"
-                                    id="project_name"
-                                    class="form-control required input-lg"
-                                    >
+                                <input type="text" name="project_name" id="project_name" class="form-control required input-lg"
+                                       v-model="form.project_name">
                             </div>
 
                             <label for="project_type" class="">What type of project do you have?</label>
                             <div class="sel-hold m-b-0">
-                                <select
-                                name="project_type"
-                                id="project_type"
-                                class="form-control input-lg"
-                                >
+                                <select name="project_type" id="project_type" class="form-control input-lg"
+                                        v-model="form.project_type">
                                 <option value="">Select a Project Type</option>
                                 @foreach(quoteFieldsProjectFields() as $option)
-                                    
-
                                     <option value="{{ $option }}">{{ $option }}</option>
-
                                 @endforeach
                             </select>
                             </div>
+
                             <label for="lead_deadline">When is your deadline?</label>
                             <div class="sel-hold m-b-0">
-                                <select
-                                name="lead_deadline"
-                                id="lead_deadline"
-                                class="form-control input-lg"
-                                >
-                                <option value="">Select a Deadline</option>
-                                @foreach(leadDeadlineOptions() as $option)
-                                    <option value="{{ $option }}">{{ $option }}</option>
-                                @endforeach
-                            </select>
+                                <select name="lead_deadline" id="lead_deadline" class="form-control input-lg"
+                                        v-model="form.requested_deadline">
+                                    <option value="">Select a Deadline</option>
+                                    @foreach(leadDeadlineOptions() as $option)
+                                        <option value="{{ $option }}">{{ $option }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+
                             <label for="lbl-12">What should we know about your project?</label>
-                            <textarea type="text"
-                                name="project_brief"
-                                id="project_brief"
-                                class="form-control input-lg m-b-0"
-                                cols="30"
-                                rows="10"
-                                placeholder="Enter your project info here..."></textarea>
+                            <textarea name="project_brief" id="project_brief" class="hidden form-control input-lg m-b-0" cols="30" rows="10" placeholder="Enter your project info here..."
+                                      v-model="form.message"
+                                      v-trix></textarea>
+
                             <p class="text-muted m-t-0 m-b-lg">You will be able to upload files to your project later.</p>
 
                             @if(Auth::guest())
-                            <a data-toggle="tab" class="btn btn-success btn-submit pull-right" href="#step-2">NEXT STEP</a>
+                                <a data-toggle="tab" class="btn btn-success btn-submit pull-right" href="#step-2">NEXT STEP</a>
                             @else
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Create Project</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block"
+                                        v-submit="posting">Create Project</button>
                             @endif
                         </div>
 
@@ -125,63 +111,39 @@
                                   <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
                                 </li>
                                 <li class="active">
-                                  <a href="#" style="background-color: #ccc">Step 2: Contact Info</a>
+                                  <a href="#step-2" style="background-color: #ccc">Step 2: Contact Info</a>
                                 </li>
                               </ul>
                             </div>
                             @endif
 
-
                             <div class="form-group">
-                                <label
-                                    for="name"
-                                    class="control-label m-t-lg">
-                                   5) What is your name?
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    class="form-control required input-lg"
-                                    >
+                                <label for="name" class="control-label m-t-lg">5) What is your name?</label>
+                                <input type="text" name="name" id="name" class="form-control required input-lg"
+                                       v-model="form.user_name">
                             </div>
 
                             <div class="form-group">
-                                <label
-                                    for="company_name"
-                                    class="control-label m-t-lg">
-                                   5) What is your company name (or team name)?
-                                </label>
-                                <input
-                                    type="text"
-                                    name="company_name"
-                                    id="company_nams"
-                                    class="form-control required input-lg"
-                                    >
+                                <label for="company_name" class="control-label m-t-lg">5) What is your company name (or team name)?</label>
+                                <input type="text" name="company_name" id="company_nams" class="form-control required input-lg"
+                                       v-model="form.company_name">
                             </div>
 
                             <div class="form-group">
            
-                                <label
-                                    for="email"
-                                    class="control-label">
-                                    6) What is your email?
-                                </label>
-                                <input type="text" name="email" id="email" class="form-control input-lg form-control required">
+                                <label for="email" class="control-label">6) What is your email?</label>
+                                <input type="text" name="email" id="email" class="form-control input-lg form-control required"
+                                       v-model="form.email">
                             </div>
                             
                             <div class="form-group">
-                                <label
-                                    for="password"
-                                    class="control-label">
-                                    Optional: Set Account Password
-                                </label>
-                                <input type="password" name="password" id="password" class="form-control input-lg form-control">
+                                <label for="password" class="control-label">Optional: Set Account Password</label>
+                                <input type="password" name="password" id="password" class="form-control input-lg form-control"
+                                       v-model="form.password">
                             </div>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Get Free Quote</button>
-
-                          
+                            <button type="submit" class="btn btn-lg btn-success btn-block"
+                                    v-submit="posting">Get Free Quote</button>
                         </div><!--step-->
                     </form>
                 </div>

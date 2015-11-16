@@ -30,6 +30,34 @@ export default {
         Bugsnag.releaseStage = CObj.environment;
     },
     vue() {
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+        Vue.http.options.beforeSend = () => {
+            // ..
+        }
+        Vue.http.options.onComplete = (req) => {
+            // ..
+            if (req.status == 422) {
+                var data = JSON.parse(req.response);
+                var template = _.template(`<ul class="list-unstyled">
+                    <% _.forEach(data, function(errors) { %>
+                        <% _.forEach(errors, function(error) {%>
+                        <li><%- error %></li>
+                        <% }); %>
+                    <% }); %>
+                </ul>`);
+
+                swal({
+                    title: "Errors occurred!",
+                    text: template({data: data}),
+                    html: true,
+                    type: "warning",
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true
+                });
+            }
+        }
+
         require('./vue/directives');
         require('./vue/filters');
 

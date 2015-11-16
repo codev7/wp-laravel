@@ -38,7 +38,7 @@ $factory->define(CMV\Models\PM\ConciergeSite::class, function (Faker\Generator $
     return [
         //'files' => [],
         'type' => $faker->randomElement(CMV\Models\PM\ConciergeSite::$types),
-        'bitbucket_id' => $faker->randomNumber(7),
+        'bitbucket_slug' => null,
         'name' => implode(' ', $faker->words(4)),
         'slug' => implode('-', $faker->words(4)),
         'url' => $faker->url,
@@ -77,10 +77,17 @@ $factory->define(CMV\Models\PM\LineItem::class, function (Faker\Generator $faker
     ];
 });
 
+//Thread
+$factory->define(CMV\Models\PM\Thread::class, function(Faker\Generator $faker) {
+    return [
+        'message_count' => 0
+    ];
+});
+
 //Message
 $factory->define(CMV\Models\PM\Message::class, function (Faker\Generator $faker) {
     return [
-        'comment' => $faker->realText( $faker->numberBetween(200,500) )
+        'content' => $faker->realText( $faker->numberBetween(200,500) )
     ];
 });
 
@@ -88,7 +95,7 @@ $factory->define(CMV\Models\PM\Message::class, function (Faker\Generator $faker)
 $factory->define(CMV\Models\PM\Project::class, function (Faker\Generator $faker) {
     return [
         'git_url' => 'ssh@bitbucket.org/codemyviews/'.implode('-', $faker->words(4)), //the ssh url for the git repo on bitbucket
-        'bitbucket_id' => $faker->url, //bitbucket ID of the project for API purposes
+        'bitbucket_slug' => null, //bitbucket ID of the project for API purposes
         'team_id' => $faker->url,
         'name' => implode(' ', $faker->words(4)), //unique name of project
         'slug' => implode('-', $faker->words(4)), //unique

@@ -5,5 +5,6 @@ export default {
     'project/files': require('./controllers/project/files'),
     'project/invoices': require('./controllers/project/invoices'),
     'project/todos': require('./controllers/project/todos'),
+    'project/new': require('./controllers/project/new'),
     'cmv-jobs': require('./controllers/cmv-jobs')
 };

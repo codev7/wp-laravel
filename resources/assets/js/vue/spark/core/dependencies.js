@@ -5,8 +5,8 @@
  */
 if (window.Vue === undefined) window.Vue = require('vue');
 
-require('vue-resource');
-Vue.http.headers.common['X-CSRF-TOKEN'] = Spark.csrfToken;
+//require('vue-resource');
+//Vue.http.headers.common['X-CSRF-TOKEN'] = Spark.csrfToken;
 
 /**
  * Load Promises library.

@@ -484,6 +484,7 @@
                     xhr: null,
                     jsonp: 'callback',
                     beforeSend: null,
+                    onComplete: null,
                     crossOrigin: null,
                     emulateHTTP: false,
                     emulateJSON: false
@@ -557,6 +558,10 @@
 
                         if (request.ok && request.status) {
                             request.ok = request.status >= 200 && request.status < 300;
+                        }
+
+                        if (_.isFunction(options.onComplete)) {
+                            options.onComplete.call(this, request, options);
                         }
 
                         (request.ok ? resolve : reject)(request);
@@ -832,6 +837,10 @@
                         response.ok = event.type !== 'error';
                         response.status = response.ok ? 200 : 404;
                         response.responseText = body ? body : event.type;
+
+                        if (_.isFunction(options.onComplete)) {
+                            options.onComplete.call(this, response, options);
+                        }
 
                         (response.ok ? resolve : reject)(response);
                     };

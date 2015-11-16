@@ -43,14 +43,22 @@ class ProjectSeeder extends Seeder
                 $toDo->createdBy()->associate( $project->team->users()->random()->take(1)->first() );
                 $toDo->save();
             }));
-      
-            $project->messages()->saveMany( factory( CMV\Models\PM\Message::class, rand(2,20))->make(['reference_type' => 'project'])->each(function($message) use($project){
 
-                $message->user()->associate( $project->team->users()->random()->take(1)->first() );
-                $message->save();
-            }));
-            
+            for($i=0; $i<=rand(0,3); $i++) {
+                $thread = factory( CMV\Models\PM\Thread::class)->make(['reference_type' => 'project']);
+                $thread->reference()->associate($project);
+                $thread->save();
 
+                for($j=0; $j<rand(1,4); $j++) {
+                    /** @var \CMV\Models\PM\Message $message */
+                    $message = factory( CMV\Models\PM\Message::class)->make();
+                    $user = $project->team->users()->random()->take(1)->first();
+                    $message->user()->associate($user);
+                    $message->save();
+
+                    $thread->messages()->save($message);
+                }
+            }
 
             $invoice = $project->invoices()->save( factory( CMV\Models\PM\Invoice::class)->make(['reference_type' => 'project']) );
             

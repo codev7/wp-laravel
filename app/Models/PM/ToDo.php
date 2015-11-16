@@ -34,7 +34,7 @@ class ToDo extends Model
         parent::boot();
 
         static::created(function($todo) {
-            if (!$todo->bitbucket_issue_id && $todo->project->hasRepo()) {
+            if (!$todo->bitbucket_issue_id && $todo->project && $todo->project->hasRepo()) {
                 $bb = App::make('Bitbucket');
                 $resource = $bb->api('Repositories\Issues');
                 try {
