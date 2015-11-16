@@ -1,17 +1,8 @@
 var init = require('./init');
 
-//require('./npm/laravel-spark/core/dependencies');
-
-if ($('#spark-app').length > 0) {
-	require('./spark/components')
-	new Vue(require('./spark/spark.js'));
-}
-
-init.bugsnag();
-init.extensions();
-init.directives();
-init.controllers();
+init.libraries();
 init.pjax();
+init.vue();
 
 var placeholder = require('placeholder');
 

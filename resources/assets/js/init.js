@@ -1,12 +1,4 @@
-var controllers = {
-    'portfolio': require('./controllers/portfolio'),
-    'project/briefs': require('./controllers/project/briefs'),
-    'project/dashboard': require('./controllers/project/dashboard'),
-    'project/files': require('./controllers/project/files'),
-    'project/invoices': require('./controllers/project/invoices'),
-    'project/todos': require('./controllers/project/todos'),
-    'cmv-jobs': require('./controllers/cmv-jobs')
-};
+var controllers = require('./vue/controllers');
 var inittedControllers = {};
 
 var mountControllers = (selector) => {
@@ -29,12 +21,24 @@ var unmountControllers = (selector) => {
 var Bugsnag = require('bugsnag');
 
 export default {
-    controllers() {
-        mountControllers("[data-controller]");
-    },
-    bugsnag() {
+    libraries() {
+        require('./extensions/lodash');
+
+        window.moment = require('moment');
+
         Bugsnag.apiKey = "15fde40c387140df4200a97e9dbf3f31";
         Bugsnag.releaseStage = CObj.environment;
+    },
+    vue() {
+        require('./vue/directives');
+        require('./vue/filters');
+
+        if ($('#spark-app').length > 0) {
+            require('./vue/spark/components')
+            new Vue(require('./vue/spark/spark'));
+        }
+
+        mountControllers("[data-controller]");
     },
     pjax() {
         $(document).pjax('a[data-pjax]', '#pjax-container', {
@@ -47,11 +51,5 @@ export default {
         $(document).on('pjax:beforeReplace'), () => {
             unmountControllers("#pjax-container [data-controller]");
         }
-    },
-    directives() {
-        require('./directives/trix');
-    },
-    extensions() {
-        require('./extensions/lodash');
     }
 }

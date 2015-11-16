@@ -10,6 +10,7 @@ export default Vue.extend({
     data() {
         return {
             loaded: false,
+            posting: false,
             data: [],
             message: ''
         }
@@ -31,8 +32,13 @@ export default Vue.extend({
             });
         },
         postMessage(e) {
+            this.posting = true;
+
             this.$http.post(`/api/threads`, _.extend(this.state, {content: this.message}), (data) => {
                 this.message = '';
+                this.data.unshift(data.data);
+            }).always(() => {
+                this.posting = false;
             });
         }
     }

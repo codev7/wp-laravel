@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-6" data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
+    <div class="col-md-6" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
         <ul class="list-group media-list media-list-stream">
 
             <li class="media list-group-item p-a">
@@ -20,10 +20,11 @@
                 </div>
 
                 <button class="btn btn-block btn-default-outline"
-                        v-on:click="postMessage($event)">Submit Message</button>
+                        v-on:click="postMessage($event)"
+                        v-submit="posting">Submit Message</button>
             </li>
 
-            <div v-if="data.length">
+            <div>
                 <li class="media list-group-item p-a" v-for="thread in data" v-show="thread.messages.length">
 
                     <a class="media-left" href="#">

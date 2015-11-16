@@ -28,6 +28,7 @@ class Threads extends Controller {
         $threads = Thread::with('messages', 'messages.user')
             ->where('reference_type', $data['reference_type'])
             ->where('reference_id', $data['reference_id'])
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return $this->respondWithData($threads->toArray());

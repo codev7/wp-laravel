@@ -35,3 +35,18 @@
     background-color: #333 !important;
     border-color: #333 !important;
 }
+
+[v-cloak] {
+  opacity: 0;
+}
+
+[data-controller][v-cloak] {
+  opacity: 0;
+}
+
+[data-controller] {
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+}

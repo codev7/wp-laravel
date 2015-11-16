@@ -15,9 +15,7 @@
             @include('spark::nav.guest')
         @endif
 
-        
         @yield('content')
-        
 
         <!-- Footer -->
         @include('spark::common.footer')
