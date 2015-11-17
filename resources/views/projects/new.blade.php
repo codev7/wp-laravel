@@ -38,27 +38,24 @@
             <div class="col-md-6">
                 <div class="quote-form clearfix">
 
+                    @if(Auth::guest())
+                        <div class="hr-divider">
+                            <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav">
+                                <li class="active">
+                                    <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
+                                </li>
+                                <li>
+                                    <a href="#step-2" data-toggle="tab">Step 2: Contact Info</a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
                     
                     <form method="post" class="tab-content" v-on:submit="createProject($event)">
                         <div class="tab-pane active" id="step-1">
 
-                            @if(Auth::guest())
-                            <div class="hr-divider">
-                                <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b">
-                                    <li class="active" >
-                                        <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
-                                    </li>
-                                    <li class='nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav m-b'>
-                                        <a href="#step-2" data-toggle="tab">Step 2: Contact Info</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            @endif
-
                             <div class="form-group">
-                                <label
-                                    for="project_name"
-                                    class="control-label">
+                                <label for="project_name" class="control-label m-t-lg">
                                    What is the name of your project?
                                 </label>
                                 <input type="text" name="project_name" id="project_name" class="form-control required input-lg"
@@ -104,19 +101,6 @@
 
                         <div class="tab-pane" id="step-2">
 
-                            @if(Auth::guest())
-                            <div class="hr-divider">
-                              <ul class="nav nav-pills nav-pills-warning hr-divider-content hr-divider-nav">
-                                <li>
-                                  <a href="#step-1" data-toggle="tab">Step 1: Project Details</a>
-                                </li>
-                                <li class="active">
-                                  <a href="#step-2" style="background-color: #ccc">Step 2: Contact Info</a>
-                                </li>
-                              </ul>
-                            </div>
-                            @endif
-
                             <div class="form-group">
                                 <label for="name" class="control-label m-t-lg">5) What is your name?</label>
                                 <input type="text" name="name" id="name" class="form-control required input-lg"
@@ -124,14 +108,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="company_name" class="control-label m-t-lg">5) What is your company name (or team name)?</label>
+                                <label for="company_name" class="control-label">6) What is your company name (or team name)?</label>
                                 <input type="text" name="company_name" id="company_nams" class="form-control required input-lg"
                                        v-model="form.company_name">
                             </div>
 
                             <div class="form-group">
            
-                                <label for="email" class="control-label">6) What is your email?</label>
+                                <label for="email" class="control-label">7) What is your email?</label>
                                 <input type="text" name="email" id="email" class="form-control input-lg form-control required"
                                        v-model="form.email">
                             </div>
