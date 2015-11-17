@@ -1,7 +1,8 @@
 <?php
 namespace CMV\Http\Controllers\API;
 
-use CMV\Models\PM\Project, CMV\Models\PM\Team, CMV\Models\PM\User;
+use CMV\Models\PM\Project, CMV\Team, CMV\User;
+use CMV\Services\MessagesService;
 use Input, Validator, Auth, Event;
 
 class Projects extends Controller {
@@ -32,7 +33,7 @@ class Projects extends Controller {
 
         $user = User::create(['email' => $data['email']]);
 
-        $user->name = $data['name'];
+        $user->name = $data['user_name'];
         $user->password = isset($data['password']) ? bcrypt($data['password']) : bcrypt(date('Y-m-d'));
 
         $team = Team::create(['name' => $data['company_name']]);
@@ -51,20 +52,18 @@ class Projects extends Controller {
         ];
 
         $project = Project::create($projectData);
-
-        $project->slug = str_replace(' ','-',strtolower($projectName));
         $project->team()->associate($team);
-
         $project->save();
-
         $project->createOrFindProjectTypeId($data['project_type']);
 
         Auth::login($user);
 
         $user->switchToTeam($team);
-
         $user->save();
 
+        $this->postMessageToProject($project, $data['message']);
+
+        return $this->show($project->id);
     }
 
     /**
@@ -92,10 +91,10 @@ class Projects extends Controller {
         ]);
 
         $project->team()->associate(Auth::user()->currentTeam());
-
         $project->save();
-
         $project->createOrFindProjectTypeId($data['project_type']);
+
+        $this->postMessageToProject($project, $data['message']);
 
         return $this->show($project->id);
     }
@@ -109,5 +108,16 @@ class Projects extends Controller {
         $project = Project::find($id);
 
         return $this->respondWithData($project->toArray());
+    }
+
+    /**
+     * @param Project $project
+     * @param $message
+     * @return \CMV\Models\PM\Message
+     */
+    protected function postMessageToProject(Project $project, $message)
+    {
+        $messageService = new MessagesService(Auth::user());
+        return $messageService->postInNewThread($project, $message);
     }
 }

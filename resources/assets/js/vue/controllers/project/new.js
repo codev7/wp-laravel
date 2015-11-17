@@ -16,10 +16,21 @@ export default Vue.extend({
     },
 
     ready() {
+        $('#modal-nda').modal('show');
 
+        $('.toggle-nda').on('click', function(e)
+        {
+            e.preventDefault();
+            $('#full-nda').toggle();
+            $('#nda-cliff-notes').toggle();
+        });
     },
 
     methods: {
+        openStep2(e) {
+            e.preventDefault();
+            $('[href=#step-2]').click();
+        },
         createProject(e) {
             e.preventDefault();
 

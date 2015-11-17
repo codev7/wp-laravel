@@ -21,6 +21,7 @@ var unmountControllers = (selector) => {
 
 export default {
     libraries() {
+        window.placeholder = require('placeholder');
         window._ = require('lodash');
         require('./extensions/lodash');
 

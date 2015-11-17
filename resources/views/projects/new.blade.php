@@ -92,7 +92,7 @@
                             <p class="text-muted m-t-0 m-b-lg">You will be able to upload files to your project later.</p>
 
                             @if(Auth::guest())
-                                <a data-toggle="tab" class="btn btn-success btn-submit pull-right" href="#step-2">NEXT STEP</a>
+                                <button class="btn btn-success btn-submit pull-right" v-on:click="openStep2($event)"">NEXT STEP</button>
                             @else
                                 <button type="submit" class="btn btn-lg btn-success btn-block"
                                         v-submit="posting">Create Project</button>
