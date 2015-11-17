@@ -37,6 +37,7 @@ export default {
         Vue.http.options.onComplete = (req) => {
             // ..
             if (req.status == 422) {
+                // show errors if server-side validation failed
                 var data = JSON.parse(req.response);
                 var template = _.template(`<ul class="list-unstyled">
                     <% _.forEach(data, function(errors) { %>

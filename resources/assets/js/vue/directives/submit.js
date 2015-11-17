@@ -1,3 +1,8 @@
+/**
+ * Disables the button/input[submit] and replaces content with a spinner based on the provided model.
+ * @example <button type="submit" v-submit="submitting">Submit!</button>
+ *          'Submit!' will be replaced with a spinner if `loading` and otherwise if `!loading`
+ */
 Vue.directive('submit', {
     initialHTML: '',
     bind: function () {

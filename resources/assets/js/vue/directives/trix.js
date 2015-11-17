@@ -1,6 +1,8 @@
-/** Handles displaying of the Trix widget and data flow between textarea/vue.js model and widget.
-*  Usage: add 'v-trix' attribute to the textarea
-*/
+/**
+ * Handles displaying of the Trix widget and data flow between textarea/vue.js model and widget.
+ * @example <textarea v-model="message" v-trix></textarea>
+ *          Trix widget display value will be changed if "message" is changed and vice versa.
+ */
 Vue.directive('trix', {
     unwatch: () => {},
     bind: function () {
