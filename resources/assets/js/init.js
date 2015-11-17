@@ -1,5 +1,6 @@
 var controllers = require('./vue/controllers');
 var inittedControllers = {};
+var notify = require('./misc/notify');
 
 var mountControllers = (selector) => {
     $(selector).each((i, el) => {
@@ -40,24 +41,7 @@ export default {
             // ..
             if (req.status == 422) {
                 // show errors if server-side validation failed
-                var data = JSON.parse(req.response);
-                var template = _.template(`<ul class="list-unstyled">
-                    <% _.forEach(data, function(errors) { %>
-                        <% _.forEach(errors, function(error) {%>
-                        <li><%- error %></li>
-                        <% }); %>
-                    <% }); %>
-                </ul>`);
-
-                swal({
-                    title: "Errors occurred!",
-                    text: template({data: data}),
-                    html: true,
-                    type: "warning",
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true
-                });
+                notify.validation(req.response);
             }
         }
 
