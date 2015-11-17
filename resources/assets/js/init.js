@@ -18,13 +18,14 @@ var unmountControllers = (selector) => {
     });
 };
 
-var Bugsnag = require('bugsnag');
 
 export default {
     libraries() {
+        window._ = require('lodash');
         require('./extensions/lodash');
 
         window.moment = require('moment');
+        window.Bugsnag = require('bugsnag');
 
         Bugsnag.apiKey = "15fde40c387140df4200a97e9dbf3f31";
         Bugsnag.releaseStage = CObj.environment;
