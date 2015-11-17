@@ -35,5 +35,5 @@ elixir(function(mix) {
         'public/css/cmv-app.css'
     ]);
 
-    mix.browserSync({ proxy: 'http://cmv.dev' });
+    mix.browserSync({ proxy: 'http://cmv.local' });
 });
