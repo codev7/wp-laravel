@@ -289,3 +289,14 @@ if (!function_exists("preprint")) {
         else print $x;
     }
 }
+
+function isSparkView()
+{
+    $request = app('request');
+    return $request->is('settings*')
+    || $request->is('register*')
+    || $request->is('spark*')
+    || $request->is('login*')
+    || $request->is('terms*')
+    || $request->is('password*');
+}

@@ -5,7 +5,7 @@
 </head>
 <body class="with-top-navbar">
     <!-- Vue App For Spark Screens -->
-    <div @if(Spark::isDisplayingSettingsScreen()) v-cloak id="spark-app"@endif>
+    <div @if(isSparkView()) v-cloak id="spark-app"@endif>
         <div class="growl" id="app-growl"></div>
 
         <!-- Navigation -->
