@@ -19,6 +19,8 @@
 @endsection
 
 @section('content')
+{!! setBodyClassIfPjax(['portfolio-page']) !!}
+
 <section class="visual3 repeatable">
     <div class="container">
         <img src="{{ asset('images/bg-call-area.jpg') }}" alt="image description" class="bg-img tiled" >
@@ -93,7 +95,7 @@
                                                    class="btn btn-lg btn-primary"><span>@{{ tab.text }}</span> <i class="fa fa-@{{ tab.icon }}"></i>
                                                 </a>
                                             
-                                                <a :href="tab.modal.preview_link" target="_blank" rel="nofollow" class="btn btn-lg btn-primary">View Site <i class="fa fa-search"></i></a>
+                                                <a :href="modal.preview_link" target="_blank" rel="nofollow" class="btn btn-lg btn-primary">View Site <i class="fa fa-search"></i></a>
                                             </div><!--btn-group-->
                                         </div><!--text-center-->
 

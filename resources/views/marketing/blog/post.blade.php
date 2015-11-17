@@ -29,6 +29,8 @@
 @stop
 
 @section('content')
+    {!! setBodyClassIfPjax(['blog-detail-page']) !!}
+
     <section class="visual2 text-center">
         <div class="container">
             <img class="bg-img" src="{{ asset('images/img-39.jpg') }}" alt="{{ get_the_title() }}" >

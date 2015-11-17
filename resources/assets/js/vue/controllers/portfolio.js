@@ -34,13 +34,9 @@ export default Vue.extend({
 
     methods: {
         fetchPortfolioItems() {
-
             this.$http.get('/code/get', function(portfolioItems) {
-                console.log(portfolioItems);
                 this.portfolioItems = portfolioItems;
                 this.loaded = true;
-
-//                this.$dispatch('portfolioLoaded');
             });
         },
 
@@ -52,7 +48,6 @@ export default Vue.extend({
                     this.modal = this.portfolioItems[i];
                 }
             }
-
 
             $('#modal-portfolio').modal('show')
                 .on('shown.bs.modal',function(e)

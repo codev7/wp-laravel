@@ -30,7 +30,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/"><span class="sr-only">Code My Views</span></a>
+                        <a data-pjax class="navbar-brand" href="/"><span class="sr-only">Code My Views</span></a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -42,7 +42,7 @@
                                             <div class="container">
                                                 <ul class="nav nav-pills">
                                                     @foreach($navigationItem['children'] as $label => $route)
-                                                        <li><a href="{{ $route }}">{{ $label }}</a></li>
+                                                        <li><a data-pjax href="{{ $route }}">{{ $label }}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div><!--container-->
@@ -50,7 +50,7 @@
                                     </li>
                                 @else
                                     <li class="{{ set_active_from_route_name( $navigationItem['route-name'] ) }}">
-                                        <a href="{{ route( $navigationItem['route-name'] ) }}">{{ $navigationItem['text'] }}</a>
+                                        <a data-pjax href="{{ route( $navigationItem['route-name'] ) }}">{{ $navigationItem['text'] }}</a>
                                     </li>
                                 @endif
                             
@@ -69,7 +69,11 @@
             </div>
         </header><!-- /header -->
 
-        @yield('content')
+        <div id="pjax-container">
+            {!! setBodyClassIfPjax(['inner']) !!}
+
+            @yield('content')
+        </div>
 
         <footer id="footer">
             <div class="container">

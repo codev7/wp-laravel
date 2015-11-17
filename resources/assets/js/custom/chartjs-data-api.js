@@ -21,7 +21,7 @@ $(function () {
         animation: false,
         segmentStrokeColor: '#fff',
         segmentStrokeWidth: 2,
-        percentageInnerCutout: 80,
+        percentageInnerCutout: 80
       }, attrData)
 
       new Chart(element.getContext('2d')).Doughnut(data, options)

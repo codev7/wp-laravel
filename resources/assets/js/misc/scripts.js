@@ -1,5 +1,5 @@
-$(document).ready(function(){
-	
+var init = function() {
+    // scripts.js
 	$('.gallery').each(function() {
 		var $el = $(this).find('.gallery-nav').children(),
 			width = ~~($(this).find('.gallery-nav').outerWidth() / $el.length);
@@ -62,7 +62,7 @@ $(document).ready(function(){
 	$('.btn-to-next').click(function(){
 		$('html,body').animate({
 			scrollTop: $(this).closest('section').next().offset().top
-		}, 700)
+		}, 700);
 		return false;
 	});
 	
@@ -70,18 +70,47 @@ $(document).ready(function(){
 		var $el = $(this).find('.bg-img');
 		
 		if ($el.length > 0) {
-
-			if($el.hasClass('tiled'))
-			{
+			if($el.hasClass('tiled')) {
 				$(this).append('<div class="bg" style="background-image: url(' + $el.attr('src') +'); background-repeat: repeat; background-size: 400px;"></div>');
-			}
-			else
-			{	
+			} else {
 				$(this).append('<div class="bg" style="background-image: url(' + $el.attr('src') +');"></div>');
 			}
-
-			
 		}
 	});
 
-});
+    // load-more.js
+    $('.btn-load-more').on('click', function(e)
+    {
+        var btn = $(this);
+
+        if(btn.hasClass('disabled')) return false;
+
+        var defaultText = btn.html();
+
+        btn.addClass('disabled').html('LOADING MORE POSTS <i class="fa fa-spin fa-spinner"></i>');
+
+        var contentTarget = '.post-preview';
+        var appendTo = '.posts-append';
+        var loadMore = '.btn-load-more';
+
+        $.get(btn.attr('href'), function(data) {
+            $( appendTo ).append($(data).find( contentTarget ));
+
+            var nextBtn = $(data).find( loadMore ).attr('href');
+
+            if(nextBtn) {
+                btn
+                    .removeClass('disabled')
+                    .html(defaultText)
+                    .attr('href',nextBtn);
+            } else {
+                btn.html('All posts have been loaded!').css('cursor','default');
+            }
+        });
+
+        e.preventDefault();
+    });
+
+};
+
+export default init;

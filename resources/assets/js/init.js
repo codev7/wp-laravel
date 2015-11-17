@@ -1,5 +1,6 @@
 var controllers = require('./vue/controllers');
 var inittedControllers = {};
+var initScripts = require('./misc/scripts');
 var notify = require('./misc/notify');
 
 var mountControllers = (selector) => {
@@ -62,9 +63,24 @@ export default {
 
         $(document).on('pjax:success', () => {
             mountControllers("#pjax-container [data-controller]");
+            this.scripts();
+
+            // make nav link active
+            $("a[data-pjax]").each(function(i, el) {
+                var $parent = $($(el).parent());
+
+                if ($parent.is('li')) {
+                    $(el).attr('href') == window.location.href ?
+                        $parent.addClass('active') :
+                        $parent.removeClass('active');
+                }
+            });
         });
         $(document).on('pjax:beforeReplace'), () => {
             unmountControllers("#pjax-container [data-controller]");
         }
+    },
+    scripts() {
+        initScripts();
     }
 }

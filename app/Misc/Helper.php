@@ -294,9 +294,20 @@ function isSparkView()
 {
     $request = app('request');
     return $request->is('settings*')
-    || $request->is('register*')
-    || $request->is('spark*')
-    || $request->is('login*')
-    || $request->is('terms*')
-    || $request->is('password*');
+      || $request->is('register*')
+      || $request->is('spark*')
+      || $request->is('login*')
+      || $request->is('terms*')
+      || $request->is('password*');
+}
+
+function setBodyClassIfPjax(array $classes) {
+    if (!Request::pjax()) return '';
+
+    $classes = implode(' ', $classes);
+    return "
+        <script>
+            $('body').attr('class', '$classes')
+        </script>
+    ";
 }

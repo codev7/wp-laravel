@@ -16,6 +16,8 @@
 @stop
 
 @section('content')
+    {!! setBodyClassIfPjax(['blog-detail-page hide-nav']) !!}
+
     <section class="visual2 text-center">
         <div class="container">
             <img class="bg-img" src="{{ asset('images/a-design-image.jpg') }}" alt="" >

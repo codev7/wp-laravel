@@ -17,7 +17,9 @@
 @stop
 
 @section('content')
-	<section class="visual3 repeatable">
+    {!! setBodyClassIfPjax(['services-page']) !!}
+
+    <section class="visual3 repeatable">
 		<div class="container">
 			<img src="{{ asset('images/dark-blue.jpg') }}" alt="image description" class="bg-img tiled" >
 			<div class="row">
