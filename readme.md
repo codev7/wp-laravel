@@ -5,6 +5,7 @@
 Javascript code are located in `/resources/assets/js`.
 
 The directory contents:
+
 - /codemyviews.js - main file. Everything we need on front-end are set up here;
 - /init.js - is used in /codemyviews.js, a set of various init methods. E.g. pgax(), vue();
 - /custom - global jQuery code. No addition code must be placed here. The existing one will eventially be moved to a custom Vue controllers or init.js.
@@ -19,6 +20,7 @@ The directory contents:
 The code is managed by http://gulpjs.com/ and it's extension http://laravel.com/docs/5.1/elixir .
 
 gulpfile.js is pretty straightforward:
+
 - /js/vendor + /js/custom folders contents are being concatenated into vendor.js;
 - /js/codemyviews.js is browserified into cmv-js.js;
 - /css/cmv-app.less is translated to /public/css/cmv-app.css;
