@@ -40,4 +40,13 @@ class Team extends SparkTeam
         return $query->orderBy(\DB::raw('RAND()'));
     }
 
+    /**
+     * Sets nda_agreed_at to current time if it's null
+     */
+    public function agreeToNDA()
+    {
+        $this->nda_agreed_at = \Carbon\Carbon::now();
+        $this->save();
+    }
+
 }

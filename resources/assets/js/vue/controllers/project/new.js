@@ -1,8 +1,11 @@
 export default Vue.extend({
 
+    mixins: [require('./../../mixins/hasState')],
+
     data() {
         return {
             posting: false,
+            ndaing: false,
             form: {
                 email: '',
                 user_name: '',
@@ -10,20 +13,27 @@ export default Vue.extend({
                 project_name: '',
                 project_type: '',
                 requested_deadline: '',
-                message: ''
+                message: '',
+                agreed_to_nda: false
             }
         }
     },
 
     ready() {
-        $('#modal-nda').modal('show');
+        if (this.state.team.id && this.state.team.nda_agreed_at) {
+            this.form.agreed_to_nda = true;
+        }
 
-        $('.toggle-nda').on('click', function(e)
-        {
-            e.preventDefault();
-            $('#full-nda').toggle();
-            $('#nda-cliff-notes').toggle();
-        });
+        if (! this.form.agreed_to_nda) {
+            $('#modal-nda').modal('show');
+
+            $('.toggle-nda').on('click', function(e)
+            {
+                e.preventDefault();
+                $('#full-nda').toggle();
+                $('#nda-cliff-notes').toggle();
+            });
+        }
     },
 
     methods: {
@@ -65,7 +75,14 @@ export default Vue.extend({
             request.always(() => {
                 this.posting = false;
             });
+        },
+
+        agreeToNDA(e) {
+            e.preventDefault();
+            this.form.agreed_to_nda = true;
+            $('#modal-nda').modal('hide');
         }
+
     }
 
 });

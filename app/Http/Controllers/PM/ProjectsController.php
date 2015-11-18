@@ -33,7 +33,17 @@ class ProjectsController extends Controller
      */
     public function newProject()
     {
-        return view('projects/new');
+        $team = [];
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user && $user->current_team) {
+                $team = $user->current_team->toArray();
+            }
+        }
+
+        return view('projects/new', [
+            'state' => ['team' => $team]
+        ]);
     }
 
     /**

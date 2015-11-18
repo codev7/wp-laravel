@@ -8,7 +8,10 @@
 @section('content')
 
 <section class="quote-area">
-    <div class="container" id="quote-form" data-controller="project/new" v-cloak>
+    <div class="container" id="quote-form" data-controller="project/new"
+         v-cloak
+         state="{{json_encode($state)}}"
+    >
         <div class="row">
             <div class="col-md-6">
 
@@ -91,6 +94,8 @@
 
                             <p class="text-muted m-t-0 m-b-lg">You will be able to upload files to your project later.</p>
 
+                            <input class="hidden" v-model="form.agreed_to_nda" type="checkbox" />
+
                             @if(Auth::guest())
                                 <button class="btn btn-success btn-submit pull-right" v-on:click="openStep2($event)"">NEXT STEP</button>
                             @else
@@ -133,9 +138,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</section><!-- / quote-area -->
 
-@include('modals/nda')
+        @include('modals/nda')
+    </div>
+
+</section><!-- / quote-area -->
 
 @endsection

@@ -28,9 +28,6 @@ class Projects extends Controller {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $projectName = $data['project_name'];
-
-
         $user = User::create(['email' => $data['email']]);
 
         $user->name = $data['user_name'];
@@ -44,24 +41,14 @@ class Projects extends Controller {
         $team->owner()->associate($user);
         $team->save();
 
-        Event::fire('user.registered', $user);
-
-        $projectData = [
-            'name' => $projectName,
-            'requested_deadline' => $data['requested_deadline'],
-        ];
-
-        $project = Project::create($projectData);
-        $project->team()->associate($team);
-        $project->save();
-        $project->createOrFindProjectTypeId($data['project_type']);
-
-        Auth::login($user);
-
         $user->switchToTeam($team);
         $user->save();
 
-        $this->postMessageToProject($project, $data['message']);
+        Event::fire('user.registered', $user);
+        Auth::login($user);
+
+        $project = $this->createProject($team, $data);
+
 
         return $this->show($project->id);
     }
@@ -85,18 +72,31 @@ class Projects extends Controller {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $project = Project::create([
-            'name' => $data['project_name'],
-            'requested_deadline' => $data['requested_deadline'],
-        ]);
+        $project = $this->createProject(Auth::user()->currentTeam(), $data);
 
-        $project->team()->associate(Auth::user()->currentTeam());
+        return $this->show($project->id);
+    }
+
+    /**
+     * @param Team $team
+     * @param array $data - ['project_name', 'project_type', 'requested_deadline', 'message'[, 'agreed_to_nda'] ]
+     * @return Project
+     */
+    protected function createProject(Team $team, array $data)
+    {
+        $data['name'] = $data['project_name'];
+        $project = Project::create(array_only($data, ['name', 'requested_deadline']));
+        $project->team()->associate($team);
         $project->save();
         $project->createOrFindProjectTypeId($data['project_type']);
 
         $this->postMessageToProject($project, $data['message']);
 
-        return $this->show($project->id);
+        if (isset($data['agreed_to_nda']) && $data['agreed_to_nda']) {
+            $team->agreeToNDA();
+        }
+
+        return $project;
     }
 
     /**

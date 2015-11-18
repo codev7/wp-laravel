@@ -1,11 +1,6 @@
 export default Vue.extend({
 
-    props: {
-        state: {
-            type: String,
-            required: true
-        }
-    },
+    mixins: [require('./../../mixins/hasState')],
 
     data() {
         return {
@@ -14,10 +9,6 @@ export default Vue.extend({
             data: [],
             message: ''
         }
-    },
-
-    attached() {
-        this.state = JSON.parse(this.state);
     },
 
     ready() {
