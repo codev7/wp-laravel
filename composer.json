@@ -11,7 +11,7 @@
         "aws/aws-sdk-php-laravel": "~2.0@beta",
         "keen-io/keen-io": "~2.5",
         "bugsnag/bugsnag-laravel": "1.*",
-        "maknz/slack": "~1.5",
+        "maknz/slack": "^1.7",
         "pda/pheanstalk": "~3.0",
         "fzaninotto/faker": "~1.4",
         "spatie/laravel-backup": "~2.1",
