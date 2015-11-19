@@ -1,6 +1,7 @@
 @setup
+    $home = "/home/forge/";
     $domain = "{$subdomain}.approvemyviews.com";
-    $path = "/home/forge/{$domain}";
+    $path = "{$home}{$domain}";
 @endsetup
 
 @servers(['forge' => 'forge@cmvplatform.approvemyviews.com'])
@@ -11,6 +12,7 @@
     rm -rf {{$path}}
     echo 'git clone {{$repo}} {{$path}}';
     git clone {{$repo}} {{$path}}
+    sudo /root/deploy {{$domain}}
 @endtask
 
 @task('deploy', ['on' => 'forge'])
