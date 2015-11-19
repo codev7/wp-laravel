@@ -57,6 +57,10 @@ $app->bind('Bitbucket', function() {
     return $bitbucket;
 });
 
+$app->bind('access', function() {
+    return new \CMV\Misc\ACL(Auth::user());
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -100,6 +100,7 @@ class Projects extends Controller {
     }
 
     /**
+     * @Middleware("param-access")
      * @Get("api/projects/{projects}")
      * @param $id
      */

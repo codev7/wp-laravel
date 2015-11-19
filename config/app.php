@@ -212,7 +212,6 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Flash'     => CMV\Misc\Flash::class,
         'AWS'       => Aws\Laravel\AwsFacade::class,
         'Bugsnag'   => Bugsnag\BugsnagLaravel\BugsnagFacade::class,
         'Carbon'    => Carbon\Carbon::class,
@@ -220,6 +219,9 @@ return [
         'HTML'      => Collective\Html\HtmlFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
         'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
+
+        'Flash'     => CMV\Misc\Facades\Flash::class,
+        'Access'    => CMV\Misc\Facades\Access::class,
 
     ],
 

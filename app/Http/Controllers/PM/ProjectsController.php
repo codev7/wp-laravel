@@ -21,7 +21,6 @@ class ProjectsController extends Controller
      */
     public function home()
     {
-
         return view('projects/home');
 
     }

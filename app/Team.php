@@ -2,6 +2,7 @@
 
 namespace CMV;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Spark\Teams\Team as SparkTeam;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,7 +22,7 @@ class Team extends SparkTeam
 
     public function projects()
     {
-        return $this->hasMany('CMV\Models\PM\Project');
+        return $this->hasMany('CMV\Models\PM\Project', 'team_id', 'id');
     }
     
     
@@ -47,6 +48,15 @@ class Team extends SparkTeam
     {
         $this->nda_agreed_at = \Carbon\Carbon::now();
         $this->save();
+    }
+
+    /**
+     * @return BelongsToMany;
+     */
+    public function users()
+    {
+        return $this->belongsToMany('CMV\User', 'user_teams')
+            ->withPivot('team_id', 'user_id', 'role');
     }
 
 }

@@ -153,9 +153,8 @@ class User extends Model implements AuthorizableContract,
 
     public function teams()
     {
-
-        return $this->belongsToMany('CMV\Team','user_teams');
-
+        return $this->belongsToMany('CMV\Team','user_teams')
+            ->withPivot('team_id', 'user_id', 'role');
     }
 
     public function developerProjects()

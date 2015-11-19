@@ -8,3 +8,10 @@
     <script src="{{ asset('js/cmv-js.js') }}"></script>
 @endif
 
+@if (Session::has('flash_message'))
+    <script>
+    @foreach (Session::get('flash_message') as $message)
+        swal({title: '', text: '{{ $message['message'] }}', type: '{{ $message['status'] }}' });
+    @endforeach
+    </script>
+@endif
