@@ -51,6 +51,16 @@ class MainController extends Controller
     }
 
     /**
+     * MSA
+     * @Get("msa", as="msa")
+     * @return MSA
+     */
+    public function msa()
+    {
+        return $this->minifyHTML(view('marketing/msa'));
+    }
+
+    /**
      * Methodology
      * @Get("our-methods", as="methods")
      * @return Methodology View
