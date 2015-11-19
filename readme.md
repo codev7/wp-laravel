@@ -1,5 +1,22 @@
 # Code
 
+## PHP
+
+### API
+
+Most logic is located in the API controllers (_/app/Controllers/Http/API/_). They response with json data.
+
+If route operates with any entity, e.g. _project_ you should name route parameter as plural form of entity name (_projects_).
+ 
+There's a couple of handy middlewares to check the user permissions:
+
+- _CheckAccessByParameters.php_ - forbids request based off route parameters and route method (DELETE/POST/GET);
+Example usege - add the following to the PHPDoc of the controller method - `@Middleware("param-access")`
+- _CheckAccessByReference.php_ - forbids request based off request payload, _reference_type_ and _reference_id_ . There're several models which use that approach, e.g. _File_, _ToDo_.
+Example usege - add the following to the PHPDoc of the controller method - `@Middleware("ref-access")`
+
+Under the hood these middlewares utilize _CMV\Misc\Acl_ class.
+ 
 ## Javascript
 
 Javascript code are located in `/resources/assets/js`.

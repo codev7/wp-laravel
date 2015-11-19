@@ -37,5 +37,6 @@ class Kernel extends HttpKernel
         'ajax' => \CMV\Http\Middleware\AjaxOnly::class,
         'require-wordpress' => \CMV\Http\Middleware\WordPressRequired::class,
         'param-access' => \CMV\Http\Middleware\CheckAccessByParameters::class,
+        'ref-access' => \CMV\Http\Middleware\CheckAccessByReference::class,
     ];
 }
