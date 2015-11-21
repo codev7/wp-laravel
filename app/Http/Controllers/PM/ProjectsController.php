@@ -76,6 +76,19 @@ class ProjectsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @Get("project/{slug}/brief/{brief_id}", as="project.brief", middleware="auth")
+     * @return Response
+     */
+    public function brief($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/brief')->with('project', $project);   
+    }
+
+    /**
+     * Store a newly created resource in storage.
      * @Get("project/{slug}/files", as="project.files", middleware="auth")
      * @return Response
      */
