@@ -21,7 +21,7 @@
 @import "_quote-area";
 
 .navbar-right a.dropdown-toggle {
-	white-space: nowrap;
+    white-space: nowrap;
 
 }
 .table-middle {
@@ -38,24 +38,55 @@
 }
 
 [v-cloak] {
-  opacity: 0;
+    opacity: 0;
 }
 
 [data-controller][v-cloak] {
-  opacity: 0;
+    opacity: 0;
 }
 
 [data-controller] {
-  opacity: 1;
-  transition: opacity .25s ease-in-out;
-  -moz-transition: opacity .25s ease-in-out;
-  -webkit-transition: opacity .25s ease-in-out;
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
 }
 
 .statcard-gray {
-  background: fadeout(#9da9b0,70%);
+    background: fadeout(#9da9b0,70%);
 }
 
 .brief-panel {
-  border-top: 3px solid @brand-primary;
+    border-top: 3px solid @brand-primary;
+}
+
+.screenshot-photo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: fadeout(#000,50%);
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 10000;
+
+
+    .close-screenshot {
+        float: right;
+        margin: 5px 5px 5px 0;
+        border-color: white !important;
+        color: white !important;
+
+        &:hover {
+            background: none;
+        }
+    }
+
+    img {
+        clear: both;
+        max-width: 95%;
+        margin: 10px auto;
+        display: block;
+    }
 }

@@ -30,7 +30,36 @@ var init = function() {
 		
 	});	
 	
+    $(document).on('click','.full-screen-screenshot', function(e)
+    {
 
+        e.preventDefault();
+
+        var imgLink = $(this).attr('href');
+
+        $('body').append('<div class="screenshot-photo"><a href="#" class="btn btn-xs btn-info-outline close-screenshot">CLOSE</a><img src="' + imgLink + '" /></div>');
+
+        console.log(imgLink);
+    });
+
+    $(document).on('click', '.close-screenshot', function(e)
+    {
+
+        e.preventDefault();
+
+
+        $('.screenshot-photo').each(function(e)
+        {   
+            var _this = $(this);
+            _this.fadeOut(function(){
+
+                _this.remove();
+
+            });
+        });
+
+
+    });
 
 	$('.tooltipper').tooltip();
 	
