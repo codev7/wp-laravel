@@ -80,13 +80,13 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-5">
                         <div class="holder clearfix">
-                            <strong class="logo"><a href="/"><span class="sr-only">{{ config('app.company_name') }}</span></a></strong>
+                            <strong class="logo"><a data-pjax href="/"><span class="sr-only">{{ config('app.company_name') }}</span></a></strong>
                             <span class="copyright">&copy; <strong>{{ date('Y') }}</strong></span>
                         </div>
                         <ul class="nav nav-pills add-nav">
-                            <li><a href="{{ route('legal') }}">NDA</a></li>
-                            <li><a href="{{ route('legal') }}">Terms of Service</a></li>
-                            <li><a href="{{ route('legal') }}">Privacy Policy</a></li>
+                            <li><a data-pjax href="{{ route('legal') }}">NDA</a></li>
+                            <li><a data-pjax href="{{ route('legal') }}">Terms of Service</a></li>
+                            <li><a data-pjax href="{{ route('legal') }}">Privacy Policy</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-8 col-md-7">
@@ -97,18 +97,18 @@
                                         <h4>About Us</h4>
                                         <ul class="list-unstyled nav-list">
                                             <li data-controller="cmv-jobs"><a href="#" class="jobs" v-on:click="step1($event)">Jobs</a></li>
-                                            <li><a href="{{ route('about-us') }}">About Us</a></li>
-                                            <li><a href="{{ route('methods') }}">Methodology</a></li>
-                                            <li><a href="{{ route('our-code') }}">Our Code</a></li>
+                                            <li><a data-pjax href="{{ route('about-us') }}">About Us</a></li>
+                                            <li><a data-pjax href="{{ route('methods') }}">Methodology</a></li>
+                                            <li><a data-pjax href="{{ route('our-code') }}">Our Code</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-sm-6">
                                         <h4>Developer Daily</h4>
                                         <ul class="list-unstyled nav-list">
-                                            <li><a href="{{ route('blog') }}">Blog Index</a></li>
-                                            <li><a href="{{ route('blog.category',['category' => 'ui-ux']) }}">UI/UX</a></li>
-                                            <li><a href="{{ route('blog.category', ['category' => 'front-end']) }}">Front End</a></li>
-                                            <li><a href="{{ route('blog.category', ['category' => 'branding']) }}">Branding</a></li>
+                                            <li><a data-pjax href="{{ route('blog') }}">Blog Index</a></li>
+                                            <li><a data-pjax href="{{ route('blog.category',['category' => 'ui-ux']) }}">UI/UX</a></li>
+                                            <li><a data-pjax href="{{ route('blog.category', ['category' => 'front-end']) }}">Front End</a></li>
+                                            <li><a data-pjax href="{{ route('blog.category', ['category' => 'branding']) }}">Branding</a></li>
                                         </ul>
                                     </div>
                                 </div>
