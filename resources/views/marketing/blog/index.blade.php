@@ -37,23 +37,23 @@
                                     <span class="label label-primary category-label">
                                 @endif
                                     {{ wp_get_object_terms(get_the_ID(), 'category')[0]->name }}</span>
-                                <h2><a href="{{ get_permalink() }}">{{ get_the_title() }}</a></h2>
+                                <h2><a data-pjax href="{{ get_permalink() }}">{{ get_the_title() }}</a></h2>
                                 <div class="meta">
                                     <p>posted by Code My Views</p>
                                 </div>
                             </header>
                             @if(get_field('featured_image'))
 
-                                <a href="{{ get_permalink() }}">{!! wp_get_attachment_image(get_field('featured_image'),'square', true, ['class' => 'img-responsive img-rounded img-base']) !!}</a>
+                                <a data-pjax href="{{ get_permalink() }}">{!! wp_get_attachment_image(get_field('featured_image'),'square', true, ['class' => 'img-responsive img-rounded img-base']) !!}</a>
                             
                             @else
 
-                                <a href="{{ get_permalink() }}">{!! wp_get_attachment_image(45604,'square', true, ['class' => 'img-responsive img-rounded img-base']) !!}</a>
+                                <a data-pjax href="{{ get_permalink() }}">{!! wp_get_attachment_image(45604,'square', true, ['class' => 'img-responsive img-rounded img-base']) !!}</a>
 
                             @endif
 
 
-                            <a href="{{ get_permalink() }}" class="btn btn-info pull-right">read story</a>
+                            <a data-pjax href="{{ get_permalink() }}" class="btn btn-info pull-right">read story</a>
                         </div>
                         <?php endwhile; ?>
                     </div><!--posts-append-->
@@ -84,9 +84,9 @@
                     <div class="cell-item">
                         <h3>Learn</h3>
                         <ul class="list-unstyled category-list">
-                            <li><a href="{{ route('blog.category',['category' => 'ui-ux']) }}" class="ico-01">UI/UX design</a></li>
-                            <li><a href="{{ route('blog.category',['category' => 'front-end']) }}" class="ico-02">front end</a></li>
-                            <li><a href="{{ route('blog.category',['category' => 'branding']) }}" class="ico-03">branding</a></li>
+                            <li><a data-pjax href="{{ route('blog.category',['category' => 'ui-ux']) }}" class="ico-01">UI/UX design</a></li>
+                            <li><a data-pjax href="{{ route('blog.category',['category' => 'front-end']) }}" class="ico-02">front end</a></li>
+                            <li><a data-pjax href="{{ route('blog.category',['category' => 'branding']) }}" class="ico-03">branding</a></li>
                         </ul>
                     </div>
                     <div class="cell-item">
