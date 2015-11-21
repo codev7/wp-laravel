@@ -1,5 +1,51 @@
 # Code
 
+## Enable WordPress
+
+WordPress is used to power the blog and some of the other marketing pages.  WordPress is enabled via the WordPressServiceProvider.
+
+To enable WordPress, add the following variables to your .env file:
+
+```
+ENABLE_WP=true
+CLEAR_VIEW_CACHE=true
+WP_SITEURL=http://blog.cmv.local 
+```
+
+In addition, ensure that you have all of the proper DB config variables defined in your .env file:
+
+```
+DB_HOST=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+DB_CONNECTION=
+```
+
+Within your homestead environment, run the following commands to import the database for the WordPress installation:
+
+```
+cd ~/code/cmv.local/wp/
+wp db import cmv_blog.sql
+```
+
+Next, you will need to set up the nginx config on homestead:
+
+```
+serve blog.cmv.local ~/code/cmv.local/wp
+```
+
+And finally, on your host computer, edit /etc/hosts:
+
+```
+192.168.35.40   blog.cmv.local
+```
+
+You should now be able to login to the WordPress site at: http://blog.cmv.local/wp-admin
+
+In addition, all of the WordPress functionality that is used on the MarketingSite controllers will now function correctly.
+
+
 ## PHP
 
 ### API

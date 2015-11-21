@@ -28,24 +28,24 @@
                         <tbody>
 
                             <tr>
-                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 123]) }}">Front End Brief</a> <span data-placement="right" class="tooltipper" title="A front end brief covers all details about the HTML/CSS/JavaScript of this project."><i class="fa fa-question-circle"></i></span></td>
+                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-front-end-brief']) }}">Front End Brief</a> <span data-placement="right" class="tooltipper" title="A front end brief covers all details about the HTML/CSS/JavaScript of this project."><i class="fa fa-question-circle"></i></span></td>
                                 <td class="text-center">5 days ago</td>
                                 <td class="text-center">Dave Gamache</td>
                                 <td class="text-center">5 minutes ago</td>
                                 <td class="text-center">John Doe</td>
                                 <td>
-                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 123]) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-front-end-brief']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 456]) }}">WordPress Brief</a> <span data-placement="right" class="tooltipper" title="A WordPress brief covers all details about the WordPress CMS implementation."><i class="fa fa-question-circle"></i></span></td>
+                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-wordpress-brief']) }}">WordPress Brief</a> <span data-placement="right" class="tooltipper" title="A WordPress brief covers all details about the WordPress CMS implementation."><i class="fa fa-question-circle"></i></span></td>
                                 <td class="text-center">5 days ago</td>
                                 <td class="text-center">Dave Gamache</td>
                                 <td class="text-center">5 minutes ago</td>
                                 <td class="text-center"><em class="text-muted">Not yet approved</em></td>
                                 <td>
-                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 456]) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-wordpress-brief']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
                                 </td>
                             </tr>
                             
