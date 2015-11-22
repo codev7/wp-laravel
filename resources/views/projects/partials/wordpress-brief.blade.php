@@ -165,8 +165,8 @@
                 </ol>
 
 
-                <h4>Checklist Items</h4>
-                <p>The check list items will be used globally across all views.  These items are used during the QA process to verify project success.</p>
+                <h4 >Checklist Items <i  data-title="The check list items will be used globally across all views.  These items are used during the QA process to verify project success." class="tooltipper fa fa-question-circle"></i></h4>
+                
 
                 <div class="checkbox custom-control custom-checkbox">
                   <label class="w-full">

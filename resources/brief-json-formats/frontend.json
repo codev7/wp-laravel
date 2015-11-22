@@ -1,4 +1,5 @@
 {
+    "related_to_brief": [23,22], //briefs can be related to other briefs.  For example, a front end brief can have a WordPress brief associated with it
     "summary": "Here is a quick summary about the project. This project summary will never have more than 300 characters and should serve as a brief overview of the project.",
     "global": {
 

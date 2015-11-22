@@ -1,0 +1,78 @@
+{
+    "related_to_brief": [23,22], //briefs can be related to other briefs.  For example, a WP brief will always require having a front end brief associated with it
+    "summary": "Here is a quick summary about the project. This project summary will never have more than 300 characters and should serve as a brief overview of the project.",
+    "global": {
+        "notes": "This will be a block of markdown text",
+        "checklist": [
+            {
+                "text": "The text associated with the checklist item",
+                "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+            }
+        ]
+    },
+    "templates": [
+        {
+            "name": "Home",
+            "summary": "Here is a quick summary of the view.",
+            "checklist": [
+                {
+                    "category": "name of category",
+                    "text": "The text associated with the checklist item",
+                    "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+                }
+            ],
+            "front_end_brief_view_name": "Home" //name of the view from the associated front end brief that this WP template will use, the design proofs are also automatically pulled in from this association.
+        }
+    ],
+    "post_types": [
+        {
+            "name": "Testimonials",
+            "summary": "Here is a quick summary of the post type.",
+            "has_single_post_page": true,
+            "view_for_single_post_page": "Home", //name of view that the single post page should use, this can be null if has_single_post_page=false
+            "include_in_search": true, //user can define whether or not this CPT shows up in search results on the site
+            "has_archive": true, //user can define whether this CPT has an archives page that displays all of the post types in a feed
+            "view_for_post_archive_page": "Testimonial View", //name of view that single post page should use, this comes from the associated front end brief
+            "meta_data_defaults": {
+                "author": false,
+                "wp_title": true,
+                "content_wysiwyg": true,
+                "excerpt": false,
+                "menu_order": true,
+                "thumbnail": true
+            },
+            "custom_meta_fields": [
+                {
+                    "name": "Testimonial Quote By",
+                    "type": "text",
+                    "required": false
+                },
+                {
+                    "name": "Quote",
+                    "type": "wysiwyg",
+                    "required": true
+                }
+            ]
+        }
+    ],
+    "endpoints": [
+        {
+            "name": "Contact Form",
+            "summary": "Here is a quick summary of the endpoint with expected functionality outlined.",
+            "form_inputs": [
+                {
+                    "name": "first name",
+                    "type": "text",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "type": "email",
+                    "required": true
+                }
+            ],
+            "expected_output_action": "This is a markdown text with a description of what happens after a user submits."
+
+        }
+    ]
+}
