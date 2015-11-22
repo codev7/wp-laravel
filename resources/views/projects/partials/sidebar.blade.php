@@ -41,7 +41,7 @@
 
     <div class="panel panel-default visible-md-block visible-lg-block">
         <div class="panel-body">
-            <h5 class="m-t-0">Details <small>· <a href="#">Edit</a></small></h5>
+            <h5 class="m-t-0">Details @if(hasRole('mastermind') || hasRole('admin'))<small>· <a data-toggle="modal" href="#admin-project-modal">Edit</a></small>@endif</h5>
 
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
@@ -77,7 +77,7 @@
     @if(hasRole('developer') || hasRole('admin') || hasRole('mastermind'))
     <div class="panel panel-default visible-md-block visible-lg-block">
         <div class="panel-body">
-            <h5 class="m-t-0">Developer Details <small>· @if(hasRole('admin'))<a href="#">Edit</a></small>@endif</h5>
+            <h5 class="m-t-0">Developer Details</h5>
 
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
@@ -92,6 +92,8 @@
                     
                 </tbody>
             </table>
+            <hr />
+            <a href="#" class="btn btn-lg btn-block btn-success">Re-deploy Application</a>
         </div>
     </div>
     @endif

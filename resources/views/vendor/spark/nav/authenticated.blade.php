@@ -20,15 +20,15 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav">
 
-				@if(isRouteNameSpace('home') || isRouteNameSpace('settings'))
+				@if(isRouteNameSpace('home') || isRouteNameSpace('settings') || isRouteNameSpace('project/new'))
 					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Dashboard</a></li>
 				@endif
 
-				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')))
+				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRouteNameSpace('project/new') ))
 					<li><a href="{{ route('prospector.dashboard') }}">Prospector Dashboard</a></li>
 				@endif
 
-				@if(hasRole('mastermind') && (isRouteNameSpace('home') || isRouteNameSpace('settings')))
+				@if(hasRole('mastermind') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRouteNameSpace('project/new') ))
 					<li><a href="{{ route('mastermind.dashboard') }}">Mastermind</a></li>
 				@endif
 
@@ -47,7 +47,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a data-pjax href="{{ route('project.new') }}">
+                            <a href="{{ route('project.new') }}">
                                 <i class="fa fa-btn fa-fw fa-plus"></i>Create New Project
                             </a>
                         </li>
