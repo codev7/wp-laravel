@@ -9,10 +9,13 @@
     @include('projects/partials/sidebar')
 
     <div class="col-md-9" data-controller="project/briefs">
-    
+        
+
+
         <ul class="list-group media-list media-list-stream">
             <li class="media list-group-item p-a">
                 <div class="media-body">
+                    <a data-pjax class="btn btn-sm btn-primary pull-right" href="{{ route('project.create_brief', ['slug' => $project->slug]) }}"><i class="fa fa-plus"></i> Create Brief</a>
                     <table class="table table-condensed table-middle m-b-0">
                         <thead>
                             <tr>

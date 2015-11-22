@@ -88,6 +88,20 @@ class ProjectsController extends Controller
     }
 
     /**
+     * @Get("project/{slug}/create-brief", as="project.create_brief", middleware="admin_auth")
+     * @return Response
+     */
+    public function createBrief($slug)
+    {
+
+        $project = Project::whereSlug($slug)->first();
+
+
+        return view('projects/create-brief')->with('project', $project);
+
+    }
+
+    /**
      * Store a newly created resource in storage.
      * @Get("project/{slug}/files", as="project.files", middleware="auth")
      * @return Response
