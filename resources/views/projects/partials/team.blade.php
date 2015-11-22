@@ -33,6 +33,7 @@
         </ul>
     </div>
     <div class="panel-footer text-center">
-        <a href="#"><i class="fa fa-plus"></i> Add a Team Member</a>
+        <a href="#add-team-member" data-toggle="modal"><i class="fa fa-plus"></i> Add a Team Member</a>
     </div>
 </div>
+@include('modals/add-team-member')
