@@ -8,6 +8,8 @@
     <small class="text-muted">{{ $project->name }} - Prepared on November 21, 2015</small>
 </h1>
 
+<div class="clearfix"></div>
+
 <div class="hr-divider m-b m-t">
   <h3 class="hr-divider-content hr-divider-heading">
     Summary 
@@ -175,7 +177,7 @@
                   <label  class="w-full">
                     <input type="checkbox" checked>
                     <span class="custom-control-indicator"></span>
-                    Dropdown menu should have fade in animation: <a href="#">http://srcnsht.my/SCjk2ct</a>
+                    Dropdown menu should have fade in animation: <a class="full-screen-screenshot" href="{{ asset('images/screenshot-icon.png') }}">http://cmvfiles.co/scrnsht/s2cd</a>
                   </label>
                 </div>
             </div>
