@@ -1,0 +1,32 @@
+body.loading {
+    #cmv-spinner {
+        display: block;
+    }
+}
+
+#cmv-spinner {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  background: fadeout(#f4f4f4,10%);
+  z-index: 1000000;
+  width: 100%;
+  display: none;
+  height: 100%;
+}
+
+#cmv-spinner > span {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 29px;
+  background: black;
+  background: url(/code-my-views-square-mark.png) no-repeat;
+  background-size: 30px 29px;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -14.5px;
+  -webkit-animation: fa-spin .85s infinite linear;
+          animation: fa-spin .85s infinite linear;
+}

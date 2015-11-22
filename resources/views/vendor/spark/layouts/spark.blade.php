@@ -24,5 +24,7 @@
 
         @include('common/footer')
     </div>
+
+    <div id="cmv-spinner"><span></span></div>
 </body>
 </html>

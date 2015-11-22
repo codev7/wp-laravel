@@ -135,5 +135,7 @@
     <script src="{{ asset('js/cmv-js.js') }}"></script>
 @endif
 @include('common/footer')
+
+<div id="cmv-spinner"><span></span></div>
 </body>
 </html>
