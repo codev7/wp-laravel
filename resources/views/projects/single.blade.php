@@ -26,45 +26,48 @@
         </div>
 
         <div v-for="thread in data" class="m-t pos-r" v-show="thread.messages.length">
-                    <div class="media list-group-item p-a" >
+            <div class="media list-group-item p-a" >
+                 <a href="#" data-confirm-text="Are you sure you want to delete this thread?" class="delete-thread text-danger"><i class="fa fa-trash"></i></a>
+                <span class="media-left">
+                    <img class="media-object panel-profile-img m-t-0" v-bind:src="thread.messages[0].user.gravatar">
+                </span>
 
-                        <span class="media-left">
-                            <img class="media-object panel-profile-img m-t-0" v-bind:src="thread.messages[0].user.gravatar">
-                        </span>
-
-                        <div class="media-body">
-                            <div class="media-heading">
-                                <small class="pull-right text-muted">4 min</small>
-                                <h5>@{{thread.messages[0].user.name}}</h5>
-                            </div>
-
-                            
-                            @{{{thread.messages[0].content}}}
-                            
-                            
-
-                            <ul class="media-list m-b">
-                                <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
-                                    <span class="media-left">
-                                        <img
-                                        class="media-object img-circle"
-                                        v-bind:src="message.user.gravatar">
-                                    </span>
-                                    <div class="media-body">
-                                        <strong>@{{ message.user.name }}: </strong>
-                                        @{{{ message.content }}}
-                                    </div>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        
+                <div class="media-body">
+                    <div class="media-heading">
+                        <small class="pull-right text-muted">4 min</small>
+                        <h5>@{{thread.messages[0].user.name}}</h5>
                     </div>
-                    <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"></textarea>
 
-                    <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"><i class="fa fa-reply"></i> Submit Reply</button>
+                    
+                    @{{{thread.messages[0].content}}}
+                    
+                    
+
+                    <ul class="media-list m-b">
+                        <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
+                            
+
+
+                            <span class="media-left">
+                                <img
+                                class="media-object img-circle"
+                                v-bind:src="message.user.gravatar">
+                            </span>
+                            <div class="media-body">
+                                <strong>@{{ message.user.name }}: </strong>
+                                @{{{ message.content }}}
+                            </div>
+                        </li>
+                    </ul>
+
                 </div>
+
+                
+            </div>
+            <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"></textarea>
+
+            <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"><i class="fa fa-reply"></i> Submit Reply</button>
+        </div>
     </div>
 
     <div class="col-md-3">

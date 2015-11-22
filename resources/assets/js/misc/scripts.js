@@ -7,6 +7,20 @@ var init = function() {
 		$el.css('width', width);
 	});
 
+    $(document).on('click', '.delete-thread', function(e)
+    {
+
+        e.preventDefault();
+
+        if(confirm($(this).data('confirm-text')))
+        {
+            return true;
+        }
+
+
+        return false;
+    });
+
 	$('.gallery').slick({
 		arrows: false,
 		dots: true,
