@@ -51,6 +51,12 @@
 
 
 
+                        @include('projects/partials/create-brief-front-end')
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         @include('projects/partials/create-brief-wp')
                         
 
