@@ -89,11 +89,12 @@
                         <td><code>ssh://projecturl@bitbucket.org</code></td>
                     </tr>
       
-                    
+                    <tr>
+                        <td><a href="#" class="btn btn-lg btn-block btn-success">Re-deploy Application</a></td>
+                    </tr>
                 </tbody>
             </table>
-            <hr />
-            <a href="#" class="btn btn-lg btn-block btn-success">Re-deploy Application</a>
+            
         </div>
     </div>
     @endif
