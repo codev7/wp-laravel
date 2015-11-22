@@ -9,9 +9,9 @@
     @include('projects/partials/sidebar')
 
     <div class="col-md-6" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
-        <ul class="list-group media-list media-list-stream">
+        <div class="list-group media-list media-list-stream">
 
-            <li class="media list-group-item p-a">
+            <div class="media list-group-item p-a">
                 <div class="form-group">
                     <textarea class="form-control hidden" rows="4" placeholder="Message"
                               v-model="message"
@@ -21,63 +21,50 @@
 
                 <button class="btn btn-block btn-default-outline"
                         v-on:click="postMessage($event)"
-                        v-submit="posting">Submit Message</button>
-            </li>
-
-            <div>
-                <li class="media list-group-item p-a" v-for="thread in data" v-show="thread.messages.length">
-
-                    <a class="media-left" href="#">
-                        <img class="media-object img-circle" v-bind:src="thread.messages[0].user.gravatar">
-                    </a>
-
-                    <div class="media-body">
-                        <div class="media-heading">
-                            <small class="pull-right text-muted">4 min</small>
-                            <h5>@{{thread.messages[0].user.name}}</h5>
-                        </div>
-
-                        <p>
-                            @{{{thread.messages[0].content}}}
-                        </p>
-
-                        {{--
-                        <div class="media-body-inline-grid" data-grid="images">
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="1050" data-height="700" src="{{ asset('images/unsplash_1.jpg') }}">
-                            </div>
-
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_1.jpg') }}">
-                            </div>
-
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="640" data-height="640" src="{{ asset('images/instagram_13.jpg') }}">
-                            </div>
-
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="1048" data-height="700" src="{{ asset('images/unsplash_2.jpg') }}">
-                            </div>
-                        </div>
-                        --}}
-
-                        <ul class="media-list m-b">
-                            <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
-                                <a class="media-left" href="#">
-                                    <img
-                                    class="media-object img-circle"
-                                    v-bind:src="message.user.gravatar">
-                                </a>
-                                <div class="media-body">
-                                    <strong>@{{ message.user.name }}: </strong>
-                                    @{{{ message.content }}}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                        v-submit="posting">Submit New Message</button>
             </div>
-        </ul>
+        </div>
+
+        <div v-for="thread in data" class="m-t pos-r" v-show="thread.messages.length">
+                    <div class="media list-group-item p-a" >
+
+                        <span class="media-left">
+                            <img class="media-object panel-profile-img m-t-0" v-bind:src="thread.messages[0].user.gravatar">
+                        </span>
+
+                        <div class="media-body">
+                            <div class="media-heading">
+                                <small class="pull-right text-muted">4 min</small>
+                                <h5>@{{thread.messages[0].user.name}}</h5>
+                            </div>
+
+                            
+                            @{{{thread.messages[0].content}}}
+                            
+                            
+
+                            <ul class="media-list m-b">
+                                <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
+                                    <span class="media-left">
+                                        <img
+                                        class="media-object img-circle"
+                                        v-bind:src="message.user.gravatar">
+                                    </span>
+                                    <div class="media-body">
+                                        <strong>@{{ message.user.name }}: </strong>
+                                        @{{{ message.content }}}
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        
+                    </div>
+                    <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"></textarea>
+
+                    <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"><i class="fa fa-reply"></i> Submit Reply</button>
+                </div>
     </div>
 
     <div class="col-md-3">

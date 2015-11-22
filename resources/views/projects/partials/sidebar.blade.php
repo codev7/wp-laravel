@@ -33,18 +33,9 @@
 
     @if(hasRole('mastermind') || hasRole('admin'))
 
-    <div class="panel panel-default visible-md-block visible-lg-block">
-        <div class="panel-body">
-            <h5 class="m-t-0">Admin Tools</h5>
-            <a class="m-t-0 btn btn-block btn-primary-outline" href="#"><i class="fa fa-bitbucket"></i> Create Bitbucket Repository</a>
-            <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-link"></i> Create Staging Site</a>
-            <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-dollar"></i> Create Invoice</a>
-            <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-code-fork"></i> Assign to Developer</a>
-            <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-user"></i> Assign to PM</a>
-            <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-flag-checkered"></i> Change Status</a>
-
-        </div>
-    </div>
+    <a class="m-t m-b btn btn-block btn-primary-outline" href="#admin-project-modal" data-toggle="modal"><i class="fa fa-unlock-alt"></i> Admin Tools</a>
+        
+    @include('modals/admin-project')
 
     @endif
 
@@ -55,45 +46,55 @@
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
                     <tr>
-                        <th rowspan="2"><i class="text-muted fa-2x fa fa-calendar m-r"></i></th>
-                        <td><small>Requested Delivery Date</small></td>
+                        <td><strong><i class="text-muted fa fa-calendar"></i> Requested Delivery Date</strong></td>
                     </tr>
 
                     <tr>
-                        <td><strong>Next week</strong></td>
+                        <td>Next week</td>
                     </tr>
+      
 
                     <tr>
-                        <th rowspan="2"><i class="text-muted fa-2x fa fa-anchor m-r"></i></th>
-                        <td><small>Project Type</small></td>
+                        <th><i class="text-muted fa fa-anchor"></i> <strong>Project Type</strong></th>
+                    </tr>
+                    <tr>
+                        <td>{{ $project->type->name }}</td>
                     </tr>
 
-                    <tr>
-                        <td><strong>{{ $project->type->name }}</strong></td>
-                    </tr>
 
                     <tr>
-                        <th rowspan="2"><i class="text-muted fa-2x fa fa-git m-r"></i></th>
-                        <td><small>Git URL</small></td>
+                        <th><i class="text-muted fa fa-link"></i> <strong>Staging URL</strong></th>
                     </tr>
-
                     <tr>
-                        <td><input type="text" class="form-control" value="git@bitbucket.org:codemyviews/cmv-web-application.git"/></td>
+                        <td>site.approvemyviews.com</td>
                     </tr>
-
-                    <tr>
-                        <th rowspan="2"><i class="text-muted fa-2x fa fa-link m-r"></i></th>
-                        <td><small>Staging Site</small></td>
-                    </tr>
-
-                    <tr>
-                        <td><strong><a href="#">site.approvemyviews.com</a></strong></td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
     </div>
 
+    @if(hasRole('developer') || hasRole('admin') || hasRole('mastermind'))
+    <div class="panel panel-default visible-md-block visible-lg-block">
+        <div class="panel-body">
+            <h5 class="m-t-0">Developer Details <small>· @if(hasRole('admin'))<a href="#">Edit</a></small>@endif</h5>
+
+            <table class="table table-condensed table-middle table-striped m-b-0">
+                <tbody>
+                    <tr>
+                        <td><strong><i class="text-muted fa fa-git"></i> Git URL</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td><code>ssh://projecturl@bitbucket.org</code></td>
+                    </tr>
+      
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endif
 
     @if(!isRouteNameSpace('files'))
     <div class="panel panel-default visible-md-block visible-lg-block">
