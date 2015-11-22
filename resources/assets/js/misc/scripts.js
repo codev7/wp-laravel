@@ -44,13 +44,13 @@ var init = function() {
 
 
     var reply_thread_open_class = 'is-opened';
-    $(document).on('mouseenter','.reply-to-a-thread', function(e)
+    $(document).on('keyup','.reply-to-a-thread', function(e)
     {
 
 
         var _this = $(this);
 
-        if( !_this.hasClass(reply_thread_open_class))
+        if( !_this.hasClass(reply_thread_open_class) && _this.val() != '')
         {
 
                 
