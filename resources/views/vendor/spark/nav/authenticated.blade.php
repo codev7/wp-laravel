@@ -34,12 +34,28 @@
 
 				@if(isRouteNameSpace('project') && isset($project))
 				<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
-				<li class="disabled">
-                    <a href="#"><strong>{{ $project->name }}</strong></a>
+				<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><strong>{{ $project->name }} <span class="caret"></span></strong></a>
+
+                    <ul class="dropdown-menu" role="menu">
+
+                        <li class="dropdown-header">Other Projects</li>
+
+                        <li><a href="#">Other Project #1</a></li>
+                        <li><a href="#">Other Project #2</a></li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a data-pjax href="{{ route('project.new') }}">
+                                <i class="fa fa-btn fa-fw fa-plus"></i>Create New Project
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.single') }}">
-                    <a data-pjax href="{{ route('project.single', ['slug' => $project->slug]) }}">Project Dashboard</a>
+                    <a data-pjax href="{{ route('project.single', ['slug' => $project->slug]) }}">Dashboard</a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('project.briefs') }}">
