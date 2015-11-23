@@ -72,7 +72,7 @@
 
     <div class="col-md-3">
         <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
-            Hang tight! We are preparing a project estimate for you.
+            {{ $project->getStatus() }}
         </div>
 
         <div class="panel panel-default m-b-md hidden-xs">

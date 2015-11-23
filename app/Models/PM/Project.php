@@ -13,7 +13,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Project extends Model {
 
 	use SoftDeletes, HasSlug;
-    
+
+    const STATUS_QUOTE = 'quote';
+    const STATUS_BRIEF = 'brief';
+    const STATUS_DEVELOPMENT = 'development';
+    const STATUS_QA = 'qa';
+    const STATUS_APPROVAL = 'approval';
+    const STATUS_COMPLETE = 'complete';
+
     protected $columns = [
         'id',
         'files', //json encoded array ['name' => $fileName, 'url' => $fileUrl, 'uploaded_by' => $user_id, 'date_uploaded' => $date_uploaded, 'deleted' => false]
@@ -170,5 +177,29 @@ class Project extends Model {
     public function hasRepo()
     {
         return $this->bitbucket_slug && $this->bitbucket_slug != "0";
+    }
+
+    /**
+     * Gives status of the project for humans
+     * @return string
+     */
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case (static::STATUS_QUOTE):
+                return "Hang tight! We are preparing a project estimate for you.";
+            case (static::STATUS_BRIEF):
+                return "Working on Brief";
+            case (static::STATUS_DEVELOPMENT):
+                return "Project is in development";
+            case (static::STATUS_QA):
+                return "Project is being tested";
+            case static::STATUS_APPROVAL:
+                return "Waiting for Approval";
+            case static::STATUS_COMPLETE:
+                return "Project is Complete";
+            default:
+                return 'Unknown status';
+        }
     }
 }

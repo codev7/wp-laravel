@@ -85,6 +85,7 @@ class Projects extends Controller {
     protected function createProject(Team $team, array $data)
     {
         $data['name'] = $data['project_name'];
+        $data['status'] = Project::STATUS_QUOTE;
         $project = Project::create(array_only($data, ['name', 'requested_deadline']));
         $project->team()->associate($team);
         $project->save();
