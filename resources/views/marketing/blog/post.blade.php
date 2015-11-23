@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="thumbnail thumbnail-item">
-                                <a href="/blog/10-tips-for-designing-icons-that-dont-suck"><img src="{{ asset('images/img-41.jpg') }}" alt="images description" ></a>
+                                <a data-pjax href="/blog/10-tips-for-designing-icons-that-dont-suck"><img src="{{ asset('images/img-41.jpg') }}" alt="images description" ></a>
                                 <div class="caption">
                                     <h4><a href="/blog/10-tips-for-designing-icons-that-dont-suck">10 Tips for Designing Icons That Don’t Suck</a></h4>
                                     <p>Almost every designer is thinking about app design these days. One of the smallest features of every app is</p>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="thumbnail thumbnail-item">
-                                <a href="/blog/how-to-center-anything-with-css"><img src="{{ asset('images/img-42.jpg') }}" alt="images description" ></a>
+                                <a data-pjax href="/blog/how-to-center-anything-with-css"><img src="{{ asset('images/img-42.jpg') }}" alt="images description" ></a>
                                 <div class="caption">
                                     <h4><a href="/blog/how-to-center-anything-with-css">How To Center Anything With CSS</a></h4>
                                     <p>Recently, we took a dive into the very core concepts behind CSS layout and explored the differences between...</p>

@@ -19,7 +19,7 @@ class User extends Model implements AuthorizableContract,
                                     CanResetPasswordContract,
                                     TwoFactorAuthenticatableContract
 {
-    use Authorizable, Billable, CanResetPassword, TwoFactorAuthenticatable, CanJoinTeams,SoftDeletes;
+    use Authorizable, Billable, CanResetPassword, TwoFactorAuthenticatable, CanJoinTeams, SoftDeletes;
 
 
     protected $columns = [

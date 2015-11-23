@@ -35,7 +35,7 @@ export default Vue.extend({
     methods: {
         openInviteModal() {
             this.form.email = '';
-            $("#modal-invite-to-team").modal("show");
+            $("#add-team-member").modal("show");
         },
         sendInvite() {
             this.sendingInvite = true;
@@ -54,7 +54,6 @@ export default Vue.extend({
         removeFromTeam(user) {
             this.team.users = _.removeById(user.id, this.team.users);
             this.$http.delete(`/settings/teams/${this.team.id}/members/${user.id}`, {}, () => {
-
             });
         }
     }

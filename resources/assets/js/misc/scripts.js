@@ -7,6 +7,20 @@ var init = function() {
 		$el.css('width', width);
 	});
 
+    $(document).on('click', '.delete-thread', function(e)
+    {
+
+        e.preventDefault();
+
+        if(confirm($(this).data('confirm-text')))
+        {
+            return true;
+        }
+
+
+        return false;
+    });
+
 	$('.gallery').slick({
 		arrows: false,
 		dots: true,
@@ -30,7 +44,79 @@ var init = function() {
 		
 	});	
 	
+    $(document).on('click','.full-screen-screenshot', function(e)
+    {
 
+        e.preventDefault();
+
+        var imgLink = $(this).attr('href');
+
+        $('body').append('<div class="screenshot-photo"><a href="#" class="btn btn-xs btn-info-outline close-screenshot">CLOSE</a><img src="' + imgLink + '" /></div>');
+
+        console.log(imgLink);
+    });
+
+
+    var reply_thread_open_class = 'is-opened';
+    $(document).on('keyup','.reply-to-a-thread', function(e)
+    {
+
+
+        var _this = $(this);
+
+        if( !_this.hasClass(reply_thread_open_class) && _this.val() != '')
+        {
+
+                
+                _this.next('.btn-reply-to-thread').fadeIn();
+
+                _this.animate({
+
+                    height: '120px'
+
+                },200).addClass(reply_thread_open_class);
+
+        }
+        
+
+
+    }).on('mouseleave','.reply-to-a-thread', function()
+    {
+        var _this = $(this);
+
+        if(_this.val() == '')
+        {
+            _this.next('.btn-reply-to-thread').fadeOut();
+
+            _this.animate({
+
+                height: '50px'
+
+            },200).removeClass(reply_thread_open_class);
+        }
+    });
+
+
+
+
+    $(document).on('click', '.close-screenshot', function(e)
+    {
+
+        e.preventDefault();
+
+
+        $('.screenshot-photo').each(function(e)
+        {   
+            var _this = $(this);
+            _this.fadeOut(function(){
+
+                _this.remove();
+
+            });
+        });
+
+
+    });
 
 	$('.tooltipper').tooltip();
 	

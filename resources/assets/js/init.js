@@ -61,9 +61,17 @@ export default {
             timeout: 3000
         });
 
+        $(document).on('pjax:clicked', () => {
+
+            $('body').addClass('loading');
+
+        });
+
         $(document).on('pjax:success', () => {
             mountControllers("#pjax-container [data-controller]");
             this.scripts();
+
+            $('body').removeClass('loading');
 
             // make nav link active
             $("a[data-pjax]").each(function(i, el) {

@@ -28,13 +28,15 @@
             </li>
         </ul>
     </div>
+        {{--@include('modals.invite-to-team')--}}
     @if (Auth::user()->currentTeam->pivot->role == 'owner')
         <div class="panel-footer text-center">
-            <a href="#" v-on:click.prevent="openInviteModal">
+            <a href="#"
+               v-on:click.prevent="openInviteModal">
                 <i class="fa fa-plus"></i> Add a Team Member
             </a>
         </div>
-
-        @include('modals.invite-to-team')
     @endif
+
+    @include('modals/add-team-member')
 </div>

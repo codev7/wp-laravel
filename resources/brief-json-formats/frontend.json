@@ -1,0 +1,54 @@
+{
+    "related_to_brief": [23,22], //briefs can be related to other briefs.  For example, a front end brief can have a WordPress brief associated with it
+    "summary": "Here is a quick summary about the project. This project summary will never have more than 300 characters and should serve as a brief overview of the project.",
+    "global": {
+
+        "notes": "This will be a block of markdown text",
+        "checklist": [
+            {
+                "text": "The text associated with the checklist item",
+                "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+            }
+        ]
+    },
+    "views": [
+        {
+            "name": "Home",
+            "summary": "Here is a quick summary of the view.",
+            "checklist": [
+                {
+                    "category": "name of category",
+                    "text": "The text associated with the checklist item",
+                    "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+                }
+            ],
+            "design_proofs": [
+                {
+                    "name": "Desktop",
+                    "screenshot_url": "https://cmvfiles.co/Cdj3c"
+                }
+            ],
+            "design_file_id": 1 //id of the file in files table where the full design file exists for the view
+        }
+    ],
+    "modals": [
+        {
+            "name": "Contact Us Form",
+            "summary": "Here is a quick summary of the modal.",
+            "checklist": [
+                {
+                    "category": "name of category",
+                    "text": "The text associated with the checklist item",
+                    "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+                }
+            ],
+            "design_proofs": [
+                {
+                    "name": "Modal Window",
+                    "screenshot_url": "https://cmvfiles.co/Cdj3c"
+                }
+            ],
+            "design_file_id": 1 //id of the file in files table where the full design file exists for the view
+        }
+    ]
+}

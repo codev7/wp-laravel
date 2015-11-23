@@ -98,11 +98,11 @@ class ImportDataFromPipelineDeals extends Command
         $contact = Contact::where('email', $person['email'])->first();
         if(!$contact)
         {
-            $contact = $this->createNewContact( $person );
+            $contact = $this->createNewContact($person);
         }
 
         if($contact) {
-            $contact->pipeline_deals_id = $person['user']['id'];
+            $contact->pipeline_deals_id = $person['id'];
             $contact->save();
         }
     }
@@ -121,7 +121,7 @@ class ImportDataFromPipelineDeals extends Command
             return false;
         }
 
-        $this->info('Adding a new contact: ' . $person['email'] .'  at ' . $person['company_name'] .'.');
+        $this->info('Adding a new contact: ' . $person['email'] .' at ' . $person['company_name'] .'.');
         $company = Company::firstOrCreate(['name' => $person['company_name']]);
         return $company->contacts()->firstOrCreate(['email' => $person['email']]);
     }
@@ -151,16 +151,22 @@ class ImportDataFromPipelineDeals extends Command
                 $rep = User::where('pipeline_user_id', $note['user']['id'])->first();
                 if($rep) {
                     $activity->salesRep()->associate($rep);
+                } else {
+                    $this->error("no rep with pipeline_user_id #{$note['user']['id']} found");
                 }
 
                 $company = Company::where('name', $note['company']['name'])->first();
                 if($company) {
                     $activity->company()->associate($company);
+                } else {
+                    $this->error("no company with name '{$note['company']['name']}' found");
                 }
 
                 $contact = Contact::where(['pipeline_deals_id' => $note['person_id']])->first();
                 if($contact) {
                     $activity->contact()->associate($contact);
+                } else {
+                    $this->error("no contact with pipeline_deals_id #{$note['person_id']} found");
                 }
 
                 $activity->save();
@@ -179,9 +185,10 @@ class ImportDataFromPipelineDeals extends Command
     protected function importReps()
     {
         $reps = [
-            ['name' => 'Joe Swint', 'email' => 'joe@codemyviews.com','pipeline_user_id' => '174811'],
-            ['name' => 'Connor Hood', 'email' => 'connor@codemyviews.com','pipeline_user_id' => '152653'],
-            ['name' => 'Nate McGuire', 'email' => 'nate@codemyviews.com','pipeline_user_id' => '165982'],
+            ['name' => 'Joe Swint', 'email' => 'joe@codemyviews.com','pipeline_user_id' => '174811', 'is_sales_rep' => true],
+            ['name' => 'Connor Hood', 'email' => 'connor@codemyviews.com','pipeline_user_id' => '152653', 'is_sales_rep' => true],
+            ['name' => 'Nate McGuire', 'email' => 'nate@codemyviews.com','pipeline_user_id' => '165982', 'is_sales_rep' => true],
+            ['name' => 'Daniel Yoo', 'email' => 'daniel@codemyviews.com','pipeline_user_id' => '189604', 'is_sales_rep' => true]
         ];
 
         foreach($reps as $rep)
