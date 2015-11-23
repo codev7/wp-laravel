@@ -34,7 +34,7 @@
     </form>
 
     @if($company->salesRep)
-    <p class="m-t-md">This contact is assigned to:<br /><strong>{{ $company->salesRep->first_name }}</strong></p>
+    <p class="m-t-md">This contact is assigned to:<br /><strong>{{ $company->salesRep()->first()->name }}</strong></p>
     @endif
 </div>
 
