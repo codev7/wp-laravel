@@ -102,7 +102,7 @@ class ImportDataFromPipelineDeals extends Command
         }
 
         if($contact) {
-            $contact->pipeline_deals_id = $person['user']['id'];
+            $contact->pipeline_deals_id = $person['id'];
             $contact->save();
         }
     }
