@@ -188,6 +188,7 @@ class ImportDataFromPipelineDeals extends Command
             ['name' => 'Joe Swint', 'email' => 'joe@codemyviews.com','pipeline_user_id' => '174811', 'is_sales_rep' => true],
             ['name' => 'Connor Hood', 'email' => 'connor@codemyviews.com','pipeline_user_id' => '152653', 'is_sales_rep' => true],
             ['name' => 'Nate McGuire', 'email' => 'nate@codemyviews.com','pipeline_user_id' => '165982', 'is_sales_rep' => true],
+            ['name' => 'Daniel Yoo', 'email' => 'daniel@codemyviews.com','pipeline_user_id' => '189604', 'is_sales_rep' => true]
         ];
 
         foreach($reps as $rep)
