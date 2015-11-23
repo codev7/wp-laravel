@@ -36,7 +36,7 @@
 
                         <div class="well well-small">
 
-                            <h5 class="text-muted m-a-0 pull-right">Completed by {{ $activity->salesRep->first_name }}</h5>
+                            <h5 class="text-muted m-a-0 pull-right">Completed by {{ $activity->salesRep()->first()->name }}</h5>
                             <h4 class="m-a-0"><strong>{{ $activity->created_at->diffForHumans() }}</strong></h4>
 
                             <hr />
