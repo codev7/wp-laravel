@@ -27,31 +27,31 @@
 
         <div v-for="thread in data" class="m-t pos-r" v-show="thread.messages.length">
             <div class="media list-group-item p-a" >
-                 <a href="#" data-confirm-text="Are you sure you want to delete this thread?" class="delete-thread text-danger"><i class="fa fa-trash"></i></a>
+                <a href="#" class="delete-thread text-danger"
+                   {{--v-if="thread.canDelete"--}}
+                   v-on:click.prevent="deleteThreadConfirm(thread)">
+                    <i class="fa fa-trash"></i>
+                </a>
+
                 <span class="media-left">
                     <img class="media-object panel-profile-img m-t-0" v-bind:src="thread.messages[0].user.gravatar">
                 </span>
 
                 <div class="media-body">
                     <div class="media-heading">
-                        <small class="pull-right text-muted">4 min</small>
+                        <small class="pull-right text-muted"
+                               v-text="thread.messages[0].created_at | ago" ></small>
                         <h5>@{{thread.messages[0].user.name}}</h5>
                     </div>
 
-                    
                     @{{{thread.messages[0].content}}}
-                    
-                    
 
                     <ul class="media-list m-b">
                         <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
-                            
-
 
                             <span class="media-left">
-                                <img
-                                class="media-object img-circle"
-                                v-bind:src="message.user.gravatar">
+                                <img class="media-object img-circle"
+                                     v-bind:src="message.user.gravatar">
                             </span>
                             <div class="media-body">
                                 <strong>@{{ message.user.name }}: </strong>

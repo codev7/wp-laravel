@@ -75,4 +75,14 @@ class Threads extends Controller {
         return $this->show($message->thread->id);
     }
 
+    /**
+     * @Delete("api/threads/{threads}")
+     */
+    public function destroy($id)
+    {
+        $thread = Thread::find($id);
+        $thread->delete();
+
+        return $this->respondWithSuccess();
+    }
 }

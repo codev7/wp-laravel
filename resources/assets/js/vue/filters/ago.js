@@ -1,3 +1,6 @@
 Vue.filter('ago', function (datetime) {
-    return moment(datetime).fromNow(true);
+    var offset = moment().utcOffset();
+    var datetime = moment(datetime).add(offset, 'minutes');
+
+    return datetime.fromNow(true);
 });

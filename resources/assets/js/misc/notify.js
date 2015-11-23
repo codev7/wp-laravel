@@ -23,6 +23,22 @@ export default {
         swal({
             title: message,
             type: "success"
-        })
+        });
+    },
+    confirm(title, text, onConfirm) {
+        swal({
+            title: title,
+            text: text,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes",
+            closeOnConfirm: true
+        }, onConfirm);
+
+        swal({
+            title: message,
+            type: "confirm"
+        });
     }
 }
