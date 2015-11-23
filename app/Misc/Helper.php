@@ -206,20 +206,21 @@ function giveUserPropertyJS($properties)
 
 function getCodeMyViewsUserObject()
 {
-
+    $user = Auth::user();
     $output = [
         'logged_in' => Auth::check(),
-        'user_id' => Auth::check() ? Auth::user()->id : null,
+        'user_id' => Auth::check() ? $user->id : null,
         'admin' => Auth::check() ? Auth::user()->is_admin ? true : false : false,
         'prod' => isProduction(),
         //'zref_route' => route('zref'),
         'environment' => App::environment()
-
     ];
 
+    if ($user && $user->currentTeam) {
+        $output['team'] = $user->currentTeam->toArray();
+    }
 
     return json_encode($output);
-
 }
 
 

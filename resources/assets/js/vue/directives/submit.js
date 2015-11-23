@@ -6,14 +6,14 @@
 Vue.directive('submit', {
     initialHTML: '',
     bind: function () {
-        this.initialHTML = this.el.innerHTML;
+        this.initialHTML = $(this.el).html();
     },
     update(value) {
         if (value) {
-            this.el.innerHTML = "<i class='fa fa-refresh fa-spin'></i>";
+            $(this.el).html("<i class='fa fa-refresh fa-spin'></i>");
             this.el.disabled = true;
         } else {
-            this.el.innerHTML = this.initialHTML;
+            $(this.el).html(this.initialHTML);
             this.el.disabled = false;
         }
     }

@@ -24,14 +24,16 @@ class ProjectManagementSeeder extends Seeder
         /* Teams */
         factory(CMV\Team::class,50)->create()->each(function($team) {
 
-            $team->owner()->associate(  factory(CMV\User::class)->create() );
+            $owner = factory(CMV\User::class)->create();
+
+            $team->owner()->associate($owner);
             $team->save();
+
+            $team->users()->attach($owner->id, ['role' => 'owner']);
 
             //save team members
             factory(CMV\User::class,4)->create()->each(function($user) use($team) {
-
-                $team->users()->attach($user->id);
-
+                $team->users()->attach($user->id, ['role' => 'member']);
             });
         });
 

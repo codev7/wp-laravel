@@ -6,5 +6,6 @@ export default {
     'project/invoices': require('./controllers/project/invoices'),
     'project/todos': require('./controllers/project/todos'),
     'project/new': require('./controllers/project/new'),
+    'project/team': require('./controllers/project/team'),
     'cmv-jobs': require('./controllers/cmv-jobs')
 };

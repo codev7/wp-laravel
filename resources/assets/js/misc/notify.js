@@ -18,6 +18,11 @@ export default {
             confirmButtonText: "Ok",
             closeOnConfirm: true
         });
-
+    },
+    success(message) {
+        swal({
+            title: message,
+            type: "success"
+        })
     }
 }
