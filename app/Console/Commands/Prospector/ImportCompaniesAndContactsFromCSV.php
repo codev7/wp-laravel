@@ -149,6 +149,17 @@ class ImportCompaniesAndContactsFromCSV extends Command
             $company->type = $line['type'];
         }
 
+        if(isset($line['assigned_to']))
+        {
+            $rep = \CMV\User::where('email', $line['assigned_to'])->first();
+            if($rep) {
+                $company->salesRep()->associate($rep);
+            } else {
+                $this->error("no rep '{$line['assigned_to']}' found!");
+            }
+            
+        }
+
         $contact = $company->contacts()->firstOrCreate(['email' => $line['email']]);
         if(isset($line['first_name']))
         {
