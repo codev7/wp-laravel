@@ -11,10 +11,10 @@
 
             <h5 class="panel-title">
                 <small>Project Engineer</small><br />
-                Dave Gamache
+                {{ $project->projectManager->name }}
             </h5>
 
-            <p class="m-b-0">Hey, I'm Dave.  I am your project engineer.</p>
+            <p class="m-b-0">Hey, I'm {{ $project->projectManager->getFirstName() }}.  I am your project engineer.</p>
 
         </div>
     </div>
@@ -23,10 +23,18 @@
         <div class="panel-body text-center">
             <h5 class="panel-title">
                 <small>Developer</small><br />
-                John Jiggins
+                @if ($project->developer)
+                    {{ $project->developer->name }}
+                @endif
             </h5>
 
-            <p class="m-b-0">I am the coder on your project.</p>
+            <p class="m-b-0">
+                @if ($project->developer)
+                I am the coder on your project.
+                @else
+                    Developer not yet assigned to this project.
+                @endif
+            </p>
 
         </div>
     </div>
@@ -68,7 +76,7 @@
                     <tr>
                         <td>site.approvemyviews.com</td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>
