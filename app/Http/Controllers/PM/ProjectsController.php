@@ -2,6 +2,7 @@
 
 namespace CMV\Http\Controllers\PM;
 
+use CMV\Models\PM\UserNews;
 use Illuminate\Http\Request;
 use CMV\Http\Requests;
 use CMV\Http\Controllers\Controller;
@@ -10,10 +11,11 @@ use CMV\User;
 use CMV\Team;
 use CMV\Models\PM\Project;
 use Auth;
+use Illuminate\Http\Response;
 
 class ProjectsController extends Controller
 {
-    
+
     /**
      * Store a newly created resource in storage.
      * @Get("home", as="app.home", middleware="auth")
@@ -22,7 +24,6 @@ class ProjectsController extends Controller
     public function home()
     {
         return view('projects/home');
-
     }
 
     /**
@@ -52,13 +53,12 @@ class ProjectsController extends Controller
      */
     public function single($slug)
     {
-
-
         $project = Project::whereSlug($slug)->first();
+        $news = UserNews::getNewsByUser(Auth::user());
 
-
-        return view('projects/single')->with('project', $project);
-
+        return view('projects/single')
+            ->with('project', $project)
+            ->with('news', $news);
     }
 
     /**
@@ -70,8 +70,7 @@ class ProjectsController extends Controller
     {
         $project = Project::whereSlug($slug)->first();
 
-
-        return view('projects/briefs')->with('project', $project);   
+        return view('projects/briefs')->with('project', $project);
     }
 
     /**
@@ -83,7 +82,6 @@ class ProjectsController extends Controller
     {
         $project = Project::whereSlug($slug)->first();
 
-
         return view('projects/brief')->with('project', $project)->with('brief_id', $brief_id);
     }
 
@@ -93,12 +91,9 @@ class ProjectsController extends Controller
      */
     public function createBrief($slug)
     {
-
         $project = Project::whereSlug($slug)->first();
 
-
         return view('projects/create-brief')->with('project', $project);
-
     }
 
     /**
@@ -110,8 +105,7 @@ class ProjectsController extends Controller
     {
         $project = Project::whereSlug($slug)->first();
 
-
-        return view('projects/files')->with('project', $project);   
+        return view('projects/files')->with('project', $project);
     }
 
     /**
@@ -123,8 +117,7 @@ class ProjectsController extends Controller
     {
         $project = Project::whereSlug($slug)->first();
 
-
-        return view('projects/invoices')->with('project', $project);   
+        return view('projects/invoices')->with('project', $project);
     }
 
     /**
@@ -136,16 +129,6 @@ class ProjectsController extends Controller
     {
         $project = Project::whereSlug($slug)->first();
 
-
-        return view('projects/to-dos')->with('project', $project);   
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @Post("project/create", as="project.create")
-     * @return Response
-     */
-    public function create(Request $request)
-    {
+        return view('projects/to-dos')->with('project', $project);
     }
 }

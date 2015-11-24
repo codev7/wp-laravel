@@ -7,5 +7,6 @@ export default {
     'project/todos': require('./controllers/project/todos'),
     'project/new': require('./controllers/project/new'),
     'project/team': require('./controllers/project/team'),
+    'project/news': require('./controllers/project/news'),
     'cmv-jobs': require('./controllers/cmv-jobs')
 };

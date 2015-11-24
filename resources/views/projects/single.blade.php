@@ -75,13 +75,21 @@
             {{ $project->getStatus() }}
         </div>
 
-        <div class="panel panel-default m-b-md hidden-xs">
-            <div class="panel-body">
-                <button type="button" style="top: -10px; right: -10px" class="close pos-r" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h5 class="m-t-0">Concierge Service</h5>
-                <a href="{{ route('wp-concierge') }}"><img class="img-thumbnail" src="{{ asset('images/img-10.png') }}"></a>
-                <p class="m-t"><strong>Looking for ongoing support?</strong> Check out our VIP Concierge service.</p>
-                <a href="{{ route('wp-concierge') }}" class="btn btn-primary-outline btn-sm">Learn More</a>
+        <div data-controller="project/news" state="{{ json_encode($news) }}" v-cloak v-show="news.id">
+            <div class="panel panel-default m-b-md hidden-xs" v-el:container>
+                <div class="panel-body">
+                    <button type="button" style="top: -10px; right: -10px" class="close pos-r" data-dismiss="alert" aria-label="Close"
+                            v-on:click.prevent="markViewed(news.id)"><span aria-hidden="true">&times;</span></button>
+
+                    <h5 class="m-t-0">@{{ news.title }}</h5>
+                    <a href="@{{ news.link }}" target="_blank">
+                        <img class="img-thumbnail" v-bind:src="news.image">
+                    </a>
+                    <p class="m-t">
+                        @{{{ news.text }}}
+                    </p>
+                    <a href="@{{ news.link }}" target="_blank" class="btn btn-primary-outline btn-sm">Learn More</a>
+                </div>
             </div>
         </div>
 
