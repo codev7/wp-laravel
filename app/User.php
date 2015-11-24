@@ -115,9 +115,19 @@ class User extends Model implements AuthorizableContract,
 
     public function isDeveloper()
     {
+        return $this->is_developer;
+    }
 
-        return $this->is_developer; 
+    public static function developers()
+    {
+        return static::where('is_developer', true)->get();
+    }
 
+    public static function projectManagers()
+    {
+        return static::where('is_admin', true)
+            ->orWhere('is_mastermind', true)
+            ->get();
     }
 
     public function getFirstName()

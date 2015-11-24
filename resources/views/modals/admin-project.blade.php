@@ -3,65 +3,76 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{ $project->name }}</h4>
+                <h4 class="modal-title">@{{ initialProject.name }}</h4>
             </div>
             <div class="modal-body">
                 
                 <div class="row">
                     <div class="col-sm-8">
-                        <h5>Edit <strong>"{{ $project->name }}"</strong> Project Details</h5>
+                        <h5>Edit <strong>"@{{ initialProject.name }}"</strong> Project Details</h5>
 
-                        <form>
+                        <form v-on:submit.prevent="updateProject">
                             <div class="form-group">
                                 <label>Project Name</label>
-                                <input type="text" class="form-control" value="{{ $project->name }}" />
+                                <input type="text" class="form-control" v-model="project.name" />
                             </div>
 
                             <div class="form-group">
                                 <label>Project Type</label>
-                                <select class="form-control">
-                                    <option>Project type name</option>
-                                    <option>Project type name</option>
-                                    <option>Project type name</option>
-                                    <option>Project type name</option>
-                                    <option>Project type name</option>
+                                <select class="form-control" v-model="project.project_type_id">
+                                    @foreach (\CMV\Models\PM\ProjectType::all() as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Project Status</label>
+                                <select class="form-control" v-model="project.status">
+                                    @foreach (\CMV\Models\PM\Project::$statuses as $status)
+                                        <option value="{{ $status }}">{{ $status }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Assigned Developer</label>
-                                <select class="form-control">
-                                    <option>Not yet assigned</option>
-                                    <option>Name of developer</option>
-                                    <option>Name of developer</option>
-                                    <option>Name of developer</option>
-                                    <option>Name of developer</option>
+                                <select class="form-control" v-model="project.developer_id">
+                                    <option value="">Not yet assigned</option>
+                                    @foreach (\CMV\User::developers() as $dev)
+                                        <option value="{{ $dev->id }}">{{ $dev->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Assigned Project Manager</label>
-                                <select class="form-control">
-                                    <option>Not yet assigned</option>
-                                    <option>Name of PM</option>
-                                    <option>Name of PM</option>
-                                    <option>Name of PM</option>
-                                    <option>Name of PM</option>
+                                <select class="form-control" required v-model="project.project_manager_id">
+                                    <option value="">Not yet assigned</option>
+                                    @foreach (\CMV\User::projectManagers() as $pm)
+                                        <option value="{{ $pm->id }}">{{ $pm->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Save Project Details</button>
+                            <button type="submit" class="btn btn-lg btn-success btn-block"
+                                    v-submit="states.updatingProject">Save Project Details</button>
                         </form>
                     </div><!--col-->
 
                     <div class="col-sm-4">
                         <h5 class="m-t-0">Admin Tools</h5>
-                        <a class="m-t-0 btn btn-block btn-primary-outline" href="#"><i class="fa fa-bitbucket"></i> Create Bitbucket Repository</a>
-                        <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-link"></i> Create Staging Site</a>
+                        <button class="m-t-0 btn btn-block btn-primary-outline"
+                                v-submit="states.creatingBBRepository"
+                                v-on:click.prevent="createBBRepository()"><i class="fa fa-bitbucket"></i> Create Bitbucket Repository</button>
+                        <button class="m-t btn btn-block btn-primary-outline"
+                                v-submit="states.creatingStagingSite"
+                                v-on:click.prevent="createStagingSite()"><i class="fa fa-link"></i> Create Staging Site</button>
                         <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-dollar"></i> Create Invoice</a>
                         <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-file-o"></i> Create Brief</a>
-                        <a class="m-t btn btn-block btn-primary-outline" href="#"><i class="fa fa-envelope"></i> Resend Invoice Email</a>
-    
+                        <button class="m-t btn btn-block btn-primary-outline"
+                                v-submit="states.resendingInvoice"
+                                v-on:click.prevent="resendInvoice()"><i class="fa fa-envelope"></i> Resend Invoice Email</button>
                     </div><!--col-->
                 </div><!--row-->
             </div><!--modal-->   

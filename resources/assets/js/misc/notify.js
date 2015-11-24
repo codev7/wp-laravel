@@ -1,6 +1,5 @@
 export default {
-    validation(response) {
-        var messages = JSON.parse(response);
+    validation(messages) {
         var template = _.template(`<ul class="list-unstyled">
                     <% _.forEach(data, function(errors) { %>
                         <% _.forEach(errors, function(error) {%>
@@ -18,6 +17,13 @@ export default {
             confirmButtonText: "Ok",
             closeOnConfirm: true
         });
+    },
+    error(message) {
+        swal({
+            title: 'Error occurred!',
+            type: "warning",
+            text: message
+        })
     },
     success(message) {
         swal({

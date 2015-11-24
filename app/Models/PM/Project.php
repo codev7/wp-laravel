@@ -5,6 +5,7 @@ namespace CMV\Models\PM;
 use CMV\Models\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Event;
 
 /**
 * This model holds all data that pertains to the projects
@@ -74,6 +75,16 @@ class Project extends Model {
         'next_month',
         'not_sure'
     ];
+
+    public static function boot()
+    {
+        self::updating(function(Project $project) {
+            $dirty = $project->getDirty();
+            if (isset($dirty['developer_id']) && $dirty['developer_id']) {
+                Event::fire('project.developer-assigned', $project);
+            }
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

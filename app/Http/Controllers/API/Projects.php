@@ -3,9 +3,12 @@ namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\Project, CMV\Team, CMV\User;
 use CMV\Services\MessagesService;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Input, Validator, Auth, Event;
 
 class Projects extends Controller {
+
+    use DispatchesJobs;
 
     /**
      * @Middleware("auth")
@@ -114,6 +117,88 @@ class Projects extends Controller {
         }
 
         return $project;
+    }
+
+    /**
+     * @Middleware("admin_auth")
+     * @Put("api/projects/{projects}")
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update($id)
+    {
+        $data = Input::all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required',
+            'developer_id' => 'exists:users,id',
+            'project_manager_id' => 'required|exists:users,id',
+            'project_type_id' => 'required|exists:project_types,id',
+            'status' => 'required|in:'.implode(',', Project::$statuses)
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $project = Project::find($id);
+        $project->name = $data['name'];
+        $project->developer_id = $data['developer_id'];
+        $project->project_manager_id = $data['project_manager_id'];
+        $project->project_type_id = $data['project_type_id'];
+        $project->status = $data['status'];
+        $project->save();
+
+        return $this->show($project->id);
+    }
+
+    /**
+     * @Middleware("admin_auth")
+     * @Post("api/projects/{projects}/create_bb_repository")
+     * @return mixed
+     */
+    public function createBBRepository($id)
+    {
+        // check if already has repo
+        /** @var Project $project */
+        $project = Project::find($id);
+        if ($project->hasRepo()) {
+            return $this->respondWithError('Project already has associated repository');
+        }
+
+        // $this->dispatch(new ..)
+
+        return $this->respondWithSuccess();
+    }
+
+    /**
+     * @Middleware("admin_auth")
+     * @Post("api/projects/{projects}/resend_invoice")
+     * @param $id
+     * @return mixed
+     */
+    public function resendInvoice($id)
+    {
+        $project = Project::find($id);
+
+        // $this->dispatch(new ..)
+
+        return $this->respondWithSuccess();
+    }
+
+    /**
+     * @Middleware("admin_auth")
+     * @Post("api/projects/{projects}/create_staging_site")
+     * @param $id
+     * @return mixed
+     */
+    public function createStagingSite($id)
+    {
+        $project = Project::find($id);
+
+        // $this->dispatch(new ..)
+
+        return $this->respondWithSuccess();
     }
 
     /**

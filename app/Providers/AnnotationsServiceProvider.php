@@ -1,5 +1,6 @@
 <?php namespace CMV\Providers;
 
+use CMV\Events\ProjectEvents;
 use Collective\Annotations\AnnotationsServiceProvider as ServiceProvider;
 
 class AnnotationsServiceProvider extends ServiceProvider {
@@ -9,7 +10,9 @@ class AnnotationsServiceProvider extends ServiceProvider {
      *
      * @var array
      */
-    protected $scanEvents = [];
+    protected $scanEvents = [
+        ProjectEvents::class
+    ];
 
     /**
      * The classes to scan for route annotations.

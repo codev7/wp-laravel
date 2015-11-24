@@ -39,10 +39,14 @@ export default {
             // ..
         }
         Vue.http.options.onComplete = (req) => {
-            // ..
-            if (req.status == 422) {
-                // show errors if server-side validation failed
-                notify.validation(req.response);
+            switch (req.status) {
+                case 400:
+                    notify.error(JSON.parse(req.response).error);
+                    break;
+                case 422:
+                    // show errors if server-side validation failed
+                    notify.validation(JSON.parse(req.response));
+                    break;
             }
         }
 

@@ -66,4 +66,18 @@ class Controller extends BaseController {
 
         return Response::json($payload);
     }
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    protected function respondWithError($message = '')
+    {
+        $payload = ['status' => 'error'];
+        if ($message) {
+            $payload['error'] = $message;
+        }
+
+        return Response::json($payload, 400);
+    }
 }
