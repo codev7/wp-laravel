@@ -47,7 +47,8 @@ class Project extends Model {
         'git_url',
         'name',
         'requested_deadline',
-        'status'
+        'status',
+        'project_manager_id'
     ];
 
     protected $dates = [

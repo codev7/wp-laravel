@@ -84,9 +84,14 @@ class Projects extends Controller {
      */
     protected function createProject(Team $team, array $data)
     {
-        $data['name'] = $data['project_name'];
-        $data['status'] = Project::STATUS_QUOTE;
-        $project = Project::create(array_only($data, ['name', 'requested_deadline']));
+        $attrs = [
+            'name' => $data['project_name'],
+            'requested_deadline' => $data['requested_deadline']
+        ];
+        $attrs['status'] = Project::STATUS_QUOTE;
+        $attrs['project_manager_id'] = env('DEFAULT_PM_USER_ID');
+
+        $project = Project::create($attrs);
         $project->team()->associate($team);
         $project->save();
         $project->createOrFindProjectTypeId($data['project_type']);
