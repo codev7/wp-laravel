@@ -39,16 +39,32 @@
 
 			<!-- Team Listing -->
 			@foreach (Auth::user()->teams as $team)
-				<li>
-					<a href="/settings/teams/switch/{{ $team->id }}">
-						@if ($team->id === Auth::user()->current_team_id)
-							<i class="fa fa-btn fa-fw fa-check text-success"></i>{{ $team->name }}
-						@else
-							<i class="fa fa-btn fa-fw"></i>{{ $team->name }}
-						@endif
-					</a>
-				</li>
+                <li>
+                    <a href="/settings/teams/switch/{{ $team->id }}">
+                        @if ($team->id === Auth::user()->current_team_id)
+                            <i class="fa fa-btn fa-fw fa-check text-success"></i>{{ $team->name }}
+                        @else
+                            <i class="fa fa-btn fa-fw"></i>{{ $team->name }}
+                        @endif
+                    </a>
+                </li>
 			@endforeach
+
+            <li class="dropdown-header">Projects</li>
+
+            <li><a href="/project/new"><i class="fa fa-btn fa-fw fa-plus"></i>Create New Project</a></li>
+            @foreach (Auth::user()->currentTeam->projects as $p)
+            <li>
+                <a href="/project/{{ $p->slug }}">
+                    @if ($p->slug === $project->slug)
+                        <i class="fa fa-btn fa-fw fa-check text-success"></i> {{ $p->name }}
+                    @else
+                        <i class="fa fa-btn fa-fw"></i>{{ $p->name }}
+                    @endif
+                </a>
+            </li>
+            @endforeach
+
 		@endif
 
 		<!-- Logout -->

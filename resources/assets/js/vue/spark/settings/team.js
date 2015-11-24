@@ -12,7 +12,9 @@ Vue.component('spark-team-settings-screen', {
      * Initial state of the component's data.
      */
 	data: function () {
-		return { team: null };
+		return {
+            team: null
+        };
 	},
 
 
@@ -40,7 +42,6 @@ Vue.component('spark-team-settings-screen', {
                 	this.$broadcast('teamRetrieved', team);
                 });
 		},
-
 
 		/**
 		 * Get all of the roles that may be assigned to users.

@@ -8,6 +8,17 @@ use Input, Validator, Auth, Event;
 class Projects extends Controller {
 
     /**
+     * @Middleware("auth")
+     * @Get("api/projects")
+     */
+    public function index()
+    {
+        $projects = Auth::user()->currentTeam->projects;
+
+        return $this->respondWithData($projects->toArray());
+    }
+
+    /**
      * @Post("api/projects/create_and_register")
      */
     public function createAndRegister()
