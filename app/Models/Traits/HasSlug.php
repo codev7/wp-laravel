@@ -11,7 +11,8 @@ trait HasSlug {
     public static function bootHasSlug()
     {
         static::creating(function($project) {
-            $initialSlug = strtolower(str_replace(' ', '-', $project->name));
+            $initialSlug = str_slug($project->name);
+            
             $slug = $initialSlug; $i = 0;
             while (static::where('slug', $slug)->count()) {
                 $i++;
