@@ -27,7 +27,8 @@ export default {
     },
     success(message) {
         swal({
-            title: message,
+            text: message,
+            title: "Success",
             type: "success"
         });
     },

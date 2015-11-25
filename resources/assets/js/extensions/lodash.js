@@ -39,5 +39,14 @@ _.mixin({
         return items.map((item) => {
             return item[column];
         })
+    },
+    /**
+     * @example _.pluralize(4, 'file', 'files') -> '4 files'
+     * @param count
+     * @param single
+     * @param plural
+     */
+    pluralize(count, single, plural) {
+        return count == 1 ? `${count} ${single}` : `${count} ${plural}`;
     }
 });

@@ -1,3 +1,5 @@
+var notify = require('./../../../misc/notify');
+
 export default Vue.extend({
 
     template: `
@@ -12,7 +14,6 @@ export default Vue.extend({
             <input role="uploadcare-uploader" type="hidden" data-multiple/>
         </div>
     `,
-// <a class="m-t-0 btn btn-block btn-lg btn-primary-outline" href="#"><i class="fa fa-upload"></i> Upload Files</a>
 
     mixins: [require('./../../mixins/hasState')],
 
@@ -46,6 +47,8 @@ export default Vue.extend({
                     this.uploadedCount = this.uploadedCount === undefined ?
                         files.length :
                         (this.uploadedCount + files.length);
+
+                    notify.success(_.pluralize(files.length, 'file has been', 'files have been') + ' uploaded');
                 });
             }
         })

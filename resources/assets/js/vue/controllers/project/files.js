@@ -1,4 +1,4 @@
-var notify = require('./../../../misc/notify')
+var notify = require('./../../../misc/notify');
 
 export default Vue.extend({
 
@@ -27,6 +27,8 @@ export default Vue.extend({
                     });
 
                     widget.value(null);
+
+                    notify.success(_.pluralize(files.length, 'file has been', 'files have been') + ' uploaded');
                 });
             }
         })
