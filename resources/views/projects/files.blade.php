@@ -13,9 +13,8 @@
          v-cloak>
         <ul class="list-group media-list media-list-stream">
 
-            <li class="media list-group-item p-a">
+            <li class="media list-group-item p-a uploadcare-widget-big">
                 <input role="uploadcare-uploader" type="hidden" data-multiple/>
-                {{--<a href="#" class="btn btn-block btn-success btn-lg"><i class="fa fa-upload"></i> Upload More Files</a>--}}
             </li>
 
             <li class="media list-group-item p-a">

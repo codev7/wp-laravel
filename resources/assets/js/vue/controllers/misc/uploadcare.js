@@ -1,7 +1,7 @@
 export default Vue.extend({
 
     template: `
-        <div class="panel-body text-center">
+        <div class="panel-body text-center uploadcare-widget-small">
             <p class="m-b text-muted">
                 <small>There are currently
                     <span v-if="uploadedCount !== undefined">{{uploadedString}}</span>

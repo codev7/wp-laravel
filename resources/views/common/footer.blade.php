@@ -4,6 +4,16 @@
     UPLOADCARE_PUBLIC_KEY = "{{ env('UPLOADCARE_PUBLIC_KEY') }}";
     UPLOADCARE_CDN_BASE = "{{ env('UPLOADCARE_CDN_BASE') }}";
     UPLOADCARE_MANUAL_START = true;
+    UPLOADCARE_LOCALE_TRANSLATIONS = {
+        buttons: {
+            choose: {
+                files: {
+                    other: 'Upload Files'
+                }
+            }
+        }
+    };
+
 </script>
 
 <script charset="utf-8" src="//ucarecdn.com/widget/2.5.5/uploadcare/uploadcare.full.min.js"></script>
