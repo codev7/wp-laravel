@@ -112,12 +112,10 @@
     @endif
 
     @if(!isRouteNameSpace('files'))
-    <div class="panel panel-default visible-md-block visible-lg-block">
-        <div class="panel-body text-center">
-            <p class="m-b text-muted"><small>There are currently 5 files uploaded.</small></p>
-            <a class="m-t-0 btn btn-block btn-lg btn-primary-outline" href="#"><i class="fa fa-upload"></i> Upload Files</a>
-
+        <div class="panel panel-default visible-md-block visible-lg-block"
+             data-controller="misc/uploadcare"
+             state="{{ json_encode(['reference_type' => 'project', 'reference_id' => $project->id]) }}">
         </div>
-    </div>
+
     @endif
 </div>

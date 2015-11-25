@@ -19,10 +19,11 @@
             </div><!--container-->
 
             </div><!--markup is broken somewhere-->
+
         <!-- Footer -->
+        @include('common/footer')
         @include('spark::common.footer')
 
-        @include('common/footer')
     </div>
 
     <div id="cmv-spinner"><span></span></div>

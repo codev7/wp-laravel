@@ -34,9 +34,31 @@ class Files extends Controller {
         }
 
         $reference = FilesService::getReference($data['reference_type'], $data['reference_id']);
-        $files = $this->service->all($reference);
+        $files = $this->service->all($reference)->with('user')->get();
 
         return $this->respondWithData($files->toArray());
+    }
+
+    /**
+     * @Get("api/files/count")
+     */
+    public function count()
+    {
+        $data = Input::all();
+
+        /** @var \Illuminate\Validation\Validator $validator */
+        $validator = Validator::make($data, [
+            'reference_type' => 'required|in:project,concierge_site',
+            'reference_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        return $this->respondWithData([
+            'count' => FilesService::countByReference($data['reference_type'], $data['reference_id'])
+        ]);
     }
 
     /**
@@ -45,6 +67,7 @@ class Files extends Controller {
     public function show($id)
     {
         $file = $this->service->find($id);
+        $file->load('user');
 
         return $this->respondWithData($file->toArray());
     }
@@ -58,12 +81,12 @@ class Files extends Controller {
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
-            'reference_type' => 'in:project,concierge_site',
-            'reference_id' => 'required_if:reference_type',
+            'reference_type' => 'required|in:project,concierge_site',
+            'reference_id' => 'required',
             'name' => 'required',
-            'path' => 'required|url',
-            'mime' => 'required',
-            'size' => 'numeric',
+            'originalUrl' => 'required|url',
+            'size' => 'required|numeric',
+            'uuid' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -75,4 +98,17 @@ class Files extends Controller {
 
         return $this->show($file->id);
     }
+
+    /**
+     * @Delete("api/files/{files}")
+     * @param $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $this->service->delete($id);
+
+        return $this->respondWithSuccess();
+    }
+
 }

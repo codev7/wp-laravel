@@ -12,4 +12,6 @@ export default {
     'project/new': require('./controllers/project/new'),
     'project/team': require('./controllers/project/team'),
     'project/news': require('./controllers/project/news'),
+
+    'misc/uploadcare': require('./controllers/misc/uploadcare'),
 };

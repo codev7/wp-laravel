@@ -1,3 +1,13 @@
+<script>
+    UPLOADCARE_LOCALE = "en";
+    UPLOADCARE_TABS = "file url gdrive dropbox";
+    UPLOADCARE_PUBLIC_KEY = "{{ env('UPLOADCARE_PUBLIC_KEY') }}";
+    UPLOADCARE_CDN_BASE = "{{ env('UPLOADCARE_CDN_BASE') }}";
+    UPLOADCARE_MANUAL_START = true;
+</script>
+
+<script charset="utf-8" src="//ucarecdn.com/widget/2.5.5/uploadcare/uploadcare.full.min.js"></script>
+
 @if(isProduction())
 <script type="text/javascript">
  var _chatlio=_chatlio||[];

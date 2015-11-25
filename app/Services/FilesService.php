@@ -6,7 +6,7 @@ use CMV\User;
 use Illuminate\Support\Collection;
 
 /**
- * Handles creating threads and messages
+ * Handles files logic
  * @todo add permission checks
  * Class FilesService
  * @package CMV\Services
@@ -25,7 +25,7 @@ class FilesService {
 
     /**
      * @param Project|ConciergeSite $reference
-     * @return Collection
+     * @return mixed
      */
     public function all($reference)
     {
@@ -33,20 +33,25 @@ class FilesService {
     }
 
     /**
+     * Creates a new file. $data format - https://uploadcare.com/documentation/javascript_api/#file-info
      * @param Project|ConciergeSite $reference
      * @param array $data ['path', 'name', 'mime', 'size']
      * @return File
      */
     public function create($reference, array $data)
     {
-        $data = array_only($data, ['path', 'name', 'mime', 'size']);
+        $data = array_only($data, ['name', 'originalUrl', 'size', 'uuid']);
+        $data['path'] = str_replace('/;/', '/', $data['originalUrl']); // weird bug in the originalUrl returned by uploadcare
+        unset($data['originalUrl']);
 
         $file = new File();
+
         $file->reference_type = $this->getReftype($reference);
         $file->reference_id = $reference->id;
         $file->user_id = $this->user->id;
+
         foreach ($data as $column => $value) {
-            $file->column = $value;
+            $file->$column = $value;
         }
         $file->save();
 
@@ -60,6 +65,16 @@ class FilesService {
     public function find($id)
     {
         return File::find($id);
+    }
+
+    /**
+     * @param $id
+     * @return boolean
+     */
+    public function delete($id)
+    {
+        $file = File::find($id);
+        return $file->delete($id);
     }
 
     /**
@@ -86,16 +101,28 @@ class FilesService {
     public static function getReference($referenceType, $referenceId)
     {
         switch($referenceType) {
-            case Thread::REF_PROJECT:
+            case File::REF_PROJECT:
                 return Project::find($referenceId);
                 break;
-            case Thread::REF_CONCIERGE:
+            case File::REF_CONCIERGE:
                 return ConciergeSite::find($referenceId);
                 break;
             default:
                 throw new \Exception('Unknown entity type. It should be in: project,todo,concierge_site');
                 break;
         }
+    }
+
+    /**
+     * @param $referenceType
+     * @param $referenceId
+     * @return mixed
+     */
+    public static function countByReference($referenceType, $referenceId)
+    {
+        return File::where('reference_type', $referenceType)
+            ->where('reference_id', $referenceId)
+            ->count();
     }
 
 }

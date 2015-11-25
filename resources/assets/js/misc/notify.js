@@ -41,10 +41,5 @@ export default {
             confirmButtonText: "Yes",
             closeOnConfirm: true
         }, onConfirm);
-
-        swal({
-            title: message,
-            type: "confirm"
-        });
     }
 }

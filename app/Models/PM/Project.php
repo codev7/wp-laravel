@@ -167,7 +167,7 @@ class Project extends Model {
      */
     public function files()
     {
-        return $this->hasMany('CMV\Models\PM\Thread','reference_id')
+        return $this->hasMany('CMV\Models\PM\File','reference_id')
             ->where('reference_type', File::REF_PROJECT);
     }
 
