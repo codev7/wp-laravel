@@ -47,7 +47,7 @@
                 </tr>
 
                 <tr>
-                    <td><strong>{{ $site->url }}</strong></td>
+                  aafewfew.com
                 </tr>
 
                 <tr>
