@@ -11,7 +11,7 @@
 @if (Session::has('flash_message'))
     <script>
     @foreach (Session::get('flash_message') as $message)
-        swal({title: '', text: '{{ $message['message'] }}', type: '{{ $message['status'] }}' });
+        swal({title: {{ ucfirst($message['status']) }}, text: '{{ $message['message'] }}', type: '{{ $message['status'] }}' });
     @endforeach
     </script>
 @endif
