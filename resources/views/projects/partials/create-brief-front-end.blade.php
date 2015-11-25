@@ -1,5 +1,3 @@
-<h1 class="text-center tooltipper" data-title="delete me">====<br />FRONT END SPECIFIC TEMPLATE<br />=====</h1>
-
 <div class="hr-divider m-a">
     <ul class="nav nav-pills  hr-divider-content hr-divider-nav">
         <li class="active">

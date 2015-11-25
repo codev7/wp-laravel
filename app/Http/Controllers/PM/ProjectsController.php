@@ -19,6 +19,7 @@ class ProjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      * @Get("home", as="app.home", middleware="auth")
+     * @Middleware("must-have-team")
      * @return Response
      */
     public function home()

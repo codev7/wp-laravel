@@ -18,7 +18,7 @@
         <div class="tab-content m-t">
 
             @foreach($reps as $count => $rep)
-                <div class="tab-pane @if($reps[0]->id == $rep->id) active @endif" id="tab-{{ $count }}}">
+                <div class="tab-pane @if($reps[0]->id == $rep->id) active @endif" id="tab-{{ $count }}">
 
                     @include('partials/rep',['rep' => $rep])
 

@@ -39,10 +39,15 @@
 
                     <ul class="dropdown-menu" role="menu">
 
-                        <li class="dropdown-header">Other Projects</li>
+                        <li class="dropdown-header">{{ Auth::user()->currentTeam->name }} Projects</li>
 
-                        <li><a href="#">Other Project #1</a></li>
-                        <li><a href="#">Other Project #2</a></li>
+                        @foreach (Auth::user()->currentTeam->projects as $p)
+                        <li>
+                            <a href="/project/{{ $p->slug }}">
+                                <i class="fa fa-btn {{ $p->slug === $project->slug ? 'fa-fw fa-check text-success' : 'fa fa-btn fa-fw'  }}"></i>{{ $p->name }}
+                            </a>
+                        </li>
+                        @endforeach
 
                         <li class="divider"></li>
 
