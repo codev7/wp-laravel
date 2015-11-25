@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \CMV\Http\Middleware\VerifyCsrfToken::class,
         \CMV\Http\Middleware\ClearLaravelCache::class,
-        \CMV\Http\Middleware\FilterIfPjax::class,
+        \CMV\Http\Middleware\FilterIfPjax::class
     ];
 
     /**
@@ -38,5 +38,6 @@ class Kernel extends HttpKernel
         'require-wordpress' => \CMV\Http\Middleware\WordPressRequired::class,
         'param-access' => \CMV\Http\Middleware\CheckAccessByParameters::class,
         'ref-access' => \CMV\Http\Middleware\CheckAccessByReference::class,
+        'must-have-team' => \CMV\Http\Middleware\MustHaveTeam::class
     ];
 }

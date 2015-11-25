@@ -14,9 +14,10 @@
 					<i class="fa fa-btn fa-fw fa-cog"></i>Your Settings
 				</a>
 			</li>
+			
 
 			<!-- Team Settings / List -->
-			@if (Spark::usingTeams())
+			@if (Spark::usingTeams() && Auth::user()->hasTeams())
 				<!-- Team Navigation Options -->
 				<!-- Team Settings -->
 				<li v-if="user.current_team_id">

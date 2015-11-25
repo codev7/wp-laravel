@@ -15,7 +15,7 @@
 		</li>
 
 		<!-- Team Settings / List -->
-		@if (Spark::usingTeams())
+		@if (Spark::usingTeams() && Auth::user()->hasTeams())
 			<!-- Team Navigation Options -->
 			<!-- Team Settings -->
 			@if (Auth::user()->current_team_id)
