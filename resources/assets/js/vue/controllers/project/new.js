@@ -50,25 +50,11 @@ export default Vue.extend({
 
             if (CObj.logged_in) {
                 request = this.$http.post(`/api/projects`, this.form, (data) => {
-                    swal({
-                        title: "Project has been created!",
-                        type: "success",
-                        closeOnConfirm: false,
-                        allowEscapeKey: false
-                    }, function() {
-                        window.location = `/project/${data.data.slug}`;
-                    });
+                    window.location = `/project/${data.data.slug}`;
                 });
             } else {
                 request = this.$http.post(`/api/projects/create_and_register`, this.form, (data) => {
-                    swal({
-                        title: "Project has been created!",
-                        type: "success",
-                        closeOnConfirm: false,
-                        allowEscapeKey: false
-                    }, function() {
-                        window.location = `/project/${data.data.slug}`;
-                    });
+                    window.location = `/project/${data.data.slug}`;
                 });
             }
 

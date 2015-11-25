@@ -78,6 +78,8 @@ class Project extends Model {
 
     public static function boot()
     {
+        parent::boot();
+
         self::updating(function(Project $project) {
             $dirty = $project->getDirty();
             if (isset($dirty['developer_id']) && $dirty['developer_id']) {

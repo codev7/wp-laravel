@@ -4,7 +4,7 @@ namespace CMV\Http\Controllers\API;
 use CMV\Models\PM\Project, CMV\Team, CMV\User;
 use CMV\Services\MessagesService;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Input, Validator, Auth, Event;
+use Input, Validator, Auth, Event, Flash;
 
 class Projects extends Controller {
 
@@ -115,6 +115,8 @@ class Projects extends Controller {
         if (isset($data['agreed_to_nda']) && $data['agreed_to_nda']) {
             $team->agreeToNDA();
         }
+
+        Flash::success('Project has been created!');
 
         return $project;
     }

@@ -12,7 +12,8 @@ trait HasSlug {
     {
         static::creating(function($project) {
             $initialSlug = str_slug($project->name);
-            
+            if (!$initialSlug) $initialSlug = 'my-project';
+
             $slug = $initialSlug; $i = 0;
             while (static::where('slug', $slug)->count()) {
                 $i++;
