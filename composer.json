@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "laravel/spark": "dev-master#0fac003f0836a31d9bfd2c4203ab38380d3c6c76",
+        "laravel/cashier": "5.0.14",
         "aws/aws-sdk-php-laravel": "~2.0@beta",
         "keen-io/keen-io": "~2.5",
         "bugsnag/bugsnag-laravel": "1.*",
@@ -43,7 +43,8 @@
             "database"
         ],
         "psr-4": {
-            "CMV\\": "app/"
+            "CMV\\": "app/",
+            "Laravel\\Spark\\": "vendor_cmv/spark/app"
         },
         "files": [
             "app/Misc/Helper.php"
