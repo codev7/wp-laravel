@@ -73,13 +73,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <select class="form-control custom-select m-b">
-                                            <option>Select a Category</option>
-                                            <option>html/css</option>
-                                            <option>JavaScript</option>
-                                            <option>design</option>
-                                            <option>animations</option>
-                                        </select>
+
                                         <textarea class="form-control m-a-0" rows="5" placeholder="Enter a description of the item."></textarea>
                                     </td>
                                     <td>
