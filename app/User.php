@@ -98,9 +98,7 @@ class User extends Model implements AuthorizableContract,
 
     public function isAdministrator()
     {
-
         return $this->is_admin;
-
     }
 
     public function getGravatarImage($size = 256)
@@ -116,6 +114,19 @@ class User extends Model implements AuthorizableContract,
     public function isDeveloper()
     {
         return $this->is_developer;
+    }
+
+    public function projects()
+    {
+        /** @var Team $team */
+        $team = $this->currentTeam();
+
+        if ($team->pivot->role == 'member') {
+            return $this->belongsToMany('CMV\Models\PM\Project','user_projects')
+                ->whereRaw("projects.team_id = {$this->current_team_id}");
+        } else if (array_search($team->pivot->role, ['admin', 'owner'])) {
+            return $team->projects();
+        }
     }
 
     public static function developers()

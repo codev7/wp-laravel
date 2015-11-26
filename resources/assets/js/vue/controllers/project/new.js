@@ -26,14 +26,14 @@ export default Vue.extend({
 
         if (! this.form.agreed_to_nda) {
             $('#modal-nda').modal('show');
-
-            $('.toggle-nda').on('click', function(e)
-            {
-                e.preventDefault();
-                $('#full-nda').toggle();
-                $('#nda-cliff-notes').toggle();
-            });
         }
+
+        $('.toggle-nda').on('click', function(e)
+        {
+            e.preventDefault();
+            $('#full-nda').toggle();
+            $('#nda-cliff-notes').toggle();
+        });
     },
 
     methods: {

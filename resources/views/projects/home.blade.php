@@ -34,7 +34,7 @@
 
 
                 @if(!Input::has('tab'))
-                    @if(Auth::user()->currentTeam()->projects()->count() > 0)
+                    @if(Auth::user()->projects()->count() > 0)
                     <div class="pull-right">
                         <a class="btn btn-primary-outline" href="{{ route('project.new') }}">
                             <i class="fa fa-btn fa-plus with-text"></i> Create Project
@@ -60,7 +60,7 @@
 
                                 <tbody>
 
-                                    @foreach(Auth::user()->currentTeam()->projects as $project)
+                                    @foreach(Auth::user()->projects as $project)
                                     <tr>
 
                                         <td>{{ $project->name }}</td>

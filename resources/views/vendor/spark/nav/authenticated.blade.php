@@ -41,7 +41,7 @@
 
                         <li class="dropdown-header">{{ Auth::user()->currentTeam->name }} Projects</li>
 
-                        @foreach (Auth::user()->currentTeam->projects as $p)
+                        @foreach (Auth::user()->projects as $p)
                         <li>
                             <a href="/project/{{ $p->slug }}">
                                 <i class="fa fa-btn {{ $p->slug === $project->slug ? 'fa-fw fa-check text-success' : 'fa fa-btn fa-fw'  }}"></i>{{ $p->name }}
