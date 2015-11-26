@@ -17,10 +17,11 @@
                 <div><a data-pjax href="{{ route('project.briefs', ['slug' => $project->slug]) }}" class="text-muted"><i class="fa fa-arrow-left"></i> Back to all briefs</a></div>
 
 
+
                 <div class="pull-right w-sm">
                     <a href="#" class="m-t-md btn btn-lg btn-block btn-success"><i class="fa fa-thumbs-o-up"></i> Approve Brief</a>
 
-                    <p class="m-t text-center"><a href="#" class="btn btn-xs btn-danger-outline">Request Changes</a></p>
+                    <p class="m-t text-center"><a href="#request-brief-changes" data-toggle="modal" class="btn btn-xs btn-danger-outline">Request Changes</a></p>
                 </div>
 
                 @if($brief_id == 'sample-front-end-brief')
@@ -40,4 +41,6 @@
         
         
     </div>
+
+    @include('modals/request-brief-changes')
 @endsection

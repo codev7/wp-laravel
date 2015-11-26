@@ -8,6 +8,8 @@
     <small class="text-muted">{{ $project->name }} - Prepared on November 21, 2015</small>
 </h1>
 
+<p class="m-a-0"><small><a class="text-danger" href="#"><i class="fa fa-edit"></i> Edit Brief</a></small></p>
+
 <div class="clearfix"></div>
 
 <div class="hr-divider m-b m-t">

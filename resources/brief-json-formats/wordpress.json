@@ -8,6 +8,16 @@
                 "text": "The text associated with the checklist item",
                 "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
             }
+        ],
+        "theme_menus": [
+            {
+                "name": "Header Menu",
+                "description": "the menu in the header of every page"
+            },
+            {
+                "name": "Footer Menu Bottom Left",
+                "description": "the short menu in bottom left"
+            }
         ]
     },
     "templates": [
@@ -16,7 +26,7 @@
             "summary": "Here is a quick summary of the view.",
             "checklist": [
                 {
-                    "category": "name of category",
+                    "category": "front end", // other options: ["front end", "wp implementation"]
                     "text": "The text associated with the checklist item",
                     "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
                 }
@@ -52,6 +62,14 @@
                     "type": "wysiwyg",
                     "required": true
                 }
+            ],
+            "taxonomies": [
+                {
+                    "name" : "Category"
+                },
+                {
+                    "name" : "Year"
+                }
             ]
         }
     ],
@@ -59,18 +77,7 @@
         {
             "name": "Contact Form",
             "summary": "Here is a quick summary of the endpoint with expected functionality outlined.",
-            "form_inputs": [
-                {
-                    "name": "first name",
-                    "type": "text",
-                    "required": false
-                },
-                {
-                    "name": "email",
-                    "type": "email",
-                    "required": true
-                }
-            ],
+            "form_inputs": "This is a markdown text with a description of what the user is submitting.",
             "expected_output_action": "This is a markdown text with a description of what happens after a user submits."
 
         }

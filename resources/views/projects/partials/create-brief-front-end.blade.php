@@ -19,9 +19,8 @@
     <div class="tab-pane active" id="global-pane">
         <div class="form-group">
             <label>Global Notes</label>
-            <textarea class="form-control" rows="10" cols="4" placeholder="Type as much as you want here.  Markdown is supported."></textarea>
+            <textarea class="form-control" rows="10" cols="4" placeholder="Type as much as you want here. Greg - turn this into trix editor."></textarea>
 
-            <p class="m-a-0 pull-right text-muted">Markdown Supported</p>
         </div>
 
         <div class="form-group">
