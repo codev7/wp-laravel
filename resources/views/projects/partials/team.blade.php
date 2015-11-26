@@ -31,7 +31,7 @@
         </ul>
     </div>
         {{--@include('modals.invite-to-team')--}}
-    @if (Auth::user()->currentTeam->pivot->role == 'owner')
+    @if (Auth::user()->currentTeam->pivot->role == 'owner' || Auth::user()->is_admin)
         <div class="panel-footer text-center">
             <a href="#"
                v-on:click.prevent="openInviteModal">

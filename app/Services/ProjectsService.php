@@ -50,7 +50,9 @@ class ProjectsService {
         }
 
         $ids = $project ? [$project->id] : $team->projects->lists('id')->all();
-        $user->projects()->sync($ids);
+        foreach ($ids as $id) {
+            $user->projects()->attach($id);
+        }
 
         return true;
     }
