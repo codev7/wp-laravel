@@ -55,7 +55,7 @@ class Team extends Model
      * @param  string  $email
      * @return \Laravel\Spark\Teams\Invitation
      */
-    public function inviteUserByEmail($email)
+    public function inviteUserByEmail($email, array $projects = [])
     {
         $model = config('auth.model');
 
@@ -69,6 +69,7 @@ class Team extends Model
                 'user_id' => $invitedUser ? $invitedUser->id : null,
                 'email' => $email,
                 'token' => str_random(40),
+                'projects' => $projects
             ]);
         }
 

@@ -98,11 +98,7 @@ class TeamRepository implements Contract
         $invitation = (new $inviteModel)->where('token', $invitationId)->first();
 
         if ($invitation) {
-            $user->joinTeamById($invitation->team->id);
-
-            $user->switchToTeam($invitation->team);
-
-            $invitation->delete();
+            $invitation->applyToUser($user);
         }
     }
 }

@@ -1,12 +1,16 @@
 var notify = require('./../../../misc/notify');
+var hasState = require('./../../mixins/hasState');
 
 export default Vue.extend({
+
+    mixins: [hasState],
 
     data() {
         return {
             sendingInvite: false,
             form: {
-                email: ''
+                email: '',
+                inviteTo: 'single'
             },
             team: {
 
@@ -25,9 +29,7 @@ export default Vue.extend({
      * Bootstrap the component. Load the initial data.
      */
     ready() {
-        var teamId = CObj.team.id;
-
-        this.$http.get(`/spark/api/teams/${teamId}`, {}, (res) => {
+        this.$http.get(`/spark/api/teams/${this.state.team_id}`, {}, (res) => {
             this.team = res;
         });
     },
@@ -40,9 +42,12 @@ export default Vue.extend({
         sendInvite() {
             this.sendingInvite = true;
 
-            this.$http.post(`/settings/teams/1/invitations`, {
-                email: this.form.email
-            }, (res) => {
+            var payload = {
+                email: this.form.email,
+                projects: (this.form.inviteTo == 'single') ? [this.state.project_id] : ['*']
+            }
+
+            this.$http.post(`/settings/teams/${this.state.team_id}/invitations`, payload, (res) => {
                 this.form.email = '';
                 this.team = res;
                 $("#modal-invite-to-team").modal("hide");
@@ -53,9 +58,7 @@ export default Vue.extend({
         },
         removeFromTeam(user) {
             this.team.users = _.removeById(user.id, this.team.users);
-            this.$http.delete(`/settings/teams/${this.team.id}/members/${user.id}`, {}, () => {
-            });
+            this.$http.delete(`/settings/teams/${this.team.id}/members/${user.id}`, {}, () => {});
         }
     }
-
 });

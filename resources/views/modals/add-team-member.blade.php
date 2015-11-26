@@ -25,14 +25,17 @@
 
                             <div class="radio custom-control custom-radio">
                               <label class="well">
-                                <input type="radio" id="radio1" name="radio">
+                                <input type="radio" id="radio1" name="invite_to" value="all" required
+                                       v-model="form.inviteTo" >
                                 <span class="custom-control-indicator" style="top: 40px; left: 2px;"></span>
                                 Add [email_address_here] to all of my projects, including this one.
                               </label>
                             </div>
+
                             <div class="radio custom-control custom-radio">
                               <label class="well">
-                                <input type="radio" id="radio2" name="radio">
+                                <input type="radio" id="radio2" name="invite_to" value="single" required
+                                       v-model="form.inviteTo">
                                 <span class="custom-control-indicator" style="top: 40px; left: 2px;"></span>
                                 Add [email_address_here] to just the [project_name] project. <small>you can add them to other projects in the future.</small>
                               </label>

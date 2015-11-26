@@ -3,6 +3,8 @@
 namespace Laravel\Spark\Teams;
 
 use Carbon\Carbon;
+use CMV\Models\PM\Project;
+use CMV\Services\ProjectsService;
 use Laravel\Spark\Spark;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,6 +32,13 @@ class Invitation extends Model
     protected $hidden = [];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'projects' => 'array',
+    ];
+
+    /**
      * Get the team that owns the invitation.
      */
     public function team()
@@ -45,5 +54,28 @@ class Invitation extends Model
     public function isExpired()
     {
         return Carbon::now()->subWeek()->gte($this->created_at);
+    }
+
+    /**
+     * Applies invitation to the given user. This adds to team & projects.
+     * @param \CMV\User $user
+     * @throws \Exception
+     */
+    public function applyToUser(\CMV\User $user)
+    {
+        $user->joinTeamById($this->team_id);
+
+        /** @var \CMV\Team $team */
+        $team = $this->team;
+
+        $projectsService = new ProjectsService($team->owner);
+        foreach ($this->projects as $projectId) {
+            $project = Project::find($projectId);
+            if ($project && $project->team_id == $team->id) {
+                $projectsService->addUserToProject($user, $project);
+            }
+        }
+
+        $this->delete();
     }
 }

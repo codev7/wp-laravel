@@ -2,12 +2,14 @@
 
 namespace Laravel\Spark\Http\Controllers\Settings;
 
+use CMV\Services\ProjectsService;
 use Exception;
 use Illuminate\Http\Request;
 use Laravel\Spark\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Laravel\Spark\Contracts\Repositories\TeamRepository;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
+use CMV\Models\PM\Project;
 
 class InvitationController extends Controller
 {
@@ -46,6 +48,7 @@ class InvitationController extends Controller
 
         $this->validate($request, [
             'email' => 'required|max:255|email',
+            'projects' => 'array'
         ]);
 
         $team = $user->teams()
@@ -56,7 +59,12 @@ class InvitationController extends Controller
             return response()->json(['email' => ['That user is already invited to the team.']], 422);
         }
 
-        $team->inviteUserByEmail($request->email);
+        $projects = isset($request->projects) ? $request->projects : [];
+        $teamProjects = $team->projects()->get()->lists('id')->all();
+
+        $projects = $projects[0] == '*' ? $teamProjects : array_intersect($projects, $teamProjects);
+
+        $team->inviteUserByEmail($request->email, $projects);
 
         return $team->fresh(['users', 'invitations']);
     }
@@ -73,10 +81,7 @@ class InvitationController extends Controller
         $user = $request->user();
 
         $invitation = $user->invitations()->findOrFail($inviteId);
-
-        $user->joinTeamById($invitation->team_id);
-
-        $invitation->delete();
+        $invitation->applyToUser($user);
 
         return $this->teams->getAllTeamsForUser($user);
     }
