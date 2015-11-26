@@ -62,8 +62,9 @@
                         <div class="clearfix"></div>
 
 
-
-                        @include('projects/partials/create-brief-wp')
+                        <!-- create-brief-wp  /  create-brief-front-end -->
+                        
+                        @include('projects/partials/create-brief-other')
 
           
 

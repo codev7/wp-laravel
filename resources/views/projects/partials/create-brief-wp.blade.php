@@ -1,6 +1,6 @@
 <div class="hr-divider m-a">
     <ul class="nav nav-pills  hr-divider-content hr-divider-nav">
-        <li>
+        <li class="active">
             <a href="#global-pane" data-toggle="tab">Global</a>
         </li>
         <li class="">
@@ -10,7 +10,7 @@
             <a href="#cpt-pane" data-toggle="tab">Post Types</a>
         </li>
 
-        <li class="active">
+        <li >
             <a href="#endpoints-pane" data-toggle="tab">Endpoints</a>
         </li>
     </ul>
@@ -20,7 +20,7 @@
 
 
 <div class="tab-content">
-    <div class="tab-pane" id="global-pane">
+    <div class="tab-pane active" id="global-pane">
         <div class="form-group">
             <label>Global Notes</label>
             <textarea class="form-control" rows="10" cols="4" placeholder="Type as much as you want here.  Markdown is supported."></textarea>
@@ -283,7 +283,7 @@
         
     </div>
 
-    <div class="tab-pane active" id="endpoints-pane">
+    <div class="tab-pane " id="endpoints-pane">
 
         <div class="row">
             <div class="col-sm-3">

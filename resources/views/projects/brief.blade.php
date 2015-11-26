@@ -35,6 +35,12 @@
                 @include('projects/partials/wordpress-brief')
 
                 @endif
+
+                @if($brief_id == 'other')
+                    
+                @include('projects/partials/other-brief')
+
+                @endif
             </div>
 
         </div><!--panel-->
