@@ -20,15 +20,15 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav">
 
-				@if(isRouteNameSpace('home') || isRouteNameSpace('settings') || isRouteNameSpace('project/new'))
+				@if(isRouteNameSpace('home') || isRouteNameSpace('settings') || isRoute('project.new'))
 					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Dashboard</a></li>
 				@endif
 
-				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRouteNameSpace('project/new') ))
+				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRoute('project.new') ))
 					<li><a href="{{ route('prospector.dashboard') }}">Prospector Dashboard</a></li>
 				@endif
 
-				@if(hasRole('mastermind') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRouteNameSpace('project/new') ))
+				@if(hasRole('mastermind') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRoute('project.new') ))
 					<li><a href="{{ route('mastermind.dashboard') }}">Mastermind</a></li>
 				@endif
 
