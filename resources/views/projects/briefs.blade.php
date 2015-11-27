@@ -51,7 +51,17 @@
                                     <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-wordpress-brief']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
                                 </td>
                             </tr>
-                            
+                                
+                            <tr>
+                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'other']) }}">Other Brief</a> <span data-placement="right" class="tooltipper" title="A other brief covers all details about the generic brief."><i class="fa fa-question-circle"></i></span></td>
+                                <td class="text-center">5 days ago</td>
+                                <td class="text-center">Dave Gamache</td>
+                                <td class="text-center">5 minutes ago</td>
+                                <td class="text-center"><em class="text-muted">Not yet approved</em></td>
+                                <td>
+                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'other']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

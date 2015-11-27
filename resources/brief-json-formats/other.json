@@ -1,0 +1,44 @@
+{
+    "related_to_brief": [23,22], //briefs can be related to other briefs.  For example, a WP brief will always require having a front end brief associated with it
+    "summary": "Here is a quick summary about the project. This project summary will never have more than 300 characters and should serve as a brief overview of the project.",
+    "global": {
+        "notes": "This will be a block of markdown text",
+        "menu_items": [
+            {
+                "header": "Menu Header",
+                "content": "wysiwyg html content here",
+                "checklist": [
+                    {
+                        "text": "The text associated with the checklist item",
+                        "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+                    }
+                ],
+            }
+        ]
+    },
+    "brief_boxes": [  //max of 3 boxes - these boxes are outputted across the top summary of the generic brief template
+        {
+            "title": "Box Title",
+            "description": "Box description",
+            "tooltip": "Box tooltip content here"
+        }
+    ],
+    "sections": [
+        {
+            "name": "Home",
+            "summary": "Here is a quick summary of the view.",
+            "sub_sections": [
+                {
+                    "header": "Sub Section Menu Header",
+                    "content": "wysiwyg html content here",
+                    "checklist": [
+                        {
+                            "text": "The text associated with the checklist item",
+                            "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+                        }
+                    ],
+                }
+            ]
+        }
+    ]
+}

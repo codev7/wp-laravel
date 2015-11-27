@@ -8,6 +8,9 @@
     <small class="text-muted">{{ $project->name }} - Prepared on November 21, 2015</small>
 </h1>
 
+<p class="m-a-0"><small><a class="text-danger" href="#"><i class="fa fa-edit"></i> Edit Brief</a></small></p>
+
+
 <div class="clearfix"></div>
 
 <div class="hr-divider m-b m-t">
@@ -283,6 +286,15 @@
                             <td>blog-post-single.html</td>
                         </tr>
                         <tr>
+                            <th>Taxonomies</th>
+                            <td>
+                                <ul class="m-a-0">
+                                    <li>Category</li>
+                                    <li>Year</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Include in search results?</th>
                             <td>Yes</td>
                         </tr>
@@ -295,9 +307,9 @@
                             <td>blog-index.html</td>
                         </tr>
                         <tr>
-                            <th>Post Data</th>
+                            <th>Post Data (Meta)</th>
                             <td>
-                                <ul>
+                                <ul class="m-a-0">
                                     <li>wp_title (text)</li>
                                     <li>content (wysiwyg)</li>
                                     <li>custom_author (text)</li>

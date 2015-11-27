@@ -37,6 +37,10 @@ function isRouteNameSpace($pathToCheck)
 
 }
 
+function isRoute($name)
+{
+    return Route::currentRouteName() == $name;
+}
 
 function hasRole($role)
 {

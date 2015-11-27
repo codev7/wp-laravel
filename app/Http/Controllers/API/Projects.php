@@ -157,12 +157,12 @@ class Projects extends Controller {
     {
         // check if already has repo
         /** @var Project $project */
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         if ($project->hasRepo()) {
             return $this->respondWithError('Project already has associated repository');
         }
 
-        // $this->dispatch(new ..)
+        $this->dispatch(new \CMV\Jobs\PM\CreateRepoForProject($project->id));
 
         return $this->respondWithSuccess();
     }

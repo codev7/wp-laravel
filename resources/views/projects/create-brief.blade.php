@@ -32,6 +32,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Layout Type</label>
+                            <p class="text-danger">
+                            <select class="custom-select form-control">
+                                <option>responsive</option>
+                                <option>fixed</option>
+                                <option>mobile only</option>
+                                <option>fluid</option>
+                            </select>
+                            This only appears if brief-type=frontend
+                        </div>
+
+                        <div class="form-group">
                             <label>Related to Other briefs?</label>
 
                             <select multiple class="form-control">
@@ -50,7 +62,8 @@
                         <div class="clearfix"></div>
 
 
-
+                        <!-- create-brief-wp  /  create-brief-other -->
+                        
                         @include('projects/partials/create-brief-front-end')
 
           

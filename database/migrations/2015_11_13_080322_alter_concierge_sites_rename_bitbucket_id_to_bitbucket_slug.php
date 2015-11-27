@@ -13,7 +13,6 @@ class AlterConciergeSitesRenameBitbucketIdToBitbucketSlug extends Migration
     public function up()
     {
         Schema::table('concierge_sites', function(Blueprint $table) {
-            $table->string('bitbucket_id')->nullable()->default(null)->change();
             $table->renameColumn('bitbucket_id', 'bitbucket_slug');
         });
     }
@@ -26,7 +25,6 @@ class AlterConciergeSitesRenameBitbucketIdToBitbucketSlug extends Migration
     public function down()
     {
         Schema::table('concierge_sites', function(Blueprint $table) {
-            $table->integer('bitbucket_slug')->nullable()->default(null)->change();
             $table->renameColumn('bitbucket_slug', 'bitbucket_id');
         });
     }
