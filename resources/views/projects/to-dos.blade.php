@@ -8,7 +8,7 @@
     <div class="col-md-9" data-controller="project/todos">
 
         <h3 class="m-a-0 p-a-0 pull-left">4 To-Do Items</h3>
-        <a href="#" class="btn btn-primary btn-sm pull-right m-b"><i class="fa fa-plus"></i> Add New Task</a>
+        <a href="#create-to-do" data-toggle="modal" class="btn btn-primary btn-sm pull-right m-b"><i class="fa fa-plus"></i> Add New To-Do</a>
 
         <div class="clearfix"></div>
 
@@ -217,4 +217,6 @@
             
         </ul>
     </div>
+
+    @include('modals/create-to-do')
 @endsection
