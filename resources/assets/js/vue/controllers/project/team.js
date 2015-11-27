@@ -50,7 +50,7 @@ export default Vue.extend({
             this.$http.post(`/settings/teams/${this.state.team_id}/invitations`, payload, (res) => {
                 this.form.email = '';
                 this.team = res;
-                $("#modal-invite-to-team").modal("hide");
+                $("#add-team-member").modal("hide");
                 notify.success("Invitation has been sent");
             }).always(() => {
                 this.sendingInvite = false;

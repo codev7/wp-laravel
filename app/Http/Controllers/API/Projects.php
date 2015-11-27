@@ -47,7 +47,9 @@ class Projects extends Controller {
         $user->name = $data['user_name'];
         $user->password = isset($data['password']) ? bcrypt($data['password']) : bcrypt(date('Y-m-d'));
 
-        $team = Team::create(['name' => $data['company_name'], ['owner_id' => $user->id] ]);
+        $team = Team::create(['name' => $data['company_name'] ]);
+        $team->owner_id = $user->id;
+        $team->save();
 
         $user->joinTeamById($team->id);
         $user->save();
