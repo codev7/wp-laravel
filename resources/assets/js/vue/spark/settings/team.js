@@ -3,6 +3,7 @@ Vue.component('spark-team-settings-screen', {
      * Bootstrap the component. Load the initial data.
      */
 	ready: function () {
+        this.getUsersAccess();
 		this.getTeam();
 		this.getRoles();
 	},
@@ -24,6 +25,7 @@ Vue.component('spark-team-settings-screen', {
 	     */
 		updateTeam: function () {
 			this.getTeam();
+            this.getUsersAccess();
 
 			return true;
 		}
@@ -42,6 +44,15 @@ Vue.component('spark-team-settings-screen', {
                 	this.$broadcast('teamRetrieved', team);
                 });
 		},
+
+        getUsersAccess() {
+            this.$http.get(`/api/teams/${TEAM_ID}/users_access`)
+                .success((data) => {
+                    this.access = data.data;
+
+                    this.$broadcast('usersAccessRetrieved', this.access);
+                });
+        },
 
 		/**
 		 * Get all of the roles that may be assigned to users.

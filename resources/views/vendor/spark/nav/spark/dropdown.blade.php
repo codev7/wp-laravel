@@ -50,17 +50,6 @@
 					</a>
 				</li>
 
-                <li class="dropdown-header">Projects</li>
-
-                <li><a href="/project/new"><i class="fa fa-btn fa-fw fa-plus"></i>Create New Project</a></li>
-                @foreach (Auth::user()->projects as $p)
-                <li>
-                    <a href="/project/{{ $p->slug }}">
-                        <i class="fa fa-btn fa-fw"></i>{{ $p->name }}
-                    </a>
-                </li>
-                @endforeach
-
 			@endif
 
 			<!-- Logout -->

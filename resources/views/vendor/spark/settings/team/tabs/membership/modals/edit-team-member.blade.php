@@ -18,7 +18,22 @@
 		                              :items="assignableRoles"
 		                              :input.sync="updateTeamMemberForm.role">
 		                </spark-select>
-					</form>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Projects</label>
+                            <div class="col-md-6">
+                                <div class="checkbox" v-for="project in team.projects">
+                                    <label>
+                                        <input type="checkbox" value="@{{ project.id }}"
+                                               v-model="updateTeamMemberForm.projects"
+                                               :disabled="updateTeamMemberForm.role == 'admin'" >
+                                        @{{ project.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
 				</div>
 
 				<div class="modal-footer">

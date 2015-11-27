@@ -9,9 +9,11 @@ Vue.component('spark-team-settings-edit-team-member-screen', {
 	        user: null,
 	        team: null,
 	        roles: [],
+            access: {},
 
             updateTeamMemberForm: new SparkForm({
-                role: ''
+                role: '',
+                projects: []
             })
 		};
 	},
@@ -23,6 +25,7 @@ Vue.component('spark-team-settings-edit-team-member-screen', {
          */
         'teamMember': function (member) {
             this.updateTeamMemberForm.role = member.pivot.role;
+            this.updateTeamMemberForm.projects = _.clone(this.access[member.id].projects);
         }
     },
 
@@ -35,7 +38,7 @@ Vue.component('spark-team-settings-edit-team-member-screen', {
             return _.reject(this.roles, function (role) {
                 return role.value == 'owner';
             });
-        },
+        }
 	},
 
 
@@ -67,8 +70,17 @@ Vue.component('spark-team-settings-edit-team-member-screen', {
             this.roles = roles;
 
             return true;
+        },
+
+        /**
+         * Handle the "rolesRetrieved" event.
+         */
+        usersAccessRetrieved(access) {
+            this.access = access;
+
+            return true;
         }
-	},
+    },
 
 
 	methods: {

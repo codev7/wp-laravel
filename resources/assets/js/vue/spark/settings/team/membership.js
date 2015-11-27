@@ -15,12 +15,14 @@ Vue.component('spark-team-settings-membership-screen', {
             user: null,
             team: null,
             roles: [],
+            access: {},
             leavingTeam: false,
 
             editingTeamMember: null,
 
             sendInviteForm: new SparkForm({
-                email: ''
+                email: '',
+                projects: []
             })
         };
     },
@@ -76,11 +78,21 @@ Vue.component('spark-team-settings-membership-screen', {
             this.roles = roles;
 
             return true;
+        },
+
+        /**
+         * Handle the "rolesRetrieved" event.
+         */
+        usersAccessRetrieved(access) {
+            this.access = access;
+
+            return true;
         }
     },
 
 
     methods: {
+
         /*
          * Send an invitation to a new user.
          */
@@ -92,6 +104,7 @@ Vue.component('spark-team-settings-membership-screen', {
                     self.$dispatch('updateTeam');
 
                     self.sendInviteForm.email = '';
+                    self.sendInviteForm.projects = [];
                 });
         },
 

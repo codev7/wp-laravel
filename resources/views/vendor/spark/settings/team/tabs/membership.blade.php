@@ -21,6 +21,17 @@
                         </spark-email>
 
                         <div class="form-group">
+                            <label class="col-md-3 control-label">Projects</label>
+                            <div class="col-md-6">
+                                <div class="checkbox" v-for="project in team.projects">
+                                    <label>
+                                        <input type="checkbox" value="@{{ project.id }}" v-model="sendInviteForm.projects"> @{{ project.name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary" @click.prevent="sendInvite" :disabled="sendInviteForm.busy">
                                     <span v-if="sendInviteForm.busy">

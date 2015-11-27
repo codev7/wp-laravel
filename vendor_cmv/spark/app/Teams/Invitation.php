@@ -4,7 +4,7 @@ namespace Laravel\Spark\Teams;
 
 use Carbon\Carbon;
 use CMV\Models\PM\Project;
-use CMV\Services\ProjectsService;
+use CMV\Services\TeamsService;
 use Laravel\Spark\Spark;
 use Illuminate\Database\Eloquent\Model;
 
@@ -68,11 +68,11 @@ class Invitation extends Model
         /** @var \CMV\Team $team */
         $team = $this->team;
 
-        $projectsService = new ProjectsService($team->owner);
+        $teamsService = new TeamsService($team->owner);
         foreach ($this->projects as $projectId) {
             $project = Project::find($projectId);
             if ($project && $project->team_id == $team->id) {
-                $projectsService->addUserToProject($user, $project);
+                $teamsService->attachUserToProject($user, $project);
             }
         }
 

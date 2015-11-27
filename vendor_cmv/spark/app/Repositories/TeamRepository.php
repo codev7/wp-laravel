@@ -41,7 +41,7 @@ class TeamRepository implements Contract
      */
     public function getTeam($user, $teamId)
     {
-        return $user->teams()->with('users', 'invitations')->findOrFail($teamId);
+        return $user->teams()->with('users', 'invitations', 'projects')->findOrFail($teamId);
     }
 
     /**

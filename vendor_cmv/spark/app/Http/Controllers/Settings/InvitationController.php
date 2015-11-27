@@ -2,7 +2,6 @@
 
 namespace Laravel\Spark\Http\Controllers\Settings;
 
-use CMV\Services\ProjectsService;
 use Exception;
 use Illuminate\Http\Request;
 use Laravel\Spark\Http\Controllers\Controller;

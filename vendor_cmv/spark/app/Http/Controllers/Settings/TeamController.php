@@ -2,6 +2,8 @@
 
 namespace Laravel\Spark\Http\Controllers\Settings;
 
+use CMV\Models\PM\Project;
+use CMV\Services\TeamsService;
 use Exception;
 use Laravel\Spark\Spark;
 use Illuminate\Http\Request;
@@ -179,6 +181,11 @@ class TeamController extends Controller
             $userToUpdate->teams()->updateExistingPivot(
                 $team->id, ['role' => $request->role]
             );
+
+            if ($request->role == 'member') {
+                $service = new TeamsService(\Auth::user());
+                $service->syncUserProjects($userToUpdate, $team, $request->projects);
+            }
         }
 
         return $this->teams->getTeam($user, $teamId);
