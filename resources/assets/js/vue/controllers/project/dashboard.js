@@ -53,7 +53,7 @@ export default Vue.extend({
 
                 canDelete = CObj.admin
                     || (firstMessage.user_id == CObj.user_id && postedAgo <= 280);
-                canDelete = true;
+
                 if (thread.canDelete != canDelete) {
                     var copy = _.clone(thread);
                     copy.canDelete = canDelete;
