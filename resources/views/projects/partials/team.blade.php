@@ -20,6 +20,7 @@
 
                 <div class="media-body">
                     <strong>@{{ user.name }}</strong>
+                    <p class="text-muted m-a-0">team @{{ user.pivot.role }}</p>
                     <div v-if="user.pivot.role != 'owner' && isOwner" class="media-body-actions">
                         <button class="btn btn-danger-outline btn-xs"
                                 v-on:click.prevent="removeFromTeam(user)">

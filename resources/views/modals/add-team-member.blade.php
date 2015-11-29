@@ -28,7 +28,7 @@
                                 <input type="radio" id="radio1" name="invite_to" value="all" required
                                        v-model="form.inviteTo" >
                                 <span class="custom-control-indicator" style="top: 40px; left: 2px;"></span>
-                                Add [email_address_here] to all of my projects, including this one.
+                                Add @{{ form.email }} to all of my projects, including this one.
                               </label>
                             </div>
 
@@ -37,7 +37,7 @@
                                 <input type="radio" id="radio2" name="invite_to" value="single" required
                                        v-model="form.inviteTo">
                                 <span class="custom-control-indicator" style="top: 40px; left: 2px;"></span>
-                                Add [email_address_here] to just the [project_name] project. <small>you can add them to other projects in the future.</small>
+                                Add @{{ form.email }} to just the {{ $project->name }} project. <small>you can add them to other projects in the future.</small>
                               </label>
                             </div>
                         </div>
