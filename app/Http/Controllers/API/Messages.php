@@ -7,19 +7,19 @@ use CMV\Services\MessagesService;
 use Input, Validator, Auth;
 
 /**
- * @todo If it's todo related create Bitbucket issue
  * Class Messages
  * @package CMV\Http\Controllers\API
  */
 class Messages extends Controller {
 
     /**
-     * @Post("api/messages")
+     * @Post("api/threads/{threads}/messages")
      * @return \Illuminate\Http\JsonResponse
      */
-    public function create()
+    public function create($id)
     {
         $data = Input::all();
+        $data['thread_id'] = $id;
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
@@ -31,11 +31,10 @@ class Messages extends Controller {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $data = Input::all();
         $thread = Thread::find($data['thread_id']);
 
         $service = new MessagesService(Auth::user());
-        $message = $service->postInThread($thread, Auth::user(), $data['content']);
+        $message = $service->postInThread($thread, $data['content']);
 
         return $this->show($message->id);
     }
@@ -47,8 +46,9 @@ class Messages extends Controller {
     public function show($id)
     {
         $message = Message::find($id);
+        $message->load('user');
 
-        $this->respondWithData($message->toArray());
+        return $this->respondWithData($message->toArray());
     }
 
 }

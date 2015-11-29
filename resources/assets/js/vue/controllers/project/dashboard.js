@@ -7,12 +7,27 @@ export default Vue.extend({
     data() {
         return {
             loaded: false,
-            posting: false,
+            creatingThread: false,
+            replyingToThread: false,
             data: [],
+            canDelete: [],
             message: '',
             tickTrigger: false,
             intervals: {
             }
+        }
+    },
+
+    watch: {
+        data(oldThreads, newThreads) {
+            this.recalcPermissions();
+
+            _.each(newThreads, (newThread, index) => {
+                if (newThread.answer == undefined) {
+                    newThread.answer = '';
+                    this.data.$set(index, _.clone(newThread));
+                }
+            });
         }
     },
 
@@ -29,16 +44,21 @@ export default Vue.extend({
     },
 
     methods: {
-        // @todo make the view rerender if any canDelete is changed :/
         recalcPermissions() {
-            var canDelete;
+            var canDelete, postedAgo, firstMessage;
 
             _.each(this.data, (thread, index) => {
-                var firstMsg = thread.messages[0];
-                canDelete = CObj.team.pivot.role == 'owner'
-                    || (firstMsg.user_id == CObj.user_id && moment().diff(moment(firstMsg.created_at), 'seconds') <= 280);
+                firstMessage = thread.messages[0];
+                postedAgo = moment().diff(moment(firstMessage.created_at), 'seconds');
 
-                if (thread.canDelete != canDelete) this.data.$set(index, thread);
+                canDelete = CObj.admin
+                    || (firstMessage.user_id == CObj.user_id && postedAgo <= 280);
+                canDelete = true;
+                if (thread.canDelete != canDelete) {
+                    var copy = _.clone(thread);
+                    copy.canDelete = canDelete;
+                    this.data.$set(index, copy);
+                }
             });
         },
         getThreads() {
@@ -47,20 +67,31 @@ export default Vue.extend({
                 this.loaded = true;
             });
         },
-        postMessage(e) {
-            this.posting = true;
+        createThread() {
+            this.creatingThread = true;
 
             this.$http.post(`/api/threads`, _.extend(this.state, {content: this.message}), (data) => {
                 this.message = '';
                 data.data.canDelete = true;
                 this.data.unshift(data.data);
             }).always(() => {
-                this.posting = false;
+                this.creatingThread = false;
+            });
+        },
+        replyToThread(thread, index) {
+            this.replyingToThread = true;
+
+            this.$http.post(`/api/threads/${thread.id}/messages`, {content: thread.answer}, (data) => {
+                thread.messages.push(data.data);
+                thread.answer = '';
+                this.data.$set(index, _.clone(thread));
+            }).always(() => {
+                this.replyingToThread = false;
             });
         },
         deleteThreadConfirm(thread) {
             notify.confirm('Are you sure you want to delete this thread?', '', () => {
-                this.data = _.removeById(thread.id, this.data.data);
+                this.data = _.removeById(thread.id, this.data);
                 this.$http.delete(`/api/threads/${thread.id}`);
             });
         }

@@ -20,15 +20,15 @@
                 </div>
 
                 <button class="btn btn-block btn-default-outline"
-                        v-on:click="postMessage($event)"
-                        v-submit="posting">Submit New Message</button>
+                        v-on:click="createThread($event)"
+                        v-submit="creatingThread">Submit New Message</button>
             </div>
         </div>
 
         <div v-for="thread in data" class="m-t pos-r" v-show="thread.messages.length">
             <div class="media list-group-item p-a" >
                 <a href="#" class="delete-thread text-danger"
-                   {{--v-if="thread.canDelete"--}}
+                   v-if="thread.canDelete"
                    v-on:click.prevent="deleteThreadConfirm(thread)">
                     <i class="fa fa-trash"></i>
                 </a>
@@ -64,9 +64,16 @@
 
                 
             </div>
-            <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"></textarea>
+            <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"
+                      v-model="thread.answer">
+            </textarea>
 
-            <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"><i class="fa fa-reply"></i> Submit Reply</button>
+            <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"
+                    v-bind:class="{disabled: thread.answer == undefined || !thread.answer}"
+                    v-submit="replyingToThread"
+                    v-on:click.prevent="replyToThread(thread, $index)">
+                <i class="fa fa-reply"></i> Submit Reply
+            </button>
         </div>
     </div>
 
