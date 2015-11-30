@@ -21,6 +21,12 @@
 @import 'pjax-loader';
 @import "_quote-area";
 
+trix-toolbar {
+  .strike, .block-level.increase, .block-level.decrease, .undo, .redo {
+    display: none;
+  }
+}
+
 .uploadcare-widget-small {
   .uploadcare-widget-button-open {
     .m-t-0;
@@ -48,13 +54,6 @@
     .btn-block;
     .btn-success;
     .btn-lg;
-  }
-}
-
-
-.uploadcare-widget-big {
-  .uploadcare-widget-button-open {
-
   }
 }
 

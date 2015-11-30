@@ -33,7 +33,7 @@ _.mixin({
      * @example _.column([{name: 'John'}, {name: 'Jack'}], 'name') => ['John', 'Jack']
      * @param items
      * @param column
-     * @returns {*}
+     * @return {array}
      */
     column(items, column) {
         return items.map((item) => {
