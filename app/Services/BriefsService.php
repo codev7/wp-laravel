@@ -14,27 +14,32 @@ use Illuminate\Support\Collection;
  */
 class BriefsService {
 
+    /**
+     * @var User
+     */
     protected $user;
+
+    /**
+     * @var Project
+     */
+    protected $project;
 
     /**
      * @param User $user
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Project $project)
     {
         $this->user = $user;
+        $this->project = $project;
     }
 
     /**
      * @param Project $project
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all(Project $project = null)
+    public function all()
     {
-        if ($project) {
-            return $project->briefs();
-        } else {
-            return ProjectBrief::query();
-        }
+        return $this->project->briefs();
     }
 
     /**
@@ -73,6 +78,19 @@ class BriefsService {
         $brief->save();
 
         return $brief;
+    }
+
+    /**
+     * @return Array
+     */
+    public static function templates()
+    {
+        return [
+            'wordpress' => json_decode(view('misc.briefs.wordpress')),
+            'frontend' => json_decode(view('misc.briefs.frontend')),
+            'other' => json_decode(view('misc.briefs.other')),
+            'blanks' => json_decode(view('misc.briefs.blanks')),
+        ];
     }
 
 }

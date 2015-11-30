@@ -13,7 +13,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProjectBrief extends Model
 { 
     use SoftDeletes;
-    
+
+    const TYPE_FRONTEND = 'frontend';
+    const TYPE_WP = 'wordpress';
+    const TYPE_OTHER = 'other';
+
     protected $columns = [
         'id',
         'text', //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
@@ -25,7 +29,11 @@ class ProjectBrief extends Model
         'updated_at',
         'deleted_at'
     ];
-    
+
+    protected $casts = [
+        'projects' => 'array',
+    ];
+
     public function project()
     {
         return $this->belongsTo('CMV\Models\PM\Project');

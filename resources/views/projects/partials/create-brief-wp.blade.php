@@ -16,9 +16,6 @@
     </ul>
 </div>
 
-
-
-
 <div class="tab-content">
     <div class="tab-pane active" id="global-pane">
         <div class="form-group">
