@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/briefs">
+    <div class="col-md-9" data-controller="project/brief" state="{{ json_encode(['project_id' => $project->id]) }}" v-cloak>
         
         <div class="panel panel-default panel-profile brief-panel">
 
@@ -24,23 +24,24 @@
                         <div class="form-group">
                             <label>Brief Type</label>
 
-                            <select class="custom-select form-control">
-                                <option>Front End</option>
-                                <option>WordPress</option>
-                                <option>Other</option>
+                            <select class="custom-select form-control"
+                                    v-model="brief.brief_type"
+                                    v-on:change="handleBriefTypeChange">
+                                <option v-for="option in templates.blanks.select.brief_types" v-bind:value="option.value">
+                                    @{{ option.text }}
+                                </option>
                             </select>
                         </div>
-
-                        <div class="form-group">
+@{{ brief | json }}
+                        <div class="form-group" v-if="brief.brief_type == 'frontend'">
                             <label>Layout Type</label>
                             <p class="text-danger">
-                            <select class="custom-select form-control">
-                                <option>responsive</option>
-                                <option>fixed</option>
-                                <option>mobile only</option>
-                                <option>fluid</option>
+                            <select class="custom-select form-control"
+                                    v-model="brief.layout_type">
+                                <option v-for="option in templates.blanks.select.layout_types" v-bind:value="option.value">
+                                    @{{ option.text }}
+                                </option>
                             </select>
-                            This only appears if brief-type=frontend
                         </div>
 
                         <div class="form-group">
@@ -54,19 +55,17 @@
 
                         <div class="form-group">
                             <label>Quick Overview</label>
-                            <textarea class="form-control" rows="2" cols="4" placeholder="Project Summary - Less than 300 characters"></textarea>
+                            <textarea class="form-control" rows="2" cols="4" placeholder="Project Summary - Less than 300 characters"
+                                      maxlength="300"
+                                      v-model="brief.summary">
+                            </textarea>
 
-                            <p class="m-a-0 pull-right text-muted">300 characters remaining</p>
+                            <p class="m-a-0 pull-right text-muted">@{{ 300 - brief.summary.length }} characters remaining</p>
                         </div>
 
                         <div class="clearfix"></div>
 
-
-                        <!-- create-brief-wp  /  create-brief-other -->
-                        
-                        @include('projects/partials/create-brief-front-end')
-
-          
+                        @include('projects.partials.brief-create')
 
                     </div>
 

@@ -112,7 +112,7 @@
                 <div class="text-center m-t">
                     <a href="#" class="btn btn-xs btn-success"><i class="fa fa-plus"></i> Add Box</a>
 
-                    <small>(Maxium: 3 Boxes)</small>
+                    <small>(Maximum: 3 Boxes)</small>
                 </div>
             </div><!--col-->
 

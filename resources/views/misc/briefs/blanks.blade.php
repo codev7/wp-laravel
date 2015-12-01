@@ -1,7 +1,7 @@
 {
   "modals_item": {
-    "name": "Contact Us Form",
-    "summary": "Here is a quick summary of the modal.",
+    "name": "",
+    "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
     ],
@@ -12,8 +12,8 @@
   },
 
   "views_item": {
-    "name": "Name of the view",
-    "summary": "Here is a quick summary of the view.",
+    "name": "",
+    "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
     ],
@@ -24,22 +24,22 @@
   },
 
   "brief_boxes_item": {
-    "title": "Box Title",
-    "description": "Box description",
-    "tooltip": "Box tooltip content here"
+    "title": "",
+    "description": "",
+    "tooltip": ""
   },
 
   "sections_item": {
-    "name": "Home",
-    "summary": "Here is a quick summary of the view.",
+    "name": "",
+    "summary": "",
     "sub_sections": [
       {{-- sub_sections_item --}}
     ]
   },
 
   "sub_sections_item": {
-    "header": "Sub Section Menu Header",
-    "content": "wysiwyg html content here",
+    "header": "",
+    "content": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
     ]
@@ -47,8 +47,8 @@
 
   "checklist_item": {
     "category": "design",
-    "text": "The text associated with the checklist item",
-    "screenshots": ["http://srcnsht.my/SCjk2ct", "http://srcnsht.my/SCjk2ct"]
+    "text": "",
+    "screenshots": []
   },
 
   "design_proofs_item": {
@@ -57,8 +57,8 @@
   },
 
   "post_types_item": {
-    "name": "Testimonials",
-    "summary": "Here is a quick summary of the post type.",
+    "name": "",
+    "summary": "",
     "has_single_post_page": true,
     "view_for_single_post_page": "", {{-- name of view that the single post page should use, this can be null if has_single_post_page=false --}}
     "include_in_search": true, {{-- user can define whether or not this CPT shows up in search results on the site --}}
@@ -81,7 +81,7 @@
   },
 
   "custom_meta_fields_item": {
-    "name": "Testimonial Quote By",
+    "name": "",
     "type": "text",
     "required": false
   },
@@ -91,15 +91,15 @@
   },
 
   "endpoints_item": {
-    "name": "Contact Form",
-    "summary": "Here is a quick summary of the endpoint with expected functionality outlined.",
-    "form_inputs": "This is a markdown text with a description of what the user is submitting.",
-    "expected_output_action": "This is a markdown text with a description of what happens after a user submits."
+    "name": "",
+    "summary": "",
+    "form_inputs": "",
+    "expected_output_action": ""
   },
 
   "templates_item": {
-    "name": "Home",
-    "summary": "Here is a quick summary of the view.",
+    "name": "",
+    "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
     ],
@@ -107,8 +107,8 @@
   },
 
   "theme_menus_item": {
-    "name": "Header Menu",
-    "description": "the menu in the header of every page"
+    "name": "",
+    "description": ""
   },
 
   "select": {
@@ -123,6 +123,11 @@
       {"text": "fixed", "value": "fixed"},
       {"text": "mobile only", "value": "mobile-only"},
       {"text": "fluid", "value": "fluid"}
+    ],
+    "brief_types": [
+      {"text": "frontend", "value": "frontend"},
+      {"text": "wordpress", "value": "wordpress"},
+      {"text": "other", "value": "other"}
     ]
   }
 }
