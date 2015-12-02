@@ -1,6 +1,6 @@
 {
   "modals_item": {
-    "name": "",
+    "name": "New Modal",
     "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
@@ -12,7 +12,7 @@
   },
 
   "views_item": {
-    "name": "",
+    "name": "New View",
     "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
@@ -24,13 +24,13 @@
   },
 
   "brief_boxes_item": {
-    "title": "",
+    "title": "New Brief Box",
     "description": "",
     "tooltip": ""
   },
 
   "sections_item": {
-    "name": "",
+    "name": "New Section",
     "summary": "",
     "sub_sections": [
       {{-- sub_sections_item --}}
@@ -38,7 +38,7 @@
   },
 
   "sub_sections_item": {
-    "header": "",
+    "header": "New Sub Section",
     "content": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
@@ -57,21 +57,14 @@
   },
 
   "post_types_item": {
-    "name": "",
+    "name": "New Post Type",
     "summary": "",
     "has_single_post_page": true,
     "view_for_single_post_page": "", {{-- name of view that the single post page should use, this can be null if has_single_post_page=false --}}
     "include_in_search": true, {{-- user can define whether or not this CPT shows up in search results on the site --}}
     "has_archive": true, {{-- user can define whether this CPT has an archives page that displays all of the post types in a feed --}}
     "view_for_post_archive_page": "", {{-- name of view that single post page should use, this comes from the associated front end brief --}}
-    "meta_data_defaults": {
-      "author": false,
-      "wp_title": true,
-      "content_wysiwyg": true,
-      "excerpt": false,
-      "menu_order": true,
-      "thumbnail": true
-    },
+    "meta_data": ["wp_title", "content_wysiwyg", "menu_order", "thumbnail"],
     "custom_meta_fields": [
       {{-- blanks.custom_meta_fields_item --}}
     ],
@@ -91,14 +84,14 @@
   },
 
   "endpoints_item": {
-    "name": "",
+    "name": "New Endpoint",
     "summary": "",
     "form_inputs": "",
     "expected_output_action": ""
   },
 
   "templates_item": {
-    "name": "",
+    "name": "New Template",
     "summary": "",
     "checklist": [
       {{-- blanks.checklist_item --}}
@@ -107,8 +100,14 @@
   },
 
   "theme_menus_item": {
-    "name": "",
+    "name": "New Theme Menu",
     "description": ""
+  },
+
+  "menu_items_item": {
+     "header": "Menu Header",
+     "content": "",
+     "checklist": []
   },
 
   "select": {
@@ -128,6 +127,21 @@
       {"text": "frontend", "value": "frontend"},
       {"text": "wordpress", "value": "wordpress"},
       {"text": "other", "value": "other"}
+    ],
+    "meta_data": [
+      {"text": "author", "value": "author"},
+      {"text": "wp_title", "value": "wp_title"},
+      {"text": "content_wysiwyg", "value": "content_wysiwyg"},
+      {"text": "excerpt", "value": "excerpt"},
+      {"text": "menu_order", "value": "menu_order"},
+      {"text": "thumbnail", "value": "thumbnail"}
+    ],
+    "meta_field_types": [
+      {"text": "text", "value": "text"},
+      {"text": "textarea", "value": "textarea"},
+      {"text": "file", "value": "file"},
+      {"text": "image", "value": "image"},
+      {"text": "repeater", "value": "repeater"}
     ]
   }
 }

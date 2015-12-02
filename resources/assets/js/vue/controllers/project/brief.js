@@ -17,7 +17,9 @@ export default Vue.extend({
             supplementary: {
                 files: [],
                 briefs: []
-            }
+            },
+
+            lodash: _
         }
     },
 
@@ -46,6 +48,7 @@ export default Vue.extend({
             parts = path.split('.');
             blank = _.cloneDeep(this.templates.blanks[_.last(parts) + '_item']);
             clone = _.cloneDeep(this[parts[0]]);
+
             _.get(clone, _.tail(parts).join('.')).push(blank);
 
             this[parts[0]] = clone;
@@ -63,7 +66,7 @@ export default Vue.extend({
                 },
                 []
             );
-            console.log(withoutIndex, _.get(clone, _.tail(parts).join('.')));
+
             _.set(clone, _.tail(parts).join('.'), withoutIndex);
             this[parts[0]] = clone;
         }

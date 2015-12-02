@@ -4,10 +4,12 @@
         <i class="fa fa-plus"></i> Add Brief Box
     </a>
 
-    <small>(Maxium: 3 Boxes)</small>
+    <small>(Maximum: 3 Boxes)</small>
 </div>
 
 <div v-for="(boxIndex, box) in brief.brief_boxes">
+    <hr/>
+
     <small class="pull-right">
         <a href="#" class="text-danger"
            v-on:click.prevent="removeListItem('brief.brief_boxes', boxIndex)">
