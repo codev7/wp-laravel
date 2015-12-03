@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <div class="statcard p-a m-b" style="background-color: #1e6ab4">
           <h3 class="statcard-number" style="color: white">
-            {{ $rep->companies->where('type','agency')->count() }}
+            {{ $rep->companies()->where('type','agency')->count() }}
           </h3>
           <span class="statcard-desc"  style="color: white">Agencies Assigned</span>
         </div>
@@ -10,7 +10,7 @@
     <div class="col-sm-3">
         <div class="statcard p-a m-b" style="background-color: #1e6ab4">
           <h3 class="statcard-number" style="color: white">
-            {{ $rep->companies->where('type','agency')->where('status','won')->count() }}
+            {{ $rep->companies()->where('type','agency')->where('status','won')->count() }}
           </h3>
           <span class="statcard-desc"  style="color: white">Agencies Won</span>
         </div>
@@ -18,7 +18,7 @@
     <div class="col-sm-3">
         <div class="statcard p-a m-b" style="background-color: #7caa18">
           <h3 class="statcard-number" style="color: white">
-            {{ $rep->companies->where('type','brand')->count() }}
+            {{ $rep->companies()->where('type','brand')->count() }}
           </h3>
           <span class="statcard-desc"  style="color: white">Brands Assigned</span>
         </div>
@@ -26,7 +26,7 @@
     <div class="col-sm-3">
         <div class="statcard p-a m-b" style="background-color: #7caa18">
           <h3 class="statcard-number" style="color: white">
-            {{ $rep->companies->where('type','brand')->where('status','won')->count() }}
+            {{ $rep->companies()->where('type','brand')->where('status','won')->count() }}
           </h3>
           <span class="statcard-desc"  style="color: white">Brands Won</span>
         </div>
