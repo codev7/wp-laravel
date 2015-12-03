@@ -1,26 +1,26 @@
-{
+export default {
   "modals_item": {
     "name": "New Modal",
     "summary": "",
     "checklist": [
-      {{-- blanks.checklist_item --}}
+      //blanks.checklist_item
     ],
     "design_proofs": [
-      {{-- blanks.design_proofs_item --}}
+      //blanks.design_proofs_item
     ],
-    "design_file_id": "" {{-- id of the file in files table where the full design file exists for the view --}}
+    "design_file_id": "" // id of the file in files table where the full design file exists for the view
   },
 
   "views_item": {
     "name": "New View",
     "summary": "",
     "checklist": [
-      {{-- blanks.checklist_item --}}
+      // blanks.checklist_item
     ],
     "design_proofs": [
-      {{-- blanks.design_proof_item --}}
+      // blanks.design_proof_item
     ],
-    "design_file_id": "" {{-- id of the file in files table where the full design file exists for the view --}}
+    "design_file_id": "" // id of the file in files table where the full design file exists for the view
   },
 
   "brief_boxes_item": {
@@ -33,7 +33,7 @@
     "name": "New Section",
     "summary": "",
     "sub_sections": [
-      {{-- sub_sections_item --}}
+      // sub_sections_item
     ]
   },
 
@@ -41,7 +41,7 @@
     "header": "New Sub Section",
     "content": "",
     "checklist": [
-      {{-- blanks.checklist_item --}}
+      // blanks.checklist_item
     ]
   },
 
@@ -53,23 +53,23 @@
 
   "design_proofs_item": {
     "name": "",
-    "screenshot_url": []
+    "screenshots": []
   },
 
   "post_types_item": {
     "name": "New Post Type",
     "summary": "",
     "has_single_post_page": true,
-    "view_for_single_post_page": "", {{-- name of view that the single post page should use, this can be null if has_single_post_page=false --}}
-    "include_in_search": true, {{-- user can define whether or not this CPT shows up in search results on the site --}}
-    "has_archive": true, {{-- user can define whether this CPT has an archives page that displays all of the post types in a feed --}}
-    "view_for_post_archive_page": "", {{-- name of view that single post page should use, this comes from the associated front end brief --}}
+    "view_for_single_post_page": "", // name of view that the single post page should use, this can be null if has_single_post_page=false
+    "include_in_search": true, // user can define whether or not this CPT shows up in search results on the site
+    "has_archive": true, // user can define whether this CPT has an archives page that displays all of the post types in a feed
+    "view_for_post_archive_page": "", // name of view that single post page should use, this comes from the associated front end brief
     "meta_data": ["wp_title", "content_wysiwyg", "menu_order", "thumbnail"],
     "custom_meta_fields": [
-      {{-- blanks.custom_meta_fields_item --}}
+      // blanks.custom_meta_fields_item
     ],
     "taxonomies": [
-      {{-- blanks.custom_taxonomies_item --}}
+      // blanks.custom_taxonomies_item
     ]
   },
 
@@ -94,9 +94,9 @@
     "name": "New Template",
     "summary": "",
     "checklist": [
-      {{-- blanks.checklist_item --}}
+      // blanks.checklist_item
     ],
-    "front_end_brief_view_name": "" {{-- name of the view from the associated front end brief that this WP template will use, the design proofs are also automatically pulled in from this association. --}}
+    "front_end_brief_view_name": "" // name of the view from the associated front end brief that this WP template will use, the design proofs are also automatically pulled in from this association.
   },
 
   "theme_menus_item": {

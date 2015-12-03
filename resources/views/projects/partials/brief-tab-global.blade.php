@@ -49,8 +49,7 @@
                 <div class="form-group">
                     <label>Menu Item Content</label>
                             <textarea class="form-control" rows="2" cols="4" placeholder=""
-                                      v-model="menuItem.content"
-                                      v-trix>
+                                      v-model="menuItem.content">
                             </textarea>
                 </div>
 

@@ -13,6 +13,9 @@ use Input, Auth, Validator;
  */
 class Briefs extends Controller {
 
+    /**
+     * @var BriefsService
+     */
     protected $service;
 
     public function __construct()
@@ -48,37 +51,57 @@ class Briefs extends Controller {
     public function show($projectId, $briefId)
     {
         $brief = $this->service->find($briefId);
+        $brief->load('project');
 
-        return $this->respondWithData($brief);
+        return $this->respondWithData($brief->toArray());
     }
 
     /**
      * @Post("api/projects/{projects}/briefs")
      */
-    public function create()
+    public function create($projectId)
     {
         $data = Input::all();
         $validator = Validator::make($data, [
-            'text' => 'required',
-            'project_id' => 'required|exists:projects,id'
+            'brief' => 'required|array',
+            'brief.brief_type' => 'required',
         ]);
 
-        if ($validator->fails) {
+        if ($validator->fails()) {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $project = Project::find($data['project_id']);
-        $brief = $this->service->create($project, $data);
+        $project = Project::find($projectId);
+        $brief = $this->service->create($data);
+        $brief->load('project');
 
-        return $this->respondWithData($brief);
+        return $this->respondWithData($brief->toArray());
     }
 
     /**
-     * @Put("api/briefs")
+     * @Put("api/projects/{projects}/briefs/{briefs}")
+     * @param $projectId
+     * @param $briefId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update($projectId, $briefId)
     {
-        //..
+        $data = Input::all();
+        $validator = Validator::make($data, [
+            'brief' => 'required|array',
+            'brief.brief_type' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $brief = $this->service->find($briefId);
+        $this->service->update($brief, $data);
+        $brief->load('project');
+
+        return $this->respondWithData($brief->toArray());
+
     }
 
 }

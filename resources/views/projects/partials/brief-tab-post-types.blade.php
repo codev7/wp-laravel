@@ -81,7 +81,7 @@
                 <label>Select Default Meta Data <i class="fa fa-question-circle tooltipper" data-title="Which default meta data should this post have?"></i></label>
 
                 <select multiple class="form-control" v-model="postType.meta_data">
-                    <option value="@{{ option.value }}" v-for="option in templates.blanks.select.meta_data">
+                    <option value="@{{ option.value }}" v-for="option in blanks.select.meta_data">
                         @{{ option.text }}
                     </option>
                 </select>
@@ -110,7 +110,7 @@
                         </td>
                         <td>
                             <select class="form-control custom-select m-a-0" v-model="metaField.type">
-                                <option value="@{{ option.value }}" v-for="option in templates.blanks.select.meta_field_types">
+                                <option value="@{{ option.value }}" v-for="option in blanks.select.meta_field_types">
                                     @{{ option.text }}
                                 </option>
                             </select>

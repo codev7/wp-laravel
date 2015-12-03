@@ -9,6 +9,9 @@ export default Vue.extend({
             required: true
         }
     },
+    components: {
+        'uploadcare': require('./brief-uploadcare')
+    },
     template: `
         <div class="form-group">
             <label>Check List Items</label>
@@ -31,13 +34,12 @@ export default Vue.extend({
                                   v-model="item.description"></textarea>
                     </td>
                     <td>
-                        <ul class="m-a-0">
-                            <li><a href="#">cmvfiles.co/23kzd</a></li>
-                            <li><a href="#">cmvfiles.co/23kzd</a></li>
-                            <li><a href="#">cmvfiles.co/23kzd</a></li>
-                        </ul>
-
-                        <a href="#" class="btn btn-block btn-xs m-t"><i class="fa fa-upload"></i> Add Screenshots</a>
+                        <uploadcare
+                            :bind-files.sync="item.screenshots"
+                            :all-files.sync="$root.files"
+                            reference_type="project_brief"
+                            reference_id="$root.state.brief_id">
+                        </uploadcare>
                     </td>
 
                     <td>

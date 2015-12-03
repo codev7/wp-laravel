@@ -9,6 +9,9 @@ export default Vue.extend({
             required: true
         }
     },
+    components: {
+        'uploadcare': require('./brief-uploadcare')
+    },
     template: `
         <div class="form-group">
             <label>Design Proofs <i class="fa fa-question-circle tooltipper" data-title="Design proofs are screenshots/png files of the view.  For each design brief, the project engineer will need to take screenshots of the raw design file as these screenshots are used during the QA process."></i></label>
@@ -29,8 +32,12 @@ export default Vue.extend({
                                v-model="proof.name" />
                     </td>
                     <td>
-                        <a href="#">cmvfiles.co/23kzd</a>
-                        <a href="#" class="btn btn-block btn-xs"><i class="fa fa-upload"></i> Upload Image</a>
+                        <uploadcare
+                            :bind-files.sync="item.screenshots"
+                            :all-files.sync="$root.files"
+                            reference_type="project_brief"
+                            reference_id="$root.state.brief_id">
+                        </uploadcare>
                     </td>
 
                     <td>

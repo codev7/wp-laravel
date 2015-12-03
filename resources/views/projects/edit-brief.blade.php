@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/brief" state="{{ json_encode(['project_id' => $project->id]) }}" v-cloak>
+    <div class="col-md-9" data-controller="project/brief" state="{{ json_encode(['project_id' => $project->id, 'brief_id' => isset($brief) ? $brief->id : false]) }}" v-cloak>
         
         <div class="panel panel-default panel-profile brief-panel">
 
@@ -26,19 +26,20 @@
 
                             <select class="custom-select form-control"
                                     v-model="brief.brief_type"
-                                    v-on:change="handleBriefTypeChange">
-                                <option v-for="option in templates.blanks.select.brief_types" v-bind:value="option.value">
+                                    v-on:change="handleBriefTypeChange"
+                                    v-bind:disabled="state.brief_id">
+                                <option v-for="option in blanks.select.brief_types" v-bind:value="option.value">
                                     @{{ option.text }}
                                 </option>
                             </select>
                         </div>
-@{{ brief | json }}
+
                         <div class="form-group" v-if="brief.brief_type == 'frontend'">
                             <label>Layout Type</label>
                             <p class="text-danger">
                             <select class="custom-select form-control"
                                     v-model="brief.layout_type">
-                                <option v-for="option in templates.blanks.select.layout_types" v-bind:value="option.value">
+                                <option v-for="option in blanks.select.layout_types" v-bind:value="option.value">
                                     @{{ option.text }}
                                 </option>
                             </select>
@@ -47,9 +48,8 @@
                         <div class="form-group">
                             <label>Related to Other briefs?</label>
 
-                            <select multiple class="form-control">
-                                <option>WordPress Brief - 2 days ago</option>
-                                <option>Front End Brief - 30 minutes ago</option>
+                            <select multiple class="form-control" v-model="brief.related_to_brief">
+                                <option v-for="otherBrief in otherBriefs" value="@{{ otherBrief.id }}">@{{ otherBrief.text.brief_type }} - @{{ otherBrief.created_at | ago }}</option>
                             </select>
                         </div>
 
@@ -65,18 +65,29 @@
 
                         <div class="clearfix"></div>
 
-                        @include('projects.partials.brief-create')
-
+                        @if (isset($brief))
+                            @include('projects.partials.brief-edit')
+                        @else
+                            <button class="btn btn-block"
+                                    v-on:click.prevent="createBrief"
+                                    v-submit="creatingBrief">Create Brief</button>
+                        @endif
                     </div>
 
+                    @if (isset($brief))
                     <div class="col-sm-3">
                         <div class="well well-small">
 
                             <a href="#" class="m-a-0 btn btn-lg btn-block btn-success"><i class="fa fa-paper-plane"></i> Send Brief</a>
 
-                            <p class="m-t m-b-0 text-center"><a href="#" class="btn btn-sm btn-primary-outline"><i class="fa fa-save"></i> Save as Draft</a></p>
+                            <p class="m-t m-b-0 text-center">
+                                <a href="#" class="btn btn-sm btn-primary-outline"
+                                   v-submit="savingAsDraft"
+                                   v-on:click.prevent="saveAsDraft()"><i class="fa fa-save"></i> Save as Draft</a>
+                            </p>
                         </div>
                     </div>
+                    @endif
                 </div><!--row-->
          
 

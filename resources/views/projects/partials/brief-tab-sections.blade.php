@@ -70,8 +70,7 @@
                 <div class="form-group">
                     <label>Subsection Content</label>
                             <textarea class="form-control" rows="2" cols="4" placeholder=""
-                                      v-model="subsection.content"
-                                      v-trix>
+                                      v-model="subsection.content">
                             </textarea>
                 </div>
 

@@ -26,6 +26,7 @@ class BriefsService {
 
     /**
      * @param User $user
+     * @param Project $project
      */
     public function __construct(User $user, Project $project)
     {
@@ -43,17 +44,29 @@ class BriefsService {
     }
 
     /**
-     * @param Project $project
      * @param array $data
      * @return ProjectBrief
      */
-    public function create(Project $project, array $data)
+    public function create(array $data)
     {
         $brief = new ProjectBrief();
 
-        $brief->text = $data['text'];
-        $brief->create_by_id = $this->user->id;
-        $brief->project_id = $project->id;
+        $brief->text = $data['brief'];
+        $brief->created_by_id = $this->user->id;
+        $brief->project_id = $this->project->id;
+        $brief->save();
+
+        return $brief;
+    }
+
+    /**
+     * @param Brief $brief
+     * @param array $data
+     * @return Brief
+     */
+    public function update(ProjectBrief $brief, array $data)
+    {
+        $brief->text = $data['brief'];
         $brief->save();
 
         return $brief;
@@ -65,7 +78,7 @@ class BriefsService {
      */
     public function find($id)
     {
-        return File::find($id);
+        return ProjectBrief::find($id);
     }
 
     /**
