@@ -83,7 +83,11 @@
                                     <tr>
                                         <td>{{ $meta->key }}</td>
                                         <td>{{ $meta->value }}</td>
-                                        <td><a href="#" class="btn btn-xs btn-danger"><span class="icon icon-circle-with-cross"></span></a></td>
+                                        <td>
+                                            <form action="{{ route('prospector.delete-company-meta', ['id' => $meta->id]) }}" method="post">
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                                <a onclick="$(this).parent().submit();" class="btn btn-xs btn-danger-outline"><span class="icon icon-circle-with-cross"></span></a>
+                                            </form>
                                     </tr>
                                     @endforeach
                                 </tbody>
