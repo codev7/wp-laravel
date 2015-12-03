@@ -75,8 +75,19 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @Get("project/{slug}/brief/{brief_id}", as="project.brief", middleware="auth")
+     * @Get("project/{slug}/briefs/create", as="project.create_brief", middleware="admin_auth")
+     * @return Response
+     */
+    public function createBrief($slug)
+    {
+        $project = Project::whereSlug($slug)->first();
+
+        return view('projects/edit-brief')->with('project', $project);
+    }
+
+
+    /**
+     * @Get("project/{slug}/briefs/{brief_id}", as="project.brief", middleware="auth")
      * @return Response
      */
     public function brief($slug, $brief_id)
@@ -87,14 +98,17 @@ class ProjectsController extends Controller
     }
 
     /**
-     * @Get("project/{slug}/create-brief", as="project.create_brief", middleware="admin_auth")
+     * @Get("project/{slug}/briefs/{briefs}/edit")
+     * @param $slug
+     * @param $briefId
      * @return Response
      */
-    public function createBrief($slug)
+    public function editBrief($slug, $briefId)
     {
         $project = Project::whereSlug($slug)->first();
+        $brief = $project->briefs()->findOrFail($briefId);
 
-        return view('projects/create-brief')->with('project', $project);
+        return view('projects/edit-brief')->with('project', $project)->with('brief', $brief);
     }
 
     /**

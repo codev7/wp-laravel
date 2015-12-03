@@ -14,41 +14,59 @@ use Illuminate\Support\Collection;
  */
 class BriefsService {
 
+    /**
+     * @var User
+     */
     protected $user;
 
     /**
-     * @param User $user
+     * @var Project
      */
-    public function __construct(User $user)
+    protected $project;
+
+    /**
+     * @param User $user
+     * @param Project $project
+     */
+    public function __construct(User $user, Project $project)
     {
         $this->user = $user;
+        $this->project = $project;
     }
 
     /**
      * @param Project $project
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function all(Project $project = null)
+    public function all()
     {
-        if ($project) {
-            return $project->briefs();
-        } else {
-            return ProjectBrief::query();
-        }
+        return $this->project->briefs();
     }
 
     /**
-     * @param Project $project
      * @param array $data
      * @return ProjectBrief
      */
-    public function create(Project $project, array $data)
+    public function create(array $data)
     {
         $brief = new ProjectBrief();
 
-        $brief->text = $data['text'];
-        $brief->create_by_id = $this->user->id;
-        $brief->project_id = $project->id;
+        $brief->text = $data['brief'];
+        $brief->created_by_id = $this->user->id;
+        $brief->project_id = $this->project->id;
+        $brief->save();
+
+        return $brief;
+    }
+
+    /**
+     * @param Brief $brief
+     * @param array $data
+     * @return Brief
+     */
+    public function update(ProjectBrief $brief, array $data)
+    {
+        $brief->text = $data['brief'];
         $brief->save();
 
         return $brief;
@@ -60,7 +78,7 @@ class BriefsService {
      */
     public function find($id)
     {
-        return File::find($id);
+        return ProjectBrief::find($id);
     }
 
     /**
@@ -73,6 +91,19 @@ class BriefsService {
         $brief->save();
 
         return $brief;
+    }
+
+    /**
+     * @return Array
+     */
+    public static function templates()
+    {
+        return [
+            'wordpress' => json_decode(view('misc.briefs.wordpress')),
+            'frontend' => json_decode(view('misc.briefs.frontend')),
+            'other' => json_decode(view('misc.briefs.other')),
+            'blanks' => json_decode(view('misc.briefs.blanks')),
+        ];
     }
 
 }

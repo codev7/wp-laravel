@@ -7,6 +7,7 @@ class File extends Model {
 
     const REF_PROJECT = 'project';
     const REF_CONCIERGE = 'concierge_site';
+    const REF_BRIEF = 'project_brief';
     //..
 
     protected $columns = [

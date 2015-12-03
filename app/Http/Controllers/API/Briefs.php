@@ -9,22 +9,25 @@ use Input, Auth, Validator;
 /**
  * Methods for system-wide brief managing. Is usable only by admin.
  * For non-admin users see ProjectBriefs.php
- * @Middleware("auth.admin")
  * @package CMV\Http\Controllers\API
  */
 class Briefs extends Controller {
 
+    /**
+     * @var BriefsService
+     */
     protected $service;
 
     public function __construct()
     {
-        $this->service = new BriefsService(Auth::user());
+        $project = Project::find(\Request::route('projects'));
+        $this->service = new BriefsService(Auth::user(), $project);
     }
 
     /**
-     * @Get("api/briefs")
+     * @Get("api/projects/{projects}/briefs")
      */
-    public function index()
+    public function index($projectId)
     {
         $paginator = $this->service->all()->paginate();
 
@@ -32,43 +35,73 @@ class Briefs extends Controller {
     }
 
     /**
-     * @Get("api/briefs/{briefs}")
-     * @param $id
+     * @Get("api/projects/{projects}/briefs/templates")
      */
-    public function show($id)
+    public function templates()
     {
-        $brief = $this->service->find($id);
+        return $this->respondWithData(BriefsService::templates());
+    }
 
-        return $this->respondWithData($brief);
+
+    /**
+     * @Get("api/projects/{projects}/briefs/{briefs}")
+     * @param $projectId
+     * @param $briefId
+     */
+    public function show($projectId, $briefId)
+    {
+        $brief = $this->service->find($briefId);
+        $brief->load('project');
+
+        return $this->respondWithData($brief->toArray());
     }
 
     /**
-     * @Post("api/briefs")
+     * @Post("api/projects/{projects}/briefs")
      */
-    public function create()
+    public function create($projectId)
     {
         $data = Input::all();
         $validator = Validator::make($data, [
-            'text' => 'required',
-            'project_id' => 'required|exists:projects,id'
+            'brief' => 'required|array',
+            'brief.brief_type' => 'required',
         ]);
 
-        if ($validator->fails) {
+        if ($validator->fails()) {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $project = Project::find($data['project_id']);
-        $brief = $this->service->create($project, $data);
+        $project = Project::find($projectId);
+        $brief = $this->service->create($data);
+        $brief->load('project');
 
-        return $this->respondWithData($brief);
+        return $this->respondWithData($brief->toArray());
     }
 
     /**
-     * @Put("api/briefs")
+     * @Put("api/projects/{projects}/briefs/{briefs}")
+     * @param $projectId
+     * @param $briefId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update()
+    public function update($projectId, $briefId)
     {
-        //..
+        $data = Input::all();
+        $validator = Validator::make($data, [
+            'brief' => 'required|array',
+            'brief.brief_type' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $brief = $this->service->find($briefId);
+        $this->service->update($brief, $data);
+        $brief->load('project');
+
+        return $this->respondWithData($brief->toArray());
+
     }
 
 }
