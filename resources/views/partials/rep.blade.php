@@ -44,7 +44,7 @@
     data-scale-grid-line-color="rgba(255,255,255,.05)"
     data-scale-font-color="#a2a2a2"
     data-labels='{!! CMV\Models\Prospector\Company::getJsonStatuses() !!}'
-    data-value="[{ fillColor: '#1e6ab4', label: 'Agency Stats', data: {!! $rep->getStatusCountJson('agency') !!} },{fillColor: '#7caa18', label: 'Brand Stats', data: {!! $rep->getStatusCountJson('brand') !!} }]">
+    data-value='[{ fillColor: "#1e6ab4", label: "Agency Stats", data: {!! $rep->getStatusCountJson('agency') !!} },{fillColor: "#7caa18", label: "Brand Stats", data: {!! $rep->getStatusCountJson('brand') !!} }]'>
   </canvas>
 </div>
 
@@ -64,6 +64,6 @@
     data-scale-step-width="200"
     data-scale-start-value="0"
     data-labels='{!! $rep->getTrailing28DayActivities(true) !!}'
-    data-value="[{fillColor: 'rgba(28,168,221,.03)', data: {!! $rep->getTrailing28DayActivities() !!}}]">
+    data-value='[{fillColor: "rgba(28,168,221,.03)", data: {!! $rep->getTrailing28DayActivities() !!}}]'>
   </canvas>
 </div>
