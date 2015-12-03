@@ -8,12 +8,12 @@
     <h3 class="hr-divider-content hr-divider-heading">{{ Input::get('search') ? 'Search Results: ' . Input::get('search') : 'All Companies' }}</h3>
 </div>
 
-<form action="{{ route('prospector.companies', ['rep' => null, 'filter' => 'all']) }}" method="get">
+<form method="get">
     <div class="flextable table-actions">
         <div class="flextable-item flextable-primary">
             <div class="btn-toolbar-item input-with-icon">
 
-                <input type="text" name="search" class="form-control input-block" placeholder="Search companies">
+                <input type="text" name="search" class="form-control input-block" placeholder="Search companies" value="{{ Input::get('search') }}">
                 <span class="icon icon-magnifying-glass"></span>
 
             </div>
