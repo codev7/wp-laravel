@@ -10,7 +10,8 @@ export default Vue.extend({
 
     data() {
         return {
-            files: [],
+            briefFiles: [],
+            projectFiles: [],
             blanks: require('./supplementary/brief-data-blanks'),
             templates: {
                 wordpress: require('./supplementary/brief-data-wordpress'),
@@ -37,9 +38,6 @@ export default Vue.extend({
         }
     },
 
-    /*
-     * Bootstrap the component. Load the initial data.
-     */
     ready() {
         this.$http.get(`/api/projects/${this.state.project_id}/briefs`, {}, (res) => {
             this.briefs = res.data;
@@ -50,8 +48,12 @@ export default Vue.extend({
                 this.brief = res.data.text;
             });
 
+            this.$http.get(`/api/files`, {reference_type: 'project', reference_id: this.state.project_id}, (res) => {
+                this.projectFiles = res.data;
+            });
+
             this.$http.get(`/api/files`, {reference_type: 'project_brief', reference_id: this.state.brief_id}, (res) => {
-                this.files = res.data;
+                this.briefFiles = res.data;
             });
         } else {
             this.brief = this.templates.frontend;

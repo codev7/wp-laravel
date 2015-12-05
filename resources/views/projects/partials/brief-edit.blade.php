@@ -3,6 +3,9 @@
         <li class="active">
             <a href="#global-tab" data-toggle="tab">Global</a>
         </li>
+        <li v-show="brief.templates">
+            <a href="#templates-tab" data-toggle="tab">Templates</a>
+        </li>
         <li v-show="brief.post_types">
             <a href="#post-types-tab" data-toggle="tab">Post Types</a>
         </li>
@@ -27,6 +30,10 @@
 <div class="tab-content">
     <div class="tab-pane active" id="global-tab">
         @include('projects.partials.brief-tab-global', ['project' => $project])
+    </div>
+
+    <div class="tab-pane" id="templates-tab">
+        @include('projects.partials.brief-tab-templates', ['project' => $project])
     </div>
 
     <div class="tab-pane" id="post-types-tab">

@@ -36,7 +36,7 @@ export default Vue.extend({
                     <td>
                         <uploadcare
                             :bind-files.sync="item.screenshots"
-                            :all-files.sync="$root.files"
+                            :all-files.sync="$root.briefFiles"
                             reference_type="project_brief"
                             reference_id="$root.state.brief_id">
                         </uploadcare>

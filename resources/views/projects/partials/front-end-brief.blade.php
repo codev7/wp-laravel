@@ -19,14 +19,17 @@
 </div>  
 
 <div class="row">
+    @foreach ($brief->sections() as $identifier => $info)
     <div class="col-sm-4">
-        <div class="statcard statcard-gray p-a-md m-b tooltipper" data-placement="bottom" data-title="These are the unique pages that we will turn into a pixel perfect front end.">
+        <div class="statcard statcard-gray p-a-md m-b tooltipper" data-placement="bottom"
+             data-title="These are the unique pages that we will turn into a pixel perfect front end.">
           <h3 class="statcard-number">
             4 Views
           </h3>
           <span class="statcard-desc"># of page templates <i class="fa fa-question-circle"></i></span>
         </div>
     </div><!--col-->
+    @endforeach
 
     <div class="col-sm-4">
         <div class="statcard statcard-gray p-a-md m-b tooltipper" data-placement="bottom" data-title="These are the modal windows that we will be included in the front end.">

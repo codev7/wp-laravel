@@ -87,14 +87,17 @@ class ProjectsController extends Controller
 
 
     /**
-     * @Get("project/{slug}/briefs/{brief_id}", as="project.brief", middleware="auth")
+     * @Get("project/{slug}/briefs/{briefs}", as="project.brief", middleware="auth")
      * @return Response
      */
     public function brief($slug, $brief_id)
     {
         $project = Project::whereSlug($slug)->first();
+        $brief = $project->briefs()->findOrFail($brief_id);
 
-        return view('projects/brief')->with('project', $project)->with('brief_id', $brief_id);
+        return view('projects/brief')
+            ->with('project', $project)
+            ->with('brief', $brief);
     }
 
     /**

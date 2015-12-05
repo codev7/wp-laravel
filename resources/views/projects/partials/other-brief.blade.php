@@ -1,15 +1,22 @@
 <h1>Other Generic Brief
     <small>
-        <span style="top: -5px" data-placement="right" class="pos-r tooltipper text-primary" title="A WordPress brief covers all details about the WordPress implementation of this project.">
+        <span style="top: -5px" data-placement="right" class="pos-r tooltipper text-primary" title="Brief covers all details about the implementation of this project.">
              <i class="fa fa-question-circle"></i>
         </span>
     </small>
     <br />
-    <small class="text-muted">{{ $project->name }} - Prepared on November 21, 2015</small>
+    <small class="text-muted">{{ $project->name }} - {{ $brief->getFinishedAtString() }}</small>
 </h1>
 
-<p class="m-a-0"><small><a class="text-danger" href="#"><i class="fa fa-edit"></i> Edit Brief</a></small></p>
-
+@if (Auth::user()->is_admin)
+<p class="m-a-0">
+    <small>
+        <a class="text-danger" href="/{{$project->slug}}/briefs/create">
+            <i class="fa fa-edit"></i> Edit Brief
+        </a>
+    </small>
+</p>
+@endif
 
 <div class="clearfix"></div>
 

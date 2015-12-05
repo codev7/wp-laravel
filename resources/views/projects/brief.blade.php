@@ -24,23 +24,25 @@
                     <p class="m-t text-center"><a href="#request-brief-changes" data-toggle="modal" class="btn btn-xs btn-danger-outline">Request Changes</a></p>
                 </div>
 
-                @if($brief_id == 'sample-front-end-brief')
-                    
-                @include('projects/partials/front-end-brief')
+                @include('projects/partials/brief-view')
 
-                @endif
+                {{--@if($brief_id == 'sample-front-end-brief')--}}
+                    {{----}}
+                {{--@include('projects/partials/front-end-brief')--}}
 
-                @if($brief_id == 'sample-wordpress-brief')
-                    
-                @include('projects/partials/wordpress-brief')
+                {{--@endif--}}
 
-                @endif
+                {{--@if($brief_id == 'sample-wordpress-brief')--}}
+                    {{----}}
+                {{--@include('projects/partials/wordpress-brief')--}}
 
-                @if($brief_id == 'other')
-                    
-                @include('projects/partials/other-brief')
+                {{--@endif--}}
 
-                @endif
+                {{--@if($brief_id == 'other')--}}
+                    {{----}}
+                {{--@include('projects/partials/other-brief')--}}
+
+                {{--@endif--}}
             </div>
 
         </div><!--panel-->

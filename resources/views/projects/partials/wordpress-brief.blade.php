@@ -15,9 +15,9 @@
 
 <div class="hr-divider m-b m-t">
   <h3 class="hr-divider-content hr-divider-heading">
-    Summary 
+    Summary
   </h3>
-</div>  
+</div>
 
 <div class="row">
     <div class="col-sm-4">
@@ -50,9 +50,9 @@
 
 <div class="hr-divider">
   <h3 class="hr-divider-content hr-divider-heading">
-    Details 
+    Details
   </h3>
-</div> 
+</div>
 
 <div class="row m-t-md">
     <div class="col-sm-3">
@@ -61,7 +61,7 @@
             <div class="panel-body p-l-0 p-r-0 p-t-0">
                 <ul class="nav nav-bordered nav-stacked m-t">
                     <li class="nav-header">Global</li>
-                        
+
                     <li class="active">
                         <a href="#wp-overview" data-toggle="tab">Overview</a>
                     </li>
@@ -77,7 +77,7 @@
                     <li><a href="#wp-page-template" data-toggle="tab">404</a></li>
                     <li><a href="#wp-page-template" data-toggle="tab">Testimonial Index</a></li>
                     <li><a href="#wp-page-template" data-toggle="tab">Contact</a></li>
-                    
+
                     <li class="nav-header m-t">Post Types</li>
 
                     <li><a href="#view-cpt-post" data-toggle="tab">Posts</a></li>
@@ -110,7 +110,7 @@
                     </ul>
                 </div>
 
-                
+
 
                 <h4>Quick Summary</h4>
                 <table class="table table-middle m-b-0">
@@ -132,7 +132,7 @@
                                 <h4><i class="fa fa-credit-card"></i><br /><small>Cost</small></h4>
                             </th>
                             <td>
-                                
+
                                 <p class="m-b-0">The guaranteed cost for this project is $1,000 - $3,000, depending on which delivery speed you pick on the invoice page.  <a href="#"><strong>View Invoice</strong></a>.</p>
 
                             </td>
@@ -143,7 +143,7 @@
                                 <h4><i class="fa fa-file-image-o"></i><br /><small>Files</small></h4>
                             </th>
                             <td>
-                                
+
                                   <p class="m-b-0">There have been 4 files uploaded to this project.  <a href="#"><strong>View Files</strong></a>.</p>
 
                             </td>
@@ -152,7 +152,7 @@
 
                 </table>
 
-                
+
 
 
 
@@ -163,7 +163,7 @@
 
                 <p>Admin will have a WYSIWYG editor that will be outputted below.</p>
                 <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor <code>commodo vitae</code>.</p>
-                           
+
                 <ol>
                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
                    <li>Aliquam tincidunt mauris eu risus.</li>
@@ -171,7 +171,7 @@
 
 
                 <h4 >Checklist Items <i  data-title="The check list items will be used globally across all views.  These items are used during the QA process to verify project success." class="tooltipper fa fa-question-circle"></i></h4>
-                
+
 
                 <div class="checkbox custom-control custom-checkbox">
                   <label class="w-full">
@@ -342,9 +342,9 @@
                 <h4>Expected Output / Action</h4>
 
                 <p>On successful form submission, user should be seen a thank you message.  The form inputs should be submitted to an endpoint in the WP theme that will store the submission as a new form entry using the Gravity Forms plugin API.</p>
-               
+
             </div>
-            
+
         </div><!--tab-content-->
     </div><!--col-->
 </div>
