@@ -316,3 +316,18 @@ function setBodyClassIfPjax(array $classes) {
         </script>
     ";
 }
+
+/**
+ * Generates random string
+ * @param int $length
+ * @return string
+ */
+function random_str($length = 8) {
+    $possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+    return 'e' . substr(str_shuffle($possible), 0, $length - 1);
+}
+
+function yesNo($bool) {
+    return $bool ? 'Yes' : 'No';
+}

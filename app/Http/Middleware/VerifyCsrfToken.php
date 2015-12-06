@@ -17,6 +17,7 @@ class VerifyCsrfToken extends BaseVerifier
         'webhooks/*',
         'blog',
         'blog/*',
-        '/'
+        '/',
+        '/api/*'
     ];
 }

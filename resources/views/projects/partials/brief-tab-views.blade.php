@@ -59,7 +59,8 @@
 
             <brief-checklist v-if="view.checklist"
                              :path="'brief.views['+viewIndex+'].checklist'"
-                             :checklist.sync="view.checklist">
+                             :checklist.sync="view.checklist"
+                             :with-categories="true">
             </brief-checklist>
 
         </div>

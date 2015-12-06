@@ -214,11 +214,6 @@
                   </label>
                 </div>
             </div>
-     
-
-
-
-            
         </div><!--tab-content-->
     </div><!--col-->
 </div>

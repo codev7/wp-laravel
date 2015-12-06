@@ -76,7 +76,8 @@
 
                 <brief-checklist v-if="subsection.checklist"
                                  :path="'brief.sections['+sectionIndex+'].sub_sections['+subsectionIndex+'].checklist'"
-                                 :checklist.sync="subsection.checklist">
+                                 :checklist.sync="subsection.checklist"
+                                 :with-categories="true">
                 </brief-checklist>
             </div>
         </div>

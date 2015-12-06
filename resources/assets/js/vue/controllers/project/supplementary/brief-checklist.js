@@ -1,3 +1,5 @@
+var blanks = require('./brief-data-blanks');
+
 export default Vue.extend({
     props: {
         checklist: {
@@ -7,6 +9,16 @@ export default Vue.extend({
         path: {
             type: String,
             required: true
+        },
+        withCategories: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
+    data() {
+        return {
+            blanks: blanks
         }
     },
     components: {
@@ -20,7 +32,8 @@ export default Vue.extend({
                    v-show="checklist.length">
                 <thead>
                 <tr>
-                    <th style="width: 70%">Description</th>
+                    <th v-if="withCategories" style="width: 20%">Category</th>
+                    <th style="width: 50%">Description</th>
                     <th style="width: 20%">Screenshots</th>
                     <th style="width: 10%">&nbsp;</th>
                 </tr>
@@ -29,6 +42,13 @@ export default Vue.extend({
                 <tbody>
 
                 <tr v-for="(itemIndex, item) in checklist">
+                    <td v-if="withCategories">
+                        <select v-model="item.category" class="custom-select form-control">
+                            <option v-for="option in blanks.select.checklist_item_categories" value="{{ option.value }}">
+                                {{ option.text }}
+                            </option>
+                        </select>
+                    </td>
                     <td>
                         <textarea class="form-control m-a-0" rows="5" placeholder="Enter a description of the item."
                                   v-model="item.description"></textarea>

@@ -110,8 +110,8 @@ class ProjectBrief extends Model
             ],
             'layout_type' => [
                 'title' => '%s',
-                'description' => "This is the layout type we will use. A responsive layout will be fully responsive to the width of the browser / device. <br /><br />Other Options:</strong><br />Fixed / Mobile-only / Fluid",
-                'tooltip' => 'Layout Type'
+                'description' => "Layout Type",
+                'tooltip' => 'This is the layout type we will use. A responsive layout will be fully responsive to the width of the browser / device. <br /><br />Other Options:</strong><br />Fixed / Mobile-only / Fluid'
             ],
             'templates' => [
                 'title' => '%d Template',
@@ -138,7 +138,7 @@ class ProjectBrief extends Model
                     $boxes[$key]['title'] = sprintf($info['title'], $count);
                     if ($count > 1) $boxes[$key]['title'] .= 's';
                 } else {
-                    $boxes[$key]['title'] = sprintf($info['title'], [ucfirst($value)]);
+                    $boxes[$key]['title'] = sprintf($info['title'], ucfirst($value));
                 }
             } else {
                 unset($boxes[$key]);
@@ -174,4 +174,45 @@ class ProjectBrief extends Model
 
         return $res;
     }
+
+    /**
+     * @param array $checklist
+     * @return array
+     */
+    public function normalizeChecklist(array $checklist)
+    {
+        $res = [];
+
+        foreach ($checklist as $checkItem) {
+            if (!isset($res[$checkItem['category']])) {
+                $res[$checkItem['category']] = [];
+            }
+
+            if ($checkItem['screenshots']) {
+                $checkItem['screenshots'] = $this->expandScreenshots($checkItem['screenshots']);
+            }
+
+            $res[$checkItem['category']][] = $checkItem;
+        }
+
+        // if there's only one category - return without categories
+        if (count($res) == 1) return array_values(array_shift($res));
+
+        return $res;
+    }
+
+    /**
+     * @param array $screenshots
+     * @return array
+     */
+    public function expandScreenshots(array $screenshots)
+    {
+        $res = [];
+        foreach ($screenshots as $fileId) {
+            $res[] = File::find($fileId)->toArray();
+        }
+
+        return $res;
+    }
+
 }

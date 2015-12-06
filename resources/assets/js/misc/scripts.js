@@ -38,41 +38,28 @@ var init = function() {
 		
 	});	
 	
-    $(document).on('click','.full-screen-screenshot', function(e)
-    {
-
+    $(document).on('click','.full-screen-screenshot', function(e) {
         e.preventDefault();
 
         var imgLink = $(this).attr('href');
 
         $('body').append('<div class="screenshot-photo"><a href="#" class="btn btn-xs btn-info-outline close-screenshot">CLOSE</a><img src="' + imgLink + '" /></div>');
-
-        console.log(imgLink);
     });
 
 
     var reply_thread_open_class = 'is-opened';
     $(document).on('keyup','.reply-to-a-thread', function(e)
     {
-
-
         var _this = $(this);
 
         if( !_this.hasClass(reply_thread_open_class) && _this.val() != '')
         {
-
-                
                 _this.next('.btn-reply-to-thread').fadeIn();
 
                 _this.animate({
-
                     height: '120px'
-
                 },200).addClass(reply_thread_open_class);
-
         }
-        
-
 
     }).on('mouseleave','.reply-to-a-thread', function()
     {

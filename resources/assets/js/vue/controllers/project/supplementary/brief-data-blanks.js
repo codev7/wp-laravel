@@ -47,7 +47,7 @@ export default {
 
   "checklist_item": {
     "category": "design",
-    "text": "",
+    "description": "",
     "screenshots": []
   },
 
