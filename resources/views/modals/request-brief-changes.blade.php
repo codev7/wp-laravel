@@ -3,6 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
         <h5 class="modal-title">Request Changes to Front End Brief</h5>
       </div>
       <div class="modal-body">
@@ -13,11 +14,13 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="name">Enter Your Changes:</label>
-                            <textarea class="form-control" rows="8" v-trix>Trix editor here</textarea>
-
+                            <textarea class="form-control" rows="8" v-trix v-model="changes"></textarea>
                         </div>
  
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Send Brief Edits</button>                       
+                        <button class="btn btn-success btn-lg btn-block" type="submit"
+                                v-bind:disabled="!changes.length"
+                                v-on:click.prevent="requestChanges()"
+                                v-submit="requestingChanges">Send Brief Edits</button>
                     </div>
                 </div>
             </form>

@@ -8,6 +8,7 @@ Vue.directive('trix', {
     bind: function () {
         this.el.id = _.randomStr();
         var $el = $(this.el);
+        $el.hide();
 
         var path = _.result(_.findWhere(this.el._vue_directives, {name: 'model'}), 'expression');
 

@@ -8,9 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/briefs">
-        
-
+    <div class="col-md-9" v-cloak data-controller="project/briefs" state="{{ json_encode(['project_id' => $project->id]) }}">
 
         <ul class="list-group media-list media-list-stream">
             <li class="media list-group-item p-a">
@@ -29,37 +27,39 @@
                         </thead>
 
                         <tbody>
-
-                            <tr>
-                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-front-end-brief']) }}">Front End Brief</a> <span data-placement="right" class="tooltipper" title="A front end brief covers all details about the HTML/CSS/JavaScript of this project."><i class="fa fa-question-circle"></i></span></td>
-                                <td class="text-center">5 days ago</td>
-                                <td class="text-center">Dave Gamache</td>
-                                <td class="text-center">5 minutes ago</td>
-                                <td class="text-center">John Doe</td>
+                            <tr v-for="brief in briefs">
                                 <td>
-                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-front-end-brief']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                    <a data-pjax href="/project/{{ $project->slug }}/briefs/@{{ brief.id }}">@{{ meta[brief.text.brief_type].name }}</a>
+                                    <span data-placement="right" class="tooltipper" title="@{{ meta[brief.text.brief_type].description }}">
+                                        <i class="fa fa-question-circle"></i>
+                                    </span>
+                                </td>
+                                <td class="text-center">@{{ brief.created_at | ago }}</td>
+                                <td class="text-center">@{{ brief.created_by_user.name }}</td>
+                                <td class="text-center">
+                                    <span v-if="brief.approved_by_customer_id">@{{ brief.approved_by_customer_at | ago }}</span>
+                                    <span v-if="!brief.approved_by_customer_id">Not Yet Approved</span>
+                                </td>
+                                <td class="text-center">
+                                    <span v-if="brief.approved_by_customer_id">@{{ brief.approved_by_user.name }}</span>
+                                    <span v-if="!brief.approved_by_customer_id"></span>
+                                </td>
+                                <td>
+                                    <a data-pjax href="/project/{{ $project->slug }}/briefs/@{{ brief.id }}" class="btn btn-primary-outline btn-xs">View Brief</a>
                                 </td>
                             </tr>
+                        </tbody>
 
+                        <tbody v-if="!briefs.length && briefsFetched">
                             <tr>
-                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-wordpress-brief']) }}">WordPress Brief</a> <span data-placement="right" class="tooltipper" title="A WordPress brief covers all details about the WordPress CMS implementation."><i class="fa fa-question-circle"></i></span></td>
-                                <td class="text-center">5 days ago</td>
-                                <td class="text-center">Dave Gamache</td>
-                                <td class="text-center">5 minutes ago</td>
-                                <td class="text-center"><em class="text-muted">Not yet approved</em></td>
-                                <td>
-                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'sample-wordpress-brief']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
-                                </td>
+                                <td colspan="6" class="text-center">No briefs are created yet</td>
                             </tr>
-                                
+                        </tbody>
+
+                        <tbody v-if="!briefsFetched">
                             <tr>
-                                <td><a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'other']) }}">Other Brief</a> <span data-placement="right" class="tooltipper" title="A other brief covers all details about the generic brief."><i class="fa fa-question-circle"></i></span></td>
-                                <td class="text-center">5 days ago</td>
-                                <td class="text-center">Dave Gamache</td>
-                                <td class="text-center">5 minutes ago</td>
-                                <td class="text-center"><em class="text-muted">Not yet approved</em></td>
-                                <td>
-                                    <a data-pjax href="{{ route('project.brief', ['slug' => $project->slug, 'brief_id' => 'other']) }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                <td class="text-center" colspan="6">
+                                    <i class="fa fa-refresh fa-spin"></i>
                                 </td>
                             </tr>
                         </tbody>

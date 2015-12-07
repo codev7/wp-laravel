@@ -4,6 +4,7 @@ namespace CMV\Services;
 use CMV\Models\PM\File, CMV\Models\PM\Project;
 use CMV\Models\PM\ProjectBrief;
 use CMV\User;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -35,12 +36,17 @@ class BriefsService {
     }
 
     /**
-     * @param Project $project
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function all()
     {
-        return $this->project->briefs();
+        $query = $this->project->briefs();
+
+        if ($this->user->is_admin == false) {
+            $query->whereNotNull('approved_by_admin_id');
+        }
+
+        return $query;
     }
 
     /**
@@ -85,9 +91,23 @@ class BriefsService {
      * @param ProjectBrief $brief
      * @return ProjectBrief
      */
+    public function sendToClient(ProjectBrief $brief)
+    {
+        $brief->approved_by_admin_id = $this->user->id;
+        $brief->approved_by_admin_at = \Carbon\Carbon::now();
+        $brief->save();
+
+        return $brief;
+    }
+
+    /**
+     * @param ProjectBrief $brief
+     * @return ProjectBrief
+     */
     public function approve(ProjectBrief $brief)
     {
         $brief->approved_by_customer_id = $this->user->id;
+        $brief->approved_by_customer_at = \Carbon\Carbon::now();
         $brief->save();
 
         return $brief;

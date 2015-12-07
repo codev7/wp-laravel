@@ -4,7 +4,7 @@
 
 <!-- Main Content -->
 @section('content')
-<div class="row">
+<div class="row" data-controller="project/brief-view" v-cloak state="{{ json_encode(['brief' => $brief->toArray()]) }}">
 
     @include('projects/partials/sidebar')
 
@@ -16,33 +16,24 @@
                 
                 <div><a data-pjax href="{{ route('project.briefs', ['slug' => $project->slug]) }}" class="text-muted"><i class="fa fa-arrow-left"></i> Back to all briefs</a></div>
 
-
-
                 <div class="pull-right w-sm">
-                    <a href="#" class="m-t-md btn btn-lg btn-block btn-success"><i class="fa fa-thumbs-o-up"></i> Approve Brief</a>
+                    <button class="m-t-md btn btn-lg btn-block btn-success"
+                            v-bind:disabled="brief.approved_by_customer_id">
+                        <i class="fa fa-thumbs-o-up"></i> Approve Brief
+                    </button>
 
-                    <p class="m-t text-center"><a href="#request-brief-changes" data-toggle="modal" class="btn btn-xs btn-danger-outline">Request Changes</a></p>
+                    <p class="m-t text-center">
+                        <a href="#" class="btn btn-xs btn-danger-outline"
+                           v-on:click.prevent="openRequestChangesModal()">Request Changes</a>
+                    </p>
+
+                    <p class="m-t text-center" v-if="brief.approved_by_customer_id">
+                        <small>Brief was approved on <br/> @{{ brief.approved_by_customer_at | date }}</small>
+                    </p>
                 </div>
 
                 @include('projects/partials/brief-view')
 
-                {{--@if($brief_id == 'sample-front-end-brief')--}}
-                    {{----}}
-                {{--@include('projects/partials/front-end-brief')--}}
-
-                {{--@endif--}}
-
-                {{--@if($brief_id == 'sample-wordpress-brief')--}}
-                    {{----}}
-                {{--@include('projects/partials/wordpress-brief')--}}
-
-                {{--@endif--}}
-
-                {{--@if($brief_id == 'other')--}}
-                    {{----}}
-                {{--@include('projects/partials/other-brief')--}}
-
-                {{--@endif--}}
             </div>
 
         </div><!--panel-->
@@ -51,4 +42,5 @@
     </div>
 
     @include('modals/request-brief-changes')
+</div>
 @endsection

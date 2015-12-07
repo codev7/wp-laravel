@@ -8,7 +8,7 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/brief" state="{{ json_encode(['project_id' => $project->id, 'brief_id' => isset($brief) ? $brief->id : false]) }}" v-cloak>
+    <div class="col-md-9" data-controller="project/brief-edit" state="{{ json_encode(['project_id' => $project->id, 'brief_id' => isset($brief) ? $brief->id : false]) }}" v-cloak>
         
         <div class="panel panel-default panel-profile brief-panel">
 

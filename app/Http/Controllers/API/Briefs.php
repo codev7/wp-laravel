@@ -4,6 +4,7 @@ namespace CMV\Http\Controllers\API;
 use CMV\Models\PM\Project;
 use CMV\Models\PM\ProjectBrief;
 use CMV\Services\BriefsService;
+use CMV\Services\MessagesService;
 use Input, Auth, Validator;
 
 /**
@@ -28,7 +29,7 @@ class Briefs extends Controller {
      */
     public function index($projectId)
     {
-        $briefs = $this->service->all()->get();
+        $briefs = $this->service->all()->with('createdByUser', 'approvedByUser')->get();
 
         return $this->respondWithData($briefs->toArray());
     }
@@ -100,7 +101,55 @@ class Briefs extends Controller {
         $brief->load('project');
 
         return $this->respondWithData($brief->toArray());
+    }
 
+    /**
+     * @Post("api/projects/{projects}/briefs/{briefs}/send-to-client")
+     * @param $projectId
+     * @param $briefId
+     * @return mixed
+     */
+    public function sendToClient($projectId, $briefId)
+    {
+        $brief = $this->service->find($briefId);
+        $this->service->sendToClient($brief);
+
+        return $this->respondWithData($brief->toArray());
+    }
+
+    /**
+     * @Post("api/projects/{projects}/briefs/{briefs}/request-changes")
+     */
+    public function requestChanges($projectId, $briefId)
+    {
+        $data = Input::all();
+        $validator = Validator::make($data, [
+            'text' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $messageService = new MessagesService(Auth::user());
+        $project = Project::find($projectId);
+        $messageService->postInNewThread($project, $data['text']);
+
+        return $this->respondWithSuccess();
+    }
+
+    /**
+     * @Post("api/projects/{projects}/briefs/{briefs}/approve")
+     * @param $projectId
+     * @param $briefId
+     * @return mixed
+     */
+    public function approveBrief($projectId, $briefId)
+    {
+        $brief = $this->service->find($briefId);
+        $this->service->approve($brief);
+
+        return $this->respondWithData($brief->toArray());
     }
 
 }

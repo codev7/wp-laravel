@@ -5,7 +5,8 @@ export default {
     'admin/project-modal': require('./controllers/admin/project-modal'),
 
     'project/briefs': require('./controllers/project/briefs'),
-    'project/brief': require('./controllers/project/brief'),
+    'project/brief-view': require('./controllers/project/brief-view'),
+    'project/brief-edit': require('./controllers/project/brief-edit'),
     'project/dashboard': require('./controllers/project/dashboard'),
     'project/files': require('./controllers/project/files'),
     'project/invoices': require('./controllers/project/invoices'),
