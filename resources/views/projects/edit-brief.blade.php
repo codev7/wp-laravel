@@ -18,6 +18,11 @@
 
                 <br />
 
+                {{--<div style="height: 150px; overflow: scroll;">--}}
+                    {{--<pre>@{{ brief | json }}</pre>--}}
+                    {{--<pre>@{{ frontendViews | json }}</pre>--}}
+                {{--</div>--}}
+
                 <div class="row">
                     <div class="col-sm-9">
 

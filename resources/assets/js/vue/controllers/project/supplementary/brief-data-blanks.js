@@ -96,7 +96,10 @@ export default {
     "checklist": [
       // blanks.checklist_item
     ],
-    "front_end_brief_view_name": "" // name of the view from the associated front end brief that this WP template will use, the design proofs are also automatically pulled in from this association.
+    // _id of the view from the associated front end brief
+    // that this WP template will use, the design proofs
+    // are also automatically pulled in from this association.
+    "frontend_brief_view_id": ""
   },
 
   "theme_menus_item": {

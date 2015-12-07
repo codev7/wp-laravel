@@ -36,11 +36,9 @@
             <div class="form-group">
                 <label>Design File</label>
 
-                <select class="custom-select form-control">
-                    <option>name-of-file.psd</option>
-                    <option>name-of-file.psd</option>
-                    <option>name-of-file.psd</option>
-                    <option>name-of-file.psd</option>
+                <select class="custom-select form-control" v-model="view.design_file_id">
+                    <option value="">No Design File Yet</option>
+                    <option v-for="file in projectFiles" value="@{{ file.id }}">@{{ file.name }}</option>
                 </select>
             </div>
 

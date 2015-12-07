@@ -36,15 +36,12 @@
                 </textarea>
             </div>
 
-            {{-- coming soon --}}
-            <div class="form-group">
+            <div class="form-group" v-if="frontendViews.length">
                 <label>Associated with HTML View <i class="fa fa-question-circle tooltipper" data-title="Select the view from your front end brief that this template will use."></i></label>
 
-                <select class="custom-select form-control">
-                    <option>name-of-view.html</option>
-                    <option>name-of-view.html</option>
-                    <option>name-of-view.html</option>
-                    <option>name-of-file.psd</option>
+                <select class="custom-select form-control" v-model="template.frontend_brief_view_id">
+                    <option value="@{{ view.value }}"
+                            v-for="view in frontendViews">@{{ view.text }}</option>
                 </select>
             </div>
 
@@ -53,7 +50,7 @@
             <brief-checklist v-if="template.checklist"
                              :path="'brief.templates['+templateIndex+'].checklist'"
                              :checklist.sync="template.checklist"
-                             :with-categories="true">
+                             :with-categories="false">
             </brief-checklist>
 
         </div>

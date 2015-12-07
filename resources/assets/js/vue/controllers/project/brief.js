@@ -39,13 +39,14 @@ export default Vue.extend({
     },
 
     ready() {
-        this.$http.get(`/api/projects/${this.state.project_id}/briefs`, {}, (res) => {
-            this.briefs = res.data;
-        });
 
         if (this.state.brief_id) {
-            this.$http.get(`/api/projects/${this.state.project_id}/briefs/${this.state.brief_id}`, {}, (res) => {
-                this.brief = res.data.text;
+            this.$http.get(`/api/projects/${this.state.project_id}/briefs`, {}, (res) => {
+                var briefs = res.data;
+                this.brief = (_.findWhere(briefs, {id: this.state.brief_id})).text;
+                this.briefs = _.reject(briefs, (brief) => {
+                    return brief.id == this.state.brief_id
+                });
             });
 
             this.$http.get(`/api/files`, {reference_type: 'project', reference_id: this.state.project_id}, (res) => {
@@ -67,6 +68,22 @@ export default Vue.extend({
                 if (brief.id != this.state.brief_id) res.push(brief);
                 return res;
             }, []);
+        },
+        frontendViews() {
+            var brief,
+                views = [{value: '', text: 'No association'}];
+
+            _.each(this.brief.related_to_brief, (briefId) => {
+                brief = _.findWhere(this.briefs, {id: briefId});
+                console.log(briefId, brief);
+                if (brief && brief.text.brief_type == 'frontend' && brief.text.views.length) {
+                    _.each(brief.text.views, (view) => {
+                        views.push({text: view.name, value: view._id});
+                    });
+                }
+            });
+
+            return views;
         }
     },
 
@@ -82,7 +99,7 @@ export default Vue.extend({
         saveAsDraft() {
             this.savingAsDraft = true;
             this.$http.put(`/api/projects/${this.state.project_id}/briefs/${this.state.brief_id}`, {brief: this.brief}, (res) => {
-
+                this.brief = res.data.text;
             }).always(() => {
                 this.savingAsDraft = false;
             });

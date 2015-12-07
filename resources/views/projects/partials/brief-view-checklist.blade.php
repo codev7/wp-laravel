@@ -15,8 +15,10 @@
                     <label class="w-full">
                         <input type="checkbox" checked="">
                         <span class="custom-control-indicator"></span>
+
                         {{ $item['description'] }}
-                        @if (count($item['screenshots']))
+
+                        @if (isset($item['screenshots']))
                             @foreach ($item['screenshots'] as $shot)
                                 &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
                             @endforeach
@@ -48,7 +50,7 @@
 
                             <p>{{ $item['description'] }}</p>
 
-                            @if (count($item['screenshots']))
+                            @if (isset($item['screenshots']))
                                 @foreach ($item['screenshots'] as $shot)
                                     &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
                                 @endforeach

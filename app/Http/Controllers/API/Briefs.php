@@ -7,7 +7,6 @@ use CMV\Services\BriefsService;
 use Input, Auth, Validator;
 
 /**
- * Methods for system-wide brief managing. Is usable only by admin.
  * For non-admin users see ProjectBriefs.php
  * @package CMV\Http\Controllers\API
  */
@@ -29,9 +28,9 @@ class Briefs extends Controller {
      */
     public function index($projectId)
     {
-        $paginator = $this->service->all()->paginate();
+        $briefs = $this->service->all()->get();
 
-        return $this->respondWithPaginatedData($paginator);
+        return $this->respondWithData($briefs->toArray());
     }
 
     /**

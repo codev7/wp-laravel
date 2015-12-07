@@ -1,4 +1,4 @@
-<h1>Front End Brief
+<h1>{{ $brief->getTypeName() }}
     <small>
         <span style="top: -5px" data-placement="right" class="pos-r tooltipper text-primary"
               title="{{ $brief->getTypeDescription() }}">
@@ -253,7 +253,7 @@
             @endif
 
             @if(isset($brief->text['templates']))
-                @foreach ($brief->text['templates'] as $i => $template)
+                @foreach ($brief->normalizeTemplates($brief->text['templates']) as $i => $template)
                 <div class="tab-pane" id="templates-tab-{{ $i }}">
 
                     <h3 class="m-t-0 p-t-0">{{ $template['name'] }}</h3>
@@ -265,10 +265,12 @@
                         'checklist' => $template['checklist'],
                     ])
 
-                    {{--@include('projects.partials.brief-view-design-proofs', [--}}
-                        {{--'brief' => $brief,--}}
-                        {{--'proofs' => $template['design_proofs']--}}
-                    {{--])--}}
+                    @if (isset($template['design_proofs']))
+                        @include('projects.partials.brief-view-design-proofs', [
+                            'brief' => $brief,
+                            'proofs' => $template['design_proofs']
+                        ])
+                    @endif
                 </div>
                 @endforeach
             @endif
@@ -371,7 +373,7 @@
             @endif
 
             @if(isset($brief->text['views']))
-                @foreach ($brief->text['views'] as $i => $view)
+                @foreach ($brief->normalizeViews($brief->text['views']) as $i => $view)
                 <div class="tab-pane" id="views-tab-{{ $i }}">
                     <h3 class="m-t-0 p-t-0">{{ $view['name'] }}</h3>
 
@@ -387,16 +389,17 @@
                         'proofs' => $view['design_proofs']
                     ])
 
-                    {{-- !!!! DESIGN FILE ID --}}
-                    <h4>Design File</h4>
-                    <p>This design can be found in the <a href="#">All Files.psd</a> file in the project files section.</p>
+                    @if (isset($view['design_file']))
+                        <h4>Design File</h4>
+                        <p>This design can be found in the <a href="/project/{{ $project->slug }}/files" target="_blank">{{ $view['design_file']['name'] }}</a> file in the project files section.</p>
+                    @endif
 
                 </div>
                 @endforeach
             @endif
 
             @if(isset($brief->text['modals']))
-                @foreach ($brief->text['modals'] as $i => $modal)
+                @foreach ($brief->normalizeModals($brief->text['modals']) as $i => $modal)
                 <div class="tab-pane" id="modals-tab-{{ $i }}">
 
                     <div class="tab-pane active" id="views-tab-{{ $i }}">
@@ -414,9 +417,10 @@
                             'proofs' => $modal['design_proofs']
                         ])
 
-                        {{-- !!!! DESIGN FILE ID --}}
+                        @if (isset($modal['design_file']))
                         <h4>Design File</h4>
-                        <p>This design can be found in the <a href="#">All Files.psd</a> file in the project files section.</p>
+                        <p>This design can be found in the <a href="/project/{{ $project->slug }}/files" target="_blank">{{ $modal['design_file']['name'] }}</a> file in the project files section.</p>
+                        @endif
 
                     </div>
 

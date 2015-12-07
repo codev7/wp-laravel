@@ -66,9 +66,10 @@ class ProjectBrief extends Model
     }
 
     /**
+     * =========================================================
      * the following methods are helpers for the brief view page
+     * =========================================================
      */
-
 
     public function getTypeDescription()
     {
@@ -84,6 +85,23 @@ class ProjectBrief extends Model
                 return 'Brief covers all details about the implementation of this project.';
                 break;
         }
+    }
+
+    public function getTypeName()
+    {
+        switch ($this->text['brief_type']) {
+            case self::TYPE_FRONTEND:
+                return 'Front End Brief';
+                break;
+            case self::TYPE_WP:
+                return 'WordPress Brief';
+                break;
+            case self::TYPE_OTHER:
+            default:
+                return 'Other Brief';
+                break;
+        }
+
     }
 
     public function getFinishedAtString()
@@ -199,6 +217,65 @@ class ProjectBrief extends Model
         if (count($res) == 1) return array_values(array_shift($res));
 
         return $res;
+    }
+
+    public function normalizeTemplates(array $templates)
+    {
+        if ($this->text['brief_type'] != self::TYPE_WP || !$this->text['related_to_brief']) {
+            return $templates;
+        }
+
+        $relatedBriefs = $this->relatedBriefs();
+        $views = [];
+
+        foreach ($relatedBriefs as $relatedBrief) {
+            if (isset($relatedBrief->text['views'])) {
+                foreach ($relatedBrief->text['views'] as $view) {
+                    $views[$view['_id']] = $view;
+                }
+            }
+        }
+
+        // Front End
+        // WP Implementation
+        foreach ($templates as $i => $template) {
+            if ($view = array_get($views, $template['frontend_brief_view_id'])) {
+                $checklist = [];
+                foreach ($template['checklist'] as $item) {
+                    $checklist[] = ['category' => 'WP Implementation', 'description' => $item['description'], 'screenshots' => []];
+                }
+                $checklist[] = ["category" => 'Front End', 'description' => "Use {$view['name']} FrontEnd View", 'screenshots' => []];
+
+                $templates[$i]['checklist'] = $checklist;
+                $templates[$i]['design_proofs'] = $view['design_proofs'];
+            }
+        }
+
+        return $templates;
+    }
+
+    public function normalizeViews(array $views)
+    {
+        foreach ($views as $i => $view) {
+            if ($view['design_file_id']) {
+                if ($file = File::find($view['design_file_id'])) {
+                    $views[$i]['design_file'] = $file->toArray();
+                }
+            }
+        }
+        return $views;
+    }
+
+    public function normalizeModals(array $modals)
+    {
+        foreach ($modals as $i => $modal) {
+            if ($modal['design_file_id']) {
+                if ($file = File::find($modal['design_file_id'])) {
+                    $modals[$i]['design_file'] = $file->toArray();
+                }
+            }
+        }
+        return $modals;
     }
 
     /**

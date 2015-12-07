@@ -51,7 +51,7 @@ class BriefsService {
     {
         $brief = new ProjectBrief();
 
-        $brief->text = $data['brief'];
+        $brief->text = $this->processText($data['brief']);
         $brief->created_by_id = $this->user->id;
         $brief->project_id = $this->project->id;
         $brief->save();
@@ -60,13 +60,13 @@ class BriefsService {
     }
 
     /**
-     * @param Brief $brief
+     * @param ProjectBrief $brief
      * @param array $data
-     * @return Brief
+     * @return ProjectBrief
      */
     public function update(ProjectBrief $brief, array $data)
     {
-        $brief->text = $data['brief'];
+        $brief->text = $this->processText($data['brief']);
         $brief->save();
 
         return $brief;
@@ -94,16 +94,20 @@ class BriefsService {
     }
 
     /**
-     * @return Array
+     * @param array $text
+     * @return array
      */
-    public static function templates()
+    protected function processText(array $text)
     {
-        return [
-            'wordpress' => json_decode(view('misc.briefs.wordpress')),
-            'frontend' => json_decode(view('misc.briefs.frontend')),
-            'other' => json_decode(view('misc.briefs.other')),
-            'blanks' => json_decode(view('misc.briefs.blanks')),
-        ];
+        if ($text['brief_type'] == ProjectBrief::TYPE_FRONTEND) {
+            foreach ($text['views'] as $i => $view) {
+                if (!isset($view['_id'])) {
+                    $text['views'][$i]['_id'] = random_str();
+                }
+            }
+        }
+
+        return $text;
     }
 
 }
