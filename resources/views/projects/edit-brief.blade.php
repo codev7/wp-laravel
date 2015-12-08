@@ -49,6 +49,7 @@
                             </select>
                         </div>
 
+                        @if (isset($brief))
                         <div class="form-group">
                             <label>Related to Other briefs?</label>
 
@@ -56,6 +57,7 @@
                                 <option v-for="otherBrief in otherBriefs" value="@{{ otherBrief.id }}">@{{ otherBrief.text.brief_type }} - @{{ otherBrief.created_at | ago }}</option>
                             </select>
                         </div>
+                        @endif
 
                         <div class="form-group">
                             <label>Quick Overview</label>

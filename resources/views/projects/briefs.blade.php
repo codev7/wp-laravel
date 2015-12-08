@@ -16,7 +16,7 @@
                     @if (hasRole('admin'))
                     <a data-pjax class="btn btn-sm btn-primary pull-right" href="{{ route('project.create_brief', ['slug' => $project->slug]) }}"><i class="fa fa-plus"></i> Create Brief</a>
                     @endif
-                    
+
                     <table class="table table-condensed table-middle m-b-0">
                         <thead>
                             <tr>
