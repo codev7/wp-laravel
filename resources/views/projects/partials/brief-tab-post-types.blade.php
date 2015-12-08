@@ -110,7 +110,7 @@
             <div class="form-group">
                 <label>Custom Meta Data</label>
 
-                <table class="table table-bordered table-middle">
+                <table class="table table-bordered table-middle" v-if="postType.custom_meta_fields.length">
                     <thead>
                     <tr>
                         <th style="width: 45%">Name</th>
@@ -156,7 +156,7 @@
             <div class="form-group">
                 <label>Taxonomies</label>
 
-                <table class="table table-bordered table-middle">
+                <table class="table table-bordered table-middle" v-if="postType.taxonomies.length">
                     <thead>
                     <tr>
                         <th style="width: 90%">Name</th>

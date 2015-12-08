@@ -201,7 +201,7 @@ class ProjectBrief extends Model
     {
         $res = [];
 
-        foreach ($checklist as $checkItem) {
+        foreach ($checklist as $i => $checkItem) {
             if (!isset($res[$checkItem['category']])) {
                 $res[$checkItem['category']] = [];
             }
@@ -233,7 +233,7 @@ class ProjectBrief extends Model
             if ($view = array_get($views, $template['frontend_brief_view_id'])) {
                 $checklist = [];
                 foreach ($template['checklist'] as $item) {
-                    $checklist[] = ['category' => 'WP Implementation', 'description' => $item['description'], 'screenshots' => []];
+                    $checklist[] = ['category' => 'WP Implementation', 'description' => $item['description'], 'screenshots' => $item['screenshots']];
                 }
                 $checklist[] = ["category" => 'Front End', 'description' => "Use {$view['name']} FrontEnd View", 'screenshots' => []];
 

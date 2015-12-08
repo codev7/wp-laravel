@@ -17,13 +17,15 @@
                         <input type="checkbox" checked="">
                         <span class="custom-control-indicator"></span>
 
-                        {{ $item['description'] }}
+                        <p>{{ $item['description'] }}
 
-                        @if (isset($item['screenshots']))
-                            @foreach ($item['screenshots'] as $shot)
-                                &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
-                            @endforeach
-                        @endif
+                            @if (isset($item['screenshots']))
+                                @foreach ($item['screenshots'] as $shot)
+                                    &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
+                                @endforeach
+                            @endif
+                        </p>
+
                     </label>
                 </div>
             @endforeach
@@ -49,13 +51,14 @@
                             <input type="checkbox" checked="">
                             <span class="custom-control-indicator"></span>
 
-                            <p>{{ $item['description'] }}</p>
+                            <p>{{ $item['description'] }}
+                                @if (isset($item['screenshots']))
+                                    @foreach ($item['screenshots'] as $shot)
+                                        &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
+                                    @endforeach
+                                @endif
+                            </p>
 
-                            @if (isset($item['screenshots']))
-                                @foreach ($item['screenshots'] as $shot)
-                                    &nbsp; <a class="full-screen-screenshot fa fa-file-image-o" href="{{ $shot['path'] }}"></a>
-                                @endforeach
-                            @endif
                         </label>
                     </div>
                 @endforeach

@@ -13,7 +13,7 @@
     <small class="pull-right">
         <a href="#" class="text-danger"
            v-on:click.prevent="removeListItem('brief.brief_boxes', boxIndex)">
-            <i class="fa fa-trash"></i> Delete Section
+            <i class="fa fa-trash"></i> Delete Brief Box
         </a>
     </small>
 

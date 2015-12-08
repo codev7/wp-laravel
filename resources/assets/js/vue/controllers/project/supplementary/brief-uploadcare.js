@@ -17,8 +17,8 @@ export default Vue.extend({
     },
 
     template: `
-        <div>
-            <ul class="m-a-0">
+        <div class="text-center">
+            <ul class="m-a-0 list-unstyled">
                 <li v-for="fileId in bindFiles" v-if="file(fileId) !== undefined">
                     <a :href="file(fileId).path" target="_blank">{{ file(fileId).path }}</a>
                 </li>

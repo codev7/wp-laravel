@@ -65,7 +65,7 @@
     <div class="form-group">
         <label>Theme Menus</label>
 
-        <table class="table table-bordered table-middle">
+        <table class="table table-bordered table-middle" v-if="brief.global.theme_menus.length">
             <thead>
             <tr>
                 <th style="width: 45%">Name</th>

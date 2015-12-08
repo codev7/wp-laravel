@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label>Quick Template Summary</label>
                 <textarea class="form-control" rows="2" cols="4" placeholder="A description of the page."
-                        v-model="template.description">
+                        v-model="template.summary">
                 </textarea>
             </div>
 

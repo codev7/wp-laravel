@@ -208,9 +208,9 @@
                 <div class="row">
                     <h4>Menu Items</h4>
 
-                    <ul class="nav nav-pills nav-stacked" role="tablist">
+                    <ul class="nav nav-pills" role="tablist">
                         @foreach ($brief->text['global']['menu_items'] as $j => $menuItem)
-                        <li role="presentation" class="@{{ $j == 0 ? 'active' : '' }}">
+                        <li role="presentation" class="{{ $j == 0 ? 'active' : '' }}">
                             <a role="tab"
                                data-toggle="tab"
                                href="#menu-item-{{ $j }}">{{ $menuItem['header'] }}</a>
@@ -218,12 +218,19 @@
                         @endforeach
                     </ul>
 
+                    <div class="clearfix"></div>
+
                     <div class="tab-content">
                         @foreach ($brief->text['global']['menu_items'] as $j => $menuItem)
-                        <div role="tabpanel" class="col-sm-9 tab-pane@{{ $j == 0 ? ' active' : '' }}" id="menu-item-{{ $j }}">
+                        <div role="tabpanel" class="col-sm-9 tab-pane{{ $j == 0 ? ' active' : '' }}" id="menu-item-{{ $j }}">
                             <div class="trix-markup">
                                 {!! $menuItem['content'] !!}
                             </div>
+
+                            @include('projects.partials.brief-view-checklist', [
+                                'brief' => $brief,
+                                'checklist' => $menuItem['checklist']
+                            ])
                         </div>
                         @endforeach
                     </div>
@@ -234,9 +241,9 @@
                     <div class="row">
                         <h4>Theme Menus</h4>
 
-                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                        <ul class="nav nav-pills" role="tablist">
                             @foreach ($brief->text['global']['theme_menus'] as $j => $themeMenu)
-                                <li role="presentation" class="@{{ $j == 0 ? 'active' : '' }}">
+                                <li role="presentation" class="{{ $j == 0 ? 'active' : '' }}">
                                     <a role="tab"
                                        data-toggle="tab"
                                        href="#theme-menu-{{ $j }}">{{ $themeMenu['name'] }}</a>
@@ -246,7 +253,7 @@
 
                         <div class="tab-content">
                             @foreach ($brief->text['global']['theme_menus'] as $j => $themeMenu)
-                                <div role="tabpanel" class="col-sm-9 tab-pane@{{ $j == 0 ? ' active' : '' }}" id="theme-menu-{{ $j }}">
+                                <div role="tabpanel" class="col-sm-9 tab-pane{{ $j == 0 ? ' active' : '' }}" id="theme-menu-{{ $j }}">
                                     <p>{{ $themeMenu['description'] }}</p>
                                 </div>
                             @endforeach
@@ -267,9 +274,9 @@
                     @if ($section['sub_sections'])
                     <div class="row">
                         <div class="col-sm-3">
-                            <ul class="nav nav-pills nav-stacked" role="tablist">
+                            <ul class="nav nav-pills" role="tablist">
                                 @foreach ($section['sub_sections'] as $j => $sub)
-                                <li role="presentation">
+                                <li role="presentation" class="{{ $j == 0 ? 'active' : '' }}">
                                     <a role="tab"
                                        data-toggle="tab"
                                        href="#subsection-tabs-{{$i}}-{{$j}}">{{ $sub['header'] }}</a>
@@ -280,7 +287,7 @@
 
                         <div class="tab-content">
                             @foreach ($section['sub_sections'] as $j => $sub)
-                            <div role="tabpanel" class="col-sm-9 tab-pane" id="subsection-tabs-{{$i}}-{{$j}}">
+                            <div role="tabpanel" class="col-sm-9 tab-pane{{ $j == 0 ? ' active' : '' }}" id="subsection-tabs-{{$i}}-{{$j}}">
                                 <h4>{{ $sub['header'] }}</h4>
 
                                 <div class="trix-markdown">
@@ -296,11 +303,6 @@
                         </div>
                     </div>
                     @endif
-
-                    @include('projects.partials.brief-view-checklist', [
-                        'brief' => $brief,
-                        'checklist' => $sub['checklist'],
-                    ])
                 </div>
                 @endforeach
             @endif
@@ -346,14 +348,14 @@
                         </tr>
                         <tr>
                             <th>View for single post page:</th>
-                            <td>{{ isset($postType['single_post_view']) ? $postType['single_post_view']['name'] : '' }}</td>
+                            <td>{{ isset($ptype['single_post_view']) ? $ptype['single_post_view']['name'] : '' }}</td>
                         </tr>
                         <tr>
                             <th>Taxonomies</th>
                             <td>
-                                <ul class="m-a-0">
+                                <ul class="m-a-0 list-unstyled">
                                     @foreach($ptype['taxonomies'] as $taxonomy)
-                                        <li>{{ $taxonomy }}</li>
+                                        <li>{{ $taxonomy['name'] }}</li>
                                     @endforeach
                                 </ul>
                             </td>
@@ -369,13 +371,13 @@
                         @if ($ptype['has_archive'])
                         <tr>
                             <th>View for post archives page:</th>
-                            <td>{{ isset($postType['post_archive_view']) ? $postType['post_archive_view']['name'] : '' }}</td>
+                            <td>{{ isset($ptype['post_archive_view']) ? $ptype['post_archive_view']['name'] : '' }}</td>
                         </tr>
                         @endif
                         <tr>
                             <th>Post Data (Meta)</th>
                             <td>
-                                <ul class="m-a-0">
+                                <ul class="m-a-0 list-unstyled">
                                     @foreach ($ptype['meta_data'] as $meta)
                                         <li>{{ $meta }}</li>
                                     @endforeach
@@ -386,7 +388,7 @@
                         <tr>
                             <th>Custom Post Data (Meta)</th>
                             <td>
-                                <ul class="m-a-0">
+                                <ul class="m-a-0 list-unstyled">
                                     @foreach ($ptype['custom_meta_fields'] as $meta)
                                         <li>
                                             {{ $meta['name'] }} ({{$meta['type'] . ($meta['required'] ? ', required': '')}})
