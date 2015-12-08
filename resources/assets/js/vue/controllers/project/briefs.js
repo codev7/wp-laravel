@@ -11,15 +11,15 @@ export default Vue.extend({
             meta: {
                 'other': {
                     name: 'Other Brief',
-                    desc: 'Brief covers all details about the implementation of this project.'
+                    description: 'Brief covers all details about the implementation of this project.'
                 },
                 'frontend': {
                     name: 'Front End Brief',
-                    desc: 'A front end brief covers all details about the HTML/CSS/JavaScript of this project.'
+                    description: 'A front end brief covers all details about the HTML/CSS/JavaScript of this project.'
                 },
                 'wordpress': {
                     name: 'WordPress Brief',
-                    desc: 'A WordPress brief covers all details about the WordPress implementation of this project.'
+                    description: 'A WordPress brief covers all details about the WordPress implementation of this project.'
                 }
             }
         }

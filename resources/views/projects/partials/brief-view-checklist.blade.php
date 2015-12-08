@@ -1,7 +1,8 @@
 @if(count($checklist))
     <h4>Checklist Items
         @if (isset($tooltip))
-        <i data-title="{{ $tooltip }}" class="tooltipper fa fa-question-circle" data-original-title="" title=""></i>
+        <i data-title="{{ $tooltip }}" class="tooltipper fa fa-question-circle" data-original-title="" title=""
+           v-tooltip></i>
         @endif
     </h4>
 

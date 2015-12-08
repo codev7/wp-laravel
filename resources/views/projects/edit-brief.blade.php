@@ -18,10 +18,9 @@
 
                 <br />
 
-                {{--<div style="height: 150px; overflow: scroll;">--}}
-                    {{--<pre>@{{ brief | json }}</pre>--}}
-                    {{--<pre>@{{ frontendViews | json }}</pre>--}}
-                {{--</div>--}}
+                <pre style="height: 200px;">
+                    @{{ brief | json }}
+                </pre>
 
                 <div class="row">
                     <div class="col-sm-9">
@@ -83,12 +82,21 @@
                     <div class="col-sm-3">
                         <div class="well well-small">
 
-                            <a href="#" class="m-a-0 btn btn-lg btn-block btn-success"><i class="fa fa-paper-plane"></i> Send Brief</a>
+                            <button class="m-a-0 btn btn-lg btn-block btn-success"
+                                    v-submit="sendingBrief"
+                                    v-bind:disabled="briefMeta.approved_by_admin_id"
+                                    v-on:click.prevent="sendBrief()">
+                                <i class="fa fa-paper-plane"></i> Send Brief
+                            </button>
 
                             <p class="m-t m-b-0 text-center">
                                 <a href="#" class="btn btn-sm btn-primary-outline"
                                    v-submit="savingAsDraft"
                                    v-on:click.prevent="saveAsDraft()"><i class="fa fa-save"></i> Save as Draft</a>
+                            </p>
+
+                            <p class="m-t text-center" v-if="briefMeta.approved_by_admin_id">
+                                <small>Brief was approved on <br/> @{{ briefMeta.approved_by_admin_at | date }}</small>
                             </p>
                         </div>
                     </div>

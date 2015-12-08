@@ -19,7 +19,7 @@
              v-for="(templateIndex, template) in brief.templates">
 
             <small class="pull-right">
-                <a v-on:click.prevent="removeListItem(brief.templates, templateIndex)" href="#" class="text-danger">
+                <a v-on:click.prevent="removeListItem('brief.templates', templateIndex)" href="#" class="text-danger">
                     <i class="fa fa-trash"></i> Delete Template
                 </a>
             </small>
@@ -37,7 +37,10 @@
             </div>
 
             <div class="form-group" v-if="frontendViews.length">
-                <label>Associated with HTML View <i class="fa fa-question-circle tooltipper" data-title="Select the view from your front end brief that this template will use."></i></label>
+                <label>Associated with HTML View
+                    <i class="fa fa-question-circle tooltipper" data-title="Select the view from your front end brief that this template will use."
+                       v-tooltip></i>
+                </label>
 
                 <select class="custom-select form-control" v-model="template.frontend_brief_view_id">
                     <option value="@{{ view.value }}"

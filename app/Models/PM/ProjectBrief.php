@@ -225,16 +225,7 @@ class ProjectBrief extends Model
             return $templates;
         }
 
-        $relatedBriefs = $this->relatedBriefs();
-        $views = [];
-
-        foreach ($relatedBriefs as $relatedBrief) {
-            if (isset($relatedBrief->text['views'])) {
-                foreach ($relatedBrief->text['views'] as $view) {
-                    $views[$view['_id']] = $view;
-                }
-            }
-        }
+        $views = $this->relatedViews();
 
         // Front End
         // WP Implementation
@@ -252,6 +243,42 @@ class ProjectBrief extends Model
         }
 
         return $templates;
+    }
+
+    public function normalizePostTypes(array $postTypes)
+    {
+        if ($this->text['brief_type'] != self::TYPE_WP || !$this->text['related_to_brief']) {
+            return $postTypes;
+        }
+
+        $views = $this->relatedViews();
+
+        foreach ($postTypes as $i => $postType) {
+            if (isset($views[$postType['view_for_single_post_page']])) {
+                $postTypes[$i]['single_post_view'] = $views[$postType['view_for_single_post_page']];
+            }
+
+            if (isset($views[$postType['view_for_post_archive_page']])) {
+                $postTypes[$i]['post_archive_view'] = $views[$postType['view_for_post_archive_page']];
+            }
+        }
+
+        return $postTypes;
+    }
+
+    protected function relatedViews()
+    {
+        $views = [];
+
+        foreach ($this->relatedBriefs() as $relatedBrief) {
+            if (isset($relatedBrief->text['views'])) {
+                foreach ($relatedBrief->text['views'] as $view) {
+                    $views[$view['_id']] = $view;
+                }
+            }
+        }
+
+        return $views;
     }
 
     public function normalizeViews(array $views)

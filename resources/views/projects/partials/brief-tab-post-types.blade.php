@@ -43,42 +43,61 @@
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-model="postType.has_single_post_page" /> Has Single Post Page? <i class="fa fa-question-circle tooltipper" data-title="Will each post in the database have a single page on the site?"></i>
+                    <input type="checkbox" v-model="postType.has_single_post_page" /> Has Single Post Page?
+                    <i class="fa fa-question-circle tooltipper" data-title="Will each post in the database have a single page on the site?"
+                       v-tooltip>
+                    </i>
                 </label>
             </div>
 
             <div class="form-group">
-                <label>View for single post page <i class="fa fa-question-circle tooltipper" data-title="Which HTML view should the post type single post page use?"></i></label>
+                <label>View for single post page
+                    <i class="fa fa-question-circle tooltipper" data-title="Which HTML view should the post type single post page use?"
+                       v-tooltip>
+                    </i>
+                </label>
 
-                <select class="custom-select form-control">
-                    <option>name of page.html</option>
-                    <option>name of page.html</option>
+                <select class="custom-select form-control" v-model="postType.view_for_single_post_page">
+                    <option value="@{{ view.value }}"
+                            v-for="view in frontendViews">@{{ view.text }}</option>
                 </select>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-model="postType.include_in_search" /> Include in site search results? <i class="fa fa-question-circle tooltipper" data-title="Should this post type appear in the sitewide search results?"></i>
+                    <input type="checkbox" v-model="postType.include_in_search" /> Include in site search results?
+                    <i class="fa fa-question-circle tooltipper" data-title="Should this post type appear in the sitewide search results?"
+                       v-tooltip>
+                    </i>
                 </label>
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" v-model="postType.has_archive"/> Has an archives page? <i class="fa fa-question-circle tooltipper" data-title="Does this post type have an archive page that displays all of the post types with pagination?"></i>
+                    <input type="checkbox" v-model="postType.has_archive"/> Has an archives page?
+                    <i class="fa fa-question-circle tooltipper" data-title="Does this post type have an archive page that displays all of the post types with pagination?"
+                       v-tooltip>
+                    </i>
                 </label>
             </div>
 
             <div class="form-group">
-                <label>View for archive page <i class="fa fa-question-circle tooltipper" data-title="Which HTML view should the post type archive page use?"></i></label>
+                <label>View for archive page
+                    <i class="fa fa-question-circle tooltipper" data-title="Which HTML view should the post type archive page use?"
+                       v-tooltip></i>
+                </label>
 
-                <select class="custom-select form-control">
-                    <option>name of page.html</option>
-                    <option>name of page.html</option>
+                <select class="custom-select form-control" v-model="postType.view_for_post_archive_page">
+                    <option value="@{{ view.value }}"
+                            v-for="view in frontendViews">@{{ view.text }}</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Select Default Meta Data <i class="fa fa-question-circle tooltipper" data-title="Which default meta data should this post have?"></i></label>
+                <label>Select Default Meta Data
+                    <i class="fa fa-question-circle tooltipper" data-title="Which default meta data should this post have?"
+                       v-tooltip></i>
+                </label>
 
                 <select multiple class="form-control" v-model="postType.meta_data">
                     <option value="@{{ option.value }}" v-for="option in blanks.select.meta_data">

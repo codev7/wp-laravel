@@ -30,7 +30,7 @@
                             <tr v-for="brief in briefs">
                                 <td>
                                     <a data-pjax href="/project/{{ $project->slug }}/briefs/@{{ brief.id }}">@{{ meta[brief.text.brief_type].name }}</a>
-                                    <span data-placement="right" class="tooltipper" title="@{{ meta[brief.text.brief_type].description }}">
+                                    <span data-placement="right" data-toggle="tooltip" class="tooltipper" v-tooltip title="@{{ meta[brief.text.brief_type].description }}">
                                         <i class="fa fa-question-circle"></i>
                                     </span>
                                 </td>

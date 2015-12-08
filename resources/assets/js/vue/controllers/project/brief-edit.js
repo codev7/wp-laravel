@@ -24,6 +24,8 @@ export default Vue.extend({
                 summary: ''
             },
 
+            briefMeta: {},
+
             briefs: [],
 
             supplementary: {
@@ -34,7 +36,8 @@ export default Vue.extend({
             lodash: _,
 
             creatingBrief: false,
-            savingAsDraft: false
+            savingAsDraft: false,
+            sendingBrief: false
         }
     },
 
@@ -43,7 +46,9 @@ export default Vue.extend({
         if (this.state.brief_id) {
             this.$http.get(`/api/projects/${this.state.project_id}/briefs`, {}, (res) => {
                 var briefs = res.data;
-                this.brief = (_.findWhere(briefs, {id: this.state.brief_id})).text;
+                var brief = _.findWhere(briefs, {id: this.state.brief_id});
+                this.brief = brief.text;
+                this.briefMeta = _.clone(brief, false);
                 this.briefs = _.reject(briefs, (brief) => {
                     return brief.id == this.state.brief_id
                 });
@@ -75,7 +80,7 @@ export default Vue.extend({
 
             _.each(this.brief.related_to_brief, (briefId) => {
                 brief = _.findWhere(this.briefs, {id: briefId});
-                console.log(briefId, brief);
+
                 if (brief && brief.text.brief_type == 'frontend' && brief.text.views.length) {
                     _.each(brief.text.views, (view) => {
                         views.push({text: view.name, value: view._id});
@@ -104,6 +109,14 @@ export default Vue.extend({
                 this.savingAsDraft = false;
             });
         },
+        sendBrief() {
+            this.sendingBrief = true;
+            this.$http.post(`/api/projects/${this.state.project_id}/briefs/${this.state.brief_id}/send-to-client`, {}, (res) => {
+                this.briefMeta = _.clone(res.data, false);
+            }).always(() => {
+                this.sendingBrief = false;
+            });
+        },
         handleBriefTypeChange() {
             var type = this.brief.brief_type;
             this.brief = this.templates[this.brief.brief_type];
@@ -114,19 +127,16 @@ export default Vue.extend({
 
             parts = path.split('.');
             blank = _.cloneDeep(this.blanks[_.last(parts) + '_item']);
-            clone = _.cloneDeep(this[parts[0]]);
 
-            _.get(clone, _.tail(parts).join('.')).push(blank);
-
-            this[parts[0]] = clone;
+            _.get(this[parts[0]], _.tail(parts).join('.')).push(blank);
         },
         removeListItem(path, index) {
-            var parts, clone, withoutIndex;
+            var parts, withoutIndex;
 
             parts = path.split('.');
-            clone = _.cloneDeep(this[parts[0]]);
+
             withoutIndex = _.reduce(
-                _.get(clone, _.tail(parts).join('.')),
+                _.get(this[parts[0]], _.tail(parts).join('.')),
                 function(res, value, key) {
                     if (key != index) res.push(value);
                     return res;
@@ -134,8 +144,7 @@ export default Vue.extend({
                 []
             );
 
-            _.set(clone, _.tail(parts).join('.'), withoutIndex);
-            this[parts[0]] = clone;
+            _.set(this[parts[0]], _.tail(parts).join('.'), withoutIndex);
         }
     }
 

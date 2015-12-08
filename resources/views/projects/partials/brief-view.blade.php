@@ -9,9 +9,11 @@
     <small class="text-muted">{{ $project->name }} - Prepared on {{ $brief->getFinishedAtString() }}</small>
 </h1>
 
+@if (hasRole('admin'))
 <p class="m-a-0">
-    <small><a class="text-danger" href="#"><i class="fa fa-edit"></i> Edit Brief</a></small>
+    <small><a data-pjax class="text-danger" href="/project/{{ $project->slug }}/briefs/{{ $brief->id }}/edit"><i class="fa fa-edit"></i> Edit Brief</a></small>
 </p>
+@endif
 
 <div class="clearfix"></div>
 
@@ -201,6 +203,57 @@
                         'tooltip' => 'The check list items will be used globally across all views.  These items are used during the QA process to verify project success.'
                     ])
                 @endif
+
+                @if (isset($brief->text['global']['menu_items']))
+                <div class="row">
+                    <h4>Menu Items</h4>
+
+                    <ul class="nav nav-pills nav-stacked" role="tablist">
+                        @foreach ($brief->text['global']['menu_items'] as $j => $menuItem)
+                        <li role="presentation" class="@{{ $j == 0 ? 'active' : '' }}">
+                            <a role="tab"
+                               data-toggle="tab"
+                               href="#menu-item-{{ $j }}">{{ $menuItem['header'] }}</a>
+                        </li>
+                        @endforeach
+                    </ul>
+
+                    <div class="tab-content">
+                        @foreach ($brief->text['global']['menu_items'] as $j => $menuItem)
+                        <div role="tabpanel" class="col-sm-9 tab-pane@{{ $j == 0 ? ' active' : '' }}" id="menu-item-{{ $j }}">
+                            <div class="trix-markup">
+                                {!! $menuItem['content'] !!}
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
+                @if(isset($brief->text['global']['theme_menus']))
+                    <div class="row">
+                        <h4>Theme Menus</h4>
+
+                        <ul class="nav nav-pills nav-stacked" role="tablist">
+                            @foreach ($brief->text['global']['theme_menus'] as $j => $themeMenu)
+                                <li role="presentation" class="@{{ $j == 0 ? 'active' : '' }}">
+                                    <a role="tab"
+                                       data-toggle="tab"
+                                       href="#theme-menu-{{ $j }}">{{ $themeMenu['name'] }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        <div class="tab-content">
+                            @foreach ($brief->text['global']['theme_menus'] as $j => $themeMenu)
+                                <div role="tabpanel" class="col-sm-9 tab-pane@{{ $j == 0 ? ' active' : '' }}" id="theme-menu-{{ $j }}">
+                                    <p>{{ $themeMenu['description'] }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
             </div>
 
             @if(isset($brief->text['sections']))
@@ -276,7 +329,7 @@
             @endif
 
             @if(isset($brief->text['post_types']))
-                @foreach ($brief->text['post_types'] as $i => $ptype)
+                @foreach ($brief->normalizePostTypes($brief->text['post_types']) as $i => $ptype)
                 <div class="tab-pane" id="post-types-tab-{{ $i }}">
 
                     <h3 class="m-t-0 p-t-0">{{ $ptype['name'] }} <br /><small class="text-muted">custom post type</small></h3>
@@ -293,7 +346,7 @@
                         </tr>
                         <tr>
                             <th>View for single post page:</th>
-                            <td>!!! !!! blog-post-single.html</td>
+                            <td>{{ isset($postType['single_post_view']) ? $postType['single_post_view']['name'] : '' }}</td>
                         </tr>
                         <tr>
                             <th>Taxonomies</th>
@@ -316,7 +369,7 @@
                         @if ($ptype['has_archive'])
                         <tr>
                             <th>View for post archives page:</th>
-                            <td>!!! !!!!! blog-index.html</td>
+                            <td>{{ isset($postType['post_archive_view']) ? $postType['post_archive_view']['name'] : '' }}</td>
                         </tr>
                         @endif
                         <tr>
@@ -366,7 +419,9 @@
 
                     <h4>Expected Output / Action</h4>
 
-                    <p>{{ $endpoint['expected_output_action'] }}</p>
+                    <div class="trix-markup">
+                        {!! $endpoint['expected_output_action'] !!}
+                    </div>
 
                 </div>
                 @endforeach

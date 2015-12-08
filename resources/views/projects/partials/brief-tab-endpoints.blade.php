@@ -41,13 +41,13 @@
             <div class="form-group">
                 <label>Expected Inputs</label>
                 <textarea class="form-control" rows="5" cols="4" placeholder="A description of what will be submitted to the endpoint (the data)."
-                        v-model="endpoint.form_inputs"></textarea>
+                        v-model="endpoint.form_inputs" v-trix></textarea>
             </div>
 
             <div class="form-group">
                 <label>Expected Output / Action</label>
                 <textarea class="form-control" rows="5" cols="4" placeholder="A description of the what happens after the endpoint is hit, or the form is submitted."
-                        v-model="endpoint.expected_output_action"></textarea>
+                        v-model="endpoint.expected_output_action" v-trix></textarea>
             </div>
         </div>
     </div>

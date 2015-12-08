@@ -68,9 +68,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Subsection Content</label>
+                    <label>Sub Section Content</label>
                             <textarea class="form-control" rows="2" cols="4" placeholder=""
-                                      v-model="subsection.content">
+                                      v-model="subsection.content" v-trix>
                             </textarea>
                 </div>
 

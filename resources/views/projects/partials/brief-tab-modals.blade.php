@@ -47,7 +47,8 @@
             <div class="form-group">
                 <label>Quick Modal Summary</label>
                         <textarea class="form-control" rows="2" cols="4" placeholder="A description of the modal."
-                                  v-model="modal.summary"></textarea>
+                                  v-model="modal.summary">
+                        </textarea>
             </div>
 
             <design-proofs v-if="modal.design_proofs"

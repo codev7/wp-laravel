@@ -2,8 +2,7 @@
     <label>Global Notes</label>
 
     <textarea class="form-control hide" rows="10" cols="4"
-              v-model="brief.global.notes"
-              v-trix>
+              v-model="brief.global.notes" v-trix>
     </textarea>
 </div>
 
@@ -36,7 +35,7 @@
                 <small class="pull-right">
                     <a href="#" class="text-danger"
                        v-on:click.prevent="removeListItem('brief.global.menu_items', menuItemIndex)">
-                        <i class="fa fa-trash"></i> Delete Section
+                        <i class="fa fa-trash"></i> Delete Menu Item
                     </a>
                 </small>
 
@@ -48,9 +47,9 @@
 
                 <div class="form-group">
                     <label>Menu Item Content</label>
-                            <textarea class="form-control" rows="2" cols="4" placeholder=""
-                                      v-model="menuItem.content">
-                            </textarea>
+                    <textarea class="form-control" rows="2" cols="4" placeholder=""
+                              v-model="menuItem.content" v-trix>
+                    </textarea>
                 </div>
 
                 <brief-checklist :path="'brief.global.menu_items['+menuItemIndex+'].checklist'"
@@ -70,7 +69,7 @@
             <thead>
             <tr>
                 <th style="width: 45%">Name</th>
-                <th style="width: 45%">Name</th>
+                <th style="width: 45%">Description</th>
                 <th style="width: 10%">&nbsp;</th>
             </tr>
             </thead>
@@ -81,7 +80,9 @@
                     <input class="form-control m-a-0" type="text" v-model="themeMenu.name" />
                 </td>
                 <td>
-                    <textarea class="form-control m-a-0" rows="4" cols="2" v-model="themeMenu.description"></textarea>
+                    <textarea class="form-control m-a-0" rows="4" cols="2"
+                              v-model="themeMenu.description">
+                    </textarea>
                 </td>
                 <td>
                     <a href="#" class="btn btn-danger-outline"

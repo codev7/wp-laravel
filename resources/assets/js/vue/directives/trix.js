@@ -6,30 +6,36 @@
 Vue.directive('trix', {
     unwatch: () => {},
     bind: function () {
-        this.el.id = _.randomStr();
-        var $el = $(this.el);
-        $el.hide();
+        setTimeout(() => {
+            this.el.id = _.randomStr();
+            var $el, vModel, originalVModelUpdate;
 
-        var path = _.result(_.findWhere(this.el._vue_directives, {name: 'model'}), 'expression');
+            $el = $(this.el);
+            $el.hide();
 
-        this.$trix = $(`<trix-editor input="${this.el.id}"></trix-editor>`);
-        this.$trix.insertAfter($el);
+            this.$trix = $(`<trix-editor input="${this.el.id}"></trix-editor>`);
+            this.$trix.insertAfter($el);
 
-        this.$trix.on('trix-change', (e) => {
-            this._updateModel(path, e.currentTarget.innerHTML);
-        });
+            this.$trix.on('trix-change', (e) => {
+                $el.trigger('change');
+            });
 
-        this.unwatch = this.vm.$watch(path, (value) => {
-            value = value == undefined ? '' : value;
-            if (this.$trix[0].innerHTML != value) {
-                this.$trix[0].editor.loadHTML(value);
-            }
-        });
-    },
-    unbind: function () {
-        this.unwatch();
-    },
-    _updateModel(path, value) {
-        this.vm.$set(path, value);
+            /**
+             * hack the v-model directive to track the value done
+             * this way b/c the value of v-model directive can be
+             * a relative way (for example inside a loop) to the
+             * vue component $data and it's tedious to track
+             * E.g. `path.to.items[0].value` in the loop becomes `item.value`
+             */
+            vModel = $el[0].__v_model;
+            originalVModelUpdate = vModel.update;
+            vModel.update = (value) => {
+                if ($el.val() != value) {
+                    this.$trix[0].editor.loadHTML(value);
+                }
+
+                originalVModelUpdate.call(vModel, value);
+            };
+        }, 100);
     }
 });
