@@ -66,7 +66,12 @@ class FilterIfPjax
         if (!$content->count()) {
             abort(422);
         }
-        return $content->html();
+
+        // crawler htmlentities escaped blade ( @{{ }} ) :/
+        // probably it can be solved in more generic way
+        $html = str_replace(['%20', '%7B', '%7D', '%24'], [' ', '{', '}', '$'], $content->html());
+
+        return $html;
     }
 
     /**

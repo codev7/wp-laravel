@@ -153,7 +153,7 @@ class User extends Model implements AuthorizableContract,
     public function isMastermind()
     {
 
-        return $this->is_mastermind; 
+        return $this->is_mastermind;
 
     }
 

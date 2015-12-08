@@ -6,7 +6,7 @@
     </textarea>
 </div>
 
-<div v-if="brief.global.menu_items !== undefined">
+<div v-if="brief.global && brief.global.menu_items">
     <div class="row">
         <div class="col-sm-3">
             <ul class="nav nav-pills nav-stacked" role="tablist">
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div v-if="brief.global.theme_menus !== undefined">
+<div v-if="brief.global && brief.global.theme_menus">
     <div class="form-group">
         <label>Theme Menus</label>
 
@@ -104,7 +104,7 @@
 
 </div>
 
-<brief-checklist v-if="brief.global.checklist !== undefined"
+<brief-checklist v-if="brief.global && brief.global.checklist"
                  :path="'brief.global.checklist'"
                  :checklist.sync="brief.global.checklist">
 </brief-checklist>

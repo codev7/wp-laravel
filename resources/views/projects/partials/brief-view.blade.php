@@ -134,6 +134,9 @@
                 @endif
 
                 <h4>Quick Summary</h4>
+
+                <p>{{ $brief->text['summary'] }}</p>
+
                 <table class="table table-middle m-b-0">
 
                     <tbody>

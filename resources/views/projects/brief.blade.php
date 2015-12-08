@@ -4,11 +4,11 @@
 
 <!-- Main Content -->
 @section('content')
-<div class="row" data-controller="project/brief-view" v-cloak state="{{ json_encode(['brief' => $brief->toArray()]) }}">
+<div class="row">
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9">
+    <div class="col-md-9" data-controller="project/brief-view" v-cloak state="{{ json_encode(['brief' => $brief->toArray()]) }}">
         
         <div class="panel panel-default panel-profile brief-panel">
 

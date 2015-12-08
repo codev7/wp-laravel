@@ -1,6 +1,6 @@
 <div class="hr-divider m-a">
     <ul class="nav nav-pills  hr-divider-content hr-divider-nav">
-        <li class="active">
+        <li class="active" v-show="brief.global">
             <a href="#global-tab" data-toggle="tab">Global</a>
         </li>
         <li v-show="brief.templates">
@@ -28,35 +28,35 @@
 </div>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="global-tab">
+    <div class="tab-pane active" id="global-tab" v-if="brief.global">
         @include('projects.partials.brief-tab-global', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="templates-tab">
+    <div class="tab-pane" id="templates-tab" v-if="brief.templates">
         @include('projects.partials.brief-tab-templates', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="post-types-tab">
+    <div class="tab-pane" id="post-types-tab" v-if="brief.post_types">
         @include('projects.partials.brief-tab-post-types', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="endpoints-tab">
+    <div class="tab-pane" id="endpoints-tab" v-if="brief.endpoints">
         @include('projects.partials.brief-tab-endpoints', ['project' => $project])
     </div>
 
-    <div class="tab-pane " id="views-tab">
+    <div class="tab-pane" id="views-tab" v-if="brief.views">
         @include('projects.partials.brief-tab-views', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="modals-tab">
+    <div class="tab-pane" id="modals-tab" v-if="brief.modals">
         @include('projects.partials.brief-tab-modals', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="sections-tab">
+    <div class="tab-pane" id="sections-tab" v-if="brief.sections">
         @include('projects.partials.brief-tab-sections', ['project' => $project])
     </div>
 
-    <div class="tab-pane" id="brief-boxes-tab">
+    <div class="tab-pane" id="brief-boxes-tab" v-if="brief.brief_boxes">
         @include('projects.partials.brief-tab-boxes', ['project' => $project])
     </div>
 </div>

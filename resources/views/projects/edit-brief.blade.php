@@ -18,10 +18,6 @@
 
                 <br />
 
-                <pre style="height: 200px;">
-                    @{{ brief | json }}
-                </pre>
-
                 <div class="row">
                     <div class="col-sm-9">
 

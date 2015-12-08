@@ -1,4 +1,4 @@
-<div class="text-center m-t" v-if="brief.brief_boxes.length < 3">
+<div class="text-center m-t" v-if="brief.brief_boxes && brief.brief_boxes.length < 3">
     <a href="#" class="btn btn-xs btn-success"
        v-on:click.prevent="addListItem('brief.brief_boxes')">
         <i class="fa fa-plus"></i> Add Brief Box

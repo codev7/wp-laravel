@@ -3,6 +3,7 @@ namespace CMV\Http\Middleware;
 
 use Access;
 use CMV\Models\PM\Project, CMV\Models\PM\ConciergeSite;
+use CMV\Models\PM\ProjectBrief;
 use Illuminate\Http\Request;
 
 class CheckAccessByParameters extends Middleware {
@@ -13,12 +14,14 @@ class CheckAccessByParameters extends Middleware {
 
         $classes = [
             'projects' => Project::class,
+            'briefs' => ProjectBrief::class
         ];
 
         $levels = [
             'GET' => 'read',
             'POST' => 'update',
             'DESTROY' => 'delete',
+            'POST' => 'create'
         ];
 
         $allowed = true;
