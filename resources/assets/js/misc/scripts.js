@@ -7,14 +7,6 @@ var init = function() {
 		$el.css('width', width);
 	});
 
-    $(document).on('click','.toggle-description', function()
-    {   
-        console.log('test');
-        $(this).parents('.media-body').find('.description-row').toggle();        
-        $(this).parents('.list-group-item').toggleClass('opened');  
-
-    });
-
 	$('.gallery').slick({
 		arrows: false,
 		dots: true,

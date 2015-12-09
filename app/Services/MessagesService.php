@@ -102,9 +102,9 @@ class MessagesService {
         if ($reference instanceof Project) {
             return Thread::REF_PROJECT;
         } else if ($reference instanceof ToDo) {
-            return Thread::REF_PROJECT;
+            return Thread::REF_TODO;
         } else if ($reference instanceof ConciergeSite) {
-            return Thread::REF_PROJECT;
+            return Thread::REF_CONCIERGE;
         } else {
             throw new \Exception('Unknown entity type. It should be in: project,todo,concierge_site');
         }

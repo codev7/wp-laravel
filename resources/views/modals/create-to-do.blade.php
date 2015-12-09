@@ -7,27 +7,23 @@
       </div>
       <div class="modal-body">
 
-            <form method="post" action="">
+            <form>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label for="name">Title</label>
-                            <input
-                                type="text"
-                                class="form-control input-lg"
-                                name="name"
-                                required autofocus 
-                            />
+                            <input type="text" class="form-control input-lg" name="name" required autofocus
+                                   v-model="newTodo.title" />
 
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="url">Type</label>
-                                    <select class="form-control input-lg">
-                                        <option>Select the to-do type</option>
-                                        <option>Bug</option>
-                                        <option>Feature</option>
+                                    <select class="form-control input-lg" v-model="newTodo.type">
+                                        <option value="">Select the to-do type</option>
+                                        <option value="bug">Bug</option>
+                                        <option value="feature">Feature</option>
                                     </select>
                                 </div>
                             </div>
@@ -35,31 +31,26 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="url">Category</label>
-                                    <select class="form-control input-lg">
-                                        <option>Select the to-do type</option>
-                                        <option>front-end</option>
-                                        <option>wordpress</option>
-                                        <option>other</option>
+                                    <select class="form-control input-lg" v-model="newTodo.category">
+                                        <option value="">Select the to-do type</option>
+                                        <option value="frontend">front-end</option>
+                                        <option value="wordpress">wordpress</option>
+                                        <option value="other">other</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        
-                        
 
                         <div class="form-group">
                             <label for="name">Details</label>
-                            <textarea 
-                                type="text"
-                                class="form-control input-lg"
-                                name="name"
-                                rows="8"
-                                placeholder="This should be a trix editor"
-                                required
-                            ></textarea>
-
+                            <textarea type="text" class="form-control input-lg" rows="8" required
+                                    v-model="newTodo.content"
+                                    v-trix></textarea>
                         </div>
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Save To Do Item</button>                       
+
+                        <button class="btn btn-success btn-lg btn-block" type="submit"
+                                v-on:click.prevent="createTodo"
+                                v-submit="creatingTodo">Save To Do Item</button>
                     </div>
                 </div>
             </form>

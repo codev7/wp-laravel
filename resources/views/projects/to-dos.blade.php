@@ -5,10 +5,13 @@
 
     @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/todos">
+    <div class="col-md-9" data-controller="project/todos" v-cloak state="{{ json_encode(['reference_id' => $project->id, 'reference_type' => 'project']) }}">
 
         <h3 class="m-a-0 p-a-0 pull-left">4 To-Do Items</h3>
-        <a href="#create-to-do" data-toggle="modal" class="btn btn-primary btn-sm pull-right m-b"><i class="fa fa-plus"></i> Add New To-Do</a>
+        <a href="#" class="btn btn-primary btn-sm pull-right m-b"
+           v-on:click.prevent="openCreateModal">
+            <i class="fa fa-plus"></i> Add New To-Do
+        </a>
 
         <div class="clearfix"></div>
 
@@ -30,17 +33,20 @@
                     </div><!--row-->
                 </div>
             </li>
-            <li class="media list-group-item p-a-0 toggle-accepted text-center">
+            <li v-if="accepted.length" class="media list-group-item p-a-0 toggle-accepted text-center">
 
-                <div v-if="showAcceptedTodos">
-                    <a href="#" v-on:click="toggleAcceptedStories($event)" class="text-success"><small>Hide 2 Accepted Stories <i class="fa fa-angle-up"></i></small></a>
-                </div>
-
-                <div v-if="!showAcceptedTodos">
-                    <a href="#" v-on:click="toggleAcceptedStories($event)" class="text-success"><small>Show 2 Accepted Stories <i class="fa fa-angle-down"></i></small></a>
+                <div>
+                    <a href="#" v-on:click.prevent="toggleAcceptedStories()" class="text-success">
+                        <small v-if="!showAcceptedTodos">Show @{{ accepted.length }} Accepted Stories <i class="fa fa-angle-down"></i></small>
+                        <small v-if="showAcceptedTodos">Hide @{{ accepted.length }} Accepted Stories <i class="fa fa-angle-up"></i></small>
+                    </a>
                 </div>
             </li>
-            <li class="media list-group-item p-a to-do-list-item accepted-task-item">
+
+            <li v-if="accepted.length && showAcceptedTodos" class="media list-group-item p-a to-do-list-item accepted-task-item"
+                v-bind:class="{'opened': opened.indexOf(todo.id) != -1}"
+                v-on:click="toggleDescription(todo.id)"
+                v-for="todo in accepted">
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
@@ -48,10 +54,10 @@
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">Front End</span></p>
-                            <p class="m-a-0">This is another new feature task.</p>
+                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <p class="m-a-0">@{{ todo.title }}</p>
 
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
+                            <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p>
                         </div><!--col-->
 
                         <div class="col-sm-3 text-right">
@@ -60,44 +66,21 @@
                             </div>
                         </div>
                     </div><!--row-->
-                    <div class="row description-row">
+                    <div class="row" v-if="opened.indexOf(todo.id) != -1">
                         <div class="col-sm-11 col-sm-offset-1"> 
                             <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="media list-group-item p-a to-do-list-item accepted-task-item">
-                <div class="media-body">
-                    <div class="row">
-                        <div class="col-sm-1 text-center toggle-description">
-                            <i class="fa fa-2x m-t text-success fa-check"></i>
-                        </div><!--col-->
-
-                        <div class="col-sm-8 toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">Front End</span></p>
-                            <p class="m-a-0">This is another new feature task.</p>
-
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
-                        </div><!--col-->
-
-                        <div class="col-sm-3 text-right">
-                            <div class="btn-group m-t">
-                                <a href="#" class="btn btn-sm btn-success" disabled>Accepted on 5/12/2015</a>
+                            <div class="trix-markup">
+                                @{{{ todo.content }}}
                             </div>
                         </div>
-                    </div><!--row-->
-
-                    <div class="row description-row">
-                        <div class="col-sm-11 col-sm-offset-1"> 
-                            <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
                     </div>
                 </div>
             </li>
-            <li class="media list-group-item to-do-list-item p-a">
+
+            <li class="media list-group-item to-do-list-item p-a"
+                v-bind:class="{'opened': opened.indexOf(todo.id) != -1}"
+                v-on:click="toggleDescription(todo.id)"
+                v-for="todo in inProgress">
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
@@ -105,10 +88,10 @@
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">WordPress</span></p>
-                            <p class="m-a-0">CASE STUDIES: potential realized content block should have arrow on right side of title (see mockup)</p>
+                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <p class="m-a-0">@{{ todo.title }}</p>
 
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
+                            <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p>
                         </div><!--col-->
 
                         <div class="col-sm-3 text-right">
@@ -116,107 +99,38 @@
                                 <a href="#" class="btn btn-sm btn-default-outline">Start Task</a>
                             </div>
                         </div>
+
+                        {{--  --}}
+
+                        {{--<div class="col-sm-3 text-right">--}}
+                            {{--<div class="btn-group m-t">--}}
+                                {{--<a href="#" class="btn btn-sm btn-success">Accept</a>--}}
+                                {{--<a href="#" class="btn btn-sm btn-danger">Reject</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+                        {{--<div class="col-sm-3 text-right">--}}
+                            {{--<div class="btn-group m-t">--}}
+                                {{--<a href="#" class="btn btn-sm btn-primary">Deliver Task</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+                        {{--  --}}
                     </div><!--row-->
-                    <div class="row description-row">
+                    <div class="row" v-if="opened.indexOf(todo.id) != -1">
                         <div class="col-sm-11 col-sm-offset-1"> 
                             <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="media list-group-item to-do-list-item p-a">
-                <div class="media-body">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  toggle-description">
-                            <i class="fa fa-2x m-t fa-exclamation-circle text-danger"></i>
-                        </div><!--col-->
-
-                        <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">WordPress</span></p>
-                            <p class="m-a-0">CASE STUDIES: potential realized content block should have arrow on right side of title (see mockup)</p>
-
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
-                        </div><!--col-->
-
-                        <div class="col-sm-3 text-right">
-                            <div class="btn-group m-t">
-                                <a href="#" class="btn btn-sm btn-primary">Deliver Task</a>
+                            <div class="trix-markup">
+                                @{{{ todo.content }}}
                             </div>
                         </div>
-                    </div><!--row-->
-                    <div class="row description-row">
-                        <div class="col-sm-11 col-sm-offset-1"> 
-                            <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
                     </div>
                 </div>
             </li>
-
-            <li class="media list-group-item to-do-list-item p-a">
-                <div class="media-body">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  toggle-description">
-                            <i class="fa fa-2x m-t fa-star text-warning"></i>
-                        </div><!--col-->
-
-                        <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">Front End</span></p>
-                            <p class="m-a-0">This is a new feature task.</p>
-
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
-                        </div><!--col-->
-
-                        <div class="col-sm-3 text-right">
-                            <div class="btn-group m-t">
-                                <a href="#" class="btn btn-sm btn-primary">Deliver Task</a>
-                            </div>
-                        </div>
-                    </div><!--row-->
-                    <div class="row description-row">
-                        <div class="col-sm-11 col-sm-offset-1"> 
-                            <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-            <li class="media list-group-item to-do-list-item p-a">
-                <div class="media-body">
-                    <div class="row">
-                        <div class="col-sm-1 text-center  toggle-description">
-                            <i class="fa fa-2x m-t fa-star text-warning"></i>
-                        </div><!--col-->
-
-                        <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">Front End</span></p>
-                            <p class="m-a-0">This is another new feature task.</p>
-
-                            <p class="text-muted m-a-0"><small>Submitted 5 minutes ago by John Doe</small></p>
-                        </div><!--col-->
-
-                        <div class="col-sm-3 text-right">
-                            <div class="btn-group m-t">
-                                <a href="#" class="btn btn-sm btn-success">Accept</a>
-                                <a href="#" class="btn btn-sm btn-danger">Reject</a>
-                            </div>
-                        </div>
-                    </div><!--row-->
-                    <div class="row description-row">
-                        <div class="col-sm-11 col-sm-offset-1"> 
-                            <h6 class="m-t">To-Do Description</h6>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
             
         </ul>
+
+        @include('modals/create-to-do')
     </div>
 
-    @include('modals/create-to-do')
 @endsection

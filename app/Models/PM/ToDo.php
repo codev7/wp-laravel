@@ -29,6 +29,10 @@ class ToDo extends Model
         'updated_at'
     ];
 
+    protected $fillable = [
+        'content', 'title', 'category', 'type'
+    ];
+
     public static function boot()
     {
         parent::boot();
@@ -62,7 +66,7 @@ class ToDo extends Model
      */
     public function comments()
     {
-        return $this->hasOne('CMV\Models\PM\Thread')
+        return $this->hasOne('CMV\Models\PM\Thread', 'reference_id')
             ->where('reference_type', Thread::REF_TODO);
     }
 

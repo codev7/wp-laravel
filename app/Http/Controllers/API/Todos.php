@@ -2,9 +2,27 @@
 namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\ToDo;
+use CMV\Services\TodosService;
 use Input, Validator, Auth, App;
 
+/**
+ * Class Todos
+ * @package CMV\Http\Controllers\API
+ */
 class Todos extends Controller {
+
+    /**
+     * @var TodosService
+     */
+    protected $service;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->service = new TodosService(Auth::user());
+    }
 
     /**
      * @Get("api/todos")
@@ -24,9 +42,11 @@ class Todos extends Controller {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $items = ToDo::with('messages', 'messages.user')
+        $items = ToDo::with('comments', 'comments.user')
             ->where('reference_type', $data['reference_type'])
             ->where('reference_id', $data['reference_id'])
+            ->orderBy('id', 'desc')
+            ->with('createdBy')
             ->get();
 
         return $this->respondWithData($items->toArray());
@@ -42,23 +62,22 @@ class Todos extends Controller {
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
-            'reference_type' => 'required_unless:thread_id|in:project,concierge_site',
-            'reference_id' => 'required_unless:thread_id',
+            'reference_type' => 'required|in:project,concierge_site',
+            'reference_id' => 'required',
+            'title' => 'required',
             'content' => 'required',
+            'category' => 'required|in:frontend,wordpress,other',
+            'type' => 'required|in:bug,feature'
         ]);
 
         if ($validator->fails()) {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $data = Input::all();
+        $reference = TodosService::getReference($data['reference_type'], $data['reference_id']);
+        $todo = $this->service->createTodo($reference, $data);
 
-        $thread = new Thread();
-        $thread->reference_type = $data['reference_type'];
-        $thread->referenct_id = $data['reference_id'];
-        $thread->save();
-
-        $thread->addMessage(Auth::user(), $data['content']);
+        return $this->respondWithData($todo->toArray());
     }
 
     /**
