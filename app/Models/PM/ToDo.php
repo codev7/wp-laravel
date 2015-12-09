@@ -10,14 +10,21 @@ use Carbon\Carbon;
 * Customers can submit to-do items to their projects
 * as well as to any sites they have in Concierge service.
 * Each to-do will be automatically created as a task via
-* the bitbucket API.
+* the PT API.
 *
 * Should have some caching mechanism for data pulled in from Bitbucket.
 */
 class ToDo extends Model
 {
+    // accepted, delivered, finished, started, rejected, planned, unstarted, unscheduled
     const REF_PROJECT = 'project';
     const REF_CONCIERGE = 'concierge_site';
+
+    const STATUS_NEW = 'unstarted';
+    const STATUS_IN_WORK = 'started';
+    const STATUS_DELIVERED = 'delivered';
+    const STATUS_REJECTED = 'rejected';
+    const STATUS_ACCEPTED = 'accepted';
 
     protected $columns = [
         'id',

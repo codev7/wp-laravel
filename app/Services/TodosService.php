@@ -58,7 +58,10 @@ class TodosService {
      */
     public function setStatus(ToDo $todo, $status)
     {
-        //..
+        $todo->status = $status;
+        $todo->save();
+
+        return $todo;
     }
 
     /**

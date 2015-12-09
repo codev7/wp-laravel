@@ -26,7 +26,7 @@ export default Vue.extend({
     computed: {
         accepted() {
             return _.reduce(this.todos, (res, todo) => {
-                if (todo.status == 'closed') {
+                if (todo.status == 'accepted') {
                     res.push(todo);
                 }
                 return res;
@@ -34,11 +34,14 @@ export default Vue.extend({
         },
         inProgress() {
             return _.reduce(this.todos, (res, todo) => {
-                if (todo.status != 'closed') {
+                if (todo.status != 'accepted') {
                     res.push(todo);
                 }
                 return res;
             }, []);
+        },
+        isDeveloper() {
+            return CObj.developer;
         }
     },
 
@@ -75,12 +78,18 @@ export default Vue.extend({
             } else {
                 this.opened = _.without(this.opened, id);
             }
-            //$(this).parents('.media-body').find('.description-row').toggle();
-            //$(this).parents('.list-group-item').toggleClass('opened');
         },
         toggleAcceptedStories() {
             this.showAcceptedTodos = ! this.showAcceptedTodos;
+        },
+        setStatus(todo, status) {
+            todo.status = status;
+            if (status == 'accepted') {
+                todo.accepted_at = moment().format();
+            }
+
+            // being positive about the call success
+            this.$http.put(`/api/todos/${todo.id}/set-status`, {status: status});
         }
     }
-
 });

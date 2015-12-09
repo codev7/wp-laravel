@@ -215,6 +215,7 @@ function getCodeMyViewsUserObject()
         'logged_in' => Auth::check(),
         'user_id' => Auth::check() ? $user->id : null,
         'admin' => Auth::check() ? Auth::user()->is_admin ? true : false : false,
+        'developer' => Auth::check() ? Auth::user()->is_developer ? true : false : false,
         'prod' => isProduction(),
         //'zref_route' => route('zref'),
         'environment' => App::environment()

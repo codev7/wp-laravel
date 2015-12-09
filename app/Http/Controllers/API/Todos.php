@@ -81,6 +81,24 @@ class Todos extends Controller {
     }
 
     /**
+     * @Put("api/todos/{todos}/set-status")
+     */
+    public function updateStatus($id)
+    {
+        $data = Input::all();
+        $validator = Validator::make($data, [
+            'status' => 'required|in:started,accepted,rejected,delivered'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $todo = ToDo::find($id);
+        $this->service->setStatus($todo, $data['status']);
+    }
+
+    /**
      * @Get("api/todos/{todos}/comments")
      * @param $id
      */
