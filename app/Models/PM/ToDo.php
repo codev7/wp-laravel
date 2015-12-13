@@ -2,9 +2,11 @@
 
 namespace CMV\Models\PM;
 
+use CMV\Jobs\SyncToDoWithPT;
 use Illuminate\Database\Eloquent\Model;
 use App, Config, Bugsnag, Exception;
 use Carbon\Carbon;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
 * Customers can submit to-do items to their projects
@@ -16,6 +18,8 @@ use Carbon\Carbon;
 */
 class ToDo extends Model
 {
+    use DispatchesJobs;
+
     // accepted, delivered, finished, started, rejected, planned, unstarted, unscheduled
     const REF_PROJECT = 'project';
     const REF_CONCIERGE = 'concierge_site';
@@ -43,38 +47,30 @@ class ToDo extends Model
     public static function boot()
     {
         parent::boot();
-
-        static::created(function($todo) {
-            if (!$todo->bitbucket_issue_id && $todo->project && $todo->project->hasRepo()) {
-                $bb = App::make('Bitbucket');
-                $resource = $bb->api('Repositories\Issues');
-                try {
-                    $response = $resource->create(
-                        Config::get('services.bitbucket.accname'),
-                        $todo->project->bitbucket_slug, [
-                            'title' => $todo->title,
-                            'content' => $todo->content,
-                            'kind' => 'task',
-                            'priority' => 'major'
-                        ]
-                    );
-                    $content = json_decode($response->getContent());
-                    $todo->bitbucket_issue_id = $content->local_id;
-                    $todo->save();
-                } catch (Exception $e) {
-                    Bugsnag::notifyException($e);
-                }
-            }
-        });
     }
 
     /**
      * @return mixed
      */
-    public function comments()
+    public function thread()
     {
+        if (!$this->thread_id) {
+            $thread = new Thread();
+            $thread->reference_id = $this->id;
+            $thread->reference_type = Thread::REF_TODO;
+            $thread->save();
+        }
+
         return $this->hasOne('CMV\Models\PM\Thread', 'reference_id')
             ->where('reference_type', Thread::REF_TODO);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->thread->messages();
     }
 
     /**

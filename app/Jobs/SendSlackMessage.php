@@ -17,7 +17,7 @@ use Slack;
 class SendSlackMessage extends Job implements SelfHandling, ShouldQueue
 {
 
-    use InteractsWithQueue, SerializesModels;
+    use InteractsWithQueue, SerializesModel;
 
     /**
      * @var

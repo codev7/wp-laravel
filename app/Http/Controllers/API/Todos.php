@@ -1,8 +1,10 @@
 <?php
 namespace CMV\Http\Controllers\API;
 
+use CMV\Jobs\SyncToDoWithPT;
 use CMV\Models\PM\ToDo;
 use CMV\Services\TodosService;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Input, Validator, Auth, App;
 
 /**
@@ -10,6 +12,8 @@ use Input, Validator, Auth, App;
  * @package CMV\Http\Controllers\API
  */
 class Todos extends Controller {
+
+    use DispatchesJobs;
 
     /**
      * @var TodosService

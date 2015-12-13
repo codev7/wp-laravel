@@ -61,6 +61,10 @@ $app->bind('access', function() {
     return new \CMV\Misc\ACL(Auth::user());
 });
 
+$app->bind('pivotal', function() {
+    return new CMV\Misc\Pivotal();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

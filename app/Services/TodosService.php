@@ -1,12 +1,14 @@
 <?php
 namespace CMV\Services;
 
+use CMV\Jobs\SyncToDoWithPT;
 use CMV\Models\PM\ConciergeSite;
 use CMV\Models\PM\Project;
 use CMV\Models\PM\ToDo;
 use CMV\Models\PM\ProjectBrief;
 use CMV\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Collection;
 
 /**
@@ -15,6 +17,8 @@ use Illuminate\Support\Collection;
  * @package CMV\Services
  */
 class TodosService {
+
+    use DispatchesJobs;
 
     protected $user;
 
@@ -39,7 +43,7 @@ class TodosService {
         $todo->reference_type = $this->getReftype($reference);
         $todo->save();
 
-        // @todo sync with bb
+        $this->dispatch(new SyncToDoWithPT($todo));
 
         return $todo;
     }
@@ -55,11 +59,14 @@ class TodosService {
      *
      * @param ToDo $todo
      * @param string $status
+     * @return ToDo
      */
     public function setStatus(ToDo $todo, $status)
     {
         $todo->status = $status;
         $todo->save();
+
+        $this->dispatch(new SyncToDoWithPT($todo));
 
         return $todo;
     }
