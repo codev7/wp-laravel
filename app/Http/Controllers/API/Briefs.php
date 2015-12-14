@@ -8,7 +8,6 @@ use CMV\Services\MessagesService;
 use Input, Auth, Validator;
 
 /**
- * For non-admin users see ProjectBriefs.php
  * @package CMV\Http\Controllers\API
  */
 class Briefs extends Controller {
@@ -33,15 +32,6 @@ class Briefs extends Controller {
 
         return $this->respondWithData($briefs->toArray());
     }
-
-    /**
-     * @Get("api/projects/{projects}/briefs/templates")
-     */
-    public function templates()
-    {
-        return $this->respondWithData(BriefsService::templates());
-    }
-
 
     /**
      * @Get("api/projects/{projects}/briefs/{briefs}")
