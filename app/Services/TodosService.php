@@ -5,11 +5,8 @@ use CMV\Jobs\SyncToDoWithPT;
 use CMV\Models\PM\ConciergeSite;
 use CMV\Models\PM\Project;
 use CMV\Models\PM\ToDo;
-use CMV\Models\PM\ProjectBrief;
 use CMV\User;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Support\Collection;
 
 /**
  * Handles creating of todos
@@ -31,6 +28,14 @@ class TodosService {
     }
 
     /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
      * @param $reference
      * @param array $data ['title', 'content', 'category', 'type']
      * @return ToDo
@@ -41,7 +46,12 @@ class TodosService {
         $todo->created_by_id = $this->user->id;
         $todo->reference_id = $reference->id;
         $todo->reference_type = $this->getReftype($reference);
+        $todo->status = ToDo::STATUS_NEW;
+        if (isset($data['pivotal_story_id'])) {
+            $todo['pivotal_story_id'] = $data['pivotal_story_id'];
+        }
         $todo->save();
+        $todo->load('createdBy');
 
         $this->dispatch(new SyncToDoWithPT($todo));
 
@@ -107,4 +117,15 @@ class TodosService {
         }
     }
 
+    /**
+     * @param $reference
+     * @return User
+     */
+    public static function findActor($reference)
+    {
+        if ($reference->developer_id) return $reference->developer;
+        if ($reference->project_manager_id) return $reference->projectManager;
+
+        return User::find(env('DEFAULT_PM_USER_ID'));
+    }
 }

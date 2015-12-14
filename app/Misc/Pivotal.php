@@ -32,16 +32,44 @@ class Pivotal {
         $response = $this->client->request('POST', "projects", [
             'json' => ['name' => $name]
         ]);
+        $project = json_decode($response->getBody()->getContents());
 
-        return json_decode($response->getBody()->getContents());
+        $this->createProjectWebhook($project->id, env('APP_URL') . '/webhooks/pivotal');
 
-//            } catch (\Exception $e) {
-//                if ($i == 0)
-//                if ($i == 1) {
-//                    $this->dispatch(new SendSlackMessage('Failed to create a PT project: ' . $name . ' Exception: ' . $e->getMessage()));
-//                }
-//            }
-//        }
+        foreach (['wordpress', 'frontend', 'other'] as $label) {
+            $this->createProjectLabel($project->id, $label);
+        }
+
+        return $project;
+    }
+
+    /**
+     * @param $ptProjectId
+     * @param $url
+     */
+    public function createProjectWebhook($ptProjectId, $url)
+    {
+        $response = $this->client->request('POST', "projects/{$ptProjectId}/webhooks", [
+            'json' => [
+                'webhook_url' => $url,
+                'webhook_version' => 'v5'
+            ]
+        ]);
+
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * @param $ptProjectId
+     * @param $label
+     */
+    public function createProjectLabel($ptProjectId, $label)
+    {
+        $response = $this->client->request('POST', "projects/{$ptProjectId}/webhook", [
+            'json' => [
+                'label' => $label
+            ]
+        ]);
     }
 
     /**
@@ -50,10 +78,12 @@ class Pivotal {
      * @param $content
      * @return array|mixed|object
      */
-    public function createStory($projectId, $title, $content)
+    public function createStory($projectId, $title, $content, array $labels = [])
     {
         $response = $this->client->request('POST', "projects/{$projectId}/stories", [
-            'json' => ['name' => $title, 'description' => $content]
+            'json' => [
+                'name' => $title, 'description' => $content, 'labels' => $labels
+            ]
         ]);
 
         return json_decode($response->getBody()->getContents());

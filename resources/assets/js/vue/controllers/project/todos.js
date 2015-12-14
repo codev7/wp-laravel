@@ -63,6 +63,7 @@ export default Vue.extend({
                     category: '',
                     content: ''
                 };
+                $('#create-to-do').modal('hide');
             }).always(() => {
                 this.creatingTodo = false;
             });

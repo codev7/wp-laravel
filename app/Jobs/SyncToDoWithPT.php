@@ -5,6 +5,8 @@ namespace CMV\Jobs;
 use CMV\Jobs\Job;
 use CMV\Models\PM\Message;
 use CMV\Models\PM\ToDo;
+use CMV\Services\MessagesService;
+use CMV\Services\TodosService;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -49,14 +51,14 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
         }
 
         if (!$todo->pivotal_story_id) {
-            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $todo->content);
+            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $todo->content, [$todo->category]);
             $todo->pivotal_story_id = $story->id;
             $todo->save();
         } else {
             $story = Pivotal::getStory($ref->pivotal_id, $todo->pivotal_story_id);
             if ($story->current_state != $todo->status) {
                 Pivotal::updateStory($ref->pivotal_id, $todo->pivotal_story_id, [
-                    'current_state' => $story->status
+                    'current_state' => $todo->status
                 ]);
             }
         }
@@ -73,16 +75,14 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
             }
         }
 
-        if ($ref->developer_id) {
-            foreach (Pivotal::getComments($ref->pivotal_id, $todo->pivotal_story_id) as $comment) {
-                if (!$todo->thread->messages()->where('pivotal_comment_id', $comment->id)->count()) {
-                    $message = new Message();
-                    $message->content = $comment->text;
-                    $message->user_id = $ref->developer_id;
-                    $message->pivotal_comment_id = $comment->id;
-                    $message->thread_id = $todo->thread->id;
-                    $message->save();
-                }
+        $messagesService = new MessagesService(TodosService::findActor($ref));
+        $thread = $todo->thread;
+
+        foreach (Pivotal::getComments($ref->pivotal_id, $todo->pivotal_story_id) as $comment) {
+            if (!$todo->thread->messages()->where('pivotal_comment_id', $comment->id)->count()) {
+                $message = $messagesService->postInThread($thread, $comment->text);
+                $message->pivotal_comment_id = $comment->id;
+                $message->save();
             }
         }
     }

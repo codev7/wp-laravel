@@ -46,8 +46,7 @@ class Todos extends Controller {
             return $this->respondWithFailedValidator($validator);
         }
 
-        $items = ToDo::with('comments', 'comments.user')
-            ->where('reference_type', $data['reference_type'])
+        $items = ToDo::where('reference_type', $data['reference_type'])
             ->where('reference_id', $data['reference_id'])
             ->orderBy('id', 'desc')
             ->with('createdBy')
