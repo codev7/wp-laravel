@@ -18,6 +18,5 @@ class VerifyCsrfToken extends BaseVerifier
         'blog',
         'blog/*',
         '/',
-        '/api/*'
     ];
 }

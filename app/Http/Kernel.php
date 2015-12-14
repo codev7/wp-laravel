@@ -19,7 +19,8 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \CMV\Http\Middleware\VerifyCsrfToken::class,
         \CMV\Http\Middleware\ClearLaravelCache::class,
-        \CMV\Http\Middleware\FilterIfPjax::class
+        \CMV\Http\Middleware\FilterIfPjax::class,
+        \CMV\Http\Middleware\WakeUpCSRFToken::class,
     ];
 
     /**

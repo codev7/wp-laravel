@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e14379a22e5481f7785084c594fcd46",
-    "content-hash": "6e916b4da93da3899508d94f69c8ed4e",
+    "hash": "9736a741009ff0555fbca5b49c1cac50",
+    "content-hash": "2913ca048f36ca245c42e95eea684acf",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -972,6 +972,47 @@
                 "fixtures"
             ],
             "time": "2015-05-29 06:29:14"
+        },
+        {
+            "name": "genealabs/laravel-caffeine",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/laravel-caffeine.git",
+                "reference": "da90a1f3bfa6a811fd3b47989e18e9358fbbf67f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/laravel-caffeine/zipball/da90a1f3bfa6a811fd3b47989e18e9358fbbf67f",
+                "reference": "da90a1f3bfa6a811fd3b47989e18e9358fbbf67f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "^5.1",
+                "illuminate/support": "~5.1",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\LaravelCaffeine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "hello@genealabs.com"
+                }
+            ],
+            "description": "Keeping Your Laravel Forms Awake",
+            "time": "2015-09-02 22:56:56"
         },
         {
             "name": "gentle/bitbucket-api",

@@ -35,6 +35,7 @@ export default {
     },
     vue() {
         Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+
         Vue.http.options.beforeSend = () => {
             // ..
         }
