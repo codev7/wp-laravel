@@ -13,8 +13,14 @@ class AlterMessagesTable extends Migration
     public function up()
     {
         Schema::table('messages', function(Blueprint $table) {
-            $table->integer('thread_id')->unsigned()->after('id')->index();
-            $table->renameColumn('comment', 'content');
+            // temporary workaround for a sqlite quirk
+            if (env('DB_CONNECTION') == 'sqlite') {
+                $table->integer('thread_id')->nullable()->default(null);
+            } else {
+                $table->integer('thread_id')->unsigned()->after('id')->index();
+                $table->renameColumn('comment', 'content');
+            }
+
             $table->dropColumn(['parent_message_id', 'reference_id', 'reference_type', 'todo_reference_id']);
         });
     }

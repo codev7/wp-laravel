@@ -15,7 +15,13 @@ class AddTeamIdToUserProjects extends Migration
         Schema::table('user_projects', function(Blueprint $table) {
             $table->dropColumn('id');
             $table->primary(['project_id', 'user_id']);
-            $table->integer('team_id')->unsigned();
+
+            if (env('DB_CONNECTION') == 'sqlite') {
+                $table->integer('team_id')->unsigned()->nullable()->default(null);
+            } else {
+                $table->integer('team_id')->unsigned();
+            }
+
             $table->dropIndex('user_projects_user_id_project_id_index');
         });
     }

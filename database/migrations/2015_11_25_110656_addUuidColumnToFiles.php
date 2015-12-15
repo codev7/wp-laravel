@@ -13,7 +13,11 @@ class AddUuidColumnToFiles extends Migration
     public function up()
     {
         Schema::table('files', function(Blueprint $table) {
-            $table->string('uuid')->after('id');
+            if (env('DB_CONNECTION') == 'sqlite') {
+                $table->string('uuid')->after('id')->nullable()->default(null);
+            } else {
+                $table->string('uuid')->after('id');
+            }
         });
     }
 

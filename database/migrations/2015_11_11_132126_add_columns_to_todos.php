@@ -13,8 +13,13 @@ class AddColumnsToTodos extends Migration
     public function up()
     {
         Schema::table('to_dos', function(Blueprint $table) {
-            $table->string('title');
-            $table->text('content');
+            if (env('DB_CONNECTION') == 'sqlite') {
+                $table->string('title')->nullable()->default(null);
+                $table->text('content')->nullable()->default(null);
+            } else {
+                $table->string('title');
+                $table->text('content');
+            }
             $table->integer('comment_count')->default(0);
         });
     }

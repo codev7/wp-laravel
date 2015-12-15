@@ -6,7 +6,6 @@ use CMV\User, CMV\Team;
 
 /**
  * Handles creating threads and messages
- * @todo add permission checks
  * Class TeamsService
  * @package CMV\Services
  */

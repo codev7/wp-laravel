@@ -13,8 +13,14 @@ class AddCategoryAndTypeToTodos extends Migration
     public function up()
     {
         Schema::table('to_dos', function(Blueprint $table) {
-            $table->string('type');
-            $table->string('category');
+            if (env('DB_CONNECTION') == 'sqlite') {
+                $table->string('type')->default(null)->nullable();
+                $table->string('category')->default(null)->nullable();
+            } else {
+                $table->string('type');
+                $table->string('category');
+            }
+
             $table->string('status')->default('new');
         });
     }
