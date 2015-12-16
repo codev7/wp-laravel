@@ -1,7 +1,7 @@
 <?php
 
 use CMV\User, CMV\Team;
-use CMV\Models\PM\Project;
+use CMV\Models\PM\Project, CMV\Models\PM\ProjectBrief;
 
 class CMVTestCase extends Illuminate\Foundation\Testing\TestCase
 {
@@ -88,12 +88,19 @@ class CMVTestCase extends Illuminate\Foundation\Testing\TestCase
     {
         if ($user) $this->actingAs($user);
 
+        Access::setUser($user);
+
         foreach ($uris as $params) {
             $uri = $params['uri'];
             $method = isset($params['method']) ? $params['method'] : 'GET';
             $data = isset($params['data']) ? $params['data'] : [];
             $this->json($method, $uri, $data, ['X-Requested-With' => 'XMLHttpRequest']);
-            $this->assertResponseStatus($responseStatus);
+            if($this->response->getStatusCode() == 500) dd($this->response->getContent());
+            $this->assertEquals(
+                $responseStatus,
+                $this->response->getStatusCode(),
+                "Expected status $responseStatus on $method $uri, got ".$this->response->getStatusCode()
+            );
         }
     }
 
@@ -148,7 +155,8 @@ class CMVTestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $user = factory(CMV\User::class)->create();
 
-        $team = Team::create(['name' => $this->fake->word]);
+        $team = new Team();
+        $team->name = $this->fake->word;
         $team->owner_id = $user->id;
         $team->save();
 
@@ -182,11 +190,24 @@ class CMVTestCase extends Illuminate\Foundation\Testing\TestCase
     {
         if (!$team) $team = $this->teamWOwner();
 
-        $project = factory(CMV\Models\PM\Project::class)->create([
-            'team_id' => $team
+        $project = factory(Project::class)->create([
+            'team_id' => $team->id,
+            'project_type_id' => 1
         ]);
 
         return $project;
     }
 
+    /**
+     * @param Project $project
+     * @return ProjectBrief
+     */
+    protected function brief(Project $project = null)
+    {
+        if (!$project) $project = $this->project();
+
+        return factory(ProjectBrief::class)->create([
+            'project_id' => $project->id
+        ]);
+    }
 }

@@ -14,6 +14,10 @@ class AlterProjectBriefsTableAddApprovedByAdminCols extends Migration
     {
         Schema::table('project_briefs', function(Blueprint $table) {
             $table->renameColumn('approved_at', 'approved_by_customer_at');
+        });
+
+        // sqlite driver bug workaround again
+        Schema::table('project_briefs', function(Blueprint $table) {
             $table->integer('approved_by_admin_id')->unsigned()->nullable()->default(null);
             $table->timestamp('approved_by_admin_at')->nullable()->default(null);
         });

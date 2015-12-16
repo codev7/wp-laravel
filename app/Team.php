@@ -25,7 +25,11 @@ class Team extends SparkTeam
         return $this->hasMany('CMV\Models\PM\Project', 'team_id', 'id');
     }
     
-    
+    public function owner()
+    {
+        return $this->belongsTo('CMV\User', 'owner_id');
+    }
+
     public function invoice()
     {
         return $this->hasManyThrough('CMV\Models\PM\Invoice','CMV\Models\PM\Project');

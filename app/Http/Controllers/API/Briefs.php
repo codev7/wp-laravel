@@ -8,6 +8,7 @@ use CMV\Services\MessagesService;
 use Input, Auth, Validator;
 
 /**
+ * @Middleware("param-access")
  * @package CMV\Http\Controllers\API
  */
 class Briefs extends Controller {

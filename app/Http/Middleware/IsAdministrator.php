@@ -6,7 +6,7 @@ use Closure;
 use Auth;
 use Flash;
 
-class IsAdministrator
+class IsAdministrator extends Middleware
 {
     /**
      * Handle an incoming request.
@@ -19,15 +19,11 @@ class IsAdministrator
     {
         $user = Auth::user();
 
-        if ($user->isAdministrator() === false)
+        if ($user && $user->isAdministrator())
         {
-            Flash::error('You need to be an admin to view that page.');
-
-            \Session::reflash();
-
-            return redirect()->guest('/');
+            return $next($request);
         }
 
-        return $next($request);
+        return $this->respondWithError('You need to be an admin to view that page.');
     }
 }

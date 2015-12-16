@@ -18,10 +18,15 @@ class AlterMessagesTable extends Migration
                 $table->integer('thread_id')->nullable()->default(null);
             } else {
                 $table->integer('thread_id')->unsigned()->after('id')->index();
-                $table->renameColumn('comment', 'content');
             }
+        });
 
+        Schema::table('messages', function(Blueprint $table) {
             $table->dropColumn(['parent_message_id', 'reference_id', 'reference_type', 'todo_reference_id']);
+        });
+
+        Schema::table('messages', function(Blueprint $table) {
+            $table->renameColumn('comment', 'content');
         });
     }
 

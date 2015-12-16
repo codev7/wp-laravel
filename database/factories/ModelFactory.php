@@ -108,9 +108,12 @@ $factory->define(CMV\Models\PM\Project::class, function (Faker\Generator $faker)
 
 //ProjectBrief
 $factory->define(CMV\Models\PM\ProjectBrief::class, function (Faker\Generator $faker) {
+    $type = array_rand(['wordpress', 'frontend', 'other']);
+
     return [
-        'text' => $faker->realText( $faker->numberBetween(200,800) ), //will most likely be some sort of json until I figure out actual data structure for the ProjectBriefs
-        'approved_at' => $faker->randomElement([null, $faker->dateTimeThisMonth()])
+        'text' => json_encode(['brief_type' => $type]),
+        'created_by_id' => 1
+//        'approved_by_customer_at' => $faker->randomElement([null, $faker->dateTimeThisMonth()])
     ];
 });
 
