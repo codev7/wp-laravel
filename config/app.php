@@ -162,6 +162,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
         /**
          * Spark Service Providers...
@@ -223,6 +224,7 @@ return [
         'HTML'      => Collective\Html\HtmlFacade::class,
         'Slack'     => Maknz\Slack\Facades\Slack::class,
         'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
+        'Activity'  => Spatie\Activitylog\ActivitylogFacade::class,
 
         'Flash'     => CMV\Misc\Facades\Flash::class,
         'Access'    => CMV\Misc\Facades\Access::class,

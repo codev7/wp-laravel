@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76b27034f04aeba14fd56c015f3f08e4",
-    "content-hash": "afc386d519124a2d6338b5bf3f47e845",
+    "hash": "297df6191684e422b59362bc0e38e393",
+    "content-hash": "8bbecc356806136b2503bd49d635af33",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2929,6 +2929,57 @@
                 "spider"
             ],
             "time": "2013-11-23 01:44:31"
+        },
+        {
+            "name": "spatie/activitylog",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/activitylog.git",
+                "reference": "0d40e4d8fc95e6f2d417b1ec07f528d3676d6505"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/activitylog/zipball/0d40e4d8fc95e6f2d417b1ec07f528d3676d6505",
+                "reference": "0d40e4d8fc95e6f2d417b1ec07f528d3676d6505",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Spatie\\Activitylog\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be"
+                }
+            ],
+            "description": "A very simple activity logger to monitor the users of your website or application",
+            "homepage": "https://github.com/spatie/activitylog",
+            "keywords": [
+                "activity",
+                "laravel",
+                "log",
+                "user"
+            ],
+            "time": "2015-10-15 13:46:19"
         },
         {
             "name": "spatie/laravel-backup",

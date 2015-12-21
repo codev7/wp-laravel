@@ -29,7 +29,8 @@
         "gentle/bitbucket-api": "^0.7.0",
         "contextio/php-contextio-lite": "1.1",
         "doctrine/dbal": "~2.4",
-        "genealabs/laravel-caffeine": "~0.2"
+        "genealabs/laravel-caffeine": "~0.2",
+        "spatie/activitylog": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
