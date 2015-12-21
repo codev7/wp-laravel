@@ -48,12 +48,19 @@ class ACL {
      */
     protected function project(Project $project, $action = 'read')
     {
+        if ($this->user && $this->user->is_mastermind || $this->user->is_admin) {
+            return true;
+        }
+
         if (! $project->exists) {
             switch ($action) {
                 case self::ACTION_READ:
                     return is_null($this->user);
                 case self::ACTION_CREATE:
-                    return true;
+                    if (!$this->user || !$this->user->current_team_id) {
+                        return true;
+                    }
+                    return array_search($this->user->currentTeam()->pivot->role, ['admin', 'owner']) !== false;
                 default:
                     return false;
             }
@@ -61,16 +68,21 @@ class ACL {
 
         if (!$this->user) return false;
 
-        if ($this->user->is_mastermind || $this->user->is_admin) {
-            return true;
-        }
-
         switch ($action) {
             case static::ACTION_DELETE:
                 return $project->team->owner_id == $this->user->id;
                 break;
             default:
-                return $project->team && $project->team->users()->find($this->user->id);
+                $team = $this->user->teams()->find($project->team_id);
+                if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
+                    return true;
+                }
+
+                return (bool) \DB::table('user_projects')
+                    ->where('team_id', $project->team_id)
+                    ->where('project_id', $project->id)
+                    ->where('user_id', $this->user_id)
+                    ->count();
                 break;
         }
     }

@@ -35,11 +35,14 @@
 
                 @if(!Input::has('tab'))
                     @if(Auth::user()->projects()->count() > 0)
+                    @if(Access::check((new CMV\Models\PM\Project), 'create'))
                     <div class="pull-right">
                         <a class="btn btn-primary-outline" href="{{ route('project.new') }}">
                             <i class="fa fa-btn fa-plus with-text"></i> Create Project
                         </a>
                     </div>
+                    @endif
+
                     <div class="panel panel-flush">
                         <div class="panel-body">
 
@@ -83,7 +86,9 @@
                     <div class="text-center">
                         <h3 class="m-b-lg">{{ Auth::user()->currentTeam()->name }} has no projects.</h3>
 
+                        @if(Access::check((new CMV\Models\PM\Project), 'create'))
                         <a href="{{ route('project.new') }}" class="btn btn-primary-outline btn-lg"><i class="fa fa-plus"></i> Create a Project</a>
+                        @endif
                     </div>
                     @endif
                 @elseif(Input::get('tab') == 'concierge')

@@ -11,29 +11,30 @@ class CheckAccessByReference extends Middleware {
     {
         $error = 'Permission error';
 
-        $classes = [
+        $refType = \Input::get('reference_type');
+        $refId = \Input::get('reference_id');
+
+        $refs = [
             'project' => Project::class,
-            'concierge_site' => ConciergeSite::class,
-            'todo' => ToDo::class
+            'project_brief' => ProjectBrief::class
         ];
 
-        $levels = [
+        $actions = [
             'GET' => 'read',
-            'POST' => 'update',
+            'PUT' => 'update',
             'DESTROY' => 'delete',
+            'POST' => 'create'
         ];
 
-        $input = $request->all();
-        $refType = array_get($input, 'reference_type');
-        $refId = array_get($input, 'reference_id');
+        $allowed = false;
 
-        if (!isset($classes[$refType]) || !$refId) {
-            return $this->respondWithError($error);
+        if ($refId && isset($refs[$refType])) {
+            $model = $refs[$refType]::find($refId);
+            if ($model) {
+                $action = $actions[$request->method()];
+                $allowed = $allowed && Access::check($model, $action);
+            }
         }
-
-        $model = $classes[$refType]::find($refId);
-        $level = $levels[$request->method()];
-        $allowed = $model && Access::check($model, $level);
 
         if ($allowed) {
             return $next($request);
@@ -41,5 +42,4 @@ class CheckAccessByReference extends Middleware {
 
         return $this->respondWithError($error);
     }
-
 }

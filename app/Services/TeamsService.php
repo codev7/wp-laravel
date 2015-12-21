@@ -78,6 +78,7 @@ class TeamsService {
     {
         /** @var Team $team */
         $team = $user->teams()->find($project->team->id);
+
         // check user belongs to the project's team
         if (!$team) {
             throw new \Exception('User doesn\'t belong to the project\'s team');
