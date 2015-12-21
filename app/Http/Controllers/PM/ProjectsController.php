@@ -29,6 +29,7 @@ class ProjectsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @Middleware("access:projects,create")
      * @Get("project/new", as="project.new")
      * @return Response
      */

@@ -161,12 +161,14 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         GeneaLabs\LaravelCaffeine\LaravelCaffeineServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /**
          * Spark Service Providers...
          */
         Laravel\Spark\Providers\SparkServiceProvider::class,
         CMV\Providers\SparkServiceProvider::class,
+
     ],
 
     /*

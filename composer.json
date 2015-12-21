@@ -14,7 +14,7 @@
         "maknz/slack": "^1.7",
         "pda/pheanstalk": "~3.0",
         "fzaninotto/faker": "~1.4",
-        "spatie/laravel-backup": "~2.1",
+        "spatie/laravel-backup": "^2.8",
         "laravelcollective/html": "5.1.*",
         "laravelcollective/annotations": "5.1.*",
         "league/flysystem-aws-s3-v2": "~1.0",

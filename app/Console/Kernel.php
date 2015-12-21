@@ -29,7 +29,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        /**
+         * This creates a backup of the production DB on s3.
+         */
+        $schedule->command('backup:run --only-db')
+            ->dailyAt('23:21');
+//            ->thenPing('http://beats.envoyer.io/heartbeat/Ris6PH8ssc8hlPs');
+
     }
 }
