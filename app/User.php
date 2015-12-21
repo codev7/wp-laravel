@@ -123,8 +123,8 @@ class User extends Model implements AuthorizableContract,
 
         if ($team->pivot->role == 'member') {
             return $this->belongsToMany('CMV\Models\PM\Project','user_projects')
-                ->whereRaw("projects.team_id = {$this->current_team_id}");
-        } else if (array_search($team->pivot->role, ['admin', 'owner'])) {
+                ->where("projects.team_id", $this->current_team_id);
+        } else if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
             return $team->projects();
         }
     }

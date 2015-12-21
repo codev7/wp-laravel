@@ -65,11 +65,13 @@ class Pivotal {
      */
     public function createProjectLabel($ptProjectId, $label)
     {
-        $response = $this->client->request('POST', "projects/{$ptProjectId}/webhook", [
+        $response = $this->client->request('POST', "projects/{$ptProjectId}/labels", [
             'json' => [
-                'label' => $label
+                'name' => $label
             ]
         ]);
+
+        return $response->getBody()->getContents();
     }
 
     /**
