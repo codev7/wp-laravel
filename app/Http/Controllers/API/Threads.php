@@ -8,6 +8,7 @@ use Input, Validator, Auth;
 class Threads extends Controller {
 
     /**
+     * @Middleware("ref-access")
      * @Get("api/threads")
      * @return \Illuminate\Http\JsonResponse
      */
@@ -35,6 +36,7 @@ class Threads extends Controller {
     }
 
     /**
+     * @Middleware("param-access")
      * @Post("api/threads/{threads}")
      */
     public function show($id)
@@ -47,6 +49,7 @@ class Threads extends Controller {
     }
 
     /**
+     * @Middleware("ref-access")
      * @Post("api/threads")
      * @return \Illuminate\Http\JsonResponse
      */
@@ -76,6 +79,7 @@ class Threads extends Controller {
     }
 
     /**
+     * @Middleware("param-access")
      * @Delete("api/threads/{threads}")
      */
     public function destroy($id)

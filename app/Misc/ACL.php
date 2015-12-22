@@ -48,7 +48,7 @@ class ACL {
      */
     protected function project(Project $project, $action = 'read')
     {
-        if ($this->user && $this->user->is_mastermind || $this->user->is_admin) {
+        if ($this->user && ($this->user->is_mastermind || $this->user->is_admin)) {
             return true;
         }
 

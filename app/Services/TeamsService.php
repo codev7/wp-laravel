@@ -133,4 +133,25 @@ class TeamsService {
         return $users;
     }
 
+    /**
+     * @param Project $project
+     * @return mixed
+     */
+    public function getProjectUsers(Project $project)
+    {
+        $teamMembers = \DB::table('user_teams')
+            ->where('team_id', $project->team_id)
+            ->whereIn('role', ['admin', 'owner'])
+            ->get()->lists('user_id')->all();
+
+        // role=member members of the team are attached only to specific projects
+        $projectMembers = \DB::table('user_projects')
+            ->where('team_id', $project->team_id)
+            ->get()->lists('user_id')->all();
+
+        $ids = array_unique(array_merge($teamMembers, $projectMembers));
+        $ids[] = -1;
+
+        return User::whereIn('id', $ids);
+    }
 }

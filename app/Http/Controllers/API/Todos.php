@@ -29,6 +29,7 @@ class Todos extends Controller {
     }
 
     /**
+     * @Middleware("ref-access")
      * @Get("api/todos")
      * @return \Illuminate\Http\JsonResponse
      */
@@ -56,6 +57,7 @@ class Todos extends Controller {
     }
 
     /**
+     * @Middleware("ref-access")
      * @Post("api/todos")
      * @return \Illuminate\Http\JsonResponse
      */
@@ -84,6 +86,7 @@ class Todos extends Controller {
     }
 
     /**
+     * @Middleware("param-access")
      * @Put("api/todos/{todos}/set-status")
      */
     public function updateStatus($id)
@@ -102,6 +105,7 @@ class Todos extends Controller {
     }
 
     /**
+     * @Middleware("param-access")
      * @Get("api/todos/{todos}/comments")
      * @param $id
      */

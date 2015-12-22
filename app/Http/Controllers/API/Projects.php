@@ -64,7 +64,7 @@ class Projects extends Controller {
     }
 
     /**
-     * @Middleware("auth")
+     * @Middleware("access:projects,create")
      * @Post("api/projects")
      */
     public function create()
@@ -118,7 +118,7 @@ class Projects extends Controller {
     }
 
     /**
-     * @Middleware("admin_auth")
+     * @Middleware("param-access")
      * @Put("api/projects/{projects}")
      * @param $id
      * @return \Illuminate\Http\JsonResponse

@@ -32,7 +32,7 @@ class CheckAccessByReference extends Middleware {
             $model = $refs[$refType]::find($refId);
             if ($model) {
                 $action = $actions[$request->method()];
-                $allowed = $allowed && Access::check($model, $action);
+                $allowed = Access::check($model, $action);
             }
         }
 

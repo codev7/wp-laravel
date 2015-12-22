@@ -6,6 +6,11 @@ use CMV\Services\FilesService;
 use Illuminate\Support\Collection;
 use Input, Validator, Auth;
 
+/**
+ * @Middleware("ref-access", except={"destroy"})
+ * Class Files
+ * @package CMV\Http\Controllers\API
+ */
 class Files extends Controller {
 
     /** @var FilesService  */
