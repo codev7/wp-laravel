@@ -81,7 +81,7 @@ class ACL {
                 return (bool) \DB::table('user_projects')
                     ->where('team_id', $project->team_id)
                     ->where('project_id', $project->id)
-                    ->where('user_id', $this->user_id)
+                    ->where('user_id', $this->user->id)
                     ->count();
                 break;
         }
