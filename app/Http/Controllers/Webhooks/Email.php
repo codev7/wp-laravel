@@ -28,13 +28,16 @@ class Email extends Controller {
         $email['envelope'] = json_decode($email['envelope'], true);
 
         $address = $email['envelope']['to'][0];
-        list($type, $hash) = explode('-', substr($address, 0, strpos($address, '@')));
-        switch ($type) {
-            case 'th':
-                $this->thread($email, $hash);
-                break;
-            default:
-                exit(0);
+        $parts = explode('-', substr($address, 0, strpos($address, '@')));
+        if (count($parts) == 2) {
+            list($type, $hash) = $parts;
+            switch ($type) {
+                case 'th':
+                    $this->thread($email, $hash);
+                    break;
+                default:
+                    exit(0);
+            }
         }
     }
 
