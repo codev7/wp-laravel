@@ -19,7 +19,7 @@ use Input, HashIds, DOMDocument, DOMXPath;
 class Email extends Controller {
 
     /**
-     * @Post("webhooks/email/thread")
+     * @Post("webhooks/email")
      */
     public function handle(Request $request)
     {
@@ -40,23 +40,24 @@ class Email extends Controller {
 
     protected function thread(array $email, $hash)
     {
-        list($threadId, $userId) = HashIds::decode($hash);
+        $ids = HashIds::decode($hash);
+        if (is_array($ids) && count($ids) == 2) {
+            list($threadId, $userId) = $ids;
 
-        $thread = Thread::find($threadId);
-        $user = User::find($userId);
+            $thread = Thread::find($threadId);
+            $user = User::find($userId);
 
-        if ($thread && $user) {
-            $doc = new DOMDocument();
-            @$doc->loadHTML($email['html']);
-            $selector = new DOMXPath($doc);
-            $div = $selector->query('//div[1]')->item(0);
+            if ($thread && $user) {
+                $doc = new DOMDocument();
+                @$doc->loadHTML($email['html']);
+                $selector = new DOMXPath($doc);
+                $div = $selector->query('//div[1]')->item(0);
 
-            $service = new MessagesService($user);
-            $message = $doc->saveHTML($div);
-            \Log::info($message);
-            $service->postInThread($thread, $message);
+                $service = new MessagesService($user);
+                $message = $doc->saveHTML($div);
+                $service->postInThread($thread, $message);
+            }
         }
-
     }
 
     // ..
