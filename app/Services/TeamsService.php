@@ -142,16 +142,16 @@ class TeamsService {
         $teamMembers = \DB::table('user_teams')
             ->where('team_id', $project->team_id)
             ->whereIn('role', ['admin', 'owner'])
-            ->get()->lists('user_id')->all();
+            ->lists('user_id');
 
         // role=member members of the team are attached only to specific projects
         $projectMembers = \DB::table('user_projects')
             ->where('team_id', $project->team_id)
-            ->get()->lists('user_id')->all();
+            ->lists('user_id');
 
         $ids = array_unique(array_merge($teamMembers, $projectMembers));
         $ids[] = -1;
 
-        return User::whereIn('id', $ids);
+        return User::whereIn('id', $ids)->get();
     }
 }

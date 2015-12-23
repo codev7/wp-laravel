@@ -65,6 +65,10 @@ $app->bind('pivotal', function() {
     return new CMV\Misc\Pivotal();
 });
 
+$app->bind('hashids', function() {
+    return new CMV\Misc\HashIds();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

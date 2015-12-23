@@ -332,3 +332,11 @@ function random_str($length = 8) {
 function yesNo($bool) {
     return $bool ? 'Yes' : 'No';
 }
+
+function std_column(array $array, $column) {
+    $res = [];
+    foreach ($array as $item) {
+        $res[] = $item->$column;
+    }
+    return $res;
+}

@@ -229,7 +229,7 @@ return [
         'Flash'     => CMV\Misc\Facades\Flash::class,
         'Access'    => CMV\Misc\Facades\Access::class,
         'Pivotal'   => CMV\Misc\Facades\Pivotal::class,
-
+        'HashIds'   => CMV\Misc\Facades\HashIds::class,
     ],
 
 ];
