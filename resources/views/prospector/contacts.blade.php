@@ -8,12 +8,12 @@
   <h3 class="hr-divider-content hr-divider-heading">All Contacts</h3>
 </div>
 
-<form action="/contacts" method="get">
+<form method="get">
 <div class="flextable table-actions">
   <div class="flextable-item flextable-primary">
     <div class="btn-toolbar-item input-with-icon">
       
-        <input type="text" name="search" class="form-control input-block" placeholder="Search prospects">
+        <input type="text" name="search" class="form-control input-block" placeholder="Search prospects" value="{{ Input::get('search') }}">
         <span class="icon icon-magnifying-glass"></span>
       
     </div>

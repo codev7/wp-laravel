@@ -1,6 +1,7 @@
 <div class="modal fade in" id="new-activity">
     <div class="modal-dialog modal-sm">
-        <form action="">
+        <form action="{{ route('prospector.create-activity', ['company_id' => $company->id]) }}" method="post">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -9,13 +10,12 @@
                 <div class="modal-body">
     
                     <div class="hr-divider m-b">
-                      <h3 class="hr-divider-content hr-divider-heading">
-                        {{ $company->name }}
-                      </h3>
+                      <h3 class="hr-divider-content hr-divider-heading">{{ $company->name }}</h3>
                     </div>
                     @if(isset($contact))
                     <div class="form-group">
                         <label>Contact</label>
+                        <input type="hidden" name="contact_id" value="{{ $contact->id }}" />
                         <input type="text" class="form-control" disabled="disabled" value="{{ $contact->email }}">
                     </div>
                     @else
@@ -35,12 +35,12 @@
                     <div class="form-group">
                         <label>Content</label>
 
-                        <textarea class="form-control" rows="10" cols=""></textarea>
+                        <textarea class="form-control" rows="10" cols="" name="content"></textarea>
                     </div><!--form-group-->
             </div>
             <div class="modal-actions">
                 <button type="button" tabindex="-1" class="btn-link modal-action" data-dismiss="modal">Cancel</button>
-                <button type="button" onclick="alert('This is not hooked up yet.  Coming soon...');" class="btn-link modal-action btn-success">
+                <button type="button" onclick="$('#new-activity form').submit();" class="btn-link modal-action btn-success">
                     <strong>Save</strong>
                 </button>
             </div>
