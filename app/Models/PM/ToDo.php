@@ -9,13 +9,14 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
-* Customers can submit to-do items to their projects
-* as well as to any sites they have in Concierge service.
-* Each to-do will be automatically created as a task via
-* the PT API.
-*
-* Should have some caching mechanism for data pulled in from Bitbucket.
-*/
+ * @todo Refactor ->reference() to ->project()
+ * Customers can submit to-do items to their projects
+ * as well as to any sites they have in Concierge service.
+ * Each to-do will be automatically created as a task via
+ * the PT API.
+ *
+ * Should have some caching mechanism for data pulled in from Bitbucket.
+ */
 class ToDo extends Model
 {
     use DispatchesJobs;

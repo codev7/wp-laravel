@@ -1,13 +1,15 @@
 <?php
 namespace CMV\Models\PM;
 
+use CMV\Jobs\PM\SendMessageNotifications;
 use CMV\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class Thread extends Model {
 
-    use SoftDeletes;
+    use SoftDeletes, DispatchesJobs;
 
     const REF_PROJECT = 'project';
     const REF_CONCIERGE = 'concierge_site';
@@ -64,6 +66,8 @@ class Thread extends Model {
         $this->last_message_preview = substr($content, 0, 100);
         $this->message_count = $this->messages()->count();
         $this->save();
+
+        $this->dispatch(new SendMessageNotifications($message));
 
         return $message;
     }

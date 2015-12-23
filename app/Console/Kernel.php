@@ -19,7 +19,6 @@ class Kernel extends ConsoleKernel
         \CMV\Console\Commands\Prospector\ImportDataFromPipelineDeals::class,
         \CMV\Console\Commands\PM\InitProjectOnStaging::class,
         \CMV\Console\Commands\PM\DeployProjectOnStaging::class,
-        \CMV\Console\Commands\PM\NotifyAboutMessages::class,
     ];
 
     /**
@@ -35,10 +34,6 @@ class Kernel extends ConsoleKernel
          */
         $schedule->command('backup:run --only-db')
             ->dailyAt('23:21');
-
-        $schedule->command('notify:thread_messages')
-            ->everyThirtyMinutes();
-
 //            ->thenPing('http://beats.envoyer.io/heartbeat/Ris6PH8ssc8hlPs');
 
     }
