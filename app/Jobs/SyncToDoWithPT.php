@@ -51,7 +51,7 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
         }
 
         if (!$todo->pivotal_story_id) {
-            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $todo->content, [$todo->category]);
+            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $todo->content, $todo->type, [$todo->category]);
             $todo->pivotal_story_id = $story->id;
             $todo->save();
         } else {

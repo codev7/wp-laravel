@@ -80,11 +80,14 @@ class Pivotal {
      * @param $content
      * @return array|mixed|object
      */
-    public function createStory($projectId, $title, $content, array $labels = [])
+    public function createStory($projectId, $title, $content, $type = 'feature', array $labels = [])
     {
         $response = $this->client->request('POST', "projects/{$projectId}/stories", [
             'json' => [
-                'name' => $title, 'description' => $content, 'labels' => $labels
+                'name' => $title,
+                'description' => $content,
+                'story_type' => $type,
+                'labels' => $labels
             ]
         ]);
 
