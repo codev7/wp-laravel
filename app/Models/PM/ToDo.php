@@ -66,6 +66,12 @@ class ToDo extends Model
             ->where('reference_type', Thread::REF_TODO);
     }
 
+    public function files()
+    {
+        return $this->hasMany('CMV\Models\PM\File','reference_id')
+            ->where('reference_type', File::REF_TODO);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

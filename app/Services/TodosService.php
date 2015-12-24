@@ -53,6 +53,13 @@ class TodosService {
         $todo->save();
         $todo->load('createdBy');
 
+        if (isset($data['files'])) {
+            $filesService = new FilesService($this->user);
+            foreach ($data['files'] as $file) {
+                $filesService->create($todo, $file);
+            }
+        }
+
         $this->dispatch(new SyncToDoWithPT($todo));
 
         return $todo;

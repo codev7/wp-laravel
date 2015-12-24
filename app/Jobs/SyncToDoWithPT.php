@@ -28,7 +28,6 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
     public function __construct(ToDo $todo)
     {
         $this->todo = $todo;
-
     }
 
     /**
@@ -39,6 +38,8 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
     public function handle()
     {
         $todo = $this->todo;
+        $todo->load('files');
+
         $ref = $todo->reference;
 
         if (! $ref->pivotal_id) {
@@ -51,7 +52,13 @@ class SyncToDoWithPT extends Job implements SelfHandling, ShouldQueue
         }
 
         if (!$todo->pivotal_story_id) {
-            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $todo->content, $todo->type, [$todo->category]);
+            $content = $todo->content;
+            if ($todo->files()->count()) {
+                foreach ($todo->files as $file) {
+                    $content .= "\n[{$file->name}]({$file->path})";
+                }
+            }
+            $story = Pivotal::createStory($ref->pivotal_id, $todo->title, $content, $todo->type, [$todo->category]);
             $todo->pivotal_story_id = $story->id;
             $todo->save();
         } else {

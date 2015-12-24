@@ -50,10 +50,23 @@ class Todos extends Controller {
         $items = ToDo::where('reference_type', $data['reference_type'])
             ->where('reference_id', $data['reference_id'])
             ->orderBy('id', 'desc')
-            ->with('createdBy')
+            ->with('createdBy', 'files')
             ->get();
 
         return $this->respondWithData($items->toArray());
+    }
+
+    /**
+     * @Middleware("param-access")
+     * @Get("api/todos/{todos}")
+     * @Param $id
+     */
+    public function show($id)
+    {
+        $todo = ToDo::find($id);
+        $todo->load('files');
+
+        return $this->respondWithData($todo->toArray());
     }
 
     /**
@@ -72,7 +85,8 @@ class Todos extends Controller {
             'title' => 'required',
             'content' => 'required',
             'category' => 'required|in:frontend,wordpress,other',
-            'type' => 'required|in:bug,feature'
+            'type' => 'required|in:bug,feature',
+            'files' => 'array'
         ]);
 
         if ($validator->fails()) {
@@ -82,7 +96,7 @@ class Todos extends Controller {
         $reference = TodosService::getReference($data['reference_type'], $data['reference_id']);
         $todo = $this->service->createTodo($reference, $data);
 
-        return $this->respondWithData($todo->toArray());
+        return $this->show($todo->id);
     }
 
     /**

@@ -53,7 +53,7 @@ class Files extends Controller {
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
-            'reference_type' => 'required|in:project,concierge_site',
+            'reference_type' => 'required|in:project,todo,project_brief',
             'reference_id' => 'required'
         ]);
 
@@ -86,7 +86,7 @@ class Files extends Controller {
 
         /** @var \Illuminate\Validation\Validator $validator */
         $validator = Validator::make($data, [
-            'reference_type' => 'required|in:project,concierge_site,project_brief',
+            'reference_type' => 'required|in:project,todo,project_brief',
             'reference_id' => 'required',
             'name' => 'required',
             'originalUrl' => 'required|url',

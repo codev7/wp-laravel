@@ -3,6 +3,7 @@ namespace CMV\Services;
 
 use CMV\Models\PM\File, CMV\Models\PM\Project, CMV\Models\PM\ConciergeSite;
 use CMV\Models\PM\ProjectBrief;
+use CMV\Models\PM\ToDo;
 use CMV\User;
 use Illuminate\Support\Collection;
 
@@ -87,10 +88,10 @@ class FilesService {
     {
         if ($reference instanceof Project) {
             return File::REF_PROJECT;
-        } else if ($reference instanceof ConciergeSite) {
-            return File::REF_CONCIERGE;
         } else if ($reference instanceof ProjectBrief) {
             return File::REF_BRIEF;
+        } else if ($reference instanceof ToDo) {
+            return File::REF_TODO;
         } else {
             throw new \Exception('Unknown entity type. It should be in: project,todo,concierge_site');
         }
@@ -106,13 +107,10 @@ class FilesService {
         switch($referenceType) {
             case File::REF_PROJECT:
                 return Project::find($referenceId);
-                break;
-            case File::REF_CONCIERGE:
-                return ConciergeSite::find($referenceId);
-                break;
             case File::REF_BRIEF:
                 return ProjectBrief::find($referenceId);
-                break;
+            case File::REF_TODO:
+                return ToDo::find($referenceId);
             default:
                 throw new \Exception('Unknown entity type. It should be in: project,todo,concierge_site');
                 break;

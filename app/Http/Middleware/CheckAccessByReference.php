@@ -16,7 +16,8 @@ class CheckAccessByReference extends Middleware {
 
         $refs = [
             'project' => Project::class,
-            'project_brief' => ProjectBrief::class
+            'project_brief' => ProjectBrief::class,
+            'todo' => ToDo::class,
         ];
 
         $actions = [

@@ -10,7 +10,8 @@ export default Vue.extend({
                 title: '',
                 type: '',
                 category: '',
-                content: ''
+                content: '',
+                files: []
             },
             meta: {
                 'frontend': 'Front End',
@@ -48,12 +49,12 @@ export default Vue.extend({
     ready() {
         this.fetchTodos();
         var widgets = uploadcare.initialize(`#create-to-do`);
-        var widget = widgets[0];
+        this.ucare = widgets[0];
 
-        widget.onChange((res) => {
+        this.ucare.onChange((res) => {
             if (res) {
                 $.when.apply(null, res.files()).done((...files) => {
-                    console.log(files);
+                    this.newTodo.files = files;
                 });
             }
         });
@@ -62,17 +63,13 @@ export default Vue.extend({
     methods: {
         openCreateModal() {
             $('#create-to-do').modal('show');
+            this._resetNewTodo();
         },
         createTodo() {
             this.creatingTodo = true;
             this.$http.post(`/api/todos`, _.merge(this.newTodo, this.state), (res) => {
                 this.todos.unshift(res.data);
-                this.newTodo = {
-                    title: '',
-                    type: '',
-                    category: '',
-                    content: ''
-                };
+                this._resetNewTodo();
                 $('#create-to-do').modal('hide');
             }).always(() => {
                 this.creatingTodo = false;
@@ -101,6 +98,16 @@ export default Vue.extend({
 
             // being positive about the call success
             this.$http.put(`/api/todos/${todo.id}/set-status`, {status: status});
+        },
+        _resetNewTodo() {
+            this.ucare.value(null);
+            this.newTodo = {
+                title: '',
+                type: '',
+                category: '',
+                content: '',
+                files: []
+            };
         }
     }
 });

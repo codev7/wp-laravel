@@ -159,9 +159,12 @@ class ProjectsController extends Controller
      */
     public function toDo($slug, $toDo)
     {
+        $todo = ToDo::find($toDo);
+        $todo->load('files');
+
         return view('projects/to-do', [
             'project' => Project::whereSlug($slug)->first(),
-            'todo' => ToDo::find($toDo)
+            'todo' => $todo
         ]);
     }
 }

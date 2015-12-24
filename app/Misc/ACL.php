@@ -2,6 +2,7 @@
 namespace CMV\Misc;
 
 use CMV\Models\PM\ProjectBrief;
+use CMV\Models\PM\ToDo;
 use CMV\User, CMV\Models\PM\Project;
 
 class ACL {
@@ -123,4 +124,15 @@ class ACL {
                 return false;
         }
     }
+
+    /**
+     * @param ToDo $todo
+     * @param $action
+     * @return bool
+     */
+    public function todo(ToDo $todo, $action)
+    {
+        return true;
+    }
+
 }
