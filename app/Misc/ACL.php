@@ -96,6 +96,10 @@ class ACL {
     {
         if (!$this->user) return false;
 
+        if ($this->user->isMastermind() || $this->user->isAdministrator()) {
+            return true;
+        }
+
         if (!$brief->exists) {
             switch ($action) {
                 case self::ACTION_READ:

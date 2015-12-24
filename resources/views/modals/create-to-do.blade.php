@@ -41,6 +41,12 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input role="uploadcare-uploader" type="hidden" data-multiple/>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="name">Details</label>
                             <textarea type="text" class="form-control input-lg" rows="8" required
