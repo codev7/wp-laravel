@@ -36,21 +36,21 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Assigned Developer</label>
-                                <select class="form-control" v-model="project.developer_id">
-                                    <option value="">Not yet assigned</option>
-                                    @foreach (\CMV\User::developers() as $dev)
-                                        <option value="{{ $dev->id }}">{{ $dev->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Assigned Project Manager</label>
                                 <select class="form-control" required v-model="project.project_manager_id">
                                     <option value="">Not yet assigned</option>
                                     @foreach (\CMV\User::projectManagers() as $pm)
                                         <option value="{{ $pm->id }}">{{ $pm->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Assigned Developer</label>
+                                <select class="form-control" v-model="project.developer_id">
+                                    <option value="">Not yet assigned</option>
+                                    @foreach (\CMV\User::developers() as $dev)
+                                        <option value="{{ $dev->id }}">{{ $dev->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
