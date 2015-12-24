@@ -84,7 +84,9 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
-                            <i class="fa fa-2x m-t fa-exclamation-circle text-danger"></i>
+                            <i class="fa fa-2x m-t"
+                               v-bind:class="{'text-danger': todo.type == 'bug', 'fa-exclamation-circle': todo.type == 'bug', 'text-warning': todo.type == 'feature', 'fa-star': todo.type == 'feature' }">
+                            </i>
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
