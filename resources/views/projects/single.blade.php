@@ -9,9 +9,9 @@
     @include('projects/partials/sidebar')
 
     <div class="col-md-6" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
-        <div class="list-group media-list media-list-stream">
+        <ul class="list-group media-list media-list-stream">
 
-            <div class="media list-group-item p-a">
+            <li class="media list-group-item p-a">
                 <div class="form-group">
                     <textarea class="form-control hidden" rows="4" placeholder="Message"
                               v-model="message"
@@ -22,11 +22,12 @@
                 <button class="btn btn-block btn-default-outline"
                         v-on:click="createThread($event)"
                         v-submit="creatingThread">Submit New Message</button>
-            </div>
-        </div>
+            </li>
 
-        <div v-for="thread in data" class="m-t pos-r" v-show="thread.messages.length">
-            <div class="media list-group-item p-a" >
+
+
+            <li v-for="thread in data" class="media list-group-item p-a" v-show="thread.messages.length">
+            
                 <a href="#" class="delete-thread text-danger"
                    v-if="thread.canDelete"
                    v-on:click.prevent="deleteThreadConfirm(thread)">
@@ -46,7 +47,9 @@
 
                     @{{{thread.messages[0].content}}}
 
-                    <ul class="media-list m-b">
+
+
+                    <ul class="media-list m-b m-t-lg">
                         <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
 
                             <span class="media-left">
@@ -60,22 +63,26 @@
                         </li>
                     </ul>
 
-                </div>
+                
 
                 
-            </div>
-            <textarea class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"
-                      v-model="thread.answer">
-            </textarea>
+            
+                    
+                </div>
 
-            <button type="button" style="absolute; bottom: 0; display: none; right: 0; background: white;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"
-                    v-bind:class="{disabled: thread.answer == undefined || !thread.answer}"
-                    v-submit="replyingToThread"
-                    v-on:click.prevent="replyToThread(thread, $index)">
-                <i class="fa fa-reply"></i> Submit Reply
-            </button>
-        </div>
+                <textarea  class="reply-to-a-thread m-b" placeholder="Type here to start replying to @{{thread.messages[0].user.name}}"
+                      v-model="thread.answer">
+                    </textarea>
+                    <button type="button" style="absolute; bottom: 0; display: none; right: 0;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"
+                        v-bind:class="{disabled: thread.answer == undefined || !thread.answer}"
+                        v-submit="replyingToThread"
+                        v-on:click.prevent="replyToThread(thread, $index)">
+                    <i class="fa fa-reply"></i> Submit Reply
+                    </button>
+            </li>
+        </ul>
     </div>
+
 
     <div class="col-md-3">
         <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
