@@ -62,7 +62,7 @@
                         <tbody v-if="!briefsFetched">
                             <tr>
                                 <td class="text-center" colspan="6">
-                                    <i class="fa fa-refresh fa-spin"></i>
+                                    <i class="fa fa-spinner fa-spin"></i>
                                 </td>
                             </tr>
                         </tbody>

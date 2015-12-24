@@ -5,7 +5,7 @@
         <h5 class="m-t-0">Team Members</h5>
 
         <div class="text-center">
-            <i v-if="!team.id" class="fa fa-refresh fa-spin"></i>
+            <i v-if="!team.id" class="fa fa-spinner fa-spin"></i>
         </div>
 
         <ul class="media-list media-list-stream"
