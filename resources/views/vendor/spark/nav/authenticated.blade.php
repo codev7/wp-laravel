@@ -20,15 +20,17 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav">
 
-				@if(isRouteNameSpace('home') || isRouteNameSpace('settings') || isRoute('project.new'))
+                <?php $show_global_links = isRouteNameSpace('/home') || isRouteNameSpace('/settings') || isRoute('project.new'); ?>
+
+				@if($show_global_links)
 					<li class="{{ set_active_from_route_name('app.home') }}"><a href="{{ route('app.home') }}">Dashboard</a></li>
 				@endif
 
-				@if(hasRole('sales-rep') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRoute('project.new') ))
+				@if(hasRole('sales-rep') && $show_global_links)
 					<li><a href="{{ route('prospector.dashboard') }}">Prospector Dashboard</a></li>
 				@endif
 
-				@if(hasRole('mastermind') && (isRouteNameSpace('home') || isRouteNameSpace('settings')  || isRoute('project.new') ))
+				@if(hasRole('mastermind') && $show_global_links)
 					<li><a href="{{ route('mastermind.dashboard') }}">Mastermind</a></li>
 				@endif
 
@@ -101,7 +103,7 @@
                 
 				@endif
 
-				@if(isRouteNameSpace('mastermind'))
+				@if(isRouteNameSpace('mastermind') && hasRole('mastermind'))
 					<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 
 					<li class="disabled">

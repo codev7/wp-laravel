@@ -10,7 +10,9 @@ Vue.directive('submit', {
     },
     update(value) {
         if (value) {
-            $(this.el).html("<i class='fa fa-refresh fa-spin'></i>");
+            
+            $(this.el).html("<i class='fa fa-spinner fa-spin'></i>");
+
             this.el.disabled = true;
         } else {
             $(this.el).html(this.initialHTML);

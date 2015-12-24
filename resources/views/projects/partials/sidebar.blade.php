@@ -53,7 +53,7 @@
 
     <div class="panel panel-default visible-md-block visible-lg-block">
         <div class="panel-body">
-            <h5 class="m-t-0">Details @if(hasRole('mastermind') || hasRole('admin'))<small>· <a data-toggle="modal" href="#admin-project-modal">Edit</a></small>@endif</h5>
+            <h5 class="m-t-0">Details</h5>
 
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
@@ -94,15 +94,23 @@
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
                     <tr>
-                        <td><strong><i class="text-muted fa fa-git"></i> Git URL</strong></td>
+                        <td><strong>Git URL</strong></td>
                     </tr>
 
                     <tr>
                         <td><code>ssh://projecturl@bitbucket.org</code></td>
                     </tr>
-      
+        
                     <tr>
-                        <td><a href="#" class="btn btn-lg btn-block btn-success">Re-deploy Application</a></td>
+                        <td><strong>Pivotal Tracker</strong></td>
+                    </tr>
+
+                    <tr>
+                        <td><code>http://pivotaltracker.com/test-12345</code></td>
+                    </tr>
+
+                    <tr>
+                        <td><a href="#" class="btn btn-lg btn-block btn-success" disabled="disabled">Re-deploy Application</a></td>
                     </tr>
                 </tbody>
             </table>

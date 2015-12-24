@@ -7,7 +7,7 @@ export default Vue.extend({
             <p class="m-b text-muted">
                 <small>There are currently
                     <span v-if="uploadedCount !== undefined">{{uploadedString}}</span>
-                    <span v-if="uploadedCount === undefined"><i class="fa fa-refresh fa-spin"></i> files</span> uploaded.
+                    <span v-if="uploadedCount === undefined"><i class="fa fa-spinner fa-spin"></i> files</span> uploaded.
                 </small>
             </p>
 
