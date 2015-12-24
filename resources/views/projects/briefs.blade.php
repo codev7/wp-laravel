@@ -13,7 +13,7 @@
         <ul class="list-group media-list media-list-stream">
             <li class="media list-group-item p-a">
                 <div class="media-body">
-                    @if (hasRole('admin'))
+                    @if (hasRole('admin') || hasRole('mastermind'))
                     <a data-pjax class="btn btn-sm btn-primary pull-right" href="{{ route('project.create_brief', ['slug' => $project->slug]) }}"><i class="fa fa-plus"></i> Create Brief</a>
                     @endif
 

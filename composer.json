@@ -31,7 +31,8 @@
         "doctrine/dbal": "~2.4",
         "genealabs/laravel-caffeine": "~0.2",
         "spatie/activitylog": "^2.2",
-        "hashids/hashids": "1.0.5"
+        "hashids/hashids": "1.0.5",
+        "erusev/parsedown": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -47,6 +47,16 @@ export default Vue.extend({
 
     ready() {
         this.fetchTodos();
+        var widgets = uploadcare.initialize(`#create-to-do`);
+        var widget = widgets[0];
+
+        widget.onChange((res) => {
+            if (res) {
+                $.when.apply(null, res.files()).done((...files) => {
+                    console.log(files);
+                });
+            }
+        });
     },
 
     methods: {

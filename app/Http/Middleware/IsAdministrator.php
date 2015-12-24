@@ -19,7 +19,7 @@ class IsAdministrator extends Middleware
     {
         $user = Auth::user();
 
-        if ($user && $user->isAdministrator())
+        if ($user && ($user->isAdministrator() || $user->isMastermind()))
         {
             return $next($request);
         }

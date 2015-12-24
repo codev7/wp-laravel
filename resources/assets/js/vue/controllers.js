@@ -11,6 +11,7 @@ export default {
     'project/files': require('./controllers/project/files'),
     'project/invoices': require('./controllers/project/invoices'),
     'project/todos': require('./controllers/project/todos'),
+    'project/todo': require('./controllers/project/todo'),
     'project/new': require('./controllers/project/new'),
     'project/team': require('./controllers/project/team'),
     'project/news': require('./controllers/project/news'),

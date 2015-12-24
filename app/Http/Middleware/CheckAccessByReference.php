@@ -2,7 +2,7 @@
 namespace CMV\Http\Middleware;
 
 use Access;
-use CMV\Models\PM\Project, CMV\Models\PM\ConciergeSite, CMV\Models\PM\ToDo;
+use CMV\Models\PM\Project, CMV\Models\PM\ConciergeSite, CMV\Models\PM\ToDo, CMV\Models\PM\ProjectBrief;
 use Illuminate\Http\Request;
 
 class CheckAccessByReference extends Middleware {

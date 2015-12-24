@@ -91,7 +91,8 @@ class Files extends Controller {
             'name' => 'required',
             'originalUrl' => 'required|url',
             'size' => 'required|numeric',
-            'uuid' => 'required'
+            'uuid' => 'required',
+            'files' => 'array'
         ]);
 
         if ($validator->fails()) {

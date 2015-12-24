@@ -2,6 +2,7 @@
 
 namespace CMV\Http\Controllers\PM;
 
+use CMV\Models\PM\ToDo;
 use CMV\Models\PM\UserNews;
 use Illuminate\Http\Request;
 use CMV\Http\Requests;
@@ -149,5 +150,18 @@ class ProjectsController extends Controller
         $project = Project::whereSlug($slug)->first();
 
         return view('projects/to-dos')->with('project', $project);
+    }
+
+    /**
+     * @Get("project/{slug}/to-dos/{todos}")
+     * @param $slug
+     * @param $toDo
+     */
+    public function toDo($slug, $toDo)
+    {
+        return view('projects/to-do', [
+            'project' => Project::whereSlug($slug)->first(),
+            'todo' => ToDo::find($toDo)
+        ]);
     }
 }

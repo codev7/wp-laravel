@@ -42,7 +42,7 @@ class BriefsService {
     {
         $query = $this->project->briefs();
 
-        if ($this->user->is_admin == false) {
+        if ($this->user->is_admin == false && $this->user->is_mastermind == false) {
             $query->whereNotNull('approved_by_admin_id');
         }
 
