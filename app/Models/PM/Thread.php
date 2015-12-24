@@ -56,7 +56,8 @@ class Thread extends Model {
     {
         $message = new Message();
         $message->user()->associate($user);
-        $message->content = $content;
+
+        $message->content = $this->replaceLinksWithAnchors($content);
         $message->save();
 
         $this->messages()->save($message);
@@ -70,5 +71,32 @@ class Thread extends Model {
         $this->dispatch(new SendMessageNotifications($message));
 
         return $message;
+    }
+
+    /**
+     * Replaces text links with anchors. Using iterator b/c the links could be already wrapped in the <a> tag.
+     * @param $content
+     * @return mixed
+     */
+    private function replaceLinksWithAnchors($content)
+    {
+        $dom = new \DOMDocument;
+        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $nodes = new \RecursiveIteratorIterator(
+            new \RecursiveDOMIterator($dom),
+            \RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach($nodes as $node) {
+            if($node->nodeType === XML_TEXT_NODE) {
+                if ($node->parentNode && $node->parentNode->nodeName != 'a') {
+                    $pattern = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+                    $replacement = '<a href="$0" target="_blank">$0</a>';
+                    $node->nodeValue = preg_replace($pattern, $replacement, $node->nodeValue);
+                }
+            }
+        }
+
+        return str_replace(['&lt;', '&gt;'], ['<', '>'], $dom->saveHTML());
     }
 }

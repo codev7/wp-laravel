@@ -34,6 +34,7 @@ class Messages extends Controller {
         $thread = Thread::find($data['thread_id']);
 
         $service = new MessagesService(Auth::user());
+
         $message = $service->postInThread($thread, "<div>{$data['content']}</div>");
 
         return $this->show($message->id);

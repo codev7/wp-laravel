@@ -156,6 +156,7 @@ class ProjectsController extends Controller
      * @Get("project/{slug}/to-dos/{todos}")
      * @param $slug
      * @param $toDo
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function toDo($slug, $toDo)
     {
