@@ -73,7 +73,7 @@ class SendMessageNotifications extends Job implements SelfHandling, ShouldQueue
             $from = "th-$hash@$host";
             $this->dispatch(new SendEmail('emails.notify_message', [
                 'msg' => $message
-            ], $member, "[CodeMyViews] Notifications on {$project->name} Project for $datetime ", $from));
+            ], $member, "Code My Views Notification - {$project->name} Project", $from));
         }
     }
 }
