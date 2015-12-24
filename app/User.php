@@ -103,7 +103,7 @@ class User extends Model implements AuthorizableContract,
 
     public function getGravatarImage($size = 256)
     {
-        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "&s=" . $size;
+        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->email ) ) ) . "&s=" . $size . "&default=" . urlencode( asset('images/favicon.png') );
     }
 
     public function getGravatarAttribute()
