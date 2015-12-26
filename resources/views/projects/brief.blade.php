@@ -6,9 +6,8 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/brief-view" v-cloak state="{{ json_encode(['brief' => $brief->toArray()]) }}">
+    <div class="col-md-12" data-controller="project/brief-view" v-cloak state="{{ json_encode(['brief' => $brief->toArray()]) }}">
         
         <div class="panel panel-default panel-profile brief-panel">
 

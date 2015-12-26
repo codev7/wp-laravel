@@ -154,6 +154,14 @@
                 </a>
             </li>
             
+            <li class="media list-group-item to-do-list-item p-a text-center"
+                v-if="todos.length == 0">
+                This project has no to-do items yet. <br /><br />
+                <a href="#" class="btn btn-primary-outline btn-sm "
+                   v-on:click.prevent="openCreateModal">
+                    <i class="fa fa-plus"></i> Create First To-Do
+                </a>
+            </li>
         </ul>
 
         @include('modals/create-to-do')
