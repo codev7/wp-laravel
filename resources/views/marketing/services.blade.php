@@ -41,7 +41,7 @@
                     <?php $count++; ?>
                     <div id="tab-{{ $count }}" class="tab-pane <?php echo $count == 1 ? 'active' : null ?>">
                 		<div class="row">
-                			<div class="col-lg-6" id="content-area-services">
+                			<div class="col-lg-6 wysiwyg" id="content-area-services">
 
                 				<h3>{{ $tab['tab_text'] }}</h3>
                 				{!! $tab['content'] !!}

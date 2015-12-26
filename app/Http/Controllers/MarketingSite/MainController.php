@@ -191,7 +191,7 @@ class MainController extends Controller
                     'icon' => 'plus',
                     'content' => view('marketing/portfolio/slack-command')->render(),
                     'id' => 'tab-1',
-                    'code_type' => 'html'
+                    'code_type' => 'php'
                 ]
             ],
             'show_empty' => true

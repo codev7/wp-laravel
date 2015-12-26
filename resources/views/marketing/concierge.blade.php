@@ -37,7 +37,7 @@
 			</div>
 		</div>
 	</section><!-- /visual3 -->
-	<section class="main">
+	<section class="main wysiwyg">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">

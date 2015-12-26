@@ -1,0 +1,310 @@
+@import "plugins/bootstrap/variables.less";
+
+// Body
+@body-bg: #fff;
+
+// Component borders
+// Create a custom variable to base the border-color off the body background.
+@toolkit-border-color:  #ccc;
+
+// Then apply that to key components
+@panel-default-border:  @toolkit-border-color;
+@panel-inner-border:    @toolkit-border-color;
+@panel-footer-bg:       @body-bg;
+@list-group-border:     @toolkit-border-color;
+@navbar-default-border: @toolkit-border-color;
+
+
+// Gray Scale
+@gray-darker:   #122a38;
+@gray-dark:     #1e3948;
+@gray:          #536570;
+@gray-light:    #9da9b0;
+@gray-lighter:  #d4dbe0;
+@gray-lightest: #f5f8fa;
+
+// Brand Scale
+@brand-primary: @blue;
+@brand-success: #8cc01b;
+@brand-warning: #cbb956;
+@brand-danger:  #bf5329;
+@brand-info:    #8eb4cb;
+
+
+// alerts
+@alert-warning-border: #E6D0A1;
+
+
+// Text Color
+@font-family-sans-serif: @base-font-family;
+@text-color:             @gray-dark;
+@letter-spacing-base:    0;
+@line-height-base:       1.6;
+@font-weight-base:       300;
+
+
+@images: '/images/';
+@fonts: '/fonts/';
+@icon-font-path: '/fonts/';
+
+@base-font-family: 'Gotham', sans-serif;
+@base-bold-family: 'Gotham', sans-serif;
+@base-medium-family: 'Gotham', sans-serif;
+
+@archer-semi: 'Archer-Semibold', serif;
+@archer-semi-italic: 'Archer-SemiboldItalic', serif;
+@archer-bold: 'Archer-Bold', serif;
+
+@screen-large-desktop: 1599px;
+
+// 1200..1599
+@desktop: ~"only screen and (min-width: @{screen-lg-min}) and (max-width: @{screen-large-desktop})";
+// 992..1199
+@tablet-large: ~"only screen and (min-width: @{screen-md-min}) and (max-width: @{screen-md-max})";
+// 768..991
+@tablet: ~"only screen and (min-width: @{screen-sm-min}) and (max-width: @{screen-sm-max})";
+// ..767
+@mobile: ~"only screen and (max-width: @{screen-xs-max})";
+
+@navbar-height: 50px;
+
+
+// lead
+@lead-font-size:      floor((@font-size-base * 1.15));
+@lead-font-size-sm:   floor((@font-size-base * 1.5));
+@lead-font-weight:    300;
+@lead-line-height:    1.4;
+@lead-letter-spacing: 0;
+
+
+// Headings
+@headings-font-weight: 600;
+@headings-line-height: 1.2;
+
+
+// Btns
+@btn-font-size:      @font-size-base;
+@btn-text-transform: default;
+@btn-letter-spacing: none;
+@btn-default-color:  #536570;
+@btn-default-bg:     #fff;
+@btn-default-border: #d4dbe0;
+@btn-toolbar-divider-bg: @gray-lighter;
+
+
+// Inputs
+@input-border:            #d4dbe0;
+@input-color-placeholder: @gray-light;
+
+
+// z-index
+@zindex-zoom:  1080;
+@zindex-growl: 1090;
+
+
+// containers
+@container-desktop:       (960px + @grid-gutter-width);
+@container-large-desktop: (1200px + @grid-gutter-width);
+
+
+// Large screen / wide desktop
+@screen-lg:         (@container-large-desktop + @grid-gutter-width);
+@screen-lg-min:     @screen-lg;
+@screen-lg-desktop: @screen-lg-min;
+@screen-md-max:     (@screen-lg-min - 1);
+
+
+// navbar
+@navbar-default-bg:                         #fff;
+@navbar-default-link-active-color:          #333;
+@navbar-default-link-active-bg:             transparent;
+@navbar-margin-bottom:                      0;
+@navbar-nav-active-font-weight:             inherit;
+
+@navbar-inverse-color:  #333;
+@navbar-inverse-bg:     #fff;
+@navbar-inverse-border: #ccc;
+
+@navbar-inverse-link-color:           #333;
+@navbar-inverse-link-hover-color:     @brand-primary;
+@navbar-inverse-link-active-color:    @brand-primary;
+@navbar-inverse-link-active-bg:       transparent;
+
+@navbar-inverse-toggle-border-color:  #333;
+@navbar-inverse-toggle-hover-bg:      #333;
+
+
+
+// nav hover
+@nav-link-hover-bg: @gray-lightest;
+
+
+// nav bordered
+@nav-bordered-color:              inherit;
+@nav-bordered-color-active:       @brand-primary;
+@nav-bordered-font-weight:        300;
+@nav-bordered-font-weight-active: 500;
+
+
+// popover
+@popover-fallback-border-color: @gray-lighter;
+@popover-border-color:          @gray-lighter;
+
+
+
+// modal
+@modal-content-fallback-border-color: @gray-light;
+
+
+// misc colors
+@headings-small-color: inherit;
+
+
+// dropdowns
+@dropdown-link-color:     @navbar-default-color;
+@dropdown-border:         rgba(0,0,0,.05);
+@dropdown-padding:        10px 0;
+@dropdown-anchor-padding: 5px 20px;
+@dropdown-link-hover-bg:  @gray-lightest;
+
+
+// Spacing
+@spacer:   20px;
+@spacer-x: @spacer;
+@spacer-y: @spacer;
+
+
+// zoom
+@zoom-overlay-bg: #fff;
+
+
+// list group
+@list-group-hover-bg: @gray-lightest;
+
+// Custom forms
+@custom-select-color:       @input-color;
+@custom-select-bg:          @input-bg;
+@custom-select-disabled-bg: @input-bg-disabled;
+
+@custom-control-indicator-bg:     @input-bg;
+@custom-control-indicator-border: rgba(0,0,0,.15);
+
+@custom-control-indicator-checked-bg:      @brand-primary;
+@custom-control-indicator-checked-border:  @brand-primary;
+@custom-control-indicator-active-bg:       lighten(@brand-primary, 15%);
+@custom-control-indicator-active-border:   lighten(@brand-primary, 15%);
+@custom-control-indicator-disabled-bg:     darken(@input-bg, 5%);
+@custom-control-indicator-disabled-border: @custom-control-indicator-border;
+
+@nav-pills-active-weight: 500;
+@navbar-nav-active-font-weight: 500;
+
+@list-group-bg: transparent;
+@list-group-header-color: inherit;
+
+@statlist-border-color: #e5e5e5;
+@statlist-link-color:   inherit;
+@statlist-progress-bg:  #f5f5f5;
+
+@hr-divider-content-color:  @gray;
+@hr-divider-content-bg:     @body-bg;
+@hr-divider-before-bg:      @gray-light;
+
+@sidebar-brand-color:          @gray;
+@sidebar-brand-hover-color:    @gray-dark;
+@sidebar-toggler-color:        #ccc;
+@sidebar-toggler-hover-color:  #fff;
+
+@dashhead-toolbar-divider-bg: #eee;
+@dashhead-subtitle-color: @nav-header-color;
+
+// Icon nav
+//
+// Custom variables. Built for the icon nav example.
+
+@iconav-bg:                  @gray-light;
+@iconav-border:              #fff;
+@iconav-width:               70px;
+@iconav-brand-color:         inherit;
+@iconav-brand-hover-color:   inherit;
+@iconav-brand-bg:            @gray-dark;
+@iconav-brand-border:        @iconav-border;
+@iconav-link-color:          @gray-dark;
+@iconav-link-border:         @iconav-border;
+@iconav-link-active-color:   @gray;
+@iconav-link-active-bg:      @iconav-border;
+
+
+@white: #fff;
+@black: #000;
+@black2: #101010;
+@black3: #17222c;
+@black4: #1d232a;
+
+@grey: #e5e5e5;
+@grey2: #222;
+@grey3: #585858;
+@grey4: #c3ced8;
+@grey5: #434445;
+@grey6: #f5f9fc;
+@grey7: #f3f3f3;
+@grey8: #696c70;
+@grey9: #bbbfc6;
+@grey10: #95989e;
+@grey11: #cbcbcb;
+@grey12: #ccc;
+@grey13: #737373;
+@grey14: #c4c4c4;
+@grey15: #dadada;
+@grey16: #222428;
+@grey17: #a9aaab;
+@grey18: #a3a3a3;
+@grey19: #7b7f82;
+@grey20: #3a444c;
+@grey21: #e6e6e6;
+@grey22: #929292;
+@grey23: #a5a5a5;
+@grey24: #f2f2f2;
+@grey25: #f0f3f7;
+@grey26: #343434;
+@grey27: #e8e8e8;
+@grey28: #f3f7fa;
+@grey29: #afb2b4;
+@grey30: #a8aaab;
+@grey31: #919294;
+@grey32: #5d656c;
+@grey33: #8e9195;
+
+@blue: #1e6ab4;
+@blue2: #112e4a;
+@blue3: #c1d3e4;
+@blue4: #eaeff8;
+@blue5: #1971c8;
+@blue6: #172d51;
+@blue7: #3075b9;
+@blue8: #a0a8b4;
+@blue9: #2881d7;
+@blue10: #f7f9fb;
+@blue11: #7ca6db;
+@blue12: #e7eef6;
+@blue13: #0f4477;
+@blue14: #105da8;
+@blue15: #e6eff9;
+
+@green: #96d019;
+@green2: #8cc01b;
+@green3: #a3cd49;
+@green4: #799d4b;
+@green5: #81b23d;
+@green6: #6d9712;
+@green7: #7caa18;
+
+@red: #e11f1f;
+@red2: #ee5b21;
+
+@yellow: #d9a51a;
+
+@brown: #1e1e1e;
+
+@nav-header-color: lighten(@gray, 35%);
+
