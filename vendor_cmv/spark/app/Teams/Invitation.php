@@ -39,6 +39,13 @@ class Invitation extends Model
     ];
 
     /**
+     * @var array
+     */
+    protected $appends = [
+        'gravatar',
+    ];
+
+    /**
      * Get the team that owns the invitation.
      */
     public function team()
@@ -63,19 +70,27 @@ class Invitation extends Model
      */
     public function applyToUser(\CMV\User $user)
     {
-        $user->joinTeamById($this->team_id);
+        $user->joinTeamById($this->team_id, $this->role);
 
         /** @var \CMV\Team $team */
         $team = $this->team;
 
         $teamsService = new TeamsService($team->owner);
-        foreach ($this->projects as $projectId) {
-            $project = Project::find($projectId);
-            if ($project && $project->team_id == $team->id) {
-                $teamsService->attachUserToProject($user, $project);
+        if ($this->role == 'member') {
+            foreach ($this->projects as $projectId) {
+                $project = Project::find($projectId);
+                if ($project && $project->team_id == $team->id) {
+                    $teamsService->attachUserToProject($user, $project);
+                }
             }
         }
 
         $this->delete();
     }
+
+    public function getGravatarAttribute()
+    {
+        return getGravatarImage($this->email);
+    }
+
 }

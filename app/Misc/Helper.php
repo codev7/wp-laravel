@@ -341,6 +341,15 @@ function std_column(array $array, $column) {
     return $res;
 }
 
+function getGravatarImage($email, $size = 256)
+{
+    return "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "&s=" . $size . "&default=" . urlencode(asset('images/favicon.png'));
+}
+
+/**
+ * Used in wrapping up text links with <a> tags in messages markup
+ * Class RecursiveDOMIterator
+ */
 class RecursiveDOMIterator implements RecursiveIterator
 {
     protected $_position;

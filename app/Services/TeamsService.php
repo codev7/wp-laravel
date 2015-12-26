@@ -51,7 +51,7 @@ class TeamsService {
             return false;
         }
 
-        if ( !$user->projects()->find($project->id) ) {
+        if (!$user->projects()->find($project->id) ) {
             $user->projects()->attach($project->id, ['team_id' => $project->team->id]);
         }
 
@@ -84,7 +84,7 @@ class TeamsService {
             throw new \Exception('User doesn\'t belong to the project\'s team');
         }
 
-        if (array_search($team->pivot->role, ['admin', 'owner'])) {
+        if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
             // admin & owner already has access to all projects
             return false;
         }

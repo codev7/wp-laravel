@@ -59,11 +59,17 @@ class InvitationController extends Controller
         }
 
         $projects = isset($request->projects) ? $request->projects : [];
-        $teamProjects = $team->projects()->get()->lists('id')->all();
 
-        $projects = array_get($projects, 0) == '*' ? $teamProjects : array_intersect($projects, $teamProjects);
+        if (array_get($projects, 0) == '*') {
+            $projects = [];
+            $role = 'admin';
+        } else {
+            $teamProjects = $team->projects()->get()->lists('id')->all();
+            $projects = array_intersect($projects, $teamProjects);
+            $role = 'member';
+        }
 
-        $team->inviteUserByEmail($request->email, $projects);
+        $team->inviteUserByEmail($request->email, $projects, $role);
 
         return $team->fresh(['users', 'invitations']);
     }

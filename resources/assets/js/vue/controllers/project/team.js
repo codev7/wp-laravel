@@ -15,7 +15,8 @@ export default Vue.extend({
             team: {
 
             },
-            isOwner: false
+            isOwner: false,
+            lodash: _
         }
     },
 
@@ -55,6 +56,10 @@ export default Vue.extend({
             }).always(() => {
                 this.sendingInvite = false;
             });
+        },
+        removeTeamInvitation(invitation) {
+            this.team.invitations = _.removeById(invitation.id, this.team.invitations);
+            this.$http.delete(`/settings/teams/${this.team.id}/invitations/${invitation.id}`, {}, () => {});
         },
         removeFromTeam(user) {
             this.team.users = _.removeById(user.id, this.team.users);
