@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
  */
 class CheckAccess extends Middleware {
 
-    public function handle(Request $request, $next, $param)
+    public function handle(Request $request, $next, $type, $action = null)
     {
         $error = 'Permission error';
 
@@ -35,21 +35,20 @@ class CheckAccess extends Middleware {
             'POST' => 'create'
         ];
 
-        $params = explode(',', $param);
-
         $allowed = false;
-        if (isset($classes[$params[0]])) {
-            $id = $request->route($params[0]);
-            if ($id && !($model = $classes[$params[0]]::find($id))) {
+        if (isset($classes[$type])) {
+            $id = $request->route($type);
+            if ($id && !($model = $classes[$type]::find($id))) {
                 return $this->respondWithError($error);
             } else {
-                $model = new $classes[$params[0]];
+                $model = new $classes[$type];
             }
 
-            $action = isset($params[1]) ? $params[1] : $actions[$request->method()];
+            $action = $action ? $action : $actions[$request->method()];
+
             $allowed = Access::check($model, $action);
         }
-
+        
         if ($allowed) {
             return $next($request);
         }
