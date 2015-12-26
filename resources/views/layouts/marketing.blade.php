@@ -37,7 +37,7 @@
                             @foreach(getMarketingHeaderNavigation() as $navigationItem)
                             
                                  @if(isset($navigationItem['children']))
-                                    <li class="{{ set_active_from_route_name( $navigationItem['route-name'] ) }} dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ $navigationItem['text'] }} <span class="glyphicon glyphicon-menu-down"></span></a>
+                                    <li class="{{ set_active_from_route_name( $navigationItem['route-name'] ) }} dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ $navigationItem['text'] }} <span class="fa fa-angle-down"></span></a>
                                         <div class="dropdown-menu">
                                             <div class="container">
                                                 <ul class="nav nav-pills">

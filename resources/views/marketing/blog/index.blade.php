@@ -53,7 +53,7 @@
                             @endif
 
 
-                            <a data-pjax href="{{ get_permalink() }}" class="btn btn-info pull-right">read story</a>
+                            <a data-pjax href="{{ get_permalink() }}" class="btn btn-primary-outline pull-right">read story</a>
                         </div>
                         <?php endwhile; ?>
                     </div><!--posts-append-->
@@ -74,7 +74,7 @@
 
 
 
-                        <a href="{{ route('blog') }}" class="btn btn-info">Go back to the blog</a>
+                        <a href="{{ route('blog') }}" class="btn btn-primary-outline">Go back to the blog</a>
                     </div>
                 @endif
                     

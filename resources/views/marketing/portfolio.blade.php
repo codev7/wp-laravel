@@ -58,7 +58,7 @@
                                             <img :src="item.image"/>
 
                                             <div class="hover-section">
-                                                <h4>@{{ item.name }}</h4>
+                                                <h3>@{{ item.name }}</h3>
                                                 <p>@{{ item.type }}</p>
 
                                                 <a v-on:click="openCodeModal(item.name)" class="btn btn-success">View Code</a>
@@ -67,7 +67,7 @@
                                     </div><!--portfolio-item-->
                                     
                                 </div><!--portfolio-item-->
-                                <div class="modal fade" id="modal-portfolio">
+                                <div class="modal fade dark" id="modal-portfolio">
                                   <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -106,7 +106,7 @@
                                                 <div v-for="tab in modal.tabs"
                                                     class="tab-pane"
                                                     id="@{{ tab.id }}">
-                                                    <pre><code class="@{{ tab.code_type }}" v-html="tab.content"></code></pre>
+                                                    <pre class="portfolio-pre"><code class="@{{ tab.code_type }}" v-html="tab.content"></code></pre>
                                                 </div><!--tab-pane-->
                                             </div><!--tab-content-->
                                         </div><!--code-block-->

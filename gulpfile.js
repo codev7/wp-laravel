@@ -12,9 +12,8 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('cmv-app.less','public/css/cmv-app.css');
 
-    mix.less('cmv-marketing.less','public/css/codemyviews.css');
+    mix.less('codemyviews.less','public/css/codemyviews.css');
 
     mix.scripts([
         'plugins/modernizr.js',
@@ -31,9 +30,8 @@ elixir(function(mix) {
     mix.version([
         'public/css/codemyviews.css',
         'public/js/cmv-js.js',
-        'public/js/vendor.js',
-        'public/css/cmv-app.css'
+        'public/js/vendor.js'
     ]);
 
-    mix.browserSync({ proxy: 'http://cmv.dev' });
+    //mix.browserSync({ proxy: 'http://cmv.dev' });
 });
