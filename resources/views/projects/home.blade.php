@@ -4,7 +4,7 @@
 <div class="profile-header text-center home-background-tiled">
 <div class="container">
     <div class="container-inner">
-        <img class="img-circle media-object" src="{{ Auth::user()->getGravatarImage() }}">
+        <img class="img-circle media-object" src="{{ Auth::user()->gravatar }}">
         <h3 class="profile-header-user">{{ Auth::user()->name }}</h3>
         <p class="profile-header-bio">
         {{ Auth::user()->currentTeam()->name }}

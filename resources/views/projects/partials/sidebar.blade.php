@@ -6,7 +6,7 @@
             <a href="javascript:;">
                 <img
                 class="panel-profile-img"
-                src="{{ $project->projectManager->getGravatarImage() }}">
+                src="{{ $project->projectManager->gravatar }}">
             </a>
 
             <h5 class="panel-title">

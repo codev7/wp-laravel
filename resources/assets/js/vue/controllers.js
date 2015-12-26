@@ -17,5 +17,6 @@ export default {
     'project/news': require('./controllers/project/news'),
 
     'misc/uploadcare': require('./controllers/misc/uploadcare'),
+    'misc/invitations': require('./controllers/misc/invitations'),
     'register/invitation': require('./controllers/register/invitation')
 };

@@ -3,6 +3,7 @@
 namespace CMV;
 
 use Laravel\Cashier\Billable;
+use Laravel\Spark\Repositories\TeamRepository;
 use Laravel\Spark\Teams\CanJoinTeams;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -13,6 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Laravel\Spark\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatable;
 use Laravel\Spark\Contracts\Auth\TwoFactor\Authenticatable as TwoFactorAuthenticatableContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Spark\Teams\Invitation;
 
 class User extends Model implements AuthorizableContract,
                                     BillableContract,
@@ -98,7 +100,18 @@ class User extends Model implements AuthorizableContract,
 
     public function isAdministrator()
     {
-        return $this->is_admin;
+        return $this->is_admin || $this->is_mastermind;
+    }
+
+    public function isCurrentTeamOwner()
+    {
+        return ($this->current_team && ($this->current_team->pivot->role == 'owner' || $this->isMastermind()) );
+    }
+
+    public function isCurrentTeamAdmin()
+    {
+        return ($this->current_team &&
+            ($this->current_team->pivot->role == 'admin' || $this->current_team->pivot->rol == 'owner' || $this->isMastermind()) );
     }
 
     public function getGravatarImage($size = 256)
@@ -108,7 +121,7 @@ class User extends Model implements AuthorizableContract,
 
     public function getGravatarAttribute()
     {
-        return $this->getGravatarImage();
+        return getGravatarImage($this->email);
     }
 
     public function isDeveloper()
@@ -143,18 +156,14 @@ class User extends Model implements AuthorizableContract,
 
     public function getFirstName()
     {
-
         $name = explode(' ',$this->name);
 
         return $name[0];
-
     }
 
     public function isMastermind()
     {
-
         return $this->is_mastermind;
-
     }
 
 

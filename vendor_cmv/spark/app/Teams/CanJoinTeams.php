@@ -32,13 +32,16 @@ trait CanJoinTeams
      * Join the team with the given ID.
      *
      * @param  int  $teamId
+     * @param string $role
      * @return void
      */
-    public function joinTeamById($teamId)
+    public function joinTeamById($teamId, $role = null)
     {
         $team = Team::find($teamId);
 
-        $role = $this->id == $team->owner_id ? 'owner' : Spark::defaultRole();
+        if ($role == null) {
+            $role = $this->id == $team->owner_id ? 'owner' : Spark::defaultRole();
+        }
 
         $this->teams()->attach([$teamId], ['role' => $role]);
 

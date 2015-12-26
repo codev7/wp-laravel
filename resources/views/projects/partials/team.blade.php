@@ -27,12 +27,29 @@
                         <i class="fa fa-times"></i> REMOVE</button>
                     </div>
                 </div>
+            </li>
+            <li class="media m-b"
+                v-for="invitation in team.invitations">
 
+                <a class="media-left" href="#">
+                    <img class="media-object img-circle"
+                         v-bind:src="invitation.gravatar">
+                </a>
+
+                <div class="media-body">
+                    <strong title="@{{ invitation.email }}">@{{ lodash.trunc(invitation.email, 15, '..') }}</strong>
+                    <p class="text-muted m-a-0">invite sent</p>
+                    <div class="media-body-actions">
+                        <button class="btn btn-danger-outline btn-xs"
+                                v-on:click.prevent="removeTeamInvitation(invitation)">
+                            <i class="fa fa-times"></i> REMOVE</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
         {{--@include('modals.invite-to-team')--}}
-    @if (Auth::user()->currentTeam->pivot->role == 'owner' || Auth::user()->is_admin)
+    @if (Auth::user()->isCurrentTeamOwner())
         <div class="panel-footer text-center">
             <a href="#"
                v-on:click.prevent="openInviteModal">
