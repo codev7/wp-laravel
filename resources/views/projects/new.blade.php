@@ -104,6 +104,7 @@
                             @endif
                         </div>
 
+                        @if (Auth::guest())
                         <div class="tab-pane" id="step-2">
 
                             <div class="form-group">
@@ -134,6 +135,7 @@
                             <button type="submit" class="btn btn-lg btn-success btn-block"
                                     v-submit="posting">Get Free Quote</button>
                         </div><!--step-->
+                        @endif
                     </form>
                 </div>
             </div>

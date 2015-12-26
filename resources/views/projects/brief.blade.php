@@ -35,11 +35,12 @@
 
             </div>
 
+            @include('modals/request-brief-changes')
+
         </div><!--panel-->
         
         
     </div>
 
-    @include('modals/request-brief-changes')
 </div>
 @endsection
