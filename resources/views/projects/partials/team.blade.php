@@ -49,7 +49,7 @@
         </ul>
     </div>
         {{--@include('modals.invite-to-team')--}}
-    @if (Auth::user()->isCurrentTeamOwner())
+    @if (Auth::user()->isCurrentTeamAdmin())
         <div class="panel-footer text-center">
             <a href="#"
                v-on:click.prevent="openInviteModal">

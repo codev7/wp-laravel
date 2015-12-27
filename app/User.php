@@ -105,13 +105,13 @@ class User extends Model implements AuthorizableContract,
 
     public function isCurrentTeamOwner()
     {
-        return ($this->current_team && ($this->current_team->pivot->role == 'owner' || $this->isMastermind()) );
+        return ($this->current_team && ($this->current_team->pivot->role == 'owner'));
     }
 
     public function isCurrentTeamAdmin()
     {
-        return ($this->current_team &&
-            ($this->current_team->pivot->role == 'admin' || $this->current_team->pivot->rol == 'owner' || $this->isMastermind()) );
+        return $this->current_team &&
+            ($this->current_team->pivot->role == 'admin' || $this->current_team->pivot->rol == 'owner');
     }
 
     public function getGravatarImage($size = 256)
