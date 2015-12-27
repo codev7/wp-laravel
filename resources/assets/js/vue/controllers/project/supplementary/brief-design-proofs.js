@@ -14,7 +14,18 @@ export default Vue.extend({
     },
     template: `
         <div class="form-group">
-            <label>Design Proofs <i class="fa fa-question-circle tooltipper" data-title="Design proofs are screenshots/png files of the view.  For each design brief, the project engineer will need to take screenshots of the raw design file as these screenshots are used during the QA process."></i></label>
+            <label>Design Proofs</label>
+
+
+            <div class="well well-small text-center" v-show=" !design_proofs.length">
+                <h4 class="m-a-0">There are no design proofs added yet.</h4>
+                <p class="m-a-0">Design proofs are PNG previews of the view/modal.  You should upload one for each viewport (mobile, desktop, tablet) if you have it.</p>
+                <br />
+                <a href="#" class="btn btn-xs btn-success"
+               v-on:click.prevent="$root.addListItem(path)">
+                <i class="fa fa-plus"></i> Add Design Proof
+            </a>
+            </div>
 
             <table class="table table-bordered table-middle" v-if="design_proofs.length">
                 <thead>
@@ -50,7 +61,7 @@ export default Vue.extend({
                 </tbody>
             </table>
 
-            <a href="#" class="btn btn-xs btn-success pull-right"
+            <a href="#" v-show="design_proofs.length" class="btn btn-xs btn-success pull-right"
                v-on:click.prevent="$root.addListItem(path)">
                 <i class="fa fa-plus"></i> Add Design Proof
             </a>
