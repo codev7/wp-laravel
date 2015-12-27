@@ -28,6 +28,12 @@ export default Vue.extend({
         <div class="form-group">
             <label>Check List Items</label>
 
+            <div class="well well-small text-center" v-show=" !checklist.length ">
+                <h4 class="m-a-0">There are no check list items added yet.</h4>
+                <br />
+                <a href="#" class="btn btn-xs btn-success"
+               v-on:click.prevent="$root.addListItem(path)"><i class="fa fa-plus"></i> Add Item</a>
+            </div>
             <table class="table table-bordered table-middle"
                    v-show="checklist.length">
                 <thead>
@@ -40,6 +46,7 @@ export default Vue.extend({
                 </thead>
 
                 <tbody>
+
 
                 <tr v-for="(itemIndex, item) in checklist">
                     <td v-if="withCategories">
@@ -71,7 +78,7 @@ export default Vue.extend({
                 </tbody>
             </table>
 
-            <a href="#" class="btn btn-xs btn-success pull-right"
+            <a v-show="checklist.length" href="#" class="btn btn-xs btn-success pull-right"
                v-on:click.prevent="$root.addListItem(path)"><i class="fa fa-plus"></i> Add Item</a>
         </div>
     `

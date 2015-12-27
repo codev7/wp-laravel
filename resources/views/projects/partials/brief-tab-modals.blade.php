@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation"
-                v-for="modal in brief.modals">
+                v-for="modal in brief.modals" class="@{{ $index == 0 ? 'active' : null }}">
                 <a data-toggle="tab"
                    role="tab"
                    href="#@{{ 'modal-tab-' + $index }}"
@@ -19,7 +19,7 @@
     </div><!--col-->
 
     <div class="tab-content">
-        <div role="tabpanel" class="col-sm-9 tab-pane" id="@{{ 'modal-tab-' + $index }}"
+        <div role="tabpanel" class="col-sm-9 tab-pane  @{{ $index == 0 ? 'active' : null }}" id="@{{ 'modal-tab-' + $index }}"
              v-for="(modalIndex, modal) in brief.modals" >
 
             <small class="pull-right">
@@ -64,5 +64,13 @@
             </brief-checklist>
 
         </div>
+
+        <div v-if="brief.modals.length == 0" role="tabpanel" class="col-sm-9 tab-pane active">
+
+            <div class="well well-small text-center">
+                <h4>No Modals Added. <br /><small class="text-muted">Click the "Add Modal" button to the left to create the first modal.</small></h4>
+            </div>
+        </div>
+
     </div>
 </div>

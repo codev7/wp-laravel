@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <ul class="nav nav-pills nav-stacked" role="tablist">
             <li role="presentation"
-                v-for="view in brief.views">
+                v-for="view in brief.views" class="@{{ $index == 0 ? 'active' : null }}">
                 <a data-toggle="tab"
                    role="tab"
                    href="#@{{ 'view-tab-' + $index }}"
@@ -19,7 +19,7 @@
     </div><!--col-->
 
     <div class="tab-content">
-        <div role="tabpanel" class="col-sm-9 tab-pane" id="@{{ 'view-tab-'+viewIndex }}"
+        <div role="tabpanel" class="col-sm-9 tab-pane @{{ viewIndex == 0 ? 'active' : null }}" id="@{{ 'view-tab-'+viewIndex }}"
              v-for="(viewIndex, view) in brief.views">
 
             <small class="pull-right">
@@ -61,6 +61,13 @@
                              :with-categories="true">
             </brief-checklist>
 
+        </div>
+
+        <div v-if="brief.views.length == 0" role="tabpanel" class="col-sm-9 tab-pane active">
+
+            <div class="well well-small text-center">
+                <h4>No Views Added. <br /><small class="text-muted">Click the "Add View" button to the left to create the first view.</small></h4>
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,49 @@
 <div class="form-group">
+    <label>Brief Type</label>
+
+    <select class="custom-select form-control"
+            v-model="brief.brief_type"
+            v-on:change="handleBriefTypeChange"
+            v-bind:disabled="state.brief_id">
+        <option v-for="option in blanks.select.brief_types" v-bind:value="option.value">
+            @{{ option.text }}
+        </option>
+    </select>
+</div>
+
+<div class="form-group" v-if="brief.brief_type == 'frontend'">
+    <label>Layout Type</label>
+    <p class="text-danger">
+    <select class="custom-select form-control"
+            v-model="brief.layout_type">
+        <option v-for="option in blanks.select.layout_types" v-bind:value="option.value">
+            @{{ option.text }}
+        </option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Quick Overview</label>
+    <textarea class="form-control" rows="2" cols="4" placeholder="Project Summary - Less than 300 characters"
+              maxlength="300"
+              v-model="brief.summary">
+    </textarea>
+
+    <p class="m-a-0 pull-right text-muted">@{{ 300 - brief.summary.length }} characters remaining</p>
+</div>
+
+@if (isset($brief))
+<div class="form-group">
+    <label>Related to Other briefs?</label>
+
+    <select multiple class="form-control" v-model="brief.related_to_brief">
+        <option v-for="otherBrief in otherBriefs" value="@{{ otherBrief.id }}">@{{ otherBrief.text.brief_type }} - @{{ otherBrief.created_at | ago }}</option>
+    </select>
+</div>
+
+
+
+<div class="form-group">
     <label>Global Notes</label>
 
     <textarea class="form-control hide" rows="10" cols="4"
@@ -108,3 +153,4 @@
                  :path="'brief.global.checklist'"
                  :checklist.sync="brief.global.checklist">
 </brief-checklist>
+@endif

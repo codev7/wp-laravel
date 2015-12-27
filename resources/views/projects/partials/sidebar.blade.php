@@ -58,7 +58,7 @@
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
                     <tr>
-                        <td><strong><i class="text-muted fa fa-calendar"></i> Requested Delivery Date</strong></td>
+                        <td><strong>Requested Delivery Date</strong></td>
                     </tr>
 
                     <tr>
@@ -67,7 +67,7 @@
       
 
                     <tr>
-                        <th><i class="text-muted fa fa-anchor"></i> <strong>Project Type</strong></th>
+                        <th><strong>Project Type</strong></th>
                     </tr>
                     <tr>
                         <td>{{ $project->type->name }}</td>
@@ -75,7 +75,7 @@
 
 
                     <tr>
-                        <th><i class="text-muted fa fa-link"></i> <strong>Staging URL</strong></th>
+                        <th><strong>Staging URL</strong></th>
                     </tr>
                     <tr>
                         <td>site.approvemyviews.com</td>
@@ -106,7 +106,7 @@
                     </tr>
 
                     <tr>
-                        <td><code>http://pivotaltracker.com/test-12345</code></td>
+                        <td><a href="#" target="_blank">http://pivotaltracker.com/test-12345</a></td>
                     </tr>
 
                     <tr>

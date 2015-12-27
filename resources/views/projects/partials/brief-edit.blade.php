@@ -24,6 +24,10 @@
         <li v-show="brief.modals">
             <a href="#modals-tab" data-toggle="tab">Modals</a>
         </li>
+
+        <li>
+            <a href="#final-tab" data-toggle="tab">Finalize</a>
+        </li>
     </ul>
 </div>
 
@@ -39,6 +43,8 @@
     <div class="tab-pane" id="post-types-tab" v-if="brief.post_types">
         @include('projects.partials.brief-tab-post-types', ['project' => $project])
     </div>
+
+
 
     <div class="tab-pane" id="endpoints-tab" v-if="brief.endpoints">
         @include('projects.partials.brief-tab-endpoints', ['project' => $project])
@@ -58,5 +64,35 @@
 
     <div class="tab-pane" id="brief-boxes-tab" v-if="brief.brief_boxes">
         @include('projects.partials.brief-tab-boxes', ['project' => $project])
+    </div>
+
+    <div class="tab-pane" id="final-tab">
+        @if (isset($brief))
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="well well-small">
+
+                <button class="m-a-0 btn btn-lg btn-block btn-success"
+                        v-submit="sendingBrief"
+                        v-bind:disabled="briefMeta.approved_by_admin_id"
+                        v-on:click.prevent="sendBrief()">
+                    Send Brief
+                </button>
+
+                <p class="m-t m-b-0 text-center">
+                    <a data-pjax href="{{ route('project.brief', ['brief_id' => $brief->id, 'slug' => $project->slug]) }}" class="btn btn-lg btn-block btn-warning-outline"><i class="fa fa-search"></i> Preview Brief</a>
+                </p>
+
+                <p class="m-t m-b-0 text-center">
+                    <a href="#" class="btn btn-lg btn-block btn-primary-outline"
+                       v-submit="savingAsDraft"
+                       v-on:click.prevent="saveAsDraft()"><i class="fa fa-save"></i> Save as Draft</a>
+                </p>
+
+                <p class="m-t text-center" v-if="briefMeta.approved_by_admin_id">
+                    <small>Brief was approved on <br/> @{{ briefMeta.approved_by_admin_at | date }}</small>
+                </p>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
