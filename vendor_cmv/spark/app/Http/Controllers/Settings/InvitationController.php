@@ -3,6 +3,7 @@
 namespace Laravel\Spark\Http\Controllers\Settings;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Laravel\Spark\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -51,8 +52,12 @@ class InvitationController extends Controller
         ]);
 
         $team = $user->teams()
-                ->where('owner_id', $user->id)
                 ->findOrFail($teamId);
+
+        if (array_search($team->pivot->role, ['owner', 'admin']) === false) {
+            throw (new ModelNotFoundException)->setModel(\CMV\Team::class);
+        }
+
 
         if ($team->invitations()->where('email', $request->email)->exists()) {
             return response()->json(['email' => ['That user is already invited to the team.']], 422);

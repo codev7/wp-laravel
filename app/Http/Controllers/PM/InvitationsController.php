@@ -48,7 +48,8 @@ class InvitationsController extends Controller
 
         $user = User::create([
             'email' => $data['email'],
-            'name' => $data['name']
+            'name' => $data['name'],
+            'password' => bcrypt($data['password'])
         ]);
 
         $invitation->applyToUser($user);
