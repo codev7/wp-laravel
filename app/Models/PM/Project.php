@@ -184,6 +184,15 @@ class Project extends Model {
         $this->save();
     }
 
+    public function getStagingUrl()
+    {
+
+        if($this->subdomain) return 'http://'.$this->subdomain.'.approvemyviews.com';
+
+
+        return false;
+    }
+
     /**
      * Checks whether the project has associated bitbucket repository
      * @return boolean

@@ -132,7 +132,8 @@ class Projects extends Controller {
             'developer_id' => 'exists:users,id',
             'project_manager_id' => 'required|exists:users,id',
             'project_type_id' => 'required|exists:project_types,id',
-            'status' => 'required|in:'.implode(',', Project::$statuses)
+            'status' => 'required|in:'.implode(',', Project::$statuses),
+            'subdomain' => 'unique:projects,subdomain,'.$id
         ]);
 
         if ($validator->fails()) {
@@ -144,6 +145,7 @@ class Projects extends Controller {
         $project->developer_id = $data['developer_id'];
         $project->project_manager_id = $data['project_manager_id'];
         $project->project_type_id = $data['project_type_id'];
+        $project->subdomain = $data['subdomain'];
         $project->status = $data['status'];
         $project->save();
 

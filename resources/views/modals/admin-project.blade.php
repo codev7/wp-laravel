@@ -18,6 +18,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Subdomain</label>
+                                <input type="text" class="form-control" v-model="project.subdomain" />
+                            </div>
+
+                            <div class="form-group">
                                 <label>Project Type</label>
                                 <select class="form-control" v-model="project.project_type_id">
                                     @foreach (\CMV\Models\PM\ProjectType::all() as $type)
@@ -65,9 +70,9 @@
                         <button class="m-t-0 btn btn-block btn-primary-outline"
                                 v-submit="states.creatingBBRepository"
                                 v-on:click.prevent="createBBRepository()"><i class="fa fa-bitbucket"></i> Create Bitbucket Repository</button>
-                        <button class="m-t btn btn-block btn-primary-outline"
+                        <button class="m-t btn btn-block btn-primary-outline disabled"
                                 v-submit="states.creatingStagingSite"
-                                v-on:click.prevent="createStagingSite()" disabled="disabled"><i class="fa fa-link"></i> Create Staging Site</button>
+                                v-on:click.prevent="createStagingSite()"><i class="fa fa-link"></i> Create Staging Site</button>
                         <a class="m-t btn btn-block btn-primary-outline" href="#"  disabled="disabled"><i class="fa fa-dollar"></i> Create Invoice</a>
                         <a class="m-t btn btn-block btn-primary-outline" href="{{ route('project.create_brief', ['slug' => $project->slug]) }}" data-pjax><i class="fa fa-file-o"></i> Create Brief</a>
                         <button class="m-t btn btn-block btn-primary-outline"

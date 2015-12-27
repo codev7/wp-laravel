@@ -1,3 +1,5 @@
+var notify = require('./../../../misc/notify');
+
 export default Vue.extend({
 
     mixins: [require('./../../mixins/hasState')],
@@ -28,13 +30,22 @@ export default Vue.extend({
             this.states.updatingProject = true;
             this.$http.put(`/api/projects/${this.project.id}`, this.project, (res) => {
                 this.initialProject = res.data;
+                notify.success("The project has been updated");
+
             }).always(() => {
+                $('#admin-project-modal').modal('hide');
+                
+               
+
                 this.states.updatingProject = false;
             });
         },
         createBBRepository() {
             this.states.creatingBBRepository = true;
             this.$http.post(`/api/projects/${this.project.id}/create_bb_repository`, this.project, (res) => {
+
+                notify.success("Bitbucket repository successfully created!");
+
             }).always(() => {
                 this.states.creatingBBRepository = false;
             });
