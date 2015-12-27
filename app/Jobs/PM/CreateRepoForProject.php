@@ -61,9 +61,10 @@ class CreateRepoForProject extends Job implements SelfHandling, ShouldQueue
         $content = json_decode($response->getContent());
 
         if($response->isOk()) {
-            \Log::info("Repository '{$content->slug}' created.");
-            $project->git_url = "ssh@bitbucket.org/{$accountName}/{$content->slug}";
-            $project->bitbucket_slug = $content->slug;
+
+            \Log::info("Repository '{$content->name}' created.");
+            $project->git_url = "git@bitbucket.org:{$accountName}/{$content->name}.git";
+            $project->bitbucket_slug = $content->name;
             $project->save();
         } else {
             \Log::error(json_encode($content));

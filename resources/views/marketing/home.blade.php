@@ -29,7 +29,6 @@
 				</div>
 			</div>
 		</div>
-		<a href="#" class="btn-to-next"><span class="fa fa-angle-down"></span><span class="sr-only">next</span></a>
 	</section><!-- /visual -->
 	<section class="gallery-area">
 		<div class="container">
@@ -100,7 +99,6 @@
 			</div>
 		</div>
 		<div class="decor"></div>
-		<a href="#" class="btn-to-next type2"><span class="fa fa-angle-down"></span><span class="sr-only">next</span></a>
 	</section><!-- /gallery-area -->
 	<section class="team-info">
 		<div class="container">
@@ -145,7 +143,6 @@
 				</div>
 			</div><!-- /services -->
 		</div>
-		<a class="btn-to-next" href="#"><span class="fa fa-angle-down"></span></a>
 	</section><!-- /team-info -->
 	
 	@include('partials/testimonials')

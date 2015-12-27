@@ -78,7 +78,13 @@
                         <th><strong>Staging URL</strong></th>
                     </tr>
                     <tr>
-                        <td>site.approvemyviews.com</td>
+
+                        @if($project->getStagingUrl())
+                        <td><a target="_blank" href="{{ $project->getStagingUrl() }}">View Staging Site</a></span></td>
+                        
+                        @else
+                        <td class="text-muted"><em>Staging site not yet created.</em></td>
+                        @endif
                     </tr>
 
                 </tbody>
@@ -94,20 +100,26 @@
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
                     <tr>
-                        <td><strong>Git URL</strong></td>
+                        <td><strong>Bitbucket Clone Repo</strong></td>
                     </tr>
 
                     <tr>
-                        <td><code>ssh://projecturl@bitbucket.org</code></td>
+                        @if($project->hasRepo())
+                        <td><input type="text" class="form-control" value="git clone {{  $project->git_url }}"></td>
+                        @else
+                        <td class="text-muted"><em>Repository not yet created.</em></td>
+                        @endif
                     </tr>
-        
+                    
+                    @if($project->pivotal_id)
                     <tr>
                         <td><strong>Pivotal Tracker</strong></td>
                     </tr>
 
                     <tr>
-                        <td><a href="#" target="_blank">http://pivotaltracker.com/test-12345</a></td>
+                        <td><a href="https://www.pivotaltracker.com/n/projects/{{ $project->pivotal_id }}" target="_blank">View Tracker</a></td>
                     </tr>
+                    @endif
 
                     <tr>
                         <td><a href="#" class="btn btn-lg btn-block btn-success" disabled="disabled">Re-deploy Application</a></td>
