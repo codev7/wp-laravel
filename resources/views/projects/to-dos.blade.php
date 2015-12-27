@@ -125,7 +125,7 @@
                                                 class="btn btn-sm btn-default-outline" disabled>Unstarted</button>
 
                                         <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}'"
-                                                class="btn btn-sm btn-default-outline" disabled>In Work</button>
+                                                class="btn btn-sm btn-default-outline" disabled>In Progress</button>
 
                                         <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"
                                                 v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_ACCEPTED }}')"
