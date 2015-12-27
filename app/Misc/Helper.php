@@ -44,39 +44,22 @@ function isRoute($name)
 
 function hasRole($role)
 {
-
     if(Auth::guest()) return false;
 
     switch($role) {
-
         case 'sales-rep':
-
-
             return Auth::user()->is_sales_rep;
-
-        break;
-
-
         case 'developer':
-
             return Auth::user()->is_developer;
-
-        break;
-
         case 'admin':
-
             return Auth::user()->is_admin;
-
-        break;
-
-
         case 'mastermind':
-
             return Auth::user()->is_mastermind;
-
-        break;
     }
+}
 
+function isAdmin() {
+    return hasRole('admin') || hasRole('mastermind');
 }
 
 /*
@@ -273,15 +256,6 @@ function set_active_from_route_name($route_name, $active = 'active')
     }
     return Route::currentRouteName() == $route_name ? $active : '';
 
-}
-
-function isAdmin()
-{
-    if (!Auth::check()) return false;
-
-    if (Auth::user()->hasRole('administrator')) return true;
-
-    return false;
 }
 
 

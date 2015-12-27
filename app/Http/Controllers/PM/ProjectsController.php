@@ -8,14 +8,27 @@ use Illuminate\Http\Request;
 use CMV\Http\Requests;
 use CMV\Http\Controllers\Controller;
 
-use CMV\User;
-use CMV\Team;
 use CMV\Models\PM\Project;
 use Auth;
 use Illuminate\Http\Response;
 
 class ProjectsController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $user = Auth::user();
+        if ((hasRole('admin') || hasRole('mastermind')) && ($slug = $request->route('slug'))) {
+            $project = Project::where('slug', $slug)->first();
+            if ($project) {
+                if (! $user->teams()->find($project->team_id)) {
+                    /** @var \CMV\User $user */
+                    $user->joinTeamById($project->team_id, 'owner');
+                    $user->current_team_id = $project->team_id;
+                }
+            }
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

@@ -43,7 +43,11 @@ trait CanJoinTeams
             $role = $this->id == $team->owner_id ? 'owner' : Spark::defaultRole();
         }
 
-        $this->teams()->attach([$teamId], ['role' => $role]);
+        $pivot = ['role' => $role];
+        if ($this->isAdministrator()) {
+            $pivot['hidden'] = true;
+        }
+        $this->teams()->attach([$teamId], $pivot);
 
         $this->currentTeam();
 
