@@ -17,6 +17,7 @@ class ProjectSeeder extends Seeder
 
         /* Load Sample Projects */
         factory(CMV\Models\PM\Project::class,35)->create()->each(function($project){
+            $project->project_type = rand(0, 1) ? 'project' : 'concierge_site';
 
             $project->team()->associate( CMV\Team::random()->take(1)->first() );
             $project->developer()->associate( CMV\User::where('is_developer',true)->random()->take(1)->first() );
