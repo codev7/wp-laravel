@@ -58,6 +58,15 @@ export default Vue.extend({
                 });
             }
         });
+
+        var _this = this;
+        $(document).on('click', '#to-do-type label', function(e)
+        {
+            var btn = $(this);
+
+            _this.newTodo.type = btn.find('input').val();
+
+        });
     },
 
     methods: {

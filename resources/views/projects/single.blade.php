@@ -85,8 +85,9 @@
 
 
     <div class="col-md-3">
-        <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
-            {{ $project->getStatus() }}
+        <div class="alert alert-success alert-dismissible hidden-xs" role="alert">
+            <small>Project Status</small><br />
+            <strong>{{ $project->getStatus() }}</strong>
         </div>
 
         <div data-controller="project/news" state="{{ json_encode($news) }}" v-cloak v-show="news.id">

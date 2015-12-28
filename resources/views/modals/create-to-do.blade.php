@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title">Create New To-Do Task</h5>
+        <h5 class="modal-title">Create New To Do Item</h5>
       </div>
       <div class="modal-body">
 
@@ -20,11 +20,18 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="url">Type</label>
-                                    <select class="form-control input-lg" v-model="newTodo.type">
-                                        <option value="">Select the to-do type</option>
-                                        <option value="bug">Bug</option>
-                                        <option value="feature">Feature</option>
-                                    </select>
+                                    <br />
+                                    <div class="btn-group" id="to-do-type" data-toggle="buttons">
+                                        <label for="bug-type" class="btn  btn-primary">
+                                            <input v-model="newTodo.type" name="type" type="radio" value="bug" id="bug-type"><i class="fa fa-bug text-danger"></i> Bug
+                                        </label>
+                                        <label for="feature-type" class="btn  btn-primary">
+                                            <input  v-model="newTodo.type" name="type" type="radio" value="feature" id="feature-type" ><i class="fa fa-star text-warning"></i> Feature
+                                        </label>
+                                    </div>
+
+                                
+
                                 </div>
                             </div>
 
@@ -32,10 +39,10 @@
                                 <div class="form-group">
                                     <label for="url">Category</label>
                                     <select class="form-control input-lg" v-model="newTodo.category">
-                                        <option value="">Select the to-do type</option>
-                                        <option value="frontend">front-end</option>
-                                        <option value="wordpress">wordpress</option>
-                                        <option value="other">other</option>
+                                        <option value="">Select the to do type</option>
+                                        <option value="frontend">Frontend</option>
+                                        <option value="wordpress">WordPress / CMS</option>
+                                        <option value="other">Other</option>
                                     </select>
                                 </div>
                             </div>
