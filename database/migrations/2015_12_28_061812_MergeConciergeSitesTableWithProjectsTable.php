@@ -14,7 +14,8 @@ class MergeConciergeSitesTableWithProjectsTable extends Migration
     {
         Schema::table('projects', function(Blueprint $table) {
             $table->json('saved_credentials')->nullable()->default(null);
-            $table->string('project_type')->default('project')->index();
+            $table->string('project_type')->after('id')->default('project')->index();
+            $table->string('url')->after('name')->nullable()->default(null);
         });
 
         Schema::table('projects', function(Blueprint $table) {
@@ -32,7 +33,7 @@ class MergeConciergeSitesTableWithProjectsTable extends Migration
     public function down()
     {
         Schema::table('projects', function(Blueprint $table) {
-            $table->dropColumn(['saved_credentials', 'project_type']);
+            $table->dropColumn(['saved_credentials', 'project_type', 'url']);
         });
 
         Schema::table('projects', function(Blueprint $table) {
