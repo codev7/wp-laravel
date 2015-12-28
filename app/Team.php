@@ -59,14 +59,9 @@ class Team extends SparkTeam
      */
     public function users()
     {
-        $relation = $this->belongsToMany('CMV\User', 'user_teams')
-            ->withPivot('team_id', 'user_id', 'role');
-
-        if (!isAdmin()) {
-            $relation->where('user_teams.hidden', false);
-        }
-
-        return $relation;
+        return $this->belongsToMany('CMV\User', 'user_teams')
+            ->withPivot('team_id', 'user_id', 'role')
+            ->where('user_teams.hidden', false);
     }
 
 }
