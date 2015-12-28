@@ -20,8 +20,13 @@ class MastermindController extends Controller
      * @return Response
      */
     public function dashboard()
-    {
-        return view('mastermind/dashboard');
+    {   
+
+        $projects = \CMV\Models\PM\Project::orderBy('created_at', 'desc')->paginate(25);
+
+        return view('mastermind/dashboard')->with([
+            'projects' => $projects
+        ]);
     }
 
 }
