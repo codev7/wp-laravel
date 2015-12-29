@@ -190,6 +190,22 @@ class ProjectsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @Get("project/{slug}/invoices/create", as="project.create_invoice", middleware="admin_auth")
+     * @return Response
+     */
+    public function createInvoice($slug)
+    {
+
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
+
+        return view('projects/edit-invoice')->with('project', $project);
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
      * @Get("project/{slug}/to-dos", as="project.todos", middleware="auth")
      * @return Response
      */
