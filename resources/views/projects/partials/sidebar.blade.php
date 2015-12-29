@@ -155,7 +155,7 @@
     </div>
     @endif
 
-    @if(!isRouteNameSpace('files'))
+    @if(!isRouteNameSpace('files') && !Auth::user()->isDeveloper())
         <div class="panel panel-default visible-md-block visible-lg-block"
              data-controller="misc/uploadcare"
              state="{{ json_encode(['reference_type' => 'project', 'reference_id' => $project->id]) }}">

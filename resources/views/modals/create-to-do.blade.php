@@ -59,11 +59,9 @@
 
                         <div class="form-group attach-files">
 
-                            <label>Attach Files</label>    
+                            <label>Attach Files</label>
                             <input role="uploadcare-uploader" type="hidden" data-multiple/>
 
-                            
-                        
                         </div>
 
                         <hr />

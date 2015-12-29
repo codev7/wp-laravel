@@ -93,49 +93,7 @@
 
                         <div class="col-sm-3 text-right">
                             <div class="btn-group m-t">
-                                <div v-if="isDeveloper">
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
-                                            class="btn btn-sm btn-default-outline">Start Task</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}')"
-                                            class="btn btn-sm btn-primary">Finish Task</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}')"
-                                            class="btn btn-sm btn-primary">Deliver Task</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
-                                            class="btn btn-sm btn-warning">Undo Delivery</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
-                                            class="btn btn-sm btn-warning">Restart</button>
-
-                                </div>
-
-                                <div v-if="!isDeveloper">
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
-                                            class="btn btn-sm btn-default-outline" disabled>Unstarted</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}' || todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}'"
-                                            class="btn btn-sm btn-default-outline" disabled>In Progress</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_ACCEPTED }}')"
-                                            class="btn btn-sm btn-success">Accept</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"
-                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}')"
-                                            class="btn btn-sm btn-danger">Reject</button>
-
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
-                                            class="btn btn-sm btn-default-outline" disabled>Rejected</button>
-
-                                </div>
-
+                                @include('projects.partials.todo-status-btn', ['btnClass' => 'btn-sm'])
                             </div>
                         </div>
                     </div><!--row-->

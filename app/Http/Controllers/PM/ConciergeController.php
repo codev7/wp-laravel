@@ -119,7 +119,7 @@ class ConciergeController extends Controller
             ->firstOrFail();
 
         $todo = ToDo::find($toDo);
-        $todo->load('files');
+        $todo->load('createdBy', 'files', 'thread.messages', 'thread.messages.user');
 
         return view('projects/to-do', [
             'project' => $project,

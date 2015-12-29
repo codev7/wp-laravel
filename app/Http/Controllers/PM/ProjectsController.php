@@ -210,11 +210,15 @@ class ProjectsController extends Controller
      */
     public function toDo($slug, $toDo)
     {
+        $project = Project::whereSlug($slug)
+            ->where('project_type', Project::TYPE_PROJECT)
+            ->firstOrFail();
+
         $todo = ToDo::find($toDo);
-        $todo->load('files');
+        $todo->load('createdBy', 'files', 'thread.messages', 'thread.messages.user');
 
         return view('projects/to-do', [
-            'project' => Project::whereSlug($slug)->first(),
+            'project' => $project,
             'todo' => $todo
         ]);
     }
