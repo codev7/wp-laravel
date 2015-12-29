@@ -84,8 +84,9 @@
 
     <div class="col-md-3">
         @if ($project->getStatus() != 'Unknown status')
-        <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
-            {{ $project->getStatus() }}
+        <div class="alert alert-success alert-dismissible hidden-xs" role="alert">
+            <small>Project Status</small><br />
+            <strong>{{ $project->getStatus() }}</strong>
         </div>
         @endif
 

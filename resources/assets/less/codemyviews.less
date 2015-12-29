@@ -117,6 +117,14 @@ trix-toolbar {
   }
 }
 
+.toggle-description {
+    a {
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
 .navbar-right a.dropdown-toggle {
     white-space: nowrap;
 
@@ -232,6 +240,17 @@ trix-toolbar {
     display: none;
 }
 
+.list-group-item {
+    &.no-border {
+        border-color: transparent;
+    }
+}
+
+.attach-files .uploadcare-widget-button-open {
+    background: #536570;
+}
+
+
 .uploadcare-dialog-inner-wrap {
     font-family: @base-font-family !important;
 }
@@ -241,10 +260,16 @@ trix-toolbar {
     padding: 10px !important;
 }
 
+
 .toggle-accepted {
     background: fadeout(#8cc01b, 85%);
     text-transform: uppercase;
     padding: 7px 0;
+    
+
+    a {
+        text-decoration: none !important;
+    }
 
     a:hover {
         text-decoration: none;
@@ -257,7 +282,6 @@ trix-toolbar {
 }
 
 .to-do-list-item {
-    cursor: pointer;
 }
 
 .media-group-header {

@@ -7,10 +7,10 @@
 
     <div class="col-md-9" data-controller="project/todos" v-cloak state="{{ json_encode(['reference_id' => $project->id, 'reference_type' => 'project']) }}">
 
-        <h3 class="m-a-0 p-a-0 pull-left">4 To-Do Items</h3>
+        <h3 class="m-a-0 p-a-0 pull-left">@{{ inProgress.length }} To Do @{{ inProgress.length == 1 ? 'Item' : 'Items' }}</h3>
         <a href="#" class="btn btn-primary btn-sm pull-right m-b"
            v-on:click.prevent="openCreateModal">
-            <i class="fa fa-plus"></i> Add New To-Do
+            <i class="fa fa-plus"></i> Add New To Do
         </a>
 
         <div class="clearfix"></div>
@@ -37,8 +37,8 @@
 
                 <div>
                     <a href="#" v-on:click.prevent="toggleAcceptedStories()" class="text-success">
-                        <small v-if="!showAcceptedTodos">Show @{{ accepted.length }} Accepted Stories <i class="fa fa-angle-down"></i></small>
-                        <small v-if="showAcceptedTodos">Hide @{{ accepted.length }} Accepted Stories <i class="fa fa-angle-up"></i></small>
+                        <small v-if="!showAcceptedTodos">Show @{{ accepted.length }} Accepted To Dos <i class="fa fa-angle-down"></i></small>
+                        <small v-if="showAcceptedTodos">Hide @{{ accepted.length }} Accepted To Dos <i class="fa fa-angle-up"></i></small>
                     </a>
                 </div>
             </li>
@@ -47,36 +47,26 @@
                 v-bind:class="{'opened': opened.indexOf(todo.id) != -1}"
                 {{--v-on:click="toggleDescription(todo.id)"--}}
                 v-for="todo in accepted">
-                <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}">
-                    <div class="media-body">
-                        <div class="row">
-                            <div class="col-sm-1 text-center  toggle-description">
-                                <i class="fa fa-2x m-t text-success fa-check"></i>
-                            </div><!--col-->
+                <div class="media-body">
+                    <div class="row">
+                        <div class="col-sm-1 text-center  toggle-description">
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t text-success fa-check"></i></a>
+                        </div><!--col-->
 
-                            <div class="col-sm-8  toggle-description">
-                                <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
-                                <p class="m-a-0">@{{ todo.title }}</p>
+                        <div class="col-sm-8  toggle-description">
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <p class="m-a-0">@{{ todo.title }}</p>
 
-                                <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p>
-                            </div><!--col-->
+                            <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p></a>
+                        </div><!--col-->
 
-                            <div class="col-sm-3 text-right">
-                                <div class="btn-group m-t">
-                                    <a href="#" class="btn btn-sm btn-success" disabled>Accepted on @{{ todo.accepted_at | date2 }}</a>
-                                </div>
-                            </div>
-                        </div><!--row-->
-                        <div class="row" v-if="opened.indexOf(todo.id) != -1">
-                            <div class="col-sm-11 col-sm-offset-1">
-                                <h6 class="m-t">To-Do Description</h6>
-                                <div class="trix-markup">
-                                    @{{{ todo.content }}}
-                                </div>
+                        <div class="col-sm-3 text-right">
+                            <div class="btn-group m-t">
+                                <a href="javascript:;" class="btn btn-sm btn-success" disabled>Accepted on @{{ todo.accepted_at | date2 }}</a>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </div><!--row-->
+                </div>
             </li>
 
             <li class="media list-group-item to-do-list-item p-a"
@@ -87,16 +77,16 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
-                            <i class="fa fa-2x m-t"
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t"
                                v-bind:class="{'text-danger': todo.type == 'bug', 'fa-exclamation-circle': todo.type == 'bug', 'text-warning': todo.type == 'feature', 'fa-star': todo.type == 'feature' }">
-                            </i>
+                            </i></a>
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
                             <p class="m-a-0">@{{ todo.title }}</p>
 
-                            <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p>
+                            <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p></a>
                         </div><!--col-->
 
                         <div class="col-sm-3 text-right">
@@ -112,11 +102,12 @@
 
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"
                                             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
-                                            class="btn btn-sm btn-warning">unDeliver</button>
+                                            class="btn btn-sm btn-warning">Undo Delivery</button>
 
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
                                             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
                                             class="btn btn-sm btn-warning">Restart</button>
+
                                 </div>
 
                                 <div v-if="!isDeveloper">
@@ -136,29 +127,22 @@
 
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
                                             class="btn btn-sm btn-default-outline" disabled>Rejected</button>
+
                                 </div>
+
                             </div>
                         </div>
                     </div><!--row-->
-
-                    <div class="row" v-if="opened.indexOf(todo.id) != -1">
-                        <div class="col-sm-11 col-sm-offset-1">
-                            <h6 class="m-t">To-Do Description</h6>
-                            <div class="trix-markup">
-                                @{{{ todo.content }}}
-                            </div>
-                        </div>
-                    </div>
                 </div>
                
             </li>
             
             <li class="media list-group-item to-do-list-item p-a text-center"
-                v-if="todos.length == 0">
-                This project has no to-do items yet. <br /><br />
+                v-if="inProgress.length == 0">
+                This project has no open to do items. <br /><br />
                 <a href="#" class="btn btn-primary-outline btn-sm "
                    v-on:click.prevent="openCreateModal">
-                    <i class="fa fa-plus"></i> Create First To-Do
+                    <i class="fa fa-plus"></i> Create First To Do
                 </a>
             </li>
         </ul>

@@ -221,15 +221,15 @@ class Project extends Model {
             case (static::STATUS_QUOTE):
                 return "Hang tight! We are preparing a project estimate for you.";
             case (static::STATUS_BRIEF):
-                return "Working on Brief";
+                return "We are currently preparing the project brief.";
             case (static::STATUS_DEVELOPMENT):
-                return "Project is in development";
+                return "Your project is in development.";
             case (static::STATUS_QA):
-                return "Project is being tested";
+                return "Your project is being QAed.";
             case static::STATUS_APPROVAL:
-                return "Waiting for Approval";
+                return "We are waiting for your approval on the development brief.";
             case static::STATUS_COMPLETE:
-                return "Project is Complete";
+                return "Your project is complete.";
             default:
                 return 'Unknown status';
         }
