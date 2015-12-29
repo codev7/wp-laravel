@@ -54,7 +54,8 @@
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}">
+                                <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.category] }}</span></p>
                             <p class="m-a-0">@{{ todo.title }}</p>
 
                             <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p></a>
@@ -71,7 +72,6 @@
 
             <li class="media list-group-item to-do-list-item p-a"
                 v-bind:class="{'opened': opened.indexOf(todo.id) != -1}"
-                {{--v-on:click="toggleDescription(todo.id)"--}}
                 v-for="todo in inProgress">
 
                 <div class="media-body">
@@ -83,7 +83,7 @@
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.type] }}</span></p>
+                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.category] }}</span></p>
                             <p class="m-a-0">@{{ todo.title }}</p>
 
                             <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p></a>

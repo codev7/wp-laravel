@@ -38,10 +38,10 @@ class File extends Model {
         switch ($this->reference_type) {
             case static::REF_PROJECT:
                 return $this->belongsTo('CMV\Models\PM\Project', 'reference_id');
-            case static::REF_TODO:
-                return $this->belongsTo('CMV\Models\PM\ToDo', 'reference_id');
             case static::REF_BRIEF:
                 return $this->belongsTo('CMV\Models\PM\ProjectBrief', 'reference_id');
+            case static::REF_TODO:
+                return $this->belongsTo('CMV\Models\PM\ToDo', 'reference_id');
             default:
                 return null;
         }
