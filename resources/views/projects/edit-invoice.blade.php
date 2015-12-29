@@ -24,7 +24,7 @@
                         
 
                             <div class="form-group">
-                                <label>Related to Development Brief</label>
+                                <label>Is this invoice related to a developer brief?</label>
 
                                 <select class="form-control">
                                     <option value="">Not related to a brief</option>
@@ -61,11 +61,29 @@
                                 <p class="help-block">Enter a percent amount that you want to discount off the invoice.</p>
                             </div>
 
-                            <div class="form-group">
-                                <label>Invoice Date</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Invoice Date</label>
 
-                                <input type="text" data-provide="datepicker" class="form-control">
+                                        <input type="text" data-provide="datepicker" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Deposit Required</label>
+
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="discount_amount" placeholder="50%">
+                                            <div class="input-group-addon">%</div>
+                                        </div>
+
+                                        <p class="help-block">This is the amount we will require to be paid up front before the project will enter development.</p>
+                                    </div>
+                                </div>
                             </div>
+                            
                  
 
                             <div class="form-group">
