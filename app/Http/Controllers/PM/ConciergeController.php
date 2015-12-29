@@ -14,7 +14,7 @@ use Auth;
 /**
  * @Controller(prefix="concierge-site")
  */
-class ConciergeController extends ProjectsController
+class ConciergeController extends Controller
 {
     
     /**
