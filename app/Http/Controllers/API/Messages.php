@@ -3,6 +3,7 @@ namespace CMV\Http\Controllers\API;
 
 use CMV\Models\PM\Message;
 use CMV\Models\PM\Thread;
+use CMV\Models\PM\ToDo;
 use CMV\Services\MessagesService;
 use Input, Validator, Auth;
 
@@ -34,8 +35,17 @@ class Messages extends Controller {
         $thread = Thread::find($data['thread_id']);
 
         $service = new MessagesService(Auth::user());
-
         $message = $service->postInThread($thread, "<div>{$data['content']}</div>");
+
+        if ($thread->reference instanceof ToDo) {
+            try {
+                $todo = $thread->reference;
+                $project = $todo->reference;
+                $comment = \Pivotal::createComment($project->pivotal_id, $todo->pivotal_story_id, $data['content']);
+                $message->pivotal_comment_id = $comment->id;
+            } catch (\Exception $e) {
+            }
+        }
 
         return $this->show($message->id);
     }

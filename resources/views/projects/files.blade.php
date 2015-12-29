@@ -13,7 +13,7 @@
          v-cloak>
         <ul class="list-group media-list media-list-stream">
 
-            @if (!Auth::user()->isDeveloper())
+            @if (!isDev())
             <li class="media list-group-item p-a uploadcare-widget-big">
                 <input role="uploadcare-uploader" type="hidden" data-multiple/>
             </li>
@@ -41,8 +41,12 @@
                                 <td>@{{ file.user.name }}</td>
                                 <td>@{{ file.created_at | ago }}</td>
                                 <td><a :href="file.path" target="_blank" class="btn btn-primary-outline btn-sm">Download File</a></td>
-                                <td><a href="#" class="btn btn-danger-outline btn-xs"
-                                       v-on:click.prevent="deleteFile(file)"><i class="fa fa-times"></i></a>
+                                <td>
+                                    @if (!isDev())
+                                    <a href="#" class="btn btn-danger-outline btn-xs"
+                                       v-on:click.prevent="deleteFile(file)"><i class="fa fa-times"></i>
+                                    </a>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>

@@ -112,20 +112,22 @@ class User extends Model implements AuthorizableContract,
 
         if ($isCMVStaff) {
             $belongsToTeam = $this->teams()->find($project->team_id);
-            if (!$belongsToTeam) {
-                if ($isProjectStaff) {
-                    // devs needn't be owners
-                    $role = $this->isAdministrator() ? 'owner' : 'member';
+
+            if ($isProjectStaff) {
+                // devs needn't be owners
+                $role = $this->isAdministrator() ? 'owner' : 'member';
+
+                if (!$belongsToTeam) {
                     $this->joinTeamById($teamId, $role);
                     $this->current_team_id = $teamId;
                     $this->save();
-
-                    if ($role == 'member') {
-                        $teamsService = new TeamsService($this);
-                        $teamsService->attachUserToProject($this, $project);
-                    }
                 }
-            } else if ($belongsToTeam && !$isProjectStaff) {
+
+                if ($role == 'member') {
+                    $teamsService = new TeamsService($this);
+                    $teamsService->attachUserToProject($this, $project);
+                }
+            } else if (!$isProjectStaff && $belongsToTeam) {
                 // e.g. the former dev of the project tries to view it
                 $this->teams()->detach([$teamId]);
             }
@@ -199,8 +201,7 @@ class User extends Model implements AuthorizableContract,
 
         if ($team->pivot->role == 'member') {
             return $this->belongsToMany('CMV\Models\PM\Project','user_projects')
-                ->where("projects.team_id", $this->current_team_id)
-                ->where('project_type', Project::TYPE_PROJECT);
+                ->where("projects.team_id", $this->current_team_id);
         } else if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
             return $team->projects()->where('project_type', Project::TYPE_PROJECT);
         }

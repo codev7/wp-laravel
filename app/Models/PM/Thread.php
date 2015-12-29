@@ -31,11 +31,12 @@ class Thread extends Model {
      */
     public function reference()
     {
-        $ref = implode('', array_map(function($part) {
-            return ucfirst($part);
-        }, explode('_', $this->reference_type)));
-
-        return $this->belongsTo('CMV\Models\PM\\'.$ref, 'reference_id');
+        switch ($this->reference_type) {
+            case self::REF_TODO:
+                return $this->belongsTo('CMV\Models\PM\ToDo', 'reference_id');
+            case self::REF_PROJECT:
+                return $this->belongsTo('CMV\Models\PM\Project', 'reference_id');
+        }
     }
 
     /**

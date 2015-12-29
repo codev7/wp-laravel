@@ -107,7 +107,7 @@ class Todos extends Controller {
     {
         $data = Input::all();
         $validator = Validator::make($data, [
-            'status' => 'required|in:started,accepted,rejected,delivered'
+            'status' => 'required|in:started,accepted,rejected,delivered,finished'
         ]);
 
         if ($validator->fails()) {

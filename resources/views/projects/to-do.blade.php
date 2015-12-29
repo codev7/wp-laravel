@@ -46,7 +46,7 @@
                                                 <a class="media-left" href="#">
                                                   <img
                                                     class="media-object img-circle"
-                                                    bind:src="@{{ msg.user.gravatar }}">
+                                                    v-bind:src="msg.user.gravatar">
                                                 </a>
                                                 <div class="media-body">
                                                   <strong>@{{ msg.user.name }}: </strong>
@@ -58,12 +58,12 @@
                                     </div>
 
                                     <textarea name="reply" class="reply-to-a-thread m-b" placeholder="Type here to start replying to {{ $todo->createdBy->name }}"
-                                            v-model="answer"></textarea>
+                                            v-model="message"></textarea>
 
                                     <button type="button" style="absolute; bottom: 0; display: none; right: 0;" href="#" class="pos-a btn btn-xs pull-right btn-primary-outline btn-reply-to-thread"
-                                        v-submit="postingMsg"
+                                        v-submit="postingMessage"
                                         v-on:click.prevent="postMessage"
-                                        v-bind:disabled="answer.length == 0"
+                                        v-bind:disabled="message.length == 0"
                                     <i class="fa fa-reply"></i> Submit Reply
                                     </button>
                                 </li>
@@ -95,7 +95,7 @@
 
                             <hr />
 
-                            @if (!Auth::user()->isDeveloper())
+                            @if (!isDev())
                                 <div id="todo-ucare">
                                     <input role="uploadcare-uploader" type="hidden" data-multiple />
                                 </div>

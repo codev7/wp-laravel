@@ -19,20 +19,22 @@ export default Vue.extend({
         this.$el.id = _.randomStr();
         var widgets = uploadcare.initialize(`#${this.$el.id}`);
         var widget = widgets[0];
-        widget.onChange((res) => {
-            if (res) {
-                $.when.apply(null, res.files()).done((...files) => {
-                    _.each(files, (file, i) => {
-                        this.persist(file);
+
+        if (widget != undefined) {
+            widget.onChange((res) => {
+                if (res) {
+                    $.when.apply(null, res.files()).done((...files) => {
+                        _.each(files, (file, i) => {
+                            this.persist(file);
+                        });
+
+                        widget.value(null);
+
+                        notify.success(_.pluralize(files.length, 'file has been', 'files have been') + ' uploaded');
                     });
-
-                    widget.value(null);
-
-                    notify.success(_.pluralize(files.length, 'file has been', 'files have been') + ' uploaded');
-                });
-            }
-        })
-
+                }
+            });
+        }
     },
 
     methods: {

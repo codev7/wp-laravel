@@ -82,13 +82,18 @@ class Pivotal {
      */
     public function createStory($projectId, $title, $content, $type = 'feature', array $labels = [])
     {
+        $payload = [
+            'name' => $title,
+            'description' => $content,
+            'story_type' => $type,
+            'labels' => $labels
+        ];
+
+        // features need to be estimated to allow a status update
+        if ($type == 'feature') $payload['estimate'] = 2;
+
         $response = $this->client->request('POST', "projects/{$projectId}/stories", [
-            'json' => [
-                'name' => $title,
-                'description' => $content,
-                'story_type' => $type,
-                'labels' => $labels
-            ]
+            'json' => $payload
         ]);
 
         return json_decode($response->getBody()->getContents());

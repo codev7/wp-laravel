@@ -63,7 +63,7 @@
                     </ul>
                 </li>
 
-                @if (! Auth::user()->isDeveloper())
+                @if (! isDev())
                 <li class="{{ set_active_from_route_name('project.single') }}">
                     <a data-pjax href="{{ route('project.single', ['slug' => $project->slug]) }}">Dashboard</a>
                 </li>
@@ -77,7 +77,7 @@
                     <a data-pjax href="{{ route('project.files', ['slug' => $project->slug]) }}">Files</a>
                 </li>
 
-                @if (! Auth::user()->isDeveloper())
+                @if (! isDev())
                 <li class="{{ set_active_from_route_name('project.invoices') }}">
                     <a data-pjax href="{{ route('project.invoices', ['slug' => $project->slug]) }}">Invoices</a>
                 </li>
@@ -94,7 +94,7 @@
                     <a href="#"><strong>{{ $project->name }}</strong></a>
                 </li>
 
-                @if (! Auth::user()->isDeveloper())
+                @if (! isDev())
                 <li class="{{ set_active_from_route_name('concierge.single') }}">
                     <a href="{{ route('concierge.single', ['slug' => $project->slug]) }}">Concierge Dashboard</a>
                 </li>
