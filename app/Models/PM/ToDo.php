@@ -23,7 +23,6 @@ class ToDo extends Model
 
     // accepted, delivered, finished, started, rejected, planned, unstarted, unscheduled
     const REF_PROJECT = 'project';
-    const REF_CONCIERGE = 'concierge_site';
 
     const STATUS_NEW = 'unstarted';
     const STATUS_IN_WORK = 'started';
@@ -88,8 +87,6 @@ class ToDo extends Model
         switch ($this->reference_type) {
             case static::REF_PROJECT:
                 return $this->belongsTo('\CMV\Models\PM\Project', 'reference_id');
-            case static::REF_CONCIERGE:
-                return $this->belongsTo('\CMV\Models\PM\ConciergeSite', 'reference_id');
         }
     }
 

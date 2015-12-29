@@ -53,15 +53,14 @@ class Invoice extends Model {
 
     public function project()
     {
-
-        return $this->belongsTo( 'CMV\Models\PM\Project', 'reference_id');
-
+        return $this->belongsTo( 'CMV\Models\PM\Project', 'reference_id')
+            ->where('project_type', Project::TYPE_PROJECT);
     }
-
 
     public function conciergeSite()
     {
-        return $this->belongsTo( 'CMV\Models\PM\ConciergeSite', 'reference_id');
+        return $this->belongsTo( 'CMV\Models\PM\Project', 'reference_id')
+            ->where('project_type', Project::TYPE_PROJECT);
     }
 
 }

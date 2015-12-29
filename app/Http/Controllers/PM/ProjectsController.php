@@ -18,8 +18,12 @@ class ProjectsController extends Controller
     public function __construct(Request $request)
     {
         $user = Auth::user();
+
         if ((hasRole('admin') || hasRole('mastermind')) && ($slug = $request->route('slug'))) {
-            $project = Project::where('slug', $slug)->first();
+            $project = Project::whereSlug($slug)
+                ->whereProjectType(Project::TYPE_PROJECT)
+                ->firstOrFail();
+
             if ($project) {
                 if (! $user->teams()->find($project->team_id)) {
                     /** @var \CMV\User $user */
@@ -50,6 +54,7 @@ class ProjectsController extends Controller
     public function newProject()
     {
         $team = [];
+
         if (Auth::check()) {
             $user = Auth::user();
             if ($user && $user->current_team) {
@@ -69,7 +74,10 @@ class ProjectsController extends Controller
      */
     public function single($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
+
         $news = UserNews::getNewsByUser(Auth::user());
 
         return view('projects/single')
@@ -84,7 +92,9 @@ class ProjectsController extends Controller
      */
     public function briefs($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
 
         return view('projects/briefs')->with('project', $project);
     }
@@ -95,7 +105,9 @@ class ProjectsController extends Controller
      */
     public function createBrief($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
 
         return view('projects/edit-brief')->with('project', $project);
     }
@@ -107,7 +119,9 @@ class ProjectsController extends Controller
      */
     public function brief($slug, $brief_id)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
         $brief = $project->briefs()->findOrFail($brief_id);
 
         return view('projects/brief')
@@ -123,7 +137,10 @@ class ProjectsController extends Controller
      */
     public function editBrief($slug, $briefId)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
+
         $brief = $project->briefs()->findOrFail($briefId);
 
         return view('projects/edit-brief')->with('project', $project)->with('brief', $brief);
@@ -136,7 +153,9 @@ class ProjectsController extends Controller
      */
     public function files($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
 
         return view('projects/files')->with('project', $project);
     }
@@ -148,7 +167,9 @@ class ProjectsController extends Controller
      */
     public function invoices($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
 
         return view('projects/invoices')->with('project', $project);
     }
@@ -160,7 +181,9 @@ class ProjectsController extends Controller
      */
     public function toDos($slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
 
         return view('projects/to-dos')->with('project', $project);
     }

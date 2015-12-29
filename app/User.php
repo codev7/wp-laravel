@@ -2,6 +2,7 @@
 
 namespace CMV;
 
+use CMV\Models\PM\Project;
 use Laravel\Cashier\Billable;
 use Laravel\Spark\Repositories\TeamRepository;
 use Laravel\Spark\Teams\CanJoinTeams;
@@ -136,9 +137,24 @@ class User extends Model implements AuthorizableContract,
 
         if ($team->pivot->role == 'member') {
             return $this->belongsToMany('CMV\Models\PM\Project','user_projects')
-                ->where("projects.team_id", $this->current_team_id);
+                ->where("projects.team_id", $this->current_team_id)
+                ->where('project_type', Project::TYPE_PROJECT);
         } else if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
-            return $team->projects();
+            return $team->projects()->where('project_type', Project::TYPE_PROJECT);
+        }
+    }
+
+    public function conciergeSites()
+    {
+        /** @var Team $team */
+        $team = $this->currentTeam();
+
+        if ($team->pivot->role == 'member') {
+            return $this->belongsToMany('CMV\Models\PM\Project','user_projects')
+                ->where("projects.team_id", $this->current_team_id)
+                ->where('project_type', Project::TYPE_CONCIERGE);
+        } else if (array_search($team->pivot->role, ['admin', 'owner']) !== false) {
+            return $team->projects()->where('project_type', Project::TYPE_CONCIERGE);
         }
     }
 

@@ -57,22 +57,34 @@
 
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
+                    @if ($project->project_type == $project::TYPE_CONCIERGE)
+                    <tr>
+                        <td><b>Site URL</b></td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ $project->url }}</td>
+                    </tr>
+                    @endif
+
+                    @if ($project->project_type == $project::TYPE_PROJECT)
                     <tr>
                         <td><strong>Requested Delivery Date</strong></td>
                     </tr>
 
                     <tr>
-                        <td>Next week</td>
+                        <td>{{ $project->requested_deadline }}</td>
                     </tr>
-      
 
                     <tr>
                         <th><strong>Project Type</strong></th>
                     </tr>
+
                     <tr>
                         <td>{{ $project->type->name }}</td>
                     </tr>
 
+                    @endif
 
                     <tr>
                         <th><strong>Staging URL</strong></th>
@@ -99,6 +111,18 @@
 
             <table class="table table-condensed table-middle table-striped m-b-0">
                 <tbody>
+                    <tr>
+                        <td><strong>Credentials</strong></td>
+                    </tr>
+
+                    <tr>
+                        @if ($project->credentials)
+                        <td>{{ array_get($project->credentials, 'username') }} / {{ array_get($project->credentials, 'password') }}</td>
+                        @else
+                        <td>Not Yet Received</td>
+                        @endif
+                    </tr>
+
                     <tr>
                         <td><strong>Bitbucket Clone Repo</strong></td>
                     </tr>

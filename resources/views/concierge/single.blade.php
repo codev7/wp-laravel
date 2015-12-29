@@ -75,7 +75,6 @@
        <div class="panel panel-default visible-md-block visible-lg-block">
         <div class="panel-body">
           <h5 class="m-t-0 text-center">File Uploader Dropzone<small></h5>
-         
         </div>
       </div>
     </div>

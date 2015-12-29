@@ -47,8 +47,6 @@
 
                     @{{{thread.messages[0].content}}}
 
-
-
                     <ul class="media-list m-b m-t-lg">
                         <li class="media" v-for="(index, message) in thread.messages" v-show="index > 0">
 
@@ -85,9 +83,11 @@
 
 
     <div class="col-md-3">
+        @if ($project->getStatus() != 'Unknown status')
         <div class="alert alert-dark alert-dismissible hidden-xs" role="alert">
             {{ $project->getStatus() }}
         </div>
+        @endif
 
         <div data-controller="project/news" state="{{ json_encode($news) }}" v-cloak v-show="news.id">
             <div class="panel panel-default m-b-md hidden-xs" v-el:container>

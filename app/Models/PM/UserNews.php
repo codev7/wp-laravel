@@ -33,13 +33,13 @@ class UserNews extends Model
      * @param User $user
      * @return mixed
      */
-    public static function getNewsByUser(User $user)
+    public static function getNewsByUser(User $user, array $except = [])
     {
         $viewed = static::where('user_id', $user->id)->get()
             ->lists('news_id')->all();
 
-        return array_reduce(static::$news, function($carry, $item) use ($viewed) {
-            if (array_search($item['id'], $viewed) === false) {
+        return array_reduce(static::$news, function($carry, $item) use ($viewed, $except) {
+            if (array_search($item['id'], $viewed) === false && array_search($item['id'], $except) === false) {
                 $carry[] = $item;
             }
 

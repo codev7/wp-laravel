@@ -12,7 +12,6 @@ class Thread extends Model {
     use SoftDeletes, DispatchesJobs;
 
     const REF_PROJECT = 'project';
-    const REF_CONCIERGE = 'concierge_site';
     const REF_TODO = 'todo';
 
     protected $columns = [

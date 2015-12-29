@@ -82,25 +82,27 @@
                 </li>
 				@endif
 
-				@if(isRouteNameSpace('concierge-site') && isset($site))
+				@if(isRouteNameSpace('concierge-site') && isset($project))
 				<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 				<li class="disabled">
-                    <a href="#"><strong>{{ $site->name }}</strong></a>
+                    <a href="#"><strong>{{ $project->name }}</strong></a>
                 </li>
 
                 <li class="{{ set_active_from_route_name('concierge.single') }}">
-                    <a href="{{ route('concierge.single', ['slug' => $site->slug]) }}">Concierge Dashboard</a>
+                    <a href="{{ route('concierge.single', ['slug' => $project->slug]) }}">Concierge Dashboard</a>
                 </li>
 
-                <li class="{{ set_active_from_route_name('prospector.contacts') }}">
-                    <a href="#">To Do's <span class="badge">15</span></a>
+                <li class="{{ set_active_from_route_name('concierge.todos') }}">
+                    <a href="{{ route('concierge.todos', ['slug' => $project->slug]) }}">To Do's
+                        {{--<span class="badge">15</span>--}}
+                    </a>
                 </li>
 
-                <li class="{{ set_active_from_route_name('prospector.companies') }}">
-                    <a href="#">Files</a>
+                <li class="{{ set_active_from_route_name('concierge.files') }}">
+                    <a href="{{ route('concierge.files', ['slug' => $project->slug]) }}">Files
+                        {{--<span class="badge">15</span>--}}
+                    </a>
                 </li>
-
-                
 				@endif
 
 				@if(isRouteNameSpace('mastermind') && hasRole('mastermind'))

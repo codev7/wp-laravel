@@ -96,7 +96,8 @@ class Projects extends Controller {
     {
         $attrs = [
             'name' => $data['project_name'],
-            'requested_deadline' => $data['requested_deadline']
+            'requested_deadline' => $data['requested_deadline'],
+            'project_type' => Project::TYPE_PROJECT
         ];
         $attrs['status'] = Project::STATUS_QUOTE;
         $attrs['project_manager_id'] = env('DEFAULT_PM_USER_ID');

@@ -22,6 +22,9 @@ class Project extends Model {
     const STATUS_APPROVAL = 'approval';
     const STATUS_COMPLETE = 'complete';
 
+    const TYPE_PROJECT = 'project';
+    const TYPE_CONCIERGE = 'concierge_site';
+
     protected $columns = [
         'id',
         'files', //json encoded array ['name' => $fileName, 'url' => $fileUrl, 'uploaded_by' => $user_id, 'date_uploaded' => $date_uploaded, 'deleted' => false]
@@ -49,7 +52,9 @@ class Project extends Model {
         'name',
         'requested_deadline',
         'status',
-        'project_manager_id'
+        'project_manager_id',
+        'project_type',
+        'url'
     ];
 
     protected $dates = [
@@ -74,6 +79,10 @@ class Project extends Model {
         'next_week',
         'next_month',
         'not_sure'
+    ];
+
+    protected $casts = [
+        'credentials' => 'array',
     ];
 
     public static function boot()

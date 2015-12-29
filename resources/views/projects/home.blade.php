@@ -49,23 +49,22 @@
                             <table class="table table-relaxed table-middle">
 
                                 <thead>
-
                                     <tr>
-
                                         <th>Name</th>
                                         <th>Type</th>
                                         <th>Last Updated</th>
                                         <th>&nbsp;</th>
                                     </tr>
-
                                 </thead>
 
 
                                 <tbody>
 
                                     @foreach(Auth::user()->projects as $project)
+                                        @if ($project->project_type != 'project')
+                                            @continue
+                                        @endif
                                     <tr>
-
                                         <td>{{ $project->name }}</td>
                                         <td>{{ $project->type->name }}</td>
                                         <td>{{ $project->updated_at->diffForHumans() }}</td>
@@ -93,7 +92,7 @@
                     @endif
                 @elseif(Input::get('tab') == 'concierge')
 
-                    @if(Auth::user()->currentTeam()->conciergeSites()->count() > 0)
+                    @if(Auth::user()->conciergeSites()->count() > 0)
                     <div class="pull-right">
                         <a class="btn btn-primary-outline" data-toggle="modal" href="#add-concierge-site">
                             <i class="fa fa-btn fa-plus with-text"></i> Add Concierge Site
@@ -105,21 +104,19 @@
                             <table class="table table-relaxed table-middle">
 
                                 <thead>
-
                                     <tr>
-
                                         <th>Name</th>
                                         <th>Last Updated</th>
                                         <th>Open Tasks</th>
                                         <th>&nbsp;</th>
                                     </tr>
-
                                 </thead>
 
-
                                 <tbody>
-
-                                    @foreach(Auth::user()->currentTeam()->conciergeSites as $site)
+                                    @foreach(Auth::user()->conciergeSites as $site)
+                                        @if ($site->project_type != 'concierge_site')
+                                            @continue
+                                        @endif
                                     <tr>
 
                                         <td>{{ $site->name }}<br /><small class="text-muted">{{ $site->url }}</small></td>
