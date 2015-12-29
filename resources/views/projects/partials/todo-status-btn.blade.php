@@ -1,5 +1,5 @@
-@if (isDev())
 <div>
+@if (isDev())
     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
             class="btn {{$btnClass}} btn-default-outline">Start Task</button>
@@ -19,10 +19,7 @@
     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
             class="btn {{$btnClass}} btn-warning">Restart</button>
-
-</div>
 @else
-<div>
     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
             class="btn {{$btnClass}} btn-default-outline" disabled>Unstarted</button>
 
@@ -39,5 +36,8 @@
 
     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_REJECTED }}'"
             class="btn {{$btnClass}} btn-default-outline" disabled>Rejected</button>
-</div>
 @endif
+
+    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_ACCEPTED }}'"
+            class="btn {{$btnClass}} btn-success" disabled>Accepted</button>
+</div>

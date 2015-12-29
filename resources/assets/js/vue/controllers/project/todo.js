@@ -52,9 +52,9 @@ export default Vue.extend({
         postMessage() {
             var thread = this.todo.thread;
             this.postingMessage = true;
-            this.$http.post(`/api/threads/${thread.id}/messages`, {content: this.answer}, (data) => {
+            this.$http.post(`/api/threads/${thread.id}/messages`, {content: this.message}, (data) => {
                 thread.messages.push(data.data);
-                this.answer = '';
+                this.message = '';
             }).always(() => {
                 this.postingMessage = false;
             });

@@ -85,7 +85,7 @@ class Pivotal extends Controller {
         $values = $payload['changes'][0]['new_values'];
 
         if (isset($values['current_state'])) {
-            $todo = ToDo::findOrFail($payload['changes'][0]['id']);
+            $todo = ToDo::findOrFail($payload['primary_resources'][0]['id']);
             $todo->status = $values['current_state'];
             $todo->save();
 
