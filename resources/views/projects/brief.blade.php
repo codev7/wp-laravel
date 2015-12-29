@@ -16,6 +16,7 @@
                 <div><a data-pjax href="{{ route('project.briefs', ['slug' => $project->slug]) }}" class="text-muted"><i class="fa fa-arrow-left"></i> Back to all briefs</a></div>
 
                 <div class="pull-right w-sm">
+                    @if (!Auth::user()->isProjectStaff($project))
                     <button class="m-t-md btn btn-lg btn-block btn-success"
                             v-bind:disabled="brief.approved_by_customer_id">
                         <i class="fa fa-thumbs-o-up"></i> Approve Brief
@@ -25,6 +26,7 @@
                         <a href="#" class="btn btn-xs btn-danger-outline"
                            v-on:click.prevent="openRequestChangesModal()">Request Changes</a>
                     </p>
+                    @endif
 
                     <p class="m-t text-center" v-if="brief.approved_by_customer_id">
                         <small>Brief was approved on <br/> @{{ brief.approved_by_customer_at | date }}</small>

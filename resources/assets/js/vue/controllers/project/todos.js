@@ -51,13 +51,15 @@ export default Vue.extend({
         var widgets = uploadcare.initialize(`#create-to-do`);
         this.ucare = widgets[0];
 
-        this.ucare.onChange((res) => {
-            if (res) {
-                $.when.apply(null, res.files()).done((...files) => {
-                    this.newTodo.files = files;
-                });
-            }
-        });
+        if (this.ucare != undefined) {
+            this.ucare.onChange((res) => {
+                if (res) {
+                    $.when.apply(null, res.files()).done((...files) => {
+                        this.newTodo.files = files;
+                    });
+                }
+            });
+        }
 
         var _this = this;
         $(document).on('click', '#to-do-type label', function(e)

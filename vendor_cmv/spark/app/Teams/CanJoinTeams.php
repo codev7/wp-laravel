@@ -44,7 +44,7 @@ trait CanJoinTeams
         }
 
         $pivot = ['role' => $role];
-        if ($this->isAdministrator()) {
+        if ($this->isCMVStaff()) {
             $pivot['hidden'] = true;
         }
         $this->teams()->attach([$teamId], $pivot);

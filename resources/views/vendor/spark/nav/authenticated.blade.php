@@ -35,7 +35,7 @@
 				@endif
 
 				@if(isRouteNameSpace('project') && isset($project))
-				<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
+				<li><a href="{{ getHomeLink() }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 				<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><strong>{{ $project->name }} <span class="caret"></span></strong></a>
 
@@ -51,6 +51,7 @@
                         </li>
                         @endforeach
 
+                        @if (Access::check(new CMV\Models\PM\Project, 'create'))
                         <li class="divider"></li>
 
                         <li>
@@ -58,12 +59,15 @@
                                 <i class="fa fa-btn fa-fw fa-plus"></i>Create New Project
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
 
+                @if (! Auth::user()->isDeveloper())
                 <li class="{{ set_active_from_route_name('project.single') }}">
                     <a data-pjax href="{{ route('project.single', ['slug' => $project->slug]) }}">Dashboard</a>
                 </li>
+                @endif
 
                 <li class="{{ set_active_from_route_name('project.briefs') }}">
                     <a data-pjax href="{{ route('project.briefs', ['slug' => $project->slug]) }}">Briefs</a>
@@ -73,24 +77,28 @@
                     <a data-pjax href="{{ route('project.files', ['slug' => $project->slug]) }}">Files</a>
                 </li>
 
+                @if (! Auth::user()->isDeveloper())
                 <li class="{{ set_active_from_route_name('project.invoices') }}">
                     <a data-pjax href="{{ route('project.invoices', ['slug' => $project->slug]) }}">Invoices</a>
                 </li>
+                @endif
 
                 <li class="{{ set_active_from_route_name('project.todos') }}">
                     <a data-pjax href="{{ route('project.todos', ['slug' => $project->slug]) }}">To Do's</a>
                 </li>
-				@endif
+                @endif
 
 				@if(isRouteNameSpace('concierge-site') && isset($project))
-				<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
+				<li><a href="{{ getHomeLink() }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 				<li class="disabled">
                     <a href="#"><strong>{{ $project->name }}</strong></a>
                 </li>
 
+                @if (! Auth::user()->isDeveloper())
                 <li class="{{ set_active_from_route_name('concierge.single') }}">
                     <a href="{{ route('concierge.single', ['slug' => $project->slug]) }}">Concierge Dashboard</a>
                 </li>
+                @endif
 
                 <li class="{{ set_active_from_route_name('concierge.todos') }}">
                     <a href="{{ route('concierge.todos', ['slug' => $project->slug]) }}">To Do's
@@ -106,7 +114,7 @@
 				@endif
 
 				@if(isRouteNameSpace('mastermind') && hasRole('mastermind'))
-					<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
+					<li><a href="{{ getHomeLink() }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 
 					<li class="disabled">
 	                    <a href="#"><strong>Mastermind</strong></a>
@@ -122,7 +130,7 @@
                 @endif
 
 				@if(isRouteNameSpace('prospector'))
-					<li><a href="{{ route('app.home') }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
+					<li><a href="{{ getHomeLink() }}"><small><i class="fa fa-arrow-left"></i> back</small></a></li>
 
 					<li class="disabled">
 	                    <a href="#"><strong>Prospector</strong></a>
@@ -142,11 +150,9 @@
                 @endif
 
 				@if ( ! Spark::isDisplayingSettingsScreen())
-					
 
 					<!-- Additional User Defined Navbar Items -->
 					<!-- Best To Leave Left Side Nav Empty On Settings To Avoid Vue.js Conflicts -->
-
 
 				@endif
 			</ul>

@@ -19,7 +19,6 @@ class InvitationController extends Controller
      * Create a new controller instance.
      *
      * @param  \Laravel\Spark\Contracts\Repositories\TeamRepository  $teams
-     * @return void
      */
     public function __construct(TeamRepository $teams)
     {

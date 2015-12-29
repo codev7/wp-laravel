@@ -13,9 +13,11 @@
          v-cloak>
         <ul class="list-group media-list media-list-stream">
 
+            @if (!Auth::user()->isDeveloper())
             <li class="media list-group-item p-a uploadcare-widget-big">
                 <input role="uploadcare-uploader" type="hidden" data-multiple/>
             </li>
+            @endif
 
             <li class="media list-group-item p-a">
        

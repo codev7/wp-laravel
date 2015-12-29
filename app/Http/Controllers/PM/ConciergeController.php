@@ -16,7 +16,23 @@ use Auth;
  */
 class ConciergeController extends Controller
 {
-    
+
+    public function __construct(Request $request)
+    {
+        /** @var \CMV\User $user */
+        $user = Auth::user();
+
+        if ($slug = $request->route('slug')) {
+            $project = Project::whereSlug($slug)
+                ->whereProjectType(Project::TYPE_CONCIERGE)
+                ->firstOrFail();
+
+            if ($project) {
+                $user->joinProjectIfStaff($project);
+            }
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      * @Post("create", as="concierge.create")

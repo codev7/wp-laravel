@@ -3,6 +3,7 @@
 namespace CMV;
 
 use CMV\Models\PM\Project;
+use CMV\Services\TeamsService;
 use Laravel\Cashier\Billable;
 use Laravel\Spark\Repositories\TeamRepository;
 use Laravel\Spark\Teams\CanJoinTeams;
@@ -99,9 +100,75 @@ class User extends Model implements AuthorizableContract,
         'trial_ends_at', 'subscription_ends_at','created_at', 'updated_at', 'deleted_at'
     ];
 
+    /**
+     * Adds user to the project if he is a member of CMV staff (eg admin/dev)
+     * @param Project $project
+     */
+    public function joinProjectIfStaff(Project $project)
+    {
+        $isProjectStaff = $this->isProjectStaff($project);
+        $isCMVStaff = $this->isCMVStaff();
+        $teamId = $project->team_id;
+
+        if ($isCMVStaff) {
+            $belongsToTeam = $this->teams()->find($project->team_id);
+            if (!$belongsToTeam) {
+                if ($isProjectStaff) {
+                    // devs needn't be owners
+                    $role = $this->isAdministrator() ? 'owner' : 'member';
+                    $this->joinTeamById($teamId, $role);
+                    $this->current_team_id = $teamId;
+                    $this->save();
+
+                    if ($role == 'member') {
+                        $teamsService = new TeamsService($this);
+                        $teamsService->attachUserToProject($this, $project);
+                    }
+                }
+            } else if ($belongsToTeam && !$isProjectStaff) {
+                // e.g. the former dev of the project tries to view it
+                $this->teams()->detach([$teamId]);
+            }
+        }
+    }
+
+    public function devProjects()
+    {
+        if (!$this->isDeveloper()) return [];
+
+        return Project::where('developer_id', $this->id)
+            ->get();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCMVStaff()
+    {
+        return $this->isAdministrator() || $this->isDeveloper();
+    }
+
+    /**
+     * @param Project $project
+     * @return bool
+     */
+    public function isProjectStaff(Project $project)
+    {
+        return $this->isAdministrator()
+            || ($this->isDeveloper() && $project->developer_id == $this->id);
+    }
+
+    /**
+     * @return bool
+     */
     public function isAdministrator()
     {
         return $this->is_admin || $this->is_mastermind;
+    }
+
+    public function isDeveloper()
+    {
+        return $this->is_developer;
     }
 
     public function isCurrentTeamOwner()
@@ -123,11 +190,6 @@ class User extends Model implements AuthorizableContract,
     public function getGravatarAttribute()
     {
         return getGravatarImage($this->email);
-    }
-
-    public function isDeveloper()
-    {
-        return $this->is_developer;
     }
 
     public function projects()

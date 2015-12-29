@@ -8,10 +8,12 @@
     <div class="col-md-9" data-controller="project/todos" v-cloak state="{{ json_encode(['reference_id' => $project->id, 'reference_type' => 'project']) }}">
 
         <h3 class="m-a-0 p-a-0 pull-left">@{{ inProgress.length }} To Do @{{ inProgress.length == 1 ? 'Item' : 'Items' }}</h3>
+        @if (! Auth::user()->isDeveloper())
         <a href="#" class="btn btn-primary btn-sm pull-right m-b"
            v-on:click.prevent="openCreateModal">
             <i class="fa fa-plus"></i> Add New To Do
         </a>
+        @endif
 
         <div class="clearfix"></div>
 
@@ -136,18 +138,22 @@
                 </div>
                
             </li>
-            
+
             <li class="media list-group-item to-do-list-item p-a text-center"
                 v-if="inProgress.length == 0">
                 This project has no open to do items. <br /><br />
+                @if (! Auth::user()->isDeveloper())
                 <a href="#" class="btn btn-primary-outline btn-sm "
                    v-on:click.prevent="openCreateModal">
                     <i class="fa fa-plus"></i> Create First To Do
                 </a>
+                @endif
             </li>
         </ul>
 
-        @include('modals/create-to-do')
+        @if (! Auth::user()->isDeveloper())
+            @include('modals/create-to-do')
+        @endif
     </div>
 
 @endsection

@@ -12,6 +12,7 @@
     </div>
 </div>
 
+
 <nav class="profile-header-nav">
     <ul class="nav nav-tabs">
         <li @if(!Input::has('tab')) class="active" @endif>
@@ -121,7 +122,7 @@
 
                                         <td>{{ $site->name }}<br /><small class="text-muted">{{ $site->url }}</small></td>
                                         <td>{{ $site->updated_at->diffForHumans() }}</td>
-                                        <td>{{ $site->toDos()->count() }}</td>
+                                        <td>{{ $site->toDos()->where('status', '!=', 'accepted')->count() }}</td>
                                         <td>
                                             <a href="{{ route('concierge.single', ['slug' => $site->slug]) }}" class="btn btn-default-outline" data-toggle="tooltip" title="View Project">
                                                 <i class="fa fa-arrow-right"></i>

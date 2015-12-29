@@ -1,5 +1,12 @@
 <?php
 
+function getHomeLink()
+{
+    $user = Auth::user();
+    if (!$user) return '/';
+    if ($user->isDeveloper()) return route('app.home-dev');
+    return route('app.home');
+}
 
 function get_status_options($selected = null)
 {

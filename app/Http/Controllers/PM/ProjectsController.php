@@ -17,19 +17,16 @@ class ProjectsController extends Controller
 
     public function __construct(Request $request)
     {
+        /** @var \CMV\User $user */
         $user = Auth::user();
 
-        if ((hasRole('admin') || hasRole('mastermind')) && ($slug = $request->route('slug'))) {
+        if ($slug = $request->route('slug')) {
             $project = Project::whereSlug($slug)
                 ->whereProjectType(Project::TYPE_PROJECT)
                 ->firstOrFail();
 
             if ($project) {
-                if (! $user->teams()->find($project->team_id)) {
-                    /** @var \CMV\User $user */
-                    $user->joinTeamById($project->team_id, 'owner');
-                    $user->current_team_id = $project->team_id;
-                }
+                $user->joinProjectIfStaff($project);
             }
         }
     }
@@ -42,7 +39,20 @@ class ProjectsController extends Controller
      */
     public function home()
     {
+        if (Auth::user()->isDeveloper()) $this->throwNotFound();
+
         return view('projects/home');
+    }
+
+    /**
+     * @Get("developer", as="app.home-dev", middleware="auth")
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function devHome()
+    {
+        if (! Auth::user()->isDeveloper()) $this->throwNotFound();
+
+        return view('projects/dev-home');
     }
 
     /**
@@ -74,6 +84,8 @@ class ProjectsController extends Controller
      */
     public function single($slug)
     {
+        if (Auth::user()->isDeveloper()) $this->throwNotFound();
+
         $project = Project::whereSlug($slug)
             ->whereProjectType(Project::TYPE_PROJECT)
             ->firstOrFail();
@@ -167,6 +179,8 @@ class ProjectsController extends Controller
      */
     public function invoices($slug)
     {
+        if (Auth::user()->isDeveloper()) $this->throwNotFound();
+
         $project = Project::whereSlug($slug)
             ->whereProjectType(Project::TYPE_PROJECT)
             ->firstOrFail();

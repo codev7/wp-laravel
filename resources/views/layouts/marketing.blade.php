@@ -58,7 +58,7 @@
                         </ul>
 
                         @if(Auth::check())
-                        <a href="{{ route('app.home') }}" class="btn btn-success">My Account</a>
+                        <a href="{{ getHomeLink() }}" class="btn btn-success">My Account</a>
                         @else
                         <a href="{{ route('quote') }}" class="btn btn-success">Get A Free Quote</a>
                         @endif

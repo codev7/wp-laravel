@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Cache;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class Controller extends BaseController
 {
@@ -15,8 +16,6 @@ abstract class Controller extends BaseController
 
     protected function minifyHTML($view)
     {
-
-
         if(isProduction())
         {
             return \HTMLMin::html($view);    
@@ -28,8 +27,7 @@ abstract class Controller extends BaseController
 
     /* Not in use yet - need to figure out best way to do this */
     protected function cacheView($view)
-    {   
-
+    {
         $cacheKey = \Request::url();
 
         if(\Cache::has($cacheKey))
@@ -37,10 +35,13 @@ abstract class Controller extends BaseController
             return \Cache::get($cacheKey);
         }
 
-
         Cache::forever($cacheKey, $view->render());
 
         return $view;
     }
 
+    protected function throwNotFound()
+    {
+        throw new NotFoundHttpException();
+    }
 }

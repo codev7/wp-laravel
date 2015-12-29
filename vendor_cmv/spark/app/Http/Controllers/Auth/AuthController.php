@@ -346,6 +346,6 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        return Spark::$afterAuthRedirectTo;
+        return getHomeLink();
     }
 }
