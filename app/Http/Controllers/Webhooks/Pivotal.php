@@ -80,19 +80,26 @@ class Pivotal extends Controller {
 
     }
 
+    /**
+     * @param array $payload
+     */
     protected function commentCreateActivity(array $payload)
     {
         $values = $payload['changes'][0]['new_values'];
 
         if (isset($values['current_state'])) {
+            $commentId = $values['id'];
+
             $todo = ToDo::findOrFail($payload['primary_resources'][0]['id']);
             $todo->status = $values['current_state'];
             $todo->save();
 
-            $messageService = new MessagesService($this->todosService->getUser());
-            $message = $messageService->postInThread($todo->thread, $values['text']);
-            $message->pivotal_comment_id = $values['id'];
-            $message->save();
+            if (! $todo->thread->messages()->where('pivotal_comment_id', $commentId)->count()) {
+                $messageService = new MessagesService($this->todosService->getUser());
+                $message = $messageService->postInThread($todo->thread, $values['text']);
+                $message->pivotal_comment_id = $commentId;
+                $message->save();
+            }
         }
     }
 

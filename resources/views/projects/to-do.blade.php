@@ -46,7 +46,7 @@
                                                 <a class="media-left" href="#">
                                                   <img
                                                     class="media-object img-circle"
-                                                    bind:src="@{{ msg.user.gravatar }}">
+                                                    v-bind:src="msg.user.gravatar">
                                                 </a>
                                                 <div class="media-body">
                                                   <strong>@{{ msg.user.name }}: </strong>
