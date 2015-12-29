@@ -51,7 +51,7 @@ class TeamsService {
             return false;
         }
 
-        if (!$user->projects()->find($project->id) ) {
+        if (! $user->projects()->find($project->id) ) {
             $user->projects()->attach($project->id, ['team_id' => $project->team->id]);
         }
 

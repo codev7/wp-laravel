@@ -69,6 +69,10 @@ function isAdmin() {
     return hasRole('admin') || hasRole('mastermind');
 }
 
+function isDev() {
+    return hasRole('developer');
+}
+
 /*
 Usage:
 fireJSEvent('Viewed Admin Dashboard','pageview','Viewed Dashboard',['date' => date('Y-m-d')]);

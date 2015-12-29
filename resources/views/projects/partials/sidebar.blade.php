@@ -119,7 +119,7 @@
                         @if ($project->credentials)
                         <td>{{ array_get($project->credentials, 'username') }} / {{ array_get($project->credentials, 'password') }}</td>
                         @else
-                        <td>Not Yet Received</td>
+                        <td><em>Not Yet Received</em></td>
                         @endif
                     </tr>
 
@@ -155,7 +155,7 @@
     </div>
     @endif
 
-    @if(!isRouteNameSpace('files') && !Auth::user()->isDeveloper())
+    @if(!isRouteNameSpace('files') && !isDev())
         <div class="panel panel-default visible-md-block visible-lg-block"
              data-controller="misc/uploadcare"
              state="{{ json_encode(['reference_type' => 'project', 'reference_id' => $project->id]) }}">

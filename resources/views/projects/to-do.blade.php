@@ -95,7 +95,7 @@
 
                             <hr />
 
-                            @if (!Auth::user()->isDeveloper())
+                            @if (!isDev())
                                 <div id="todo-ucare">
                                     <input role="uploadcare-uploader" type="hidden" data-multiple />
                                 </div>

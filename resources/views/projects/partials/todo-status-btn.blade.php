@@ -1,4 +1,4 @@
-@if (Auth::user()->isDeveloper())
+@if (isDev())
 <div>
     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}')"
