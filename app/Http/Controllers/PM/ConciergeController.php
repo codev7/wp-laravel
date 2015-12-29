@@ -4,6 +4,7 @@ namespace CMV\Http\Controllers\PM;
 
 use CMV\Http\Controllers\API\News;
 use CMV\Models\PM\Project;
+use CMV\Models\PM\ToDo;
 use CMV\Models\PM\UserNews;
 use Illuminate\Http\Request;
 use CMV\Http\Requests;
@@ -102,6 +103,27 @@ class ConciergeController extends Controller
 
         return view('projects/files', [
             'project' => $project
+        ]);
+    }
+
+    /**
+     * @Get("{slug}/to-dos/{todos}", as="project.todo", middleware="auth")
+     * @param $slug
+     * @param $toDo
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function toDo($slug, $toDo)
+    {
+        $project = Project::whereSlug($slug)
+            ->where('project_type', Project::TYPE_CONCIERGE)
+            ->firstOrFail();
+
+        $todo = ToDo::find($toDo);
+        $todo->load('files');
+
+        return view('projects/to-do', [
+            'project' => $project,
+            'todo' => $todo
         ]);
     }
 }

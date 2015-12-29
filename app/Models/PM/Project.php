@@ -235,4 +235,12 @@ class Project extends Model {
                 return 'Unknown status';
         }
     }
+
+    /**
+     * @return string
+     */
+    public function pType()
+    {
+        return $this->project_type == 'project' ? 'project' : 'concierge-site';
+    }
 }

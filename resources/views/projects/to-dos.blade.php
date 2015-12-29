@@ -52,11 +52,11 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t text-success fa-check"></i></a>
+                            <a data-pjax href="/{{ $project->pType() }}/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t text-success fa-check"></i></a>
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}">
+                            <a data-pjax href="/{{ $project->pType() }}/{{ $project->slug }}/to-dos/@{{ todo.id }}">
                                 <p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.category] }}</span></p>
                             <p class="m-a-0">@{{ todo.title }}</p>
 
@@ -79,13 +79,13 @@
                 <div class="media-body">
                     <div class="row">
                         <div class="col-sm-1 text-center  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t"
+                            <a data-pjax href="/{{ $project->pType() }}/{{ $project->slug }}/to-dos/@{{ todo.id }}"><i class="fa fa-2x m-t"
                                v-bind:class="{'text-danger': todo.type == 'bug', 'fa-exclamation-circle': todo.type == 'bug', 'text-warning': todo.type == 'feature', 'fa-star': todo.type == 'feature' }">
                             </i></a>
                         </div><!--col-->
 
                         <div class="col-sm-8  toggle-description">
-                            <a data-pjax href="/project/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.category] }}</span></p>
+                            <a data-pjax href="/{{ $project->pType() }}/{{ $project->slug }}/to-dos/@{{ todo.id }}"><p class=" text-primary" style="margin-bottom: 4px;"><span class="label label-default">@{{ meta[todo.category] }}</span></p>
                             <p class="m-a-0">@{{ todo.title }}</p>
 
                             <p class="text-muted m-a-0"><small>Submitted @{{ todo.created_at | ago }} ago by @{{ todo.created_by.name }}</small></p></a>
@@ -99,6 +99,10 @@
                                             class="btn btn-sm btn-default-outline">Start Task</button>
 
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}'"
+                                            v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}')"
+                                            class="btn btn-sm btn-primary">Finish Task</button>
+
+                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}'"
                                             v-on:click.stop="setStatus(todo, '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}')"
                                             class="btn btn-sm btn-primary">Deliver Task</button>
 
