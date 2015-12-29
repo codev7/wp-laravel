@@ -116,7 +116,7 @@
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_NEW }}'"
                                             class="btn btn-sm btn-default-outline" disabled>Unstarted</button>
 
-                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}'"
+                                    <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_IN_WORK }}' || todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_FINISHED }}'"
                                             class="btn btn-sm btn-default-outline" disabled>In Progress</button>
 
                                     <button v-if="todo.status == '{{ \CMV\Models\PM\ToDo::STATUS_DELIVERED }}'"

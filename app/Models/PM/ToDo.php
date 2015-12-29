@@ -26,6 +26,7 @@ class ToDo extends Model
 
     const STATUS_NEW = 'unstarted';
     const STATUS_IN_WORK = 'started';
+    const STATUS_FINISHED = 'finished';
     const STATUS_DELIVERED = 'delivered';
     const STATUS_REJECTED = 'rejected';
     const STATUS_ACCEPTED = 'accepted';
