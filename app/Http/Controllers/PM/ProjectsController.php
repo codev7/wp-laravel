@@ -188,6 +188,9 @@ class ProjectsController extends Controller
         return view('projects/invoices')->with('project', $project);
     }
 
+
+    
+
     /**
      * Store a newly created resource in storage.
      * @Get("project/{slug}/invoices/create", as="project.create_invoice", middleware="admin_auth")
@@ -204,6 +207,20 @@ class ProjectsController extends Controller
 
     }
 
+    /**
+     * @Get("project/{slug}/invoices/{invoices}", as="project.invoice", middleware="auth")
+     * @return Response
+     */
+    public function invoice($slug, $invoice_id)
+    {
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
+
+        return view('projects/invoice')
+            ->with('project', $project);
+    }
+    
     /**
      * Store a newly created resource in storage.
      * @Get("project/{slug}/to-dos", as="project.todos", middleware="auth")
