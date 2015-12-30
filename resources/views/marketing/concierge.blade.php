@@ -332,15 +332,47 @@
 		                    <li>&nbsp;</li>	
 		                    <li class="plan-action">
 		                        <a 
-		                        	href="{{ Auth::guest() ? '/register' : '/settings?tab=subscription' }}"
-		                        	class="btn {{ $count == 1 ? 'btn-success' : 'btn-default' }}  btn-lg">
+		                        	href="{{ Auth::guest() ? '/register?plan=' . $plan->id : '/settings?tab=subscription' }}"
+		                        	class="btn {{ $count == 1 ? 'btn-success' : 'btn-default-outline' }}  btn-lg">
 		                        	Choose Plan
 		                        </a>
 		                    </li>
 		                </ul>
 		            </div>
 		            @endforeach
+		            <div class="col-md-3 col-xs-12">
 
+		           
+		                <ul class="plan plan3">
+		                    <li class="plan-name">
+		                        Enterprise
+		                    </li>
+		                    <li class="plan-price">
+		                        <strong>Contact Us</strong>
+		                    </li>
+
+		                    
+		                    <li>
+		                        <strong>Unlimited Sites</strong>
+		                    </li>
+		                    <li>
+		                        <strong>Custom Plans</strong>
+		                    </li>
+		                    <li>
+		                        <strong>Expedited Response times to fit your exact needs</strong>
+		                    </li>
+		                    
+		                  
+		                    <li>&nbsp;</li>	
+		                    <li class="plan-action">
+		                        <a 
+		                        	href="#"
+		                        	class="btn btn-default-outline btn-lg toggle-chat">
+		                        	Contact Us
+		                        </a>
+		                    </li>
+		                </ul>
+		            </div>
 
 		           
 		    	</div>

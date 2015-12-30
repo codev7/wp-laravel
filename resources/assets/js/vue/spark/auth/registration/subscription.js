@@ -166,6 +166,20 @@ Vue.component('spark-subscription-register-screen', {
                                 return self.selectPlan(p);
                             }
                         });
+                    } else if(queryString.plan) {
+
+                        var counter = 0;
+                        for(counter=0; counter < this.plans.length; counter++) {
+
+                            if(this.plans[counter].id == queryString.plan) {
+
+
+                                this.setSelectedPlan(this.plans[counter]);
+
+                            }
+                        }
+
+                        
                     }
                 });
         },

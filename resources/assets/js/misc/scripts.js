@@ -7,6 +7,16 @@ var init = function() {
 		$el.css('width', width);
 	});
 
+
+    $('.toggle-chat').on('click', function(e)
+    {  
+
+        e.preventDefault();
+
+        window.CMV.toggleChat();
+
+    }); 
+
 	$('.gallery').slick({
 		arrows: false,
 		dots: true,

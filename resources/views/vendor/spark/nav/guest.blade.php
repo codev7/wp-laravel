@@ -20,14 +20,13 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="nav navbar-nav hidden-xs">
                 <li class="{{ set_active_from_route_name('project.new') }}"><a href="{{ route('project.new') }}">Get a Project Quote</a></li>
-				<li><a href="{{ route('wp-concierge') }}">WordPress Concierge</a></li>
+				<li><a href="{{ route('wp-concierge') }}">Get WordPress Concierge</a></li>
 			</ul>
 
 			<!-- Right Side Of Navbar -->
 			<ul class="nav navbar-nav navbar-right m-r-0">
 				<!-- Login / Registration Links -->
 				<li><a href="/login">Login</a></li>
-				<li><a href="/register">Register</a></li>
 			</ul>
 
 

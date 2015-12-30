@@ -18,7 +18,7 @@
 
 <script charset="utf-8" src="//ucarecdn.com/widget/2.5.5/uploadcare/uploadcare.full.min.js"></script>
 
-@if(isProduction())
+
 <script type="text/javascript">
  var _chatlio=_chatlio||[];
 !function(){var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["configure","identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];n.id="chatlio-widget-embed",n.src="https://w.chatlio.com/w.chatlio-widget.js",n.async=!0,n.setAttribute("data-embed-version","1.3");
@@ -43,4 +43,3 @@
 
 
 <script src="//load.sumome.com/" data-sumo-site-id="cbd69eb33c6add8729a025e4b35f477b184596d37cffb4dd763fd3b92b754ce7" async="async"></script>
-@endif

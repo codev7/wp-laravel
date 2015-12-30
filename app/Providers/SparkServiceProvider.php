@@ -146,21 +146,16 @@ class SparkServiceProvider extends ServiceProvider
          ->features([
              '1 site',
              '1 request at a time',
-             '2 Business Days to Complete Non Urgent Tasks',
+             '3 Business Days to Complete Non Urgent Tasks',
          ]);
 
          Spark::plan('Agency', 'WP-CONCIERGE-FREELANCER')->price(1599)
          ->features([
              '3 sites',
-             '2 request at a time',
+             '3 request at a time',
              '2 Business Days to Complete Non Urgent Tasks'
          ]);
 
-         Spark::plan('Agency XL', 'WP-CONCIERGE-AGENCY')->price(2400)
-         ->features([
-             '5 sites',
-             '3 request at a time',
-             '1 Business Days to Complete Non Urgent Tasks'
-         ]);
+    
     }
 }
