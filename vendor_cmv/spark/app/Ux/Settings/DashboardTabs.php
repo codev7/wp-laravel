@@ -46,7 +46,7 @@ class DashboardTabs extends Tabs
     public function subscription($force = false)
     {
         if (count(Spark::plans()->paid()) > 0 || $force) {
-            return new Tab('Subscription', 'spark::settings.tabs.subscription', 'fa-credit-card');
+            return new Tab('WP Concierge Subscription', 'spark::settings.tabs.subscription', 'fa-wordpress');
         }
     }
 }
