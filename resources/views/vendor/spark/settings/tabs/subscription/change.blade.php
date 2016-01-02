@@ -1,5 +1,5 @@
 <div class="panel panel-default" v-if="user.stripe_active">
-	<div class="panel-heading">Current Subscription</div>
+	<div class="panel-heading">Current WP Concierge Subscription</div>
 
 	<div class="panel-body">
 		<div class="pull-left" style="line-height: 36px;">

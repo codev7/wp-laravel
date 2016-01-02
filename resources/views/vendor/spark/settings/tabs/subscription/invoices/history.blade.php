@@ -1,6 +1,6 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Invoice History
+		WP Concierge Invoice History
 	</div>
 
 	<div class="panel-body">

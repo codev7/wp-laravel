@@ -11,16 +11,13 @@
 			<!-- Update Subscription -->
 			@include('spark::settings.tabs.subscription.change')
 
-			<!-- Update Credit Card -->
-			@include('spark::settings.tabs.subscription.card')
 
 			<!-- Resume Subscription -->
 			@include('spark::settings.tabs.subscription.resume')
 
 			<!-- Invoices -->
 			@if (count($invoices) > 0)
-				@include('spark::settings.tabs.subscription.invoices.vat')
-
+				
 				@include('spark::settings.tabs.subscription.invoices.history')
 			@endif
 

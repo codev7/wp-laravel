@@ -102,8 +102,9 @@ class SparkServiceProvider extends ServiceProvider
                 $tabs->profile(),
                 $tabs->teams(),
                 $tabs->security(),
+                $tabs->make('Billing', 'partials/project-settings', 'fa-credit-card'),
                 $tabs->subscription(),
-                // $tabs->make('Name', 'view', 'fa-icon'),
+                
             ];
         });
 
