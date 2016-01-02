@@ -1,11 +1,13 @@
 <?php
 namespace CMV\Http\Controllers\API;
 
+use CMV\Jobs\SendEmail;
 use CMV\Models\PM\Invoice;
 use CMV\Models\PM\InvoicePayment;
 use CMV\Models\PM\Project;
 //use CMV\Models\PM\ProjectBrief;
 //use CMV\Services\invoicesService;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Input, Auth, Validator;
@@ -15,6 +17,8 @@ use Input, Auth, Validator;
  * @package CMV\Http\Controllers\API
  */
 class invoices extends Controller {
+
+    use DispatchesJobs;
 
     /**
      * @var invoicesService
@@ -163,13 +167,19 @@ class invoices extends Controller {
      * @Post("api/projects/{projects}/invoices/{invoices}/set-speed")
      * @param $projectId
      * @param $invoiceId
+     * @return mixed
      */
     public function setSpeed($projectId, $invoiceId)
     {
-        $speed = Input::get('speed') ?: 0;
-
         $project = Project::findOrFail($projectId);
         $invoice = $project->invoices()->findOrFail($invoiceId);
+
+        $speed = Input::get('speed');
+
+        if ($invoice->speeds[$speed]['enabled'] == false) {
+            return $this->respondWithError('Selected delivery speed is not available for this invoice');
+        }
+
         $invoice->speed = $speed;
         $invoice->save();
 
@@ -198,7 +208,6 @@ class invoices extends Controller {
 
         /** @var Invoice $invoice */
         $invoice = $project->invoices()->findOrFail($invoiceId);
-        $payments = $invoice->payments;
 
         $user = \Auth::user();
         InvoicePayment::unguard();
@@ -257,11 +266,36 @@ class invoices extends Controller {
     }
 
     /**
-     * @param array $data
+     * @Post("api/projects/{projects}/invoices/{invoices}/notify-users")
+     * @param $projectId
+     * @param $invoiceId
+     * @return \Illuminate\Http\JsonResponse|mixed
      */
-    public function validateInvoice(array $data)
+    public function notifyUsers($projectId, $invoiceId)
     {
+        $data = \Input::all();
 
+        $validator = Validator::make($data, [
+            'users' => 'required|array'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->respondWithFailedValidator($validator);
+        }
+
+        $project = Project::findOrFail($projectId);
+
+        /** @var Invoice $invoice */
+        $invoice = $project->invoices()->findOrFail($invoiceId);
+
+        foreach ($data['users'] as $userId) {
+            $user = $project->team->users()->find($userId);
+            if ($user) {
+                $job = new SendEmail('emails.project_invoice', ['invoice' => $invoice], $user, "Project {$project->slug}: Invoice notification");
+                $this->dispatch($job);
+            }
+        }
+
+        return $this->respondWithSuccess();
     }
-
 }

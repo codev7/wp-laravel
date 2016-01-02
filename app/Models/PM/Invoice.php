@@ -106,9 +106,9 @@ class Invoice extends Model {
 
         // title, timeframes, enabled, delivery_date, multiplier
         return ! $value ? [
-            ['title' => 'Standard Turnaround', 'timeframes' => '5-10 business days', 'enabled' => true, 'delivery_date' => $now->addDays(10)->format('m-d-Y'), 'multiplier' => 100],
-            ['title' => 'Rush Turnaround', 'timeframes' => '3-5 business days', 'enabled' => true, 'delivery_date' => $now->addDays(5)->format('m-d-Y'), 'multiplier' => 120],
-            ['title' => 'Urgent Turnaround', 'timeframes' => '1-3 business days', 'enabled' => true, 'delivery_date' => $now->addDays(3)->format('m-d-Y'), 'multiplier' => 150],
+            ['title' => 'Standard Turnaround', 'timeframes' => '5-10 business days', 'enabled' => true, 'delivery_date' => $now->addDays(10)->format('m/d/Y'), 'multiplier' => 100],
+            ['title' => 'Rush Turnaround', 'timeframes' => '3-5 business days', 'enabled' => true, 'delivery_date' => $now->addDays(5)->format('m/d/Y'), 'multiplier' => 120],
+            ['title' => 'Urgent Turnaround', 'timeframes' => '1-3 business days', 'enabled' => true, 'delivery_date' => $now->addDays(3)->format('m/d/Y'), 'multiplier' => 150],
         ] : (is_array($value) ? $value : json_decode($value, true));
 
     }
@@ -166,7 +166,7 @@ class Invoice extends Model {
 
     public function speedAmount()
     {
-        $speed = $this->speeds[$this->speed ?: 0];
+        $speed = $this->getSpeed();
 
         return ceil($this->subtotal() * (($speed['multiplier'] - 100) / 100));
     }
@@ -174,7 +174,7 @@ class Invoice extends Model {
     public function discountAmount()
     {
         $subTotal = $this->subTotal();
-        $speed = $this->speeds[$this->speed ?: 0];
+        $speed = $this->getSpeed();
 
         return ceil($subTotal * ($speed['multiplier']/100) * ($this->discount_percent/100));
     }
@@ -182,7 +182,7 @@ class Invoice extends Model {
     public function grandTotal()
     {
         $subTotal = $this->subTotal();
-        $speed = $this->speeds[$this->speed ?: 0];
+        $speed = $this->getSpeed();
 
         return ceil($subTotal * ($speed['multiplier']/100) * ((100-$this->discount_percent)/100) );
     }
@@ -209,4 +209,20 @@ class Invoice extends Model {
     public function getFinalAmountAttribute() {return $this->finalAmount();}
     public function getGrandTotalAttribute() {return $this->grandTotal();}
     public function getSubTotalAttribute() {return $this->subTotal();}
+
+    public function getSpeed()
+    {
+        if ($this->speed !== null) {
+            $index = $this->speed;
+        } else {
+            foreach ($this->speeds as $i => $speed) {
+                if ($speed['enabled']) {
+                    $index = $i;
+                    break;
+                }
+            }
+        }
+
+        return $this->speeds[$index];
+    }
 }

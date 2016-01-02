@@ -10,7 +10,7 @@ export default Vue.extend({
             payingForInvoice: false,
             settingSpeed: false,
             submittingPayment: false,
-            paymentMethod: 'pre-saved'
+            paymentMethod: 'one-time'
         }
     },
 
@@ -46,6 +46,7 @@ export default Vue.extend({
         },
         openPaymentModal() {
             $('[data-stripe]').val('');
+            this.paymentMethod = 'one-time';
             $("#modal-pay-invoice").modal();
         },
         submitPayment() {

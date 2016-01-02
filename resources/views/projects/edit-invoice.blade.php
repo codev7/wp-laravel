@@ -122,7 +122,7 @@
                                                 <option value="10">10</option>
                                             </select>
                                         </td>
-                                        <td class="text-right">@{{ item.quantity * item.price }}</td>
+                                        <td class="text-right">$@{{ item.quantity * item.price }}</td>
                                         <td class="text-center">
                                             <a href="#" class="btn btn-xs btn-block btn-danger" v-on:click.prevent="removeLineItem(index)"><i class="fa fa-times"></i></a>
                                         </td>
@@ -135,7 +135,7 @@
                                             <a href="#" class="btn btn-primary btn-xs" v-on:click.prevent="addLineItem()"><i class="fa fa-plus"></i> Add Line Item</a>
                                         </td>
                                         <td style="border-left: none" colspan="2" class="text-right">Subtotal:</td>
-                                        <td colspan="2">$@{{ subtotal }}</td>
+                                        <td colspan="2">$@{{ subTotal }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="text-right">Discount:</td>
@@ -171,7 +171,7 @@
                                 <tbody>
                                     <tr v-for="speed in invoice.speeds">
                                         <td><h4 class="m-a-0 p-a-0">@{{ speed.title }}<br /><small class="text-muted">@{{ speed.timeframes }}</small></h4></td>
-                                        <td><input type="checkbox" checked="checked" v-model="speed.enabled"></td>
+                                        <td><input type="checkbox" v-model="speed.enabled"></td>
                                         <td>
                                             <div class="input-group input-group-sm">
                                                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
@@ -198,7 +198,9 @@
 
                     <div class="col-sm-3">
                         <div class="well well-small m-b-sm">
-                            <button type="submit" class="btn btn-success btn-block">Send Email Notification</button>
+                            <button type="submit" class="btn btn-success btn-block"
+                                    v-submit="sendingNotifications"
+                                    v-on:click.prevent="sendEmailNotifications">Send Email Notification</button>
 
                             @if ($invoice->exists)
                             <button v-if="invoice.status == 'draft'" type="submit" class="btn btn-info btn-block"

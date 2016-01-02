@@ -23,7 +23,7 @@
                     </div>
                     <div class="panel-body">
                         <form role="form" novalidate="novalidate" id="invoice-payment-form">
-                            @if (Auth::user('last_four'))
+                            @if (Auth::user()->last_four)
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="form-group">
@@ -56,6 +56,7 @@
                                         <label for="cardNumber">CARD NUMBER</label>
                                         <div class="input-group input-group-lg">
                                             <input type="tel" class="form-control input-lg" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required=""
+                                                   v-bind:disabled="paymentMethod == 'pre-saved'"
                                                     data-stripe="number">
                                             <span class="input-group-addon"><i class="fa fa-credit-card"></i></span></div>
                                     </div>
@@ -66,6 +67,7 @@
                                     <div class="form-group">
                                         <label for="cardExpiry">Exp Month</label>
                                         <select type="text" class="form-control" placeholder="MONTH" required=""
+                                                v-bind:disabled="paymentMethod == 'pre-saved'"
                                                 data-stripe="exp-month">
                                             <option value="01">Jan</option>
                                             <option value="02">Feb</option>
@@ -86,6 +88,7 @@
                                     <div class="form-group">
                                         <label for="cardExpiry">Exp Year</label>
                                         <select type="text" class="form-control" name="exp_year" placeholder="YEAR" required=""
+                                                v-bind:disabled="paymentMethod == 'pre-saved'"
                                                 data-stripe="exp-year">
                                             <option value="2015">2015</option>
                                             <option value="2016">2016</option>
@@ -109,6 +112,7 @@
                                     <div class="form-group">
                                         <label for="cardCVC">CV CODE</label>
                                         <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required=""
+                                               v-bind:disabled="paymentMethod == 'pre-saved'"
                                                 data-stripe="cvc">
                                     </div>
                                 </div>

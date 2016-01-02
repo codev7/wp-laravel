@@ -13,6 +13,10 @@ use CMV\Models\PM\Project;
 use Auth;
 use Illuminate\Http\Response;
 
+/**
+ * Class ProjectsController
+ * @package CMV\Http\Controllers\PM
+ */
 class ProjectsController extends Controller
 {
 
@@ -25,6 +29,15 @@ class ProjectsController extends Controller
             $project = Project::whereSlug($slug)
                 ->whereProjectType(Project::TYPE_PROJECT)
                 ->firstOrFail();
+
+            if (\Access::check($project, 'read')) {
+                if ($user->current_team_id != $project->team_id) {
+                    $user->current_team_id = $project->team_id;
+                    $user->save();
+                }
+            } else {
+                $this->throwNotFound();
+            }
 
             if ($project) {
                 $user->joinProjectIfStaff($project);
@@ -254,7 +267,7 @@ class ProjectsController extends Controller
 
         $invoice = $project->invoices()->findOrFail($invoiceId);
         $invoice->load('createdBy', 'payments', 'payments.payer');
-//dd($invoice->toArray());
+
         return view('projects/invoice', [
             'project' => $project,
             'invoice' => $invoice

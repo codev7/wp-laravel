@@ -90,7 +90,7 @@
                                     <td class="text-center">
                                         @{{ item.quantity }}
                                     </td>
-                                    <td class="text-right">@{{ item.price * item.quantity }}</td>
+                                    <td class="text-right">$@{{ item.price * item.quantity }}</td>
                                 </tr>
                             </tbody>
 
@@ -98,7 +98,7 @@
                                 <tr>
                                     <td  style="border-right: none"></td>
                                     <td style="border-left: none" colspan="2" class="text-right">Subtotal:</td>
-                                    <td colspan="2" class="text-right">$@{{ subtotal }}</td>
+                                    <td colspan="2" class="text-right">$@{{ invoice.subTotal }}</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -119,7 +119,7 @@
                                     <td>Deposit</td>
                                     <td>$@{{ invoice.depositAmount }}.00</td>
                                     <td>
-                                        <em v-if="!depPayment">Not Yet Payed</em>
+                                        <em v-if="!depPayment">not yet paid</em>
                                         <span v-if="depPayment && depPayment.stripe_transaction_id">
                                             @{{ depPayment.created_at | ago }} ago
                                         </span>
@@ -166,7 +166,9 @@
                 </tr>
 
                 <tr>
-                    <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time <br/><a href="#delivery-date-selector" data-toggle="modal">change delivery speed</a></small></td>
+                    <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time
+                            <br/>
+                            <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
                     <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
                 </tr>
             </table>
@@ -199,7 +201,9 @@
         </div>
         @endif
 
-        <a href="#" class="btn btn-warning-outline btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
+        @if (isAdmin())
+        <a href="/project/{{ $project->slug }}/invoices/{{ $invoice->id }}/edit" class="btn btn-warning-outline btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
+        @endif
     </div>
     @include('modals/delivery-date-selector')
     @include('modals/payment-info')

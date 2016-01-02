@@ -18,19 +18,19 @@
                             Standard
                         </li>
 
-
                         <li class="plan-price">
-                            <h3 class="black">$@{{ subtotal * (invoice.speeds[0].multiplier/100) }}</h3>
+                            <h3 class="black">$@{{ invoice.subTotal * (invoice.speeds[0].multiplier/100) }}</h3>
                         </li>
                         <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[0].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[0].delivery_date | mdYtoReadable }})</small></p></li>
                         <li class="plan-action">
-                            <a 
-                                href="#"
-                                class="btn btn-default-outline  btn-lg"
-                                v-submit="settingSpeed"
-                                v-on:click.prevent="setSpeed(0)">
-                                Select
+                            <a href="#"
+                               class="btn btn-default-outline  btn-lg"
+                               v-if="invoice.speeds[0].enabled"
+                               v-submit="settingSpeed"
+                               v-on:click.prevent="setSpeed(0)">
+                               Select
                             </a>
+                            <em v-if="!invoice.speeds[0].enabled">Not Available</em>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +40,7 @@
                             Expedited
                         </li>
                         <li class="plan-price">
-                            <h3 class="black">$@{{ subtotal * (invoice.speeds[1].multiplier/100) }}</h3>
+                            <h3 class="black">$@{{ invoice.subTotal * (invoice.speeds[1].multiplier/100) }}</h3>
                         </li>
 
                         <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[1].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[2].delivery_date | mdYtoReadable }})</small></p></li>
@@ -48,11 +48,14 @@
                             <a 
                                 href="#"
                                 class="btn btn-success  btn-lg"
+                                v-if="invoice.speeds[1].enabled"
                                 v-submit="settingSpeed"
                                 v-on:click.prevent="setSpeed(1)">
                                 Select
                             </a>
+                            <em v-if="!invoice.speeds[1].enabled">Not Available</em>
                         </li>
+
                     </ul>
                 </div>
                 <div class="col-md-4 col-xs-12">
@@ -63,16 +66,20 @@
                             Urgent
                         </li>
                         <li class="plan-price">
-                            <h3 class="black">$@{{ subtotal * (invoice.speeds[2].multiplier/100) }}</h3>
+                            <h3 class="black">$@{{ invoice.subTotal * (invoice.speeds[2].multiplier/100) }}</h3>
                         </li>
 
                         <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[2].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[2].delivery_date | mdYtoReadable }})</small></p></li>
                         <li class="plan-action">
-                            <a href="#" class="btn btn-default-outline  btn-lg"
+                            <a href="#"
+                               class="btn btn-default-outline  btn-lg"
+                               v-if="invoice.speeds[2].enabled"
                                v-submit="settingSpeed"
                                v-on:click.prevent="setSpeed(2)">
                                 Select
                             </a>
+
+                            <em v-if="!invoice.speeds[2].enabled">Not Available</em>
                         </li>
                     </ul>
                 </div>
