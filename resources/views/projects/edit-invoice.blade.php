@@ -169,7 +169,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr v-for="speed in invoice.speeds">
+                                    <tr v-for="(i, speed) in invoice.speeds">
                                         <td><h4 class="m-a-0 p-a-0">@{{ speed.title }}<br /><small class="text-muted">@{{ speed.timeframes }}</small></h4></td>
                                         <td><input type="checkbox" v-model="speed.enabled"></td>
                                         <td>
@@ -182,7 +182,7 @@
                                         <td>
                                             <div class="input-group input-group-sm">
 
-                                                <input type="text" disabled="disabled" placeholder="100" class="form-control input-sm  m-a-0"
+                                                <input type="text" v-bind:disabled="i == 0" placeholder="100" class="form-control input-sm  m-a-0"
                                                        v-model="speed.multiplier"/>
                                                 <div class="input-group-addon">%</div>
 
