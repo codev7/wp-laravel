@@ -328,8 +328,8 @@ function std_column(array $array, $column) {
 }
 
 function getGravatarImage($email, $size = 256)
-{
-    return "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "&s=" . $size . "&default=" . urlencode(asset('images/favicon.png'));
+{   
+    return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size . "&d=mm";
 }
 
 /**

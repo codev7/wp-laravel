@@ -42,7 +42,7 @@
     @if(hasRole('mastermind') || hasRole('admin'))
 
         <div data-controller="admin/project-modal" state="{{ json_encode($project->toArray()) }}">
-            <a class="m-t m-b btn btn-block btn-primary-outline"
+            <a class="m-t m-b btn btn-block btn-success"
                v-on:click.prevent="openModal()">
                 <i class="fa fa-unlock-alt"></i> Admin Tools
             </a>
