@@ -2,6 +2,7 @@
 
 namespace CMV\Http\Controllers\PM;
 
+use CMV\Models\PM\Invoice;
 use CMV\Models\PM\ToDo;
 use CMV\Models\PM\UserNews;
 use Illuminate\Http\Request;
@@ -185,40 +186,79 @@ class ProjectsController extends Controller
             ->whereProjectType(Project::TYPE_PROJECT)
             ->firstOrFail();
 
-        return view('projects/invoices')->with('project', $project);
+        return view('projects/invoices', [
+            'project' => $project
+        ]);
     }
 
-
-    
-
     /**
-     * Store a newly created resource in storage.
      * @Get("project/{slug}/invoices/create", as="project.create_invoice", middleware="admin_auth")
      * @return Response
      */
     public function createInvoice($slug)
     {
-
         $project = Project::whereSlug($slug)
             ->whereProjectType(Project::TYPE_PROJECT)
             ->firstOrFail();
 
-        return view('projects/edit-invoice')->with('project', $project);
+        $invoice = new Invoice();
+        $invoice->setRawAttributes([
+            'project_id' => $project->id,
+            'brief_id' => '',
+            'brief' => [],
+            'discount_percent' => 0,
+            'date' => null,
+            'users_to_notify' => '[]',
+            'speeds' => $invoice->speeds,
+            'speed' => 0,
+            'date_paid' => null,
+            'upfront_percent' => 20,
+            'line_items' => '[]'
+        ]);
 
+        return view('projects/edit-invoice', [
+            'project' => $project,
+            'invoice' => $invoice
+        ]);
     }
 
     /**
-     * @Get("project/{slug}/invoices/{invoices}", as="project.invoice", middleware="auth")
+     * Store a newly created resource in storage.
+     * @Get("project/{slug}/invoices/{invoices}/edit", as="project.edit_invoice", middleware="admin_auth")
      * @return Response
      */
-    public function invoice($slug, $invoice_id)
+    public function editInvoice(Request $request, $slug, $invoiceId)
     {
         $project = Project::whereSlug($slug)
             ->whereProjectType(Project::TYPE_PROJECT)
             ->firstOrFail();
 
-        return view('projects/invoice')
-            ->with('project', $project);
+        $invoice = $project->invoices()->findOrFail($invoiceId);
+
+        return view('projects/edit-invoice', [
+            'project' => $project,
+            'invoice' => $invoice
+        ]);
+    }
+
+
+    /**
+     * @Get("project/{slug}/invoices/{invoices}", as="project.invoice", middleware="auth")
+     * @return Response
+     */
+    public function invoice($slug, $invoiceId)
+    {
+        $project = Project::whereSlug($slug)
+            ->whereProjectType(Project::TYPE_PROJECT)
+            ->firstOrFail();
+
+        $invoice = $project->invoices()->findOrFail($invoiceId);
+        $invoice->load('createdBy', 'payments', 'payments.payer');
+//dd($invoice->toArray());
+        return view('projects/invoice', [
+            'project' => $project,
+            'invoice' => $invoice
+        ]);
     }
     
     /**

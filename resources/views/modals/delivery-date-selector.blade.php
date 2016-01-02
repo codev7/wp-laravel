@@ -20,13 +20,15 @@
 
 
                         <li class="plan-price">
-                            <h3 class="black">$75</h3>
+                            <h3 class="black">$@{{ subtotal * (invoice.speeds[0].multiplier/100) }}</h3>
                         </li>
-                        <li><p class="black">Guaranteed by end of day January 15th, 2015<br /><small class="text-muted">(next thursday)</small></p></li>             
+                        <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[0].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[0].delivery_date | mdYtoReadable }})</small></p></li>
                         <li class="plan-action">
                             <a 
-                                href=""
-                                class="btn btn-default-outline  btn-lg">
+                                href="#"
+                                class="btn btn-default-outline  btn-lg"
+                                v-submit="settingSpeed"
+                                v-on:click.prevent="setSpeed(0)">
                                 Select
                             </a>
                         </li>
@@ -38,14 +40,16 @@
                             Expedited
                         </li>
                         <li class="plan-price">
-                            <h3 class="black">$110</h3>
+                            <h3 class="black">$@{{ subtotal * (invoice.speeds[1].multiplier/100) }}</h3>
                         </li>
-                                                  
-                        <li><p class="black">Guaranteed by end of day January 11th, 2015<br /><small class="text-muted">(next monday)</small></p></li>
+
+                        <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[1].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[2].delivery_date | mdYtoReadable }})</small></p></li>
                         <li class="plan-action">
                             <a 
                                 href="#"
-                                class="btn btn-success  btn-lg">
+                                class="btn btn-success  btn-lg"
+                                v-submit="settingSpeed"
+                                v-on:click.prevent="setSpeed(1)">
                                 Select
                             </a>
                         </li>
@@ -59,14 +63,14 @@
                             Urgent
                         </li>
                         <li class="plan-price">
-                            <h3 class="black">$500</h3>
+                            <h3 class="black">$@{{ subtotal * (invoice.speeds[2].multiplier/100) }}</h3>
                         </li>
-                                                  
-                        <li><p class="black">Guaranteed by end of day January 8th, 2015<br /><small class="text-muted">(this friday)</small></p></li>
+
+                        <li><p class="black">Guaranteed by end of day @{{ invoice.speeds[2].delivery_date | mdYtoMDoY }}<br /><small class="text-muted">(@{{ invoice.speeds[2].delivery_date | mdYtoReadable }})</small></p></li>
                         <li class="plan-action">
-                            <a 
-                                href="/settings?tab=subscription"
-                                class="btn btn-default-outline  btn-lg">
+                            <a href="#" class="btn btn-default-outline  btn-lg"
+                               v-submit="settingSpeed"
+                               v-on:click.prevent="setSpeed(2)">
                                 Select
                             </a>
                         </li>

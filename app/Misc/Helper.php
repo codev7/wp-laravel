@@ -212,7 +212,8 @@ function getCodeMyViewsUserObject()
         'developer' => Auth::check() ? Auth::user()->is_developer ? true : false : false,
         'prod' => isProduction(),
         //'zref_route' => route('zref'),
-        'environment' => App::environment()
+        'environment' => App::environment(),
+        'last_four' => Auth::check() ? $user->last_four : null
     ];
 
     if ($user && $user->currentTeam) {

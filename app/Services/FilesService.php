@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 /**
  * Handles files logic
- * @todo add permission checks
  * Class FilesService
  * @package CMV\Services
  */

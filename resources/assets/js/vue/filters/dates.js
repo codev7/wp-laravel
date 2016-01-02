@@ -18,3 +18,12 @@ Vue.filter('date2', function (datetime) {
 
     return datetime.format('M/D/YYYY');
 });
+
+Vue.filter('mdYtoMDoY', function(date) {
+   return moment(date, 'M/D/YYYY').format('MMMM Do, YYYY');
+});
+
+Vue.filter('mdYtoReadable', function(date) {
+    var now = moment();
+    return moment(date, 'M/D/YYYY').from(now);
+})

@@ -10,6 +10,8 @@ export default {
     'project/dashboard': require('./controllers/project/dashboard'),
     'project/files': require('./controllers/project/files'),
     'project/invoices': require('./controllers/project/invoices'),
+    'project/invoice-edit': require('./controllers/project/invoice-edit'),
+    'project/invoice': require('./controllers/project/invoice'),
     'project/todos': require('./controllers/project/todos'),
     'project/todo': require('./controllers/project/todo'),
     'project/new': require('./controllers/project/new'),

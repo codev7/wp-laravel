@@ -153,7 +153,7 @@ class Project extends Model {
      */
     public function invoices()
     {
-        return $this->hasMany( 'CMV\Models\PM\Invoice','reference_id');
+        return $this->hasMany( 'CMV\Models\PM\Invoice');
     }
 
     /**

@@ -9,7 +9,7 @@
     </script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/URI.js/1.15.2/URI.min.js"></script>
-    @endsection
+@endsection
 
             <!-- Main Content -->
 @section('content')

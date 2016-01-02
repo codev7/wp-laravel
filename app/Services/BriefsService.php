@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 
 /**
  * Handles creating threads and messages
- * @todo add permission checks
  * Class BriefsService
  * @package CMV\Services
  */
