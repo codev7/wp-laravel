@@ -6,9 +6,7 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
-
-    <div class="col-md-6" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
+<div class="col-md-6 col-md-push-3" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
         <ul class="list-group media-list media-list-stream">
 
             <li class="media list-group-item p-a">
@@ -80,6 +78,9 @@
             </li>
         </ul>
     </div>
+    @include('projects/partials/sidebar')
+
+    
 
 
     <div class="col-md-3">

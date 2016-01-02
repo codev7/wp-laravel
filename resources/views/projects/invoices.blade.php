@@ -6,9 +6,8 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
 
-    <div class="col-md-9" data-controller="project/invoices" state="{{ json_encode(['project' => $project->toArray()]) }}" v-cloak>
+    <div class="col-md-9 col-md-push-3" data-controller="project/invoices" state="{{ json_encode(['project' => $project->toArray()]) }}" v-cloak>
        <ul class="list-group media-list media-list-stream">
             <li class="media list-group-item p-a">
                 <div class="media-body">
@@ -41,9 +40,9 @@
                                 <td class="text-center">$@{{ invoice.grandTotal }}.00</td>
                                 <td class="text-center">@{{ invoice.status }}</td>
                                 <td>
-                                    <a href="/project/{{ $project->slug }}/invoices/@{{ invoice.id }}" class="btn btn-primary-outline btn-xs">View Invoice</a>
+                                    <a data-pjax href="/project/{{ $project->slug }}/invoices/@{{ invoice.id }}" class="btn btn-primary-outline btn-xs">View Invoice</a>
                                     @if (isAdmin())
-                                    <a href="/project/{{ $project->slug }}/invoices/@{{ invoice.id }}/edit" style="margin-left: 3px" class="btn btn-warning-outline btn-xs">
+                                    <a data-pjax href="/project/{{ $project->slug }}/invoices/@{{ invoice.id }}/edit" style="margin-left: 3px" class="btn btn-warning-outline btn-xs">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     @endif
@@ -69,4 +68,6 @@
             </li>         
         </ul>
     </div>
+
+    @include('projects/partials/sidebar', ['pull' => 'col-md-pull-9'])
 @endsection

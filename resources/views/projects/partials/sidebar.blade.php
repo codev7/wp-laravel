@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3 {{ isset($pull) ? $pull : 'col-md-pull-6' }}">
 
 
     <div class="panel panel-default panel-profile m-b  m-t-lg">

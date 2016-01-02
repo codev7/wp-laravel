@@ -1,4 +1,4 @@
-<div class="panel panel-default m-b-md hidden-xs" data-controller="project/team"
+<div class="panel panel-default m-b-md" data-controller="project/team"
      state="{{ json_encode(['project_id' => $project->id, 'team_id' => $project->team_id]) }}"
      v-cloak>
     <div class="panel-body">

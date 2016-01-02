@@ -1,5 +1,13 @@
 @extends('spark::layouts.spark-no-container')
 
+@section('additional_js')
+<style>
+body {
+    background: white !important;
+}
+</style>
+@stop
+
 @section('content')
 <div class="profile-header text-center home-background-tiled">
 <div class="container">
@@ -28,7 +36,7 @@
 </nav>
 </div>
 
-<div class="p-y-md">
+<div class="p-y-md" style="background: white">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">

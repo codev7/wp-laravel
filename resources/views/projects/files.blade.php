@@ -6,9 +6,9 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
+    
 
-    <div class="col-md-9" data-controller="project/files"
+    <div class="col-md-9 col-md-push-3" data-controller="project/files"
          state="{{ json_encode(['reference_type' => 'project', 'reference_id' => $project->id]) }}"
          v-cloak>
         <ul class="list-group media-list media-list-stream">
@@ -71,5 +71,7 @@
 
         </ul>
     </div>
+
+    @include('projects/partials/sidebar', ['pull' => 'col-md-pull-9'])
 </div>
 @endsection

@@ -148,34 +148,37 @@
     </div>
 
     <div class="col-sm-4">
-        <div class="well well-small">
-            <table class="table table-bordered m-b-sm table-middle table-white">
-                <tr>
-                    <td class="text-right">Subtotal:</td>
-                    <td class="text-right">$@{{ invoice.subTotal }}</td>
-                </tr>
+        <div class="panel panel-default">
 
-                <tr>
-                    <td class="text-right">Expedited Delivery Speed:</td>
-                    <td class="text-right">$@{{ invoice.speedAmount }}</td>
-                </tr>
+            <div class="panel-body">
+                <table class="table table-bordered m-b-sm table-middle table-white">
+                    <tr>
+                        <td class="text-right">Subtotal:</td>
+                        <td class="text-right">$@{{ invoice.subTotal }}</td>
+                    </tr>
 
-                <tr>
-                    <td class="text-right">Discount (@{{ invoice.discount_percent }}%):</td>
-                    <td class="text-right"><em>-$@{{ invoice.discountAmount }}</em></td>
-                </tr>
+                    <tr>
+                        <td class="text-right">Expedited Delivery Speed:</td>
+                        <td class="text-right">$@{{ invoice.speedAmount }}</td>
+                    </tr>
 
-                <tr>
-                    <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time
-                            <br/>
-                            <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
-                    <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
-                </tr>
-            </table>
+                    <tr>
+                        <td class="text-right">Discount (@{{ invoice.discount_percent }}%):</td>
+                        <td class="text-right"><em>-$@{{ invoice.discountAmount }}</em></td>
+                    </tr>
 
-            <a href="#" v-if="invoice.speed === null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openSpeedModal">Select Delivery Date</a>
-            <a href="#" v-if="invoice.status == 'sent' && invoice.speed !== null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Deposit</a>
-            <a href="#" v-if="invoice.status == 'deposit_paid'" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Balance of $@{{ invoice.finalAmount }}</a>
+                    <tr>
+                        <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time
+                                <br/>
+                                <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
+                        <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
+                    </tr>
+                </table>
+
+                <a href="#" v-if="invoice.speed === null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openSpeedModal">Select Delivery Date</a>
+                <a href="#" v-if="invoice.status == 'sent' && invoice.speed !== null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Deposit</a>
+                <a href="#" v-if="invoice.status == 'deposit_paid'" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Balance of $@{{ invoice.finalAmount }}</a>
+            </div>
         </div>
 
         @if ($invoice->brief)

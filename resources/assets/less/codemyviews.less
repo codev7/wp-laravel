@@ -67,6 +67,15 @@
 /*
 * Misc LESS
 */
+
+body.with-top-navbar {
+    background: #f5f8fa;
+}
+
+.list-group-item {
+    background: white;
+}
+
 html {height: 100%;}
 
 #wrapper {
@@ -301,10 +310,9 @@ trix-toolbar {
 }
 
 .invoice-panel {
-    border: none;
+    //border: none;
     border-top: 3px solid @brand-primary;
     padding: 30px;
-    background: darken(#fff,3%);
 
     .logo-bg {
         background: url('/code-my-views-square-mark.png') no-repeat right center;
@@ -319,4 +327,8 @@ trix-toolbar {
             background: white;
         }
     }
+}
+
+.breadcrumb {
+    background: white;
 }
