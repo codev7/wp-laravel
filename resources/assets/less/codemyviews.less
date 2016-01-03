@@ -170,10 +170,6 @@ trix-toolbar {
     background: fadeout(#9da9b0,70%);
 }
 
-.brief-panel {
-    border-top: 3px solid @brand-primary;
-}
-
 .screenshot-photo {
     position: fixed;
     top: 0;
@@ -293,6 +289,15 @@ trix-toolbar {
 .to-do-list-item {
 }
 
+.navbar-inverse,.panel-default,.media-list-stream {
+    box-shadow: 0 1px 1px #ccc !important;
+    border: none !important;
+}
+
+.list-group-item {
+    border: none !important;
+}
+
 .media-group-header {
     padding: 5px 10px !important;
     background: fadeout(#ccc, 70%);
@@ -309,9 +314,13 @@ trix-toolbar {
     background: @blue15 url('@{images}bg-call-area.jpg');
 }
 
+.brief-panel {
+    border-top: 3px solid @brand-primary !important;
+}
+
 .invoice-panel {
     //border: none;
-    border-top: 3px solid @brand-primary;
+    border-top: 3px solid @brand-primary !important;
     padding: 30px;
 
     .logo-bg {

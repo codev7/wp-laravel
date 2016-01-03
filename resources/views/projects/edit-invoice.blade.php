@@ -12,7 +12,7 @@
         <form action="">
             <div class="row">
                 <div class="col-sm-9">
-                    <div class="panel panel-default panel-profile brief-panel">
+                    <div class="panel panel-default panel-profile invoice-panel p-t-0">
 
                         <div class="panel-body">
                             
@@ -214,22 +214,22 @@
                     <div class="panel panel-default">
 
                         <div class="panel-body">
-                            <button type="submit" class="btn btn-success btn-block"
+                            <button type="button" class="btn btn-success btn-block"
                                     v-submit="sendingNotifications"
                                     v-on:click.prevent="sendEmailNotifications">Send Email Notification</button>
 
                             @if ($invoice->exists)
-                            <button v-if="invoice.status == 'draft'" type="submit" class="btn btn-info btn-block"
+                            <button v-if="invoice.status == 'draft'" type="button" class="btn btn-info btn-block"
                                     v-submit="sendingToClient"
                                     v-on:click.prevent="sendToClient">Send to Client</button>
                             @endif
 
-                            <button v-if="invoice.status == 'draft' || !invoice.id" type="button" class="btn btn-default-outline btn-block"
+                            <button v-if="invoice.status == 'draft' || !invoice.id" type="submit" class="btn btn-default-outline btn-block"
                                     v-submit="savingInvoice"
-                                    v-on:click.prevent="saveAsDraft">Save as Draft
+                                    v-on:click.prevent="saveAsDraft">Save Draft
                             </button>
 
-                            <button v-if="invoice.status != 'draft' && invoice.id" type="button" class="btn btn-default-outline btn-block"
+                            <button v-if="invoice.status != 'draft' && invoice.id" type="submit" class="btn btn-default-outline btn-block"
                                     v-submit="savingInvoice"
                                     v-on:click.prevent="saveAsDraft">Save
                             </button>

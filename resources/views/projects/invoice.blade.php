@@ -74,17 +74,17 @@
                         <table class="table table-bordered m-b-sm table-middle table-white">
                             <thead>
                                 <tr>
-                                    <th>Description</th>
-                                    <th style="width: 15%">Unit Cost</th>
-                                    <th>Qty</th>
-                                    <th class="text-right" style="width: 12%">Line Total</th>
+                                    <th style="width: 55%">Description</th>
+                                    <th style="width: 15%" class="text-center">Unit Cost</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-right" style="width: 15%">Line Total</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr v-for="item in invoice.line_items">
                                     <td>@{{ item.description }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         $@{{ item.price }}
                                     </td>
                                     <td class="text-center">
@@ -168,7 +168,7 @@
                     </tr>
 
                     <tr>
-                        <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time
+                        <td class="text-right">Grand Total: <small class="text-muted" v-if="invoice.speed">@{{ invoice.speeds[invoice.speed].title }} time
                                 <br/>
                                 <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
                         <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
@@ -193,26 +193,21 @@
             <div class="panel-body">
                 <h5 class="m-t-0">This invoice is for the following development brief:</h5>
 
-                <ul class="media-list media-list-stream">
-                    <li class="media m-b">
-                        <div class="media-body">
-                            <strong>{{ $invoice->text['brief_type'] }} Project</strong>
-                            <p class="text-muted m-a-0">{{ $project->team->name }}</p>
-                            <div class="media-body-actions">
-                                <a class="btn btn-primary-outline btn-xs"
-                                   href="/project/{{ $project->slug }}/briefs/{{ $invoice->brief->id }}" target="_blank">
-                                    <i class="fa fa-search"></i> View Brief
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <strong>{{ $invoice->brief->text['brief_type'] }} Brief</strong>
+                <p class="text-muted m-a-0">{{ $project->name }}</p>
+                <div class="media-body-actions">
+                    <a class="btn btn-primary btn-xs"
+                       href="/project/{{ $project->slug }}/briefs/{{ $invoice->brief->id }}" target="_blank">
+                        <i class="fa fa-search"></i> View Brief
+                    </a>
+                </div>
+    
             </div>
         </div>
         @endif
 
         @if (isAdmin())
-        <a data-pjax href="/project/{{ $project->slug }}/invoices/{{ $invoice->id }}/edit" class="btn btn-warning-outline btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
+        <a data-pjax href="/project/{{ $project->slug }}/invoices/{{ $invoice->id }}/edit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
         @endif
     </div>
     @include('modals/delivery-date-selector')

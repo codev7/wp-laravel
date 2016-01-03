@@ -40,7 +40,7 @@
                                 <td>@{{ file.size | readableSize }}</td>
                                 <td>@{{ file.user.name }}</td>
                                 <td>@{{ file.created_at | ago }}</td>
-                                <td><a :href="file.path" target="_blank" class="btn btn-primary-outline btn-sm">Download File</a></td>
+                                <td><a :href="file.path" target="_blank" class="btn btn-primary btn-sm">Download File</a></td>
                                 <td>
                                     @if (!isDev())
                                     <a href="#" class="btn btn-danger-outline btn-xs"
