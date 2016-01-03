@@ -28,7 +28,7 @@
 
                         <tbody>
                             <tr v-for="invoice in invoices">
-                                <td class="text-left">@{{ invoice.created_at | ago }}</td>
+                                <td class="text-left">@{{ invoice.created_at | mdYtoMDoY }}</td>
                                 <td class="text-left">@{{ invoice.created_by.name }}</td>
                                 <td class="text-left">$@{{ invoice.grandTotal }}.00</td>
                                 <td class="text-left">@{{ invoice.status }}</td>

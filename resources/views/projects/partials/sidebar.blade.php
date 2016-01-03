@@ -146,7 +146,7 @@
                     @endif
 
                     <tr>
-                        <td><a href="#" class="btn btn-lg btn-block btn-success" disabled="disabled">Re-deploy Application</a></td>
+                        <td><a href="#" class="btn btn-sm btn-block btn-success" disabled="disabled">Re-deploy Application</a></td>
                     </tr>
                 </tbody>
             </table>

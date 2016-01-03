@@ -37,18 +37,18 @@
                                         <i class="fa fa-question-circle"></i>
                                     </span>
                                 </td>
-                                <td class="text-center">@{{ brief.created_at | ago }}</td>
+                                <td class="text-center">@{{ brief.created_at | ago }} ago</td>
                                 <td class="text-center">@{{ brief.created_by_user.name }}</td>
                                 <td class="text-center">
-                                    <span v-if="brief.approved_by_customer_id">@{{ brief.approved_by_customer_at | ago }}</span>
-                                    <span v-if="!brief.approved_by_customer_id">Not Yet Approved</span>
+                                    <span v-if="brief.approved_by_customer_id">@{{ brief.approved_by_customer_at | ago }} ago</span>
+                                    <span v-if="!brief.approved_by_customer_id"><em class="text-muted">Not Yet Approved</em></span>
                                 </td>
                                 <td class="text-center">
                                     <span v-if="brief.approved_by_customer_id">@{{ brief.approved_by_user.name }}</span>
-                                    <span v-if="!brief.approved_by_customer_id"></span>
+                                    <span v-if="!brief.approved_by_customer_id"><em class="text-muted">Not Yet Approved</em></span>
                                 </td>
                                 <td>
-                                    <a data-pjax href="/project/{{ $project->slug }}/briefs/@{{ brief.id }}" class="btn btn-primary-outline btn-xs">View Brief</a>
+                                    <a data-pjax href="/project/{{ $project->slug }}/briefs/@{{ brief.id }}" class="btn btn-primary btn-xs">View Brief</a>
                                 </td>
                             </tr>
                         </tbody>

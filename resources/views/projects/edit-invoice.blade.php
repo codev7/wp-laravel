@@ -21,65 +21,66 @@
                             <br />
                             
 
-                            <div class="form-group">
-                                <label>Is this invoice related to a developer brief?</label>
-
-                                <select class="form-control" v-model="invoice.brief_id">
-                                    <option value="">Not related to a brief</option>
-                                    @foreach ($project->briefs as $brief)
-                                        <option value="{{ $brief->id }}">{{ $brief->text['brief_type'] }} ({{ $brief->created_at->format('m/d/Y') }})</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>Send Invoice To</label>
-
-                                <select class="form-control" multiple v-model="invoice.users_to_notify">
-                                    @foreach ($project->team->users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                <p class="help-block">The people you select here will receive a notification about this invoice and any associated project briefs.  The invoice will still be visible to all members of this project - but if you do not select a user here, they will not receive an email notification about the invoice or brief.</p>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="discount_amount">Discount Percent</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="discount_amount" placeholder="Discount Amount" max="99"
-                                           v-model="invoice.discount_percent">
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                                <p class="help-block">Enter a percent amount that you want to discount off the invoice.</p>
-                            </div>
-
                             <div class="row">
                                 <div class="col-sm-6">
+
+                                    <div class="form-group">
+                                        <label>Is this invoice related to a developer brief?</label>
+
+                                        <select class="form-control" v-model="invoice.brief_id">
+                                            <option value="">Not related to a brief</option>
+                                            @foreach ($project->briefs as $brief)
+                                                <option value="{{ $brief->id }}">{{ $brief->text['brief_type'] }} ({{ $brief->created_at->format('m/d/Y') }})</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>Send Invoice To <i data-placement="right" class="fa fa-question-circle tooltipper" data-title="The people you select here will receive a notification about this invoice and any associated project briefs.  The invoice will still be visible to all members of this project - but if you do not select a user here, they will not receive an email notification about the invoice or brief."></i></label>
+
+                                        <select class="form-control" multiple v-model="invoice.users_to_notify">
+                                            @foreach ($project->team->users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
                                     <div class="form-group">
                                         <label>Invoice Date</label>
 
                                         <input type="text" data-provide="datepicker" class="form-control"
                                                v-model="invoice.date">
                                     </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Deposit Required</label>
-
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="deposit_amount" placeholder="50%" max="99"
-                                                   v-model="invoice.upfront_percent">
-                                            <div class="input-group-addon">%</div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="discount_amount">Discount Percent <i data-title="Enter a percent amount that you want to discount off the invoice." class="fa fa-question-circle tooltipper"></i></label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="discount_amount" placeholder="Discount Amount" max="99"
+                                                       v-model="invoice.discount_percent">
+                                                <div class="input-group-addon">%</div>
+                                            </div>
                                         </div>
+                                        <div class="form-group col-sm-6">
+                                            <label>Deposit Required <i  data-title="This is the amount we will require to be paid up front before the project will enter development." class="fa fa-question-circle tooltipper"></i></label>
 
-                                        <p class="help-block">This is the amount we will require to be paid up front before the project will enter development.</p>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="deposit_amount" placeholder="50%" max="99"
+                                                       v-model="invoice.upfront_percent">
+                                                <div class="input-group-addon">%</div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
+
+                                    
                                 </div>
                             </div>
+
+                            <hr />
 
                             <div class="form-group">
                                 <label>Line Items</label>
@@ -96,6 +97,18 @@
                                     </thead>
 
                                     <tbody>
+                                        <tr v-if="!invoice.line_items.length">
+                                            <td colspan="5" class="text-center">
+                                                <br />
+                                                <br />
+                                                You need to add some line items to this invoice.
+                                                <br />
+                                                <br />
+                                                <a href="#" class="btn btn-primary btn-xs" v-on:click.prevent="addLineItem()"><i class="fa fa-plus"></i> Add Line Item</a>
+                                                <br />
+                                                <br />
+                                            </td>
+                                        </tr>
                                         <tr v-for="(index, item) in invoice.line_items">
                                             <td>
                                                 <input type="text" placeholder="A short description" class="form-control input-sm m-a-0"
@@ -129,7 +142,7 @@
                                         </tr>
                                     </tbody>
 
-                                    <tfoot>
+                                    <tfoot v-if="invoice.line_items.length">
                                         <tr>
                                             <td  style="border-right: none">
                                                 <a href="#" class="btn btn-primary btn-xs" v-on:click.prevent="addLineItem()"><i class="fa fa-plus"></i> Add Line Item</a>

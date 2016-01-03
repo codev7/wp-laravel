@@ -3,9 +3,8 @@
 @section('content')
     <div class="row">
 
-        @include('projects/partials/sidebar')
 
-        <div class="col-md-9" data-controller="project/todo" v-cloak state="{{ json_encode(['todo' => $todo->toArray() ]) }}">
+        <div class="col-md-9 col-md-push-3" data-controller="project/todo" v-cloak state="{{ json_encode(['todo' => $todo->toArray() ]) }}">
 
             <div class="panel panel-default panel-profile brief-panel">
                 <div class="panel-body">
@@ -72,7 +71,7 @@
 
                         <div class="col-sm-4">
 
-                            <div class="hr-divider">
+                            <div class="hr-divider" v-if="todo.files.length">
                                 <h3 class="hr-divider-content hr-divider-heading">To Do Files</h3>
                             </div>
 
@@ -93,14 +92,13 @@
 
                             </table>
 
-                            <hr />
+                            <hr v-if="todo.files.length" />
 
                             @if (!isDev())
                                 <div id="todo-ucare">
                                     <input role="uploadcare-uploader" type="hidden" data-multiple />
                                 </div>
 
-                                {{--<a href="#" class="btn btn-success btn-xs pull-right"><i class="fa fa-plus"></i> Upload Files</a>--}}
                                 <div class="clearfix"></div>
 
                                 <hr />
@@ -112,6 +110,8 @@
                 </div>
             </div>
         </div>
+
+        @include('projects/partials/sidebar', ['pull' => 'col-md-pull-9'])
     </div>
 
 @endsection
