@@ -9,9 +9,9 @@
 <div class="col-md-6 col-md-push-3" v-cloak data-controller="project/dashboard" state='{{json_encode(['reference_type' => 'project', 'reference_id' => $project->id])}}'>
         <ul class="list-group media-list media-list-stream">
 
-            <li class="media list-group-item p-a">
+            <li class="media list-group-item p-a no-border">
                 <div class="form-group">
-                    <textarea class="form-control hidden" rows="4" placeholder="Message"
+                    <textarea class="form-control hidden" rows="10" placeholder="Message"
                               v-model="message"
                               v-trix
                     ></textarea>
