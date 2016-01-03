@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta id="token" name="csrf-token" content="{{ csrf_token() }}"/>
 <meta id="stripe-token" name="stripe-token" content="{{ env('STRIPE_PUBLIC') }}"/>
 
