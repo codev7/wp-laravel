@@ -5,7 +5,7 @@
 @stop
 
 @section('title')
-<title>404 Error - Page Not Found</title>
+<title>500 Error - Something went wrong.</title>
 @endsection
 
 @section('content')
@@ -15,22 +15,22 @@
                 <div class="col-lg-8 col-md-9">
 
 
-	                <div class="post-preview">
-	                    <header>
+                    <div class="post-preview">
+                        <header>
 
-	                        <span class="label label-warning category-label">404</span>
-	                        <h2>Page not found.</h2>
-	                        <div class="meta">
-	                            <p>Sorry, we could not find what you were looking for.</p>
-	                        </div>
-	                    </header>
-	 
-
-
+                            <span class="label label-danger category-label">500</span>
+                            <h2>Uh oh.  Something broke. <i class="fa fa-frown-o"></i></h2>
+                            <div class="meta">
+                                <p>Sorry, that was not supposed to happen.  Our engineers have been notified of this issue.</p>
+                            </div>
+                        </header>
+     
 
 
-	                    <a data-pjax href="{{ route('home') }}" class="btn btn-primary-outline"><i class="fa fa-long-arrow-left"></i> Go back to the home page</a>
-	                </div>
+
+
+                        <a data-pjax href="{{ URL::previous() }}" class="btn btn-primary-outline"><i class="fa fa-long-arrow-left"></i> Go back to the last page.</a>
+                    </div>
                     
                    
                 </div>

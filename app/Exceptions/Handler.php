@@ -46,6 +46,9 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+
+        if (!$this->isHttpException($e) &&  ! \Config::get('app.debug')) $e = new \Symfony\Component\HttpKernel\Exception\HttpException(500);
+
         return parent::render($request, $e);
     }
 }
