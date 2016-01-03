@@ -47,7 +47,7 @@ class MergeConciergeSitesTableWithProjectsTable extends Migration
 
             $table->integer('developer_id')->unsigned()->nullable()->default(null);
             $table->integer('project_manager_id')->unsigned()->nullable()->default(null);
-            $table->integer('bitbucket_id')->nullable()->default(null);
+            $table->integer('bitbucket_slug')->nullable()->default(null);
 
             $table->string('git_url')->nullable()->default(null);
 

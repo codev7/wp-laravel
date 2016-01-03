@@ -31,7 +31,7 @@ class AlterProjectBriefsTableAddApprovedByAdminCols extends Migration
     public function down()
     {
         Schema::table('project_briefs', function(Blueprint $table) {
-            $table->renameColumn('approved_by_client_at', 'approved_at');
+            $table->renameColumn('approved_by_customer_at', 'approved_at');
             $table->dropColumn('approved_by_admin_id', 'approved_by_admin_at');
         });
     }
