@@ -154,7 +154,7 @@ body {
                         <a href="#add-concierge-site" data-toggle="modal" class="btn btn-lg btn-primary-outline"><i class="fa fa-plus"></i> Add Concierge Site</a>
 
                         @else
-                        <p class="m-b-lg">Before you can add a concierge site, the team owner needs <a href="/settings?tab=subscription">choose a plan</a>.</p>
+                        <p class="m-b-lg">Before you can add a concierge site, the team owner needs <a href="/settings?tab=wp-concierge-subscription">choose a plan</a>.</p>
 
                         <div class="well well-small m-x-lg">
                             <h4 class="p-x">Our WordPress VIP concierge service gives you the ability to stop worrying about updates and small changes to your WordPress site.</h4>

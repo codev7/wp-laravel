@@ -8,7 +8,7 @@
             <i v-if="!team.id" class="fa fa-spinner fa-spin"></i>
         </div>
 
-        <ul class="media-list media-list-stream"
+        <ul class="media-list media-list-stream no-shadow"
             v-if="team.id">
             <li class="media m-b"
                 v-for="user in team.users">

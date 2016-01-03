@@ -69,7 +69,7 @@
 */
 
 body.with-top-navbar {
-    background: #f5f8fa;
+    background: fadeout(@brand-primary, 95%);
 }
 
 .list-group-item {
@@ -291,7 +291,13 @@ trix-toolbar {
 
 .navbar-inverse,.panel-default,.media-list-stream {
     box-shadow: 0 1px 1px #ccc !important;
+    -webkit-box-shadow: 0 1px 1px #ccc !important;
+    -moz-box-shadow: 0 1px 1px #ccc !important;
     border: none !important;
+
+    &.no-shadow {
+        box-shadow: none !important;
+    }
 }
 
 .list-group-item {
