@@ -16,7 +16,7 @@ class AlterInvoicesTable extends Migration
             $table->dropColumn('reference_id');
             $table->dropColumn('reference_type');
 
-            $table->integer('brief_id')->undigned()->default(null)->after('id');
+            $table->integer('brief_id')->unsigned()->default(null)->after('id');
             $table->integer('project_id')->unsigned()->after('id');
             $table->integer('created_by')->unsigned()->after('id');
 

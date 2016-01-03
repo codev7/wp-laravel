@@ -152,7 +152,6 @@ return [
         CMV\Providers\AnnotationsServiceProvider::class,
         CMV\Providers\MacroServiceProvider::class,
         CMV\Providers\WordPressServiceProvider::class,
-        Aws\Laravel\AwsServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagLaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Maknz\Slack\SlackServiceProvider::class,

@@ -147,11 +147,17 @@
                             </h4>
                         </th>
                         <td>
-                            <p>This project can be completed in as soon as 3 business days - 10 business days, depending
-                                on which speed you pick on the invoice page.</p>
 
-                            <p class="text-muted m-b-0">
-                                <strong>All of our projects come with a <a href="#">delivery date guarantee</a>.</strong></p>
+                            <div><!--v-if invoiceExists-->
+                                <p>This project can be completed in as soon as 3 business days - 10 business days, depending
+                                    on which speed you pick on the invoice page.</p>
+
+                                <p>All of our projects come with guaranteed delivery dates.</p>
+                            </div>
+
+                            <div><!--v-if invoiceDoesNotExist -->
+                                <p>The delivery dates have not been added for this brief yet.  Please contact your project engineer.</p>
+                            </div>
                         </td>
                     </tr>
 
@@ -163,10 +169,15 @@
                         </th>
                         <td>
 
-                            <p class="m-b-0">
+                            <div><!--v-if invoiceExists-->
+                            <p>
                                 The guaranteed cost for this project is $1,000 - $3,000, depending on which delivery speed you pick on the invoice page. <a href="#"><strong>View Invoice</strong></a>.
                             </p>
+                            </div>
 
+                            <div><!--v-if invoiceDoesNotExist -->
+                                <p>An invoice has not been created yet for this development brief.  Please contact your project engineer.</p>
+                            </div>
                         </td>
                     </tr>
 

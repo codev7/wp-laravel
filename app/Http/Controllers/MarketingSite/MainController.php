@@ -66,7 +66,8 @@ class MainController extends Controller
      * @return Methodology View
      */
     public function ourMethods()
-    {  
+    {   
+        
         return $this->minifyHTML(view('marketing/our-methods'));
     }
 

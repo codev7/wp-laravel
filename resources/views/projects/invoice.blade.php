@@ -20,15 +20,15 @@
                 <div class="row">
                     <div class="col-sm-12">
 
-                        <div v-if="invoice.status == 'sent' && invoice.upfront_percent" class="alert alert-info">
-                            This project requires a @{{ invoice.upfront_percent }}% deposit before it will be moved into development.  Please select a delivery option below to start your project.
+                        <div v-if="invoice.status == 'sent' && invoice.upfront_percent" class="alert alert-warning">
+                            This project requires a @{{ invoice.upfront_percent }}% deposit before it will be moved into development.  Please <strong><a class="alert-link" v-on:click.prevent="openSpeedModal" href="#">select a delivery option</a></strong> to start your project.
                         </div>
 
                         <div v-if="invoice.status == 'paid'" class="alert alert-success">
                             This invoice was paid in full {{ $invoice->updated_at->diffForHumans() }}.
                         </div>
 
-                        <div v-if="invoice.status == 'deposit_paid'" class="alert alert-warning">
+                        <div v-if="invoice.status == 'deposit_paid'" class="alert alert-info">
                             We have received your deposit and your project has entered development.
                         </div>
 
@@ -74,17 +74,17 @@
                         <table class="table table-bordered m-b-sm table-middle table-white">
                             <thead>
                                 <tr>
-                                    <th>Description</th>
-                                    <th style="width: 15%">Unit Cost</th>
-                                    <th>Qty</th>
-                                    <th class="text-right" style="width: 12%">Line Total</th>
+                                    <th style="width: 55%">Description</th>
+                                    <th style="width: 15%" class="text-center">Unit Cost</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-right" style="width: 15%">Line Total</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr v-for="item in invoice.line_items">
                                     <td>@{{ item.description }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         $@{{ item.price }}
                                     </td>
                                     <td class="text-center">
@@ -148,34 +148,44 @@
     </div>
 
     <div class="col-sm-4">
-        <div class="well well-small">
-            <table class="table table-bordered m-b-sm table-middle table-white">
-                <tr>
-                    <td class="text-right">Subtotal:</td>
-                    <td class="text-right">$@{{ invoice.subTotal }}</td>
-                </tr>
+        <div class="panel panel-default">
 
-                <tr>
-                    <td class="text-right">Expedited Delivery Speed:</td>
-                    <td class="text-right">$@{{ invoice.speedAmount }}</td>
-                </tr>
+            <div class="panel-body">
+                <table class="table table-bordered m-b-sm table-middle table-white">
+                    <tr>
+                        <td class="text-right">Subtotal:</td>
+                        <td class="text-right">$@{{ invoice.subTotal }}</td>
+                    </tr>
 
-                <tr>
-                    <td class="text-right">Discount (@{{ invoice.discount_percent }}%):</td>
-                    <td class="text-right"><em>-$@{{ invoice.discountAmount }}</em></td>
-                </tr>
+                    <tr>
+                        <td class="text-right">Expedited Delivery Speed:</td>
+                        <td class="text-right">$@{{ invoice.speedAmount }}</td>
+                    </tr>
 
-                <tr>
-                    <td class="text-right">Grand Total: <small class="text-muted">@{{ invoice.speeds[invoice.speed].title }} time
-                            <br/>
-                            <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
-                    <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
-                </tr>
-            </table>
+                    <tr v-if="invoice.discount_percent != 0">
+                        <td class="text-right">Discount (@{{ invoice.discount_percent }}%):</td>
+                        <td class="text-right"><em>-$@{{ invoice.discountAmount }}</em></td>
+                    </tr>
 
-            <a href="#" v-if="invoice.speed === null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openSpeedModal">Select Delivery Date</a>
-            <a href="#" v-if="invoice.status == 'sent' && invoice.speed !== null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Deposit</a>
-            <a href="#" v-if="invoice.status == 'deposit_paid'" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Balance of $@{{ invoice.finalAmount }}</a>
+                    <tr>
+                        <td class="text-right">Grand Total: <small class="text-muted" v-if="invoice.speed">@{{ invoice.speeds[invoice.speed].title }} time
+                                <br/>
+                                <a v-if="invoice.status == 'sent'" href="#" v-on:click.prevent="openSpeedModal">change delivery speed</a></small></td>
+                        <td class="text-right"><strong>$@{{ invoice.grandTotal }}</strong></td>
+                    </tr>
+                </table>
+
+                <a href="#" v-if="invoice.speed === null" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openSpeedModal">Select Delivery Date</a>
+                
+                <div v-if="invoice.status == 'sent' && invoice.speed !== null">
+                    <p class="text-center m-b-sm">Paying the deposit will lock in your delivery date of <strong>@{{ invoice.speeds[invoice.speed].delivery_date  | dayOfWeek }}</strong>.</p>
+
+                    <a href="#" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Deposit</a>
+                    
+                    
+                </div>
+                <a href="#" v-if="invoice.status == 'deposit_paid'" class="btn btn-lg btn-success btn-block" v-on:click.prevent="openPaymentModal">Pay Balance of $@{{ invoice.finalAmount }}</a>
+            </div>
         </div>
 
         @if ($invoice->brief)
@@ -183,26 +193,21 @@
             <div class="panel-body">
                 <h5 class="m-t-0">This invoice is for the following development brief:</h5>
 
-                <ul class="media-list media-list-stream">
-                    <li class="media m-b">
-                        <div class="media-body">
-                            <strong>{{ $invoice->text['brief_type'] }} Project</strong>
-                            <p class="text-muted m-a-0">{{ $project->team->name }}</p>
-                            <div class="media-body-actions">
-                                <a class="btn btn-primary-outline btn-xs"
-                                   href="/project/{{ $project->slug }}/briefs/{{ $invoice->brief->id }}" target="_blank">
-                                    <i class="fa fa-search"></i> View Brief
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                <strong>{{ $invoice->brief->text['brief_type'] }} Brief</strong>
+                <p class="text-muted m-a-0">{{ $project->name }}</p>
+                <div class="media-body-actions">
+                    <a class="btn btn-primary btn-xs"
+                       href="/project/{{ $project->slug }}/briefs/{{ $invoice->brief->id }}" target="_blank">
+                        <i class="fa fa-search"></i> View Brief
+                    </a>
+                </div>
+    
             </div>
         </div>
         @endif
 
         @if (isAdmin())
-        <a href="/project/{{ $project->slug }}/invoices/{{ $invoice->id }}/edit" class="btn btn-warning-outline btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
+        <a data-pjax href="/project/{{ $project->slug }}/invoices/{{ $invoice->id }}/edit" class="btn btn-warning btn-xs pull-right"><i class="fa fa-edit"></i> Edit Invoice</a>
         @endif
     </div>
     @include('modals/delivery-date-selector')

@@ -3,9 +3,9 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
+    
 
-    <div class="col-md-9" data-controller="project/todos" v-cloak state="{{ json_encode(['reference_id' => $project->id, 'reference_type' => 'project']) }}">
+    <div class="col-md-9 col-md-push-3" data-controller="project/todos" v-cloak state="{{ json_encode(['reference_id' => $project->id, 'reference_type' => 'project']) }}">
 
         <h3 class="m-a-0 p-a-0 pull-left">@{{ inProgress.length }} To Do @{{ inProgress.length == 1 ? 'Item' : 'Items' }}</h3>
         @if (!isDev())
@@ -118,4 +118,6 @@
         @endif
     </div>
 
+    @include('projects/partials/sidebar', ['pull' => 'col-md-pull-9'])
+    
 @endsection

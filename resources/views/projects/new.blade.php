@@ -2,7 +2,11 @@
 
 
 @section('additional_js')
-<script type="text/javascript" src="{{ asset('//api.filepicker.io/v1/filepicker.js') }}"></script>
+<style>
+body {
+    background: white !important;
+}
+</style>
 @stop
 
 @section('content')

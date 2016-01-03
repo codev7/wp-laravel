@@ -26,4 +26,9 @@ Vue.filter('mdYtoMDoY', function(date) {
 Vue.filter('mdYtoReadable', function(date) {
     var now = moment();
     return moment(date, 'M/D/YYYY').from(now);
+});
+
+Vue.filter('dayOfWeek', function(date) {
+    var now = moment();
+    return moment(date, 'M/D/YYYY').format('dddd, MMMM Do');
 })

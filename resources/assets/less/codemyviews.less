@@ -67,6 +67,23 @@
 /*
 * Misc LESS
 */
+
+
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
+
+body.with-top-navbar {
+    background: fadeout(@brand-primary, 95%);
+}
+
+.list-group-item {
+    background: white;
+}
+
 html {height: 100%;}
 
 #wrapper {
@@ -159,10 +176,6 @@ trix-toolbar {
 
 .statcard-gray {
     background: fadeout(#9da9b0,70%);
-}
-
-.brief-panel {
-    border-top: 3px solid @brand-primary;
 }
 
 .screenshot-photo {
@@ -284,6 +297,26 @@ trix-toolbar {
 .to-do-list-item {
 }
 
+.navbar-inverse,.panel-default,.media-list-stream {
+    box-shadow: 0 1px 1px #ccc !important;
+    -webkit-box-shadow: 0 1px 1px #ccc !important;
+    -moz-box-shadow: 0 1px 1px #ccc !important;
+    border: none !important;
+
+    &.no-shadow {
+        box-shadow: none !important;
+    }
+}
+
+.list-group-item {
+    border-left: none !important;
+    border-right: none !important;
+
+    &.no-border {
+        border: none !important;
+    }
+}
+
 .media-group-header {
     padding: 5px 10px !important;
     background: fadeout(#ccc, 70%);
@@ -300,11 +333,14 @@ trix-toolbar {
     background: @blue15 url('@{images}bg-call-area.jpg');
 }
 
+.brief-panel {
+    border-top: 3px solid @brand-primary !important;
+}
+
 .invoice-panel {
-    border: none;
-    border-top: 3px solid @brand-primary;
+    //border: none;
+    border-top: 3px solid @brand-primary !important;
     padding: 30px;
-    background: darken(#fff,3%);
 
     .logo-bg {
         background: url('/code-my-views-square-mark.png') no-repeat right center;
@@ -319,4 +355,8 @@ trix-toolbar {
             background: white;
         }
     }
+}
+
+.breadcrumb {
+    background: white;
 }

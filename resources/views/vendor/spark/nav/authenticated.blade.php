@@ -84,7 +84,7 @@
                 @endif
 
                 <li class="{{ set_active_from_route_name('project.todos') }}">
-                    <a data-pjax href="{{ route('project.todos', ['slug' => $project->slug]) }}">To Do's</a>
+                    <a data-pjax href="{{ route('project.todos', ['slug' => $project->slug]) }}">To Do Items</a>
                 </li>
                 @endif
 

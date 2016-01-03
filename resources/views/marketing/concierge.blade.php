@@ -332,7 +332,7 @@
 		                    <li>&nbsp;</li>	
 		                    <li class="plan-action">
 		                        <a 
-		                        	href="{{ Auth::guest() ? '/register?plan=' . $plan->id : '/settings?tab=subscription' }}"
+		                        	href="{{ Auth::guest() ? '/register?plan=' . $plan->id : '/settings?tab=wp-concierge-subscription' }}"
 		                        	class="btn {{ $count == 1 ? 'btn-success' : 'btn-default-outline' }}  btn-lg">
 		                        	Choose Plan
 		                        </a>

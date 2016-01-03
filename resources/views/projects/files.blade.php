@@ -6,9 +6,9 @@
 @section('content')
 <div class="row">
 
-    @include('projects/partials/sidebar')
+    
 
-    <div class="col-md-9" data-controller="project/files"
+    <div class="col-md-9 col-md-push-3" data-controller="project/files"
          state="{{ json_encode(['reference_type' => 'project', 'reference_id' => $project->id]) }}"
          v-cloak>
         <ul class="list-group media-list media-list-stream">
@@ -40,7 +40,7 @@
                                 <td>@{{ file.size | readableSize }}</td>
                                 <td>@{{ file.user.name }}</td>
                                 <td>@{{ file.created_at | ago }}</td>
-                                <td><a :href="file.path" target="_blank" class="btn btn-primary-outline btn-sm">Download File</a></td>
+                                <td><a :href="file.path" target="_blank" class="btn btn-primary btn-sm">Download File</a></td>
                                 <td>
                                     @if (!isDev())
                                     <a href="#" class="btn btn-danger-outline btn-xs"
@@ -71,5 +71,7 @@
 
         </ul>
     </div>
+
+    @include('projects/partials/sidebar', ['pull' => 'col-md-pull-9'])
 </div>
 @endsection

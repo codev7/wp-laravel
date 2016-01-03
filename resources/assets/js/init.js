@@ -70,6 +70,14 @@ export default {
 
             $('body').addClass('loading');
 
+            if($('#navbar').hasClass('in')) {
+                $('#navbar').collapse('toggle');
+            }
+           
+           if($('#navbar-collapse-main').hasClass('in')) {
+                $('#navbar-collapse-main').collapse('toggle');
+           }
+
         });
 
         $(document).on('pjax:success', () => {
@@ -77,6 +85,7 @@ export default {
             this.scripts();
 
             $('body').removeClass('loading');
+
 
             // make nav link active
             $("a[data-pjax]").each(function(i, el) {

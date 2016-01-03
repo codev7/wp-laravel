@@ -1,5 +1,13 @@
 @extends('spark::layouts.spark-no-container')
 
+@section('additional_js')
+<style>
+body {
+    background: white !important;
+}
+</style>
+@stop
+
 @section('content')
 <div class="profile-header text-center home-background-tiled">
 <div class="container">
@@ -28,7 +36,7 @@
 </nav>
 </div>
 
-<div class="p-y-md">
+<div class="p-y-md" style="background: white">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -146,7 +154,7 @@
                         <a href="#add-concierge-site" data-toggle="modal" class="btn btn-lg btn-primary-outline"><i class="fa fa-plus"></i> Add Concierge Site</a>
 
                         @else
-                        <p class="m-b-lg">Before you can add a concierge site, the team owner needs <a href="/settings?tab=subscription">choose a plan</a>.</p>
+                        <p class="m-b-lg">Before you can add a concierge site, the team owner needs <a href="/settings?tab=wp-concierge-subscription">choose a plan</a>.</p>
 
                         <div class="well well-small m-x-lg">
                             <h4 class="p-x">Our WordPress VIP concierge service gives you the ability to stop worrying about updates and small changes to your WordPress site.</h4>
