@@ -20,6 +20,8 @@ elixir(function(mix) {
         'plugins/jquery.js',
         'plugins/jquery.pjax.js',
         'plugins/vue.js',
+        'plugins/bootstrap.js',
+        'plugins/bootstrap-tour.js',
         'plugins/*.js',
         'custom/cmv-helpers.js',
         'custom/*.js'

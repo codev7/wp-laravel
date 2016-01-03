@@ -4,3 +4,4 @@ init.libraries();
 init.scripts();
 init.pjax();
 init.vue();
+init.tour();

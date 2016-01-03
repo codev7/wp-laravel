@@ -104,5 +104,27 @@ export default {
     },
     scripts() {
         initScripts();
+    },
+    tour(){
+
+        let tour = new Tour({
+            steps: [
+                {
+                    element: "#visual-tour",
+                    title: "Title of my step",
+                    content: "Content of my step"
+                },
+                {
+                    element: "#gallery-tour",
+                    title: "Title of my step",
+                    content: "Content of my step"
+                }
+            ]});
+
+// Initialize the tour
+        tour.init();
+
+// Start the tour
+        tour.start();
     }
 }

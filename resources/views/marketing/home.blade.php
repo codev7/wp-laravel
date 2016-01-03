@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-	<section class="visual">
+	<section class="visual" id="visual-tour">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-7">
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 	</section><!-- /visual -->
-	<section class="gallery-area">
+	<section class="gallery-area" id="gallery-tour">
 		<div class="container">
 			<header class="heading text-center">
 				<h3 class="sub-ttl">Focus on the Design</h3>
