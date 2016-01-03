@@ -21,6 +21,7 @@ return [
             'exclude' => [
                 storage_path(),
                 base_path('vendor'),
+                'node_modules'
             ],
         ],
 
@@ -36,7 +37,7 @@ return [
          * The filesystem(s) you on which the backups will be stored. Choose one or more
          * of the filesystems you configured in app/config/filesystems.php
          */
-        'filesystem' => ['s3'],
+        'filesystem' => ['s3-db-backups'],
 
         /*
          * The path where the backups will be saved. This path

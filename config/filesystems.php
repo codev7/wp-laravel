@@ -64,10 +64,18 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
+            'key'    => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => 'your-region',
             'bucket' => 'your-bucket',
+        ],
+
+        's3-db-backups' => [
+            'driver' => 's3',
+            'key'    => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => 'us-east-1',
+            'bucket' => 'cmv-prod-db-backups',
         ],
 
         'rackspace' => [
