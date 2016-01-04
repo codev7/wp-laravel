@@ -106,25 +106,26 @@ export default {
         initScripts();
     },
     tour(){
-
-        let tour = new Tour({
-            steps: [
-                {
-                    element: "#visual-tour",
-                    title: "Title of my step",
-                    content: "Content of my step"
-                },
-                {
-                    element: "#gallery-tour",
-                    title: "Title of my step",
-                    content: "Content of my step"
-                }
-            ]});
+        jQuery(document).ready(function ($) {
+            let tour = new Tour({
+                steps: [
+                    {
+                        element: "#visual-tour",
+                        title: "This is Test tour Text of VISUAL Step",
+                        content: "VISUAL"
+                    },
+                    {
+                        element: "#gallery-tour",
+                        title: "This is Test tour Text of gallery step",
+                        content: "GALLERY"
+                    }
+                ]});
 
 // Initialize the tour
-        tour.init();
+            tour.init();
 
 // Start the tour
-        tour.start();
+            tour.start();
+        });
     }
 }
