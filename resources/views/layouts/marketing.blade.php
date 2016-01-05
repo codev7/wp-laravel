@@ -16,7 +16,7 @@
         @endif  
         @include('common/head')
 
-    <head>
+    </head>
     @yield('body','<body class="inner">')
 
     <div id="wrapper">

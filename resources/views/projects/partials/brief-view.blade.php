@@ -26,7 +26,7 @@
 <div class="row">
     @foreach ($brief->briefBoxes() as $box)
     <div class="col-sm-4">
-        <div class="statcard statcard-gray p-a-md m-b tooltipper" data-placement="bottom"
+        <div class="statcard statcard-gray p-a-md m-b tooltipper" data-placement="bottom" data-html="true"
              data-title="{{ $box['tooltip'] }}">
             <h3 class="statcard-number">
                 {!! $box['title'] !!}
