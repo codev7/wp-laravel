@@ -10,6 +10,3 @@ public/js/*
 public/css/*
 npm_debug.log
 node_modules
-vendor
-*.*/vendor
-composer.lock
