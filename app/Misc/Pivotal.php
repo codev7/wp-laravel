@@ -93,6 +93,7 @@ class Pivotal {
         if ($type == 'feature') $payload['estimate'] = 2;
 
         $response = $this->client->request('POST', "projects/{$projectId}/stories", [
+            'verify' => false,
             'json' => $payload
         ]);
 
