@@ -7,6 +7,12 @@ body {
     background: white !important;
 }
 </style>
+<script type="text/javascript">
+    window.onload = function(){
+        var trixToolbar = $('trix-toolbar');
+        trixToolbar.find('button').attr('tabindex','-1');
+    }
+</script>
 @stop
 
 @section('content')
