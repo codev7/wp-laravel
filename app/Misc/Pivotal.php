@@ -78,6 +78,8 @@ class Pivotal {
      * @param $projectId
      * @param $title
      * @param $content
+     * @param $type
+     * @param $labels
      * @return array|mixed|object
      */
     public function createStory($projectId, $title, $content, $type = 'feature', array $labels = [])
@@ -109,6 +111,7 @@ class Pivotal {
     public function updateStory($projectId, $storyId, array $data)
     {
         $response = $this->client->request('PUT', "projects/{$projectId}/stories/{$storyId}", [
+            'verify' => false,
             'json' => $data
         ]);
 
@@ -150,6 +153,20 @@ class Pivotal {
     public function getComments($projectId, $storyId)
     {
         $response = $this->client->request('GET', "projects/{$projectId}/stories/{$storyId}/comments");
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * @param $projectId
+     * @param $label
+     * @return object
+     */
+    public function getProjectStoriesWithLabel($projectId, $label){
+
+        $response = $this->client->request('GET', "projects/{$projectId}/stories?with_label=".$label, [
+            'verify' => false
+        ]);
 
         return json_decode($response->getBody()->getContents());
     }
