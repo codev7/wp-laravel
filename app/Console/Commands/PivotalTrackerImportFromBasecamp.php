@@ -71,7 +71,7 @@ class PivotalTrackerImportFromBasecamp extends Command
 
         $bcTodoLists = $this->getBasecampTodoLists($basecampProjectId, $basecampAssignedPersonId);
         $newStories = $this->convertTodoListsToStories($basecampProjectId,$bcTodoLists);
-        $this->createOrUpdatePTStory($pivotalProjectId, $newStories);
+//        $this->createOrUpdatePTStory($pivotalProjectId, $newStories);
     }
 
 
@@ -85,13 +85,18 @@ class PivotalTrackerImportFromBasecamp extends Command
 
     public function getBasecampTodoLists($bcProjectId, $bcAssignedPersonId=null){
         if($bcAssignedPersonId){
-            $todoLists = $this->client->getAssignedTodolistsByPerson( array(
+            $todoLists = $this->client->getAssignedTodolistsByPerson( array(        // get all todolists that assigned to user
                 'personId' => $bcAssignedPersonId
             ) );
-            return $todoLists;
+            foreach($todoLists as $key => $value){                      // remove todolist that assigned to user but not in this project
+                if($value['bucket']['id'] != $bcProjectId){
+                    unset($todoLists[$key]);
+                }
+            }
+            return array_values($todoLists);
         }
         else{
-            $todoLists = $this->client->getTodolistsByProject( array(
+            $todoLists = $this->client->getTodolistsByProject( array(           // get all todolists by project id
                 'projectId' => $bcProjectId ,
             ) );
             return $todoLists;
@@ -110,8 +115,12 @@ class PivotalTrackerImportFromBasecamp extends Command
     public function convertTodoListsToStories($bcProjectId, $bcTodoLists){
         $ptStories = array();
         foreach ($bcTodoLists as $key => $value){
-
-            $ptStories[] = array('id' => $value['id'], 'title' => $value['name'], 'content' => $value['description']);
+            $response = $this->client->getTodolist( array(
+                'projectId' => $bcProjectId,  // Required. Project id
+                'todolistId' => intval($value['id']),  // Required. Todolist id
+            ) );
+            var_dump($response);
+            $ptStories[] = array('id' => $value['id'], 'title' => $value['name'], 'content' => $value['description'], 'todos' => $response['todos'], 'comments' => $response['comments']);
         }
         return $ptStories;
     }
